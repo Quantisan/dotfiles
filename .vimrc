@@ -16,6 +16,7 @@ set gdefault
 set encoding=utf-8 nobomb
 " Change mapleader
 let mapleader=","
+let maplocalleader = "\\"
 " Don’t add empty newlines at the end of files
 set binary
 set noeol
@@ -126,3 +127,29 @@ filetype plugin indent on     " required!
 
 " End of Vundle config
 """"""""""""""""""""""
+
+set completeopt=menuone,longest
+
+nmap <Leader>q :nohlsearch<CR>
+nmap <silent><C-e> :e#<CR>
+map <Leader>fm :%s/\s\+$//<BAR>g/^\s*$/,/\S/-j<BAR>noh<CR>
+nnoremap <silent><C-J> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><C-K> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent> <F11> :YRShow<CR>
+nnoremap <C-k> O<Esc>j
+nnoremap <C-j> o<Esc>k
+map <Leader>gg :GitGutterToggle<CR>
+
+let g:gitgutter_enabled = 0
+let g:paredit_electric_return = 0
+let g:clojure_align_multiline_strings = 1
+let g:clojure_maxlines = 1000
+autocmd FileType clojure setlocal lispwords+=facts,fact
+autocmd FileType clojure nnoremap <localleader>rt :Require!<Bar>Eval (clojure.test/run-tests)<CR>
+autocmd FileType clojure nnoremap <localleader>a :A<CR>
+autocmd FileType clojure nnoremap <localleader>as :AV<CR>
+autocmd FileType clojure nnoremap <localleader>ai :AS<CR>
+
+" Always on rainbow paren
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound

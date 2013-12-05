@@ -94,3 +94,35 @@ if has("autocmd")
 	" Treat .json files as .js
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 endif
+
+"""""""""""""""
+" Vundle config
+
+filetype off                  " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" My bundles here:
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'YankRing.vim'
+Bundle 'godlygeek/tabular'
+
+" for Clojure
+Bundle 'tpope/vim-fireplace'
+Bundle 'paredit.vim'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'tpope/vim-classpath'
+
+" End of my bundles
+
+filetype plugin indent on     " required!
+
+" End of Vundle config
+""""""""""""""""""""""

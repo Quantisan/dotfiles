@@ -128,7 +128,6 @@ filetype plugin indent on     " required!
 " End of Vundle config
 """"""""""""""""""""""
 
-autocmd vimenter * if !argc() | NERDTree | endif
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 

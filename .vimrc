@@ -114,6 +114,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'YankRing.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'bling/vim-airline'
+Bundle 'mileszs/ack.vim'
 
 " for Clojure
 Bundle 'tpope/vim-fireplace'
@@ -138,9 +140,8 @@ nnoremap <silent><C-K> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <F11> :YRShow<CR>
 nnoremap <C-k> O<Esc>j
 nnoremap <C-j> o<Esc>k
-map <Leader>gg :GitGutterToggle<CR>
+nnoremap <D-F> :Ack<space>
 
-let g:gitgutter_enabled = 0
 let g:paredit_electric_return = 0
 let g:clojure_align_multiline_strings = 1
 let g:clojure_maxlines = 1000

@@ -116,6 +116,8 @@ Bundle 'YankRing.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'bling/vim-airline'
 Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
 
 " for Clojure
 Bundle 'tpope/vim-fireplace'
@@ -129,6 +131,9 @@ filetype plugin indent on     " required!
 
 " End of Vundle config
 """"""""""""""""""""""
+
+autocmd vimenter * if !argc() | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
 
 set completeopt=menuone,longest
 

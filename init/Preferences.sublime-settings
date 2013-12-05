@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
 	"default_line_ending": "unix",
 	"detect_indentation": false,
 	"draw_white_space": "all",
@@ -19,7 +19,8 @@
 		".git",
 		"node_modules"
 	],
-	"font_size": 15.0,
+	"font_face": "Inconsolata",
+	"font_size": 23.0,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
 	"line_padding_bottom": 6,
@@ -29,6 +30,7 @@
 	[
 		80
 	],
+	"show_full_path": true,	
 	"tab_size": 2,
 	"translate_tabs_to_spaces": false,
 	"trim_trailing_white_space_on_save": true,

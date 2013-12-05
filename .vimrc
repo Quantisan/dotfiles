@@ -128,7 +128,7 @@ filetype plugin indent on     " required!
 " End of Vundle config
 """"""""""""""""""""""
 
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
+let NERDTreeIgnore=['^classes[[dir]]', '^target[[dir]]', '\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 nmap <leader>gb :Gblame<CR>

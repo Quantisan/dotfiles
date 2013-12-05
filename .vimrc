@@ -128,9 +128,15 @@ filetype plugin indent on     " required!
 """"""""""""""""""""""
 
 autocmd vimenter * if !argc() | NERDTree | endif
-map <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
+map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
-set completeopt=menuone,longest
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gp :Git push<CR>
 
 nmap <Leader>q :nohlsearch<CR>
 nmap <silent><C-e> :e#<CR>

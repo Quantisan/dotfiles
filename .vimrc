@@ -128,9 +128,14 @@ filetype plugin indent on     " required!
 " End of Vundle config
 """"""""""""""""""""""
 
-let NERDTreeIgnore=['^classes[[dir]]', '^target[[dir]]', '\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
+" NERDTree settings
+let NERDTreeIgnore=['^classes[[dir]]', '^target[[dir]]', '\.class$', '\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
+" CtrlP ignore
+set wildignore+=*.class
+
+" bind Fugitive functions
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
@@ -140,12 +145,17 @@ nmap <leader>gp :Git push<CR>
 
 nmap <Leader>q :nohlsearch<CR>
 nmap <silent><C-e> :e#<CR>
+
+" Clear trailing whitespaces and multiple blank lines
 map <Leader>fm :%s/\s\+$//<BAR>g/^\s*$/,/\S/-j<BAR>noh<CR>
+
 nnoremap <silent><C-J> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-K> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <F11> :YRShow<CR>
 nnoremap <C-k> O<Esc>j
 nnoremap <C-j> o<Esc>k
+
+" bind :Ack to Cmd-F
 nnoremap <D-F> :Ack<space>
 
 let g:paredit_electric_return = 0

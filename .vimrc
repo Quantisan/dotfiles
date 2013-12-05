@@ -113,6 +113,7 @@ Bundle 'bling/vim-airline'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
 
 " for Clojure
 Bundle 'tpope/vim-fireplace'

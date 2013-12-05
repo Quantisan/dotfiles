@@ -143,6 +143,10 @@ nmap <leader>gl :Glog<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Git push<CR>
 
+" binding nerdcommenter
+map <D-/> <plug>NERDCommenterToggle<CR>
+imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
+
 nmap <Leader>q :nohlsearch<CR>
 nmap <silent><C-e> :e#<CR>
 

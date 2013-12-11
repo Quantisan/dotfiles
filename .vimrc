@@ -135,6 +135,9 @@ map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 " CtrlP ignore
 set wildignore+=*.class
 
+" map CtrlP buffer
+nmap ; :CtrlPBuffer<CR>
+
 " bind Fugitive functions
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gs :Gstatus<CR>
@@ -166,6 +169,8 @@ let g:paredit_electric_return = 0
 let g:clojure_align_multiline_strings = 1
 let g:clojure_maxlines = 1000
 autocmd FileType clojure setlocal lispwords+=facts,fact
+
+" map Clojure testing and namespace switch shortcuts
 autocmd FileType clojure nnoremap <localleader>rt :Require!<Bar>Eval (clojure.test/run-tests)<CR>
 autocmd FileType clojure nnoremap <localleader>a :A<CR>
 autocmd FileType clojure nnoremap <localleader>a<C-v> :AV<CR>

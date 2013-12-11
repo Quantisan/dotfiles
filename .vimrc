@@ -153,9 +153,6 @@ imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
 nmap <Leader>q :nohlsearch<CR>
 nmap <silent><C-e> :e#<CR>
 
-" Clear trailing whitespaces and multiple blank lines
-map <Leader>fm :%s/\s\+$//<BAR>g/^\s*$/,/\S/-j<BAR>noh<CR>
-
 nnoremap <silent><C-J> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-K> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <F11> :YRShow<CR>

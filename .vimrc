@@ -168,8 +168,8 @@ let g:clojure_maxlines = 1000
 autocmd FileType clojure setlocal lispwords+=facts,fact
 autocmd FileType clojure nnoremap <localleader>rt :Require!<Bar>Eval (clojure.test/run-tests)<CR>
 autocmd FileType clojure nnoremap <localleader>a :A<CR>
-autocmd FileType clojure nnoremap <localleader>as :AV<CR>
-autocmd FileType clojure nnoremap <localleader>ai :AS<CR>
+autocmd FileType clojure nnoremap <localleader>a<C-v> :AV<CR>
+autocmd FileType clojure nnoremap <localleader>as :AS<CR>
 
 " Always on rainbow paren
 au VimEnter * RainbowParenthesesToggle

@@ -26,6 +26,8 @@ set directory=~/.vim/swaps
 if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
+" Disable swapfiles altogether
+set noswapfile
 
 " Respect modeline in files
 set modeline

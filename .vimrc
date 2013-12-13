@@ -72,6 +72,8 @@ set title
 set showcmd
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
+" Disable line wrap
+set nowrap
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()

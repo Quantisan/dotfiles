@@ -23,8 +23,6 @@
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 	# Interactive rebase with the given number of latest commits
 	reb = "!r() { git rebase -i HEAD~$1; }; r"
-	# Delete merged local branches
-	clean-branch = !"git branch --merged | ack -v '(\\*|^\\s*master$|^\\s*develop$)' | xargs -n 1 git branch -d"
 	# Find branches containing commit
 	fb = "!f() { git branch -a --contains $1; }; f"
 	# Find tags containing commit
@@ -33,8 +31,8 @@
 	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
-	# Remove branches that have already been merged with master
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	# Delete merged local branches
+	dm = !"git branch --merged | ack -v '(\\*|^\\s*master$|^\\s*develop$)' | xargs -n 1 git branch -d"
 
 [apply]
 	# Detect whitespace errors when applying a patch

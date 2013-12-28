@@ -47,3 +47,8 @@ fi
 
 # Setting up rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+ # This loads NVM
+[ -s $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh
+
+cd ~/Projects

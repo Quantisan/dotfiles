@@ -173,6 +173,8 @@ nnoremap <C-j> o<Esc>k
 " bind :Ack to Cmd-F
 nnoremap <D-F> :Ack<space>
 
+"""" Clojure """"
+
 let g:paredit_electric_return = 0
 let g:clojure_align_multiline_strings = 1
 let g:clojure_maxlines = 1000
@@ -187,6 +189,20 @@ autocmd FileType clojure nnoremap <localleader>as :AS<CR>
 " Always on rainbow paren
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
+
+"""" Python """"
+
+" Settings for indentation and line-wrapping to values compliant with PEP 8
+" Reference http://docs.python-guide.org/en/latest/dev/env/
+
+" lines longer than 79 columns will be broken
+" operation >> indents 4 columns; << unindents 4 columns
+" insert spaces when hitting TABs
+" an hard TAB displays as 4 columns
+" insert/delete 4 spaces when hitting a TAB/BACKSPACE
+" round indent to multiple of 'shiftwidth'
+" align the new line indent with the previous line
+au FileType python setlocal textwidth=79 shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
 
 " Call Flake8 on *.py file saves
 autocmd BufWritePost *.py call Flake8()

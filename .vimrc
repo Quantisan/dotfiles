@@ -120,6 +120,12 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 
+" for Python
+Bundle 'python.vim'
+Bundle 'python_match.vim'
+Bundle 'nvie/vim-flake8'
+Bundle 'davidhalter/jedi-vim'
+
 " for Clojure
 Bundle 'tpope/vim-fireplace'
 Bundle 'paredit.vim'
@@ -181,3 +187,9 @@ autocmd FileType clojure nnoremap <localleader>as :AS<CR>
 " Always on rainbow paren
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
+
+" Call Flake8 on *.py file saves
+autocmd BufWritePost *.py call Flake8()
+
+" Remap jedi-vim command as it conflicts with NerdTree shortcut
+let g:jedi#usages_command = "<leader>u"

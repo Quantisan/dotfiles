@@ -118,6 +118,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-surround'
 
 " for Clojure
 Bundle 'tpope/vim-fireplace'

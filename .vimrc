@@ -205,8 +205,5 @@ au Syntax * RainbowParenthesesLoadRound
 au FileType python setlocal textwidth=79 shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
 au FileType python setlocal colorcolumn=80
 
-" Call Flake8 on *.py file saves
-autocmd BufWritePost *.py call Flake8()
-
 " Remap jedi-vim command as it conflicts with NerdTree shortcut
 let g:jedi#usages_command = "<leader>u"

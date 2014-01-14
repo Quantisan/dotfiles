@@ -144,7 +144,7 @@ let NERDTreeIgnore=['^classes[[dir]]', '^target[[dir]]', '\.class$', '\.pyc$', '
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " CtrlP ignore
-set wildignore+=*.class
+set wildignore+=*.class,*.pyc,*.class
 
 " map CtrlP buffer
 nmap ; :CtrlPBuffer<CR>
@@ -204,6 +204,9 @@ au Syntax * RainbowParenthesesLoadRound
 " align the new line indent with the previous line
 au FileType python setlocal textwidth=79 shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
 au FileType python setlocal colorcolumn=80
+
+" Flake8 ignore line length errors"
+let g:flake8_ignore="E501"
 
 " Remap jedi-vim command as it conflicts with NerdTree shortcut
 let g:jedi#usages_command = "<leader>u"

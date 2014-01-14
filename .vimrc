@@ -203,6 +203,7 @@ au Syntax * RainbowParenthesesLoadRound
 " round indent to multiple of 'shiftwidth'
 " align the new line indent with the previous line
 au FileType python setlocal textwidth=79 shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
+au FileType python setlocal colorcolumn=80
 
 " Call Flake8 on *.py file saves
 autocmd BufWritePost *.py call Flake8()

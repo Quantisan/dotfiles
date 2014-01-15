@@ -19,8 +19,6 @@ install wget --enable-iri
 install vim --override-system-vi
 tap homebrew/dupes
 install homebrew/dupes/grep
-tap josegonzalez/homebrew-php
-install php55
 
 # This formula didn’t work well last time I tried it:
 #install homebrew/dupes/screen
@@ -29,7 +27,7 @@ install php55
 install ack
 #install exiv2
 install git
-#install imagemagick
+install imagemagick
 install pigz
 install rename
 install tree

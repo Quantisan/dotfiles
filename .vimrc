@@ -125,6 +125,7 @@ Bundle 'python.vim'
 Bundle 'python_match.vim'
 Bundle 'nvie/vim-flake8'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'hynek/vim-python-pep8-indent'
 
 " for Clojure
 Bundle 'tpope/vim-fireplace'

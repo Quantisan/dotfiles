@@ -119,6 +119,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/syntastic'
 
 " for Python
 Bundle 'python.vim'

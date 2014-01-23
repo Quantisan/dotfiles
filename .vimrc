@@ -145,7 +145,7 @@ let NERDTreeIgnore=['^classes[[dir]]', '^target[[dir]]', '\.class$', '\.pyc$', '
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " CtrlP ignore
-set wildignore+=*.class,*.pyc,*.class
+set wildignore+=*.class,*.pyc,*.class,*.css
 
 " map CtrlP buffer
 nmap ; :CtrlPBuffer<CR>
@@ -211,3 +211,6 @@ let g:flake8_ignore="E501"
 
 " Remap jedi-vim command as it conflicts with NerdTree shortcut
 let g:jedi#usages_command = "<leader>u"
+
+"""" Javascript """"
+au FileType javascript setlocal softtabstop=4 shiftwidth=4 expandtab

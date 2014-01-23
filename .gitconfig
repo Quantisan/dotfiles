@@ -32,7 +32,7 @@
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 	# Delete merged local branches
-	dm = !"git branch --merged | ack -v '(\\*|^\\s*master$|^\\s*develop$)' | xargs -n 1 git branch -d"
+	dm = !"git branch --merged | ack -v '(\\*|^\\s*master$|^\\s*dev)' | xargs -n 1 git branch -d"
 
 [apply]
 	# Detect whitespace errors when applying a patch

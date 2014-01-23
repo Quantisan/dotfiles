@@ -124,7 +124,6 @@ Bundle 'scrooloose/syntastic'
 " for Python
 Bundle 'python.vim'
 Bundle 'python_match.vim'
-Bundle 'nvie/vim-flake8'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'hynek/vim-python-pep8-indent'
 
@@ -207,8 +206,8 @@ au Syntax * RainbowParenthesesLoadRound
 au FileType python setlocal textwidth=79 shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
 au FileType python setlocal colorcolumn=80
 
-" Flake8 ignore line length errors"
-let g:flake8_ignore="E501"
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--ignore="E501"'
 
 " Remap jedi-vim command as it conflicts with NerdTree shortcut
 let g:jedi#usages_command = "<leader>u"

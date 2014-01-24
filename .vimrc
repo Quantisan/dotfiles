@@ -217,4 +217,4 @@ let g:syntastic_python_flake8_args = '--ignore="E501"'
 let g:jedi#usages_command = "<leader>u"
 
 """" Javascript """"
-au FileType javascript setlocal softtabstop=4 shiftwidth=4 expandtab
+au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab

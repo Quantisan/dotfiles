@@ -19,6 +19,8 @@
 	tags = tag -l
 	branches = branch -a
 	remotes = remote -v
+    # Fetch and prune remote-tracking branches
+    f = fetch -p
 	# Credit an author on the latest commit
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 	# Interactive rebase with the given number of latest commits
@@ -33,6 +35,8 @@
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 	# Delete merged local branches
 	dm = !"git branch --merged | ack -v '(\\*|^\\s*master$|^\\s*dev)' | xargs -n 1 git branch -d"
+    # Delete merged REMOTE branches, except master and dev
+    dmr = !"git branch -r --merged | grep origin | grep -v '>' | grep -v master | grep -v dev | sed 's/origin\\///' | xargs -n 1 git push --delete origin"
 
 [apply]
 	# Detect whitespace errors when applying a patch

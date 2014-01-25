@@ -35,8 +35,5 @@ install webkit2png
 install zopfli
 install p7zip
 
-tap homebrew/versions
-install lua52
-
 # Remove outdated versions from the cellar
 cleanup

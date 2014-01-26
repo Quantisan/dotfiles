@@ -125,7 +125,6 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
-Bundle 'marijnh/tern_for_vim'
 
 " for Python
 Bundle 'python.vim'
@@ -138,6 +137,12 @@ Bundle 'tpope/vim-fireplace'
 Bundle 'paredit.vim'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'tpope/vim-classpath'
+
+" Javascript
+Bundle 'marijnh/tern_for_vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Raimondi/delimitMate'
 
 " End of my bundles
 
@@ -220,3 +225,5 @@ let g:jedi#usages_command = "<leader>u"
 
 """" Javascript """"
 au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1

@@ -125,6 +125,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " for Python
 Bundle 'python.vim'
@@ -141,7 +142,6 @@ Bundle 'tpope/vim-classpath'
 " Javascript
 Bundle 'marijnh/tern_for_vim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Raimondi/delimitMate'
 
 " End of my bundles
@@ -185,6 +185,9 @@ nnoremap <C-j> o<Esc>k
 " bind :Ack to Cmd-F
 nnoremap <D-F> :Ack<space>
 
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
 """" Clojure """"
 
 let g:paredit_electric_return = 0
@@ -227,5 +230,4 @@ let g:jedi#usages_command = "<leader>u"
 au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab
 au FileType javascript let b:delimitMate_expand_cr=1
 au FileType javascript let b:delimitMate_expand_space=1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+au FileType javascript IndentGuidesEnable

@@ -124,6 +124,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'marijnh/tern_for_vim'
 
 " for Python
 Bundle 'python.vim'

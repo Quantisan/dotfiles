@@ -42,3 +42,4 @@ Thumbs.db
 .Rhistory
 .lein*
 pom.xml.asc
+.tern-project

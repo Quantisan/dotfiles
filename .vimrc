@@ -225,5 +225,7 @@ let g:jedi#usages_command = "<leader>u"
 
 """" Javascript """"
 au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab
+au FileType javascript let b:delimitMate_expand_cr=1
+au FileType javascript let b:delimitMate_expand_space=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1

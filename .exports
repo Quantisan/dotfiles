@@ -31,4 +31,4 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
 # Set JAVA_HOME for Hadoop
-export JAVA_HOME=/usr/lib/jvm/default-java
+export JAVA_HOME=$(/usr/libexec/java_home)

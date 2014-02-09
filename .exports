@@ -32,3 +32,5 @@ export PIP_RESPECT_VIRTUALENV=true
 
 # Set JAVA_HOME for Hadoop
 export JAVA_HOME=$(/usr/libexec/java_home)
+
+GOPATH=$HOME/go

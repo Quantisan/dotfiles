@@ -145,6 +145,9 @@ Bundle 'marijnh/tern_for_vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
 
+" Go
+Bundle 'Blackrush/vim-gocode'
+
 " End of my bundles
 
 filetype plugin indent on     " required!

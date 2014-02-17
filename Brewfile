@@ -27,7 +27,9 @@ install homebrew/dupes/grep
 install ack
 #install exiv2
 install git
-install imagemagick
+install imagemagick --with-webp
+install lynx
+install node
 install pigz
 install rename
 install tree

@@ -236,3 +236,8 @@ au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab
 au FileType javascript let b:delimitMate_expand_cr=1
 au FileType javascript let b:delimitMate_expand_space=1
 au FileType javascript IndentGuidesEnable
+
+"""" Go """"
+au FileType go setlocal colorcolumn=80
+au FileType go setlocal textwidth=79
+au FileType go setlocal formatoptions+=t

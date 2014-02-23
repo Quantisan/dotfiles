@@ -244,3 +244,6 @@ au FileType javascript IndentGuidesEnable
 au FileType go setlocal colorcolumn=80
 au FileType go setlocal textwidth=79
 au FileType go setlocal formatoptions+=t
+au FileType go setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+au FileType go setlocal nolist
+

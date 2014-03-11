@@ -43,3 +43,4 @@ Thumbs.db
 .lein*
 pom.xml.asc
 .tern-project
+*.pyc

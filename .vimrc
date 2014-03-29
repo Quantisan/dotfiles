@@ -218,14 +218,13 @@ au Syntax * RainbowParenthesesLoadRound
 " Settings for indentation and line-wrapping to values compliant with PEP 8
 " Reference http://docs.python-guide.org/en/latest/dev/env/
 
-" lines longer than 79 columns will be broken
 " operation >> indents 4 columns; << unindents 4 columns
 " insert spaces when hitting TABs
 " an hard TAB displays as 4 columns
 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 " round indent to multiple of 'shiftwidth'
 " align the new line indent with the previous line
-au FileType python setlocal textwidth=79 shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
+au FileType python setlocal shiftwidth=4 expandtab tabstop=4 softtabstop=4 shiftround autoindent
 au FileType python setlocal colorcolumn=80
 
 let g:syntastic_python_checkers = ['flake8']
@@ -242,7 +241,6 @@ au FileType javascript IndentGuidesEnable
 
 """" Go """"
 au FileType go setlocal colorcolumn=80
-au FileType go setlocal textwidth=79
 au FileType go setlocal formatoptions+=t
 au FileType go setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 au FileType go setlocal nolist

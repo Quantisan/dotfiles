@@ -159,7 +159,7 @@ filetype plugin indent on     " required!
 """"""""""""""""""""""
 
 " NERDTree settings
-let NERDTreeIgnore=['^Godeps[[dir]]', '^classes[[dir]]', '^target[[dir]]', '\.class$', '\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
+let NERDTreeIgnore=['^dist$[[dir]]', '^Godeps[[dir]]', '^classes[[dir]]', '^target[[dir]]', '\.class$', '\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " CtrlP ignore

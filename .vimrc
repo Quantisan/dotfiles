@@ -107,53 +107,55 @@ endif
 
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 " My bundles here:
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'YankRing.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'bling/vim-airline'
-Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'gitignore'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'YankRing.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'bling/vim-airline'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'gitignore'
 
 " for Python
-Bundle 'python.vim'
-Bundle 'python_match.vim'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'hynek/vim-python-pep8-indent'
+Plugin 'python.vim'
+Plugin 'python_match.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'hynek/vim-python-pep8-indent'
 
 " for Clojure
-Bundle 'tpope/vim-fireplace'
-Bundle 'paredit.vim'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'tpope/vim-classpath'
+Plugin 'tpope/vim-fireplace'
+Plugin 'paredit.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tpope/vim-classpath'
 
 " Javascript
-Bundle 'marijnh/tern_for_vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'Raimondi/delimitMate'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'Raimondi/delimitMate'
 
 " Go
-Bundle 'Blackrush/vim-gocode'
+Plugin 'Blackrush/vim-gocode'
 
 " End of my bundles
 
-filetype plugin indent on     " required!
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " End of Vundle config
 """"""""""""""""""""""

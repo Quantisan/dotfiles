@@ -150,7 +150,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'Raimondi/delimitMate'
 
 " Go
-Plugin 'Blackrush/vim-gocode'
+Plugin 'fatih/vim-go'
 
 " End of my bundles
 
@@ -247,4 +247,10 @@ au FileType go setlocal colorcolumn=80
 au FileType go setlocal formatoptions+=t
 au FileType go setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 au FileType go setlocal nolist
+
+let g:go_disable_autoinstall = 1
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>t <Plug>(go-test)
 

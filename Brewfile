@@ -27,12 +27,11 @@ install wget --enable-iri
 # Install more recent versions of some OS X tools
 install vim --override-system-vi
 install homebrew/dupes/grep
-
-# This formula didn’t work well last time I tried it:
-#install homebrew/dupes/screen
+install homebrew/dupes/screen
 
 # Install other useful binaries
 install ack
+install bfg
 #install exiv2
 install foremost
 install git

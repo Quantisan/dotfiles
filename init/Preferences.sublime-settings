@@ -3,7 +3,7 @@
 	"default_line_ending": "unix",
 	"show_line_endings": true,
 	"default_encoding": "UTF-8",
-	"show_encoding": true,
+	"default_line_ending": "unix",
 	"detect_indentation": false,
 	"draw_white_space": "all",
 	"ensure_newline_at_eof_on_save": false,
@@ -26,7 +26,7 @@
 	"font_size": 14,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
-	"line_padding_bottom": 6,
+	"line_padding_bottom": 5,
 	"match_brackets": true,
 	"match_brackets_angle": true,
 	"remember_open_files": false,
@@ -37,6 +37,8 @@
 	"show_full_path": true,
 	"tab_size": 4,
 	"translate_tabs_to_spaces": true,
+	"show_encoding": true,
+	"show_line_endings": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": true
 }

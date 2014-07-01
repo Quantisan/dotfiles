@@ -250,6 +250,8 @@ au FileType go setlocal nolist
 au FileType go setlocal foldmethod=syntax
 au FileType go setlocal foldlevelstart=1
 au FileType go setlocal foldnestmax=3
+" press Space to toggle the current fold open/closed
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 let g:go_disable_autoinstall = 1
 au FileType go nmap <Leader>i <Plug>(go-info)

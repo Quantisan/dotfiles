@@ -247,6 +247,9 @@ au FileType go setlocal colorcolumn=80
 au FileType go setlocal formatoptions+=t
 au FileType go setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 au FileType go setlocal nolist
+au FileType go setlocal foldmethod=syntax
+au FileType go setlocal foldlevelstart=1
+au FileType go setlocal foldnestmax=3
 
 let g:go_disable_autoinstall = 1
 au FileType go nmap <Leader>i <Plug>(go-info)

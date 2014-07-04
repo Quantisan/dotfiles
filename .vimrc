@@ -33,6 +33,9 @@ endif
 " Disable swapfiles altogether
 set noswapfile
 
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
+
 " Respect modeline in files
 set modeline
 set modelines=4

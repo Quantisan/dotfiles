@@ -25,7 +25,7 @@
 
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
-	branches = branch -a
+	b = branch -a
 	remotes = remote -v
 
     # Fetch and prune remote-tracking branches

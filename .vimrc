@@ -134,6 +134,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'gitignore'
+Plugin 'kshenoy/vim-signature'
 
 " for Python
 Plugin 'python.vim'

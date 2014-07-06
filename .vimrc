@@ -287,6 +287,8 @@ autocmd FileType clojure nnoremap <localleader>as :AS<CR>
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 
+au FileType clojure NeoCompleteLock
+
 """" Python """"
 
 " Settings for indentation and line-wrapping to values compliant with PEP 8

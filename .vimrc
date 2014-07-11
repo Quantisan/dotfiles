@@ -174,7 +174,7 @@ let NERDTreeIgnore=['^dist$[[dir]]', '^Godeps[[dir]]', '^classes[[dir]]', '^targ
 map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " CtrlP ignore
-set wildignore+=*.class,*.pyc,*.class,*.css
+set wildignore+=*.class,*.pyc,*.class,*.css,*.log
 
 " map CtrlP buffer
 nmap ; :CtrlPBuffer<CR>

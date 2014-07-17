@@ -336,4 +336,5 @@ au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>t <Plug>(go-test)
 
 """" HTML """"
+au FileType html setlocal softtabstop=2 shiftwidth=2 expandtab
 au FileType html IndentGuidesEnable

@@ -288,6 +288,7 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 
 au FileType clojure NeoCompleteLock
+au FileType clojure IndentGuidesDisable
 
 """" Python """"
 
@@ -323,6 +324,7 @@ au FileType go setlocal nolist
 au FileType go setlocal foldmethod=syntax
 au FileType go setlocal foldlevelstart=1
 au FileType go setlocal foldnestmax=3
+au FileType go IndentGuidesDisable
 " press Space to toggle the current fold open/closed
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
@@ -333,3 +335,5 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>t <Plug>(go-test)
 
+"""" HTML """"
+au FileType html IndentGuidesEnable

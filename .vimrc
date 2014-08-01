@@ -1,5 +1,9 @@
-" Use the Solarized Dark theme
-set background=dark
+" Use Solarized Light for daytime and Dark for nighttime
+if strftime("%H") >= 8 && strftime("%H") <= 18
+  set background=light
+else
+  set background=dark
+endif
 colorscheme solarized
 
 " Make Vim more useful

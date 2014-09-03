@@ -135,7 +135,7 @@ Plugin 'kshenoy/vim-signature'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
-
+Plugin 'editorconfig/editorconfig-vim'
 
 " for Python
 Plugin 'python.vim'

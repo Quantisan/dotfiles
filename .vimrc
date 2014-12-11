@@ -119,6 +119,7 @@ Plugin 'gmarik/Vundle.vim'
 " My bundles here:
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tommcdo/vim-fubitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'YankRing.vim'
 Plugin 'godlygeek/tabular'
@@ -177,7 +178,7 @@ set wildignore+=*.class,*.pyc,*.class,*.css,*.log
 nmap ; :CtrlPBuffer<CR>
 
 " bind Fugitive functions
-nmap <leader>gb :Gblame<CR>
+nmap <leader>gb :Gbrowse<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gl :Glog<CR>
@@ -329,7 +330,7 @@ let g:go_snippet_engine = "neosnippet"
 let g:go_disable_autoinstall = 1
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>gdb <Plug>(go-doc-browser)
 au FileType go nmap <leader>t <Plug>(go-test)
 
 """" HTML """"

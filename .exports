@@ -30,7 +30,4 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
-# Set JAVA_HOME for Hadoop
-export JAVA_HOME=$(/usr/libexec/java_home)
-
 export GOPATH=$HOME/Projects/gocode

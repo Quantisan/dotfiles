@@ -134,6 +134,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'gitignore'
 Plugin 'kshenoy/vim-signature'
+Plugin 'Valloric/YouCompleteMe'
 
 " for Python
 Plugin 'python.vim'
@@ -202,6 +203,18 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'clojure', 'lisp']
 
+" press Space to toggle the current fold open/closed
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+"""" Java """"
+
+" YouCompleteMe intgration with Eclim
+let g:EclimCompletionMethod = 'omnifunc'
+
+au FileType java setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+
+au FileType java setlocal foldmethod=syntax foldlevelstart=2 foldnestmax=4
+
 """" Clojure """"
 
 let g:paredit_electric_return = 0
@@ -256,8 +269,6 @@ au FileType go setlocal foldmethod=syntax
 au FileType go setlocal foldlevelstart=1
 au FileType go setlocal foldnestmax=3
 au FileType go IndentGuidesDisable
-" press Space to toggle the current fold open/closed
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 let g:go_disable_autoinstall = 1
 au FileType go nmap <Leader>i <Plug>(go-info)

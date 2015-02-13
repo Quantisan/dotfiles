@@ -211,6 +211,9 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
+" disable useless and conflicting key binding
+let g:ycm_key_detailed_diagnostics = ''
+
 """" Java """"
 
 " YouCompleteMe intgration with Eclim
@@ -222,7 +225,16 @@ au FileType java setlocal nolist
 " Use 4-character tab for tabs
 au FileType java setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 
-au FileType java setlocal foldmethod=syntax foldlevelstart=2 foldnestmax=4
+au FileType java setlocal foldmethod=syntax foldlevelstart=1 foldnestmax=4
+
+" Shortcuts for eclim
+autocmd FileType java nnoremap <localleader>d :JavaDocPreview<CR>
+autocmd FileType java nnoremap <localleader>dc :JavaDocComment<CR>
+autocmd FileType java nnoremap <localleader>s :JavaSearchContext<CR>
+autocmd FileType java nnoremap <localleader>c :JavaCorrect<CR>
+autocmd FileType java nnoremap <localleader>i :JavaImport<CR>
+autocmd FileType java nnoremap <localleader>io :JavaImportOrganize<CR>
+autocmd FileType java nnoremap <localleader>t :JUnitFindTest<CR>
 
 """" Clojure """"
 

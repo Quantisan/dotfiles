@@ -211,6 +211,10 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 " YouCompleteMe intgration with Eclim
 let g:EclimCompletionMethod = 'omnifunc'
 
+" Hide invisible whitespace characters
+au FileType java setlocal nolist
+
+" Use 4-character tab for tabs
 au FileType java setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 
 au FileType java setlocal foldmethod=syntax foldlevelstart=2 foldnestmax=4

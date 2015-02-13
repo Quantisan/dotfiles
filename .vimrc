@@ -206,6 +206,11 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'clojure', 'lisp']
 " press Space to toggle the current fold open/closed
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
+" Close preview window when a selection is made, these lines close it on
+" movement in insert mode or when leaving insert mode
+autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
 """" Java """"
 
 " YouCompleteMe intgration with Eclim

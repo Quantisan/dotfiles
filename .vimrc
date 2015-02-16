@@ -220,12 +220,12 @@ let g:ycm_key_detailed_diagnostics = ''
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Hide invisible whitespace characters
-au FileType java setlocal nolist
+au FileType java,scala setlocal nolist
 
 " Use 4-character tab for tabs
-au FileType java setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+au FileType java,scala setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 
-au FileType java setlocal foldmethod=syntax foldlevelstart=1 foldnestmax=4
+au FileType java,scala setlocal foldmethod=syntax foldlevelstart=1 foldnestmax=4
 
 " Shortcuts for eclim
 autocmd FileType java nnoremap <localleader>d :JavaDocPreview<CR>

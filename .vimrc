@@ -144,7 +144,9 @@ Plugin 'hynek/vim-python-pep8-indent'
 
 " for Clojure
 Plugin 'tpope/vim-fireplace'
-Plugin 'paredit.vim'
+Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-sexp'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'tpope/vim-classpath'
 
@@ -238,7 +240,6 @@ autocmd FileType java nnoremap <localleader>t :JUnitFindTest<CR>
 
 """" Clojure """"
 
-let g:paredit_electric_return = 0
 let g:clojure_align_multiline_strings = 1
 let g:clojure_maxlines = 1000
 autocmd FileType clojure setlocal lispwords+=facts,fact
@@ -298,5 +299,9 @@ au FileType go nmap <Leader>gdb <Plug>(go-doc-browser)
 au FileType go nmap <leader>t <Plug>(go-test)
 
 """" HTML """"
-au FileType html setlocal softtabstop=2 shiftwidth=2 expandtab
+" Use 4-character tab for tabs
+au FileType html setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+" Hide invisible whitespace characters
+au FileType html setlocal nolist
+
 au FileType html IndentGuidesEnable

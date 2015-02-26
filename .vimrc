@@ -128,6 +128,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+Plugin 'd11wtq/ctrlp_bdelete.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
@@ -176,6 +177,9 @@ set wildignore+=*.class,*.pyc,*.class,*.css,*.log
 
 " map CtrlP buffer
 nmap ; :CtrlPBuffer<CR>
+
+" Enable C-@ deleting buffer in CtrlPBuffer
+call ctrlp_bdelete#init()
 
 " bind Fugitive functions
 nmap <leader>gb :Gbrowse<CR>

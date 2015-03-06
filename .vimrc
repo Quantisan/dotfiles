@@ -136,6 +136,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'gitignore'
 Plugin 'kshenoy/vim-signature'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'editorconfig/editorconfig-vim'
 
 " for Python
 Plugin 'python.vim'

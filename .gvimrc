@@ -16,5 +16,7 @@ elseif has("gui_win32")
   set guifont=Consolas:h11:cANSI
 endif
 
+" Don’t blink cursor in normal mode
+set guicursor=n:blinkon0
 " Better line-height
 set linespace=8

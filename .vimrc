@@ -223,9 +223,6 @@ let g:ycm_key_detailed_diagnostics = ''
 
 """" Java """"
 
-" YouCompleteMe intgration with Eclim
-let g:EclimCompletionMethod = 'omnifunc'
-
 " Hide invisible whitespace characters
 au FileType java,scala setlocal nolist
 
@@ -233,15 +230,6 @@ au FileType java,scala setlocal nolist
 au FileType java,scala setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 
 au FileType java,scala setlocal foldmethod=syntax foldlevelstart=1 foldnestmax=4
-
-" Shortcuts for eclim
-autocmd FileType java nnoremap <localleader>d :JavaDocPreview<CR>
-autocmd FileType java nnoremap <localleader>dc :JavaDocComment<CR>
-autocmd FileType java nnoremap <localleader>s :JavaSearchContext<CR>
-autocmd FileType java nnoremap <localleader>c :JavaCorrect<CR>
-autocmd FileType java nnoremap <localleader>i :JavaImport<CR>
-autocmd FileType java nnoremap <localleader>io :JavaImportOrganize<CR>
-autocmd FileType java nnoremap <localleader>t :JUnitFindTest<CR>
 
 """" Clojure """"
 

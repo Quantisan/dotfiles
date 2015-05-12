@@ -141,7 +141,6 @@ Plugin 'editorconfig/editorconfig-vim'
 " for Python
 Plugin 'python.vim'
 Plugin 'python_match.vim'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'hynek/vim-python-pep8-indent'
 
 " for Clojure
@@ -265,11 +264,6 @@ au FileType python setlocal colorcolumn=80
 
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--ignore="E501"'
-
-" Remap jedi-vim command as it conflicts with NerdTree shortcut
-let g:jedi#usages_command = "<leader>u"
-" Disable auto-select first selection
-let g:jedi#popup_select_first = 0
 
 """" Javascript """"
 au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab

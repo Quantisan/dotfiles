@@ -159,6 +159,9 @@ Plugin 'Raimondi/delimitMate'
 " Go
 Plugin 'fatih/vim-go'
 
+" Julia
+Plugin 'JuliaLang/julia-vim'
+
 " End of my bundles
 
 " All of your Plugins must be added before the following line

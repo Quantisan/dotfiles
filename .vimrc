@@ -222,6 +222,7 @@ autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 " disable useless and conflicting key binding
 let g:ycm_key_detailed_diagnostics = ''
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 """" Java """"
 
@@ -297,3 +298,4 @@ au FileType html setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 au FileType html setlocal nolist
 
 au FileType html IndentGuidesEnable
+

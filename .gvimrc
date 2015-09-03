@@ -1,7 +1,7 @@
 colorscheme solarized
 set t_Co=256
 " Use Solarized Light for daytime and Dark for nighttime
-if strftime("%H") >= 7 && strftime("%H") <= 17
+if strftime("%H") >= 7 && strftime("%H") <= 19
   set background=light
 else
   set background=dark

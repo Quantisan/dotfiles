@@ -178,6 +178,9 @@ map <Leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 " CtrlP ignore
 set wildignore+=*.class,*.pyc,*.class,*.css,*.log
 
+" CtrlP ignore gitignore listed folders
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 " map CtrlP buffer
 nmap ; :CtrlPBuffer<CR>
 

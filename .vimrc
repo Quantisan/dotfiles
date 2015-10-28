@@ -296,7 +296,7 @@ au FileType go nmap <leader>t <Plug>(go-test)
 
 """" HTML """"
 " Use 4-character tab for tabs
-au FileType html setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+au FileType html setlocal tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
 " Hide invisible whitespace characters
 au FileType html setlocal nolist
 

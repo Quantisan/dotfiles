@@ -183,6 +183,8 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 " map CtrlP buffer
 nmap ; :CtrlPBuffer<CR>
+" disable CtrlP caching
+let g:ctrlp_use_caching = 0
 
 " Enable C-@ deleting buffer in CtrlPBuffer
 call ctrlp_bdelete#init()

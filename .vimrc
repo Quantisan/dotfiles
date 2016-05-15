@@ -247,6 +247,7 @@ autocmd FileType clojure setlocal lispwords+=facts,fact
 
 " map Clojure testing and namespace switch shortcuts
 autocmd FileType clojure nnoremap <localleader>rt :Require!<Bar>Eval (clojure.test/run-tests)<CR>
+autocmd FileType clojure nnoremap <localleader>t :.RunTests<CR>
 autocmd FileType clojure nnoremap <localleader>a :A<CR>
 autocmd FileType clojure nnoremap <localleader>a<C-v> :AV<CR>
 autocmd FileType clojure nnoremap <localleader>as :AS<CR>

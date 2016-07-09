@@ -283,7 +283,7 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 3
 
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--ignore="E501"'
+let g:syntastic_python_flake8_args = '--ignore="E501,E221,E226"'
 
 """" Javascript """"
 au FileType javascript setlocal softtabstop=2 shiftwidth=2 expandtab

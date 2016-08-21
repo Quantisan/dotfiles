@@ -204,6 +204,18 @@ imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
 nmap <Leader>q :nohlsearch<CR>
 nmap <silent><C-e> :e#<CR>
 
+" Tab switching
+noremap <D-1> 1gt
+noremap <D-2> 2gt
+noremap <D-3> 3gt
+noremap <D-4> 4gt
+noremap <D-5> 5gt
+noremap <D-6> 6gt
+noremap <D-7> 7gt
+noremap <D-8> 8gt
+noremap <D-9> 9gt
+noremap <D-0> :tablast<CR>
+
 nnoremap <silent><C-J> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-K> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <F11> :YRShow<CR>

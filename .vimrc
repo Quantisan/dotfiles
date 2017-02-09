@@ -254,7 +254,7 @@ au FileType java,scala setlocal foldmethod=syntax foldlevelstart=1 foldnestmax=4
 """" Clojure """"
 
 let g:clojure_align_multiline_strings = 1
-let g:clojure_maxlines = 1000
+let g:clojure_maxlines = 200
 autocmd FileType clojure setlocal lispwords+=facts,fact
 
 " map Clojure testing and namespace switch shortcuts

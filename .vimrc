@@ -163,6 +163,9 @@ Plugin 'fatih/vim-go'
 " Julia
 Plugin 'JuliaLang/julia-vim'
 
+" Terraform
+Plugin 'hashivim/vim-terraform'
+
 " End of my bundles
 
 " All of your Plugins must be added before the following line
@@ -240,6 +243,9 @@ autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " disable useless and conflicting key binding
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
+"
+vmap <Leader>aw :Tabularize /\W\+ \+\zs<CR>
 
 """" Java """"
 
@@ -327,3 +333,5 @@ au FileType html setlocal nolist
 
 au FileType html IndentGuidesEnable
 
+"""" Terraform """"
+let g:terraform_fmt_on_save = 1

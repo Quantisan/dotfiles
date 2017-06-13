@@ -119,6 +119,7 @@ Plugin 'VundleVim/Vundle.vim'
 " My bundles here:
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tommcdo/vim-fubitive'
 Plugin 'shumphrey/fugitive-gitlab.vim'
 Plugin 'Lokaltog/vim-easymotion'

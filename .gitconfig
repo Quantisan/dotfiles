@@ -28,13 +28,8 @@
 	b = branch -a
 	remotes = remote -v
 
-<<<<<<< HEAD
-    # Fetch and prune remote-tracking branches
-    f = fetch -p
-=======
 	# List aliases
 	aliases = config --get-regexp alias
->>>>>>> c495de6d15a1af43951b5964320e8e3ea587b4b5
 
 	# Amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD

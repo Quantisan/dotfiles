@@ -53,7 +53,7 @@ if dein#load_state(expand('~/.vim/bundles'))
 
   " visual
   call dein#add('NLKNguyen/papercolor-theme')
-  call dein#add('bling/vim-airline')
+  call dein#add('vim-airline/vim-airline')
 
   " motion
   call dein#add('easymotion/vim-easymotion')
@@ -61,11 +61,13 @@ if dein#load_state(expand('~/.vim/bundles'))
   " editing helpers
   call dein#add('Shougo/deoplete.nvim') " auto-complete
   call dein#add('w0rp/ale')             " linting
+  " ./install --all so the interactive script doesn't block
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " CLI tools integration
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-rhubarb')
-  call dein#add('mileszs/ack.vim')
 
   " Required:
   call dein#end()
@@ -94,7 +96,19 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
-" set Ack to use Ag
-let g:ackprg = 'ag --nogroup --nocolor --column'
-" bind :Ack to key
-nnoremap <leader>f :Ack<space>
+" fzf.vim bindings
+nnoremap <silent> <leader><space> :Files<CR>
+nnoremap <silent> <leader>a :Buffers<CR>
+nnoremap <silent> <leader>A :Windows<CR>
+nnoremap <silent> <leader>; :BLines<CR>
+nnoremap <silent> <leader>o :BTags<CR>
+nnoremap <silent> <leader>O :Tags<CR>
+nnoremap <silent> <leader>? :History<CR>
+nnoremap <silent> <leader>gl :Commits<CR>
+nnoremap <silent> <leader>ga :BCommits<CR>
+nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+
+" Insert mode completion
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)

@@ -32,7 +32,6 @@ set sidescrolloff=5
 " Use true colour in terminal
 set termguicolors
 
-
 """"""""""""""""""""""""""
 " dein.vim package manager
 
@@ -51,6 +50,10 @@ if dein#load_state(expand('~/.vim/bundles'))
   " Required:
   call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
 
+  " IDE
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/vimfiler.vim', { 'on': 'VimFiler', 'depends': 'unite.vim' }) " file explorer
+
   " visual
   call dein#add('NLKNguyen/papercolor-theme')
   call dein#add('vim-airline/vim-airline')
@@ -59,15 +62,16 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('easymotion/vim-easymotion')
 
   " editing helpers
-  call dein#add('Shougo/deoplete.nvim') " auto-complete
-  call dein#add('w0rp/ale')             " linting
-  " ./install --all so the interactive script doesn't block
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-
+  call dein#add('Shougo/deoplete.nvim')     " auto-complete
+  call dein#add('w0rp/ale')                 " linting
+  call dein#add('scrooloose/nerdcommenter') " commenting
+  
   " CLI tools integration
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-rhubarb')
+  " ./install --all so the interactive script doesn't block
+  call dein#add('junegunn/fzf', { 'build': './install --all' }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " Required:
   call dein#end()
@@ -77,7 +81,11 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
+
 """"""""""""""""""""""""""
+" plugin settings
+
+let g:deoplete#enable_at_startup = 1
 
 """"""""""""""""""""""""""
 " Theme
@@ -89,12 +97,15 @@ if strftime("%H") >= 7 && strftime("%H") < 19
 else
   set background=dark
 endif
-""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""
-" misc. plugin settings
+" key bindings
 
-let g:deoplete#enable_at_startup = 1
+" disable search highlight
+nmap <leader>q :nohlsearch<CR>
+
+map ` :VimFiler -explorer<CR>
+map ~ :VimFilerCurrentDir -explorer -find<CR>
 
 " fzf.vim bindings
 nnoremap <silent> <leader><space> :Files<CR>
@@ -108,7 +119,8 @@ nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 
-" Insert mode completion
+" fzf.vim insert mode completion
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+

@@ -73,6 +73,15 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('junegunn/fzf', { 'build': './install --all' }) 
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
+  "" Language-specific ""
+
+  " Clojure
+  call dein#add('clojure-vim/acid.nvim')         " nREPL integration
+  call dein#add('guns/vim-sexp')                 " paredit
+  call dein#add('tpope/vim-sexp-mappings-for-regular-people')
+  call dein#add('clojure-vim/async-clj-omni', { 'depends': 'deoplete.nvim' }) " auto-complete
+  call dein#add('luochen1990/rainbow')           " rainbow paren
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -85,7 +94,18 @@ syntax enable
 """"""""""""""""""""""""""
 " plugin settings
 
+" deoplete
 let g:deoplete#enable_at_startup = 1
+
+" async-clj-omni
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+
+""""""""""""""""""""""""""
+" Clojure
+
+" rainbow
+autocmd FileType clojure let g:rainbow_active = 1
 
 """"""""""""""""""""""""""
 " Theme

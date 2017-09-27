@@ -57,6 +57,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   " visual
   call dein#add('NLKNguyen/papercolor-theme')
   call dein#add('vim-airline/vim-airline')
+  call dein#add('nathanaelkane/vim-indent-guides') 
 
   " motion
   call dein#add('easymotion/vim-easymotion')
@@ -65,10 +66,11 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('Shougo/deoplete.nvim')     " auto-complete
   call dein#add('w0rp/ale')                 " linting
   call dein#add('scrooloose/nerdcommenter') " commenting
+  call dein#add('tpope/vim-surround')       " quoting
   
   " CLI tools integration
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-rhubarb')
+  call dein#add('tpope/vim-fugitive')       " Git
+  call dein#add('tpope/vim-rhubarb')        " Git
   " ./install --all so the interactive script doesn't block
   call dein#add('junegunn/fzf', { 'build': './install --all' }) 
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
@@ -105,7 +107,7 @@ let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 " Clojure
 
 " rainbow
-autocmd FileType clojure let g:rainbow_active = 1
+let g:rainbow_active = 1
 
 """"""""""""""""""""""""""
 " Theme
@@ -144,3 +146,9 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" bind Fugitive functions
+nmap <leader>gb :Gbrowse<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Git push<CR>

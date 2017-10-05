@@ -68,6 +68,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('w0rp/ale')                 " linting
   call dein#add('scrooloose/nerdcommenter') " commenting
   call dein#add('tpope/vim-surround')       " quoting
+  call dein#add('editorconfig/editorconfig-vim')
   
   " CLI tools integration
   call dein#add('tpope/vim-fugitive')       " Git

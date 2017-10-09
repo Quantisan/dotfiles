@@ -53,11 +53,12 @@ if dein#load_state(expand('~/.vim/bundles'))
   " IDE
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/vimfiler.vim', { 'on': 'VimFiler', 'depends': 'unite.vim' }) " file explorer
+  call dein#add('vim-scripts/gitignore')
 
   " visual
   call dein#add('NLKNguyen/papercolor-theme')
   call dein#add('vim-airline/vim-airline')
-  call dein#add('nathanaelkane/vim-indent-guides') 
+  call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('kshenoy/vim-signature')
 
   " motion
@@ -69,15 +70,17 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('scrooloose/nerdcommenter') " commenting
   call dein#add('tpope/vim-surround')       " quoting
   call dein#add('editorconfig/editorconfig-vim')
-  
+
   " CLI tools integration
   call dein#add('tpope/vim-fugitive')       " Git
   call dein#add('tpope/vim-rhubarb')        " Git
   " ./install --all so the interactive script doesn't block
-  call dein#add('junegunn/fzf', { 'build': './install --all' }) 
+  call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   "" Language-specific ""
+
+  call dein#add('hashivim/vim-terraform')
 
   " Clojure
   call dein#add('clojure-vim/acid.nvim')         " nREPL integration
@@ -116,6 +119,8 @@ let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 
+" vim-terraform
+let g:terraform_align=1
 
 """"""""""""""""""""""""""
 " Clojure

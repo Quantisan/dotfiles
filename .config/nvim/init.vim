@@ -50,16 +50,16 @@ if dein#load_state(expand('~/.vim/bundles'))
   " Required:
   call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
 
-  " IDE
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/vimfiler.vim', { 'on': 'VimFiler', 'depends': 'unite.vim' }) " file explorer
-  call dein#add('vim-scripts/gitignore')
-
   " visual
   call dein#add('NLKNguyen/papercolor-theme')
   call dein#add('vim-airline/vim-airline')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('kshenoy/vim-signature')
+
+  " IDE
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/vimfiler.vim', { 'on': 'VimFiler', 'depends': 'unite.vim' }) " file explorer
+  call dein#add('vim-scripts/gitignore')
 
   " motion
   call dein#add('easymotion/vim-easymotion')

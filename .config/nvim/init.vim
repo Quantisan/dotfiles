@@ -90,6 +90,9 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('clojure-vim/async-clj-omni', { 'depends': 'deoplete.nvim' }) " auto-complete
   call dein#add('luochen1990/rainbow')           " rainbow paren
 
+  " Python
+  call dein#add('hynek/vim-python-pep8-indent')  " identation
+
   " Required:
   call dein#end()
   call dein#save_state()

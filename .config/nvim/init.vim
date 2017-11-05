@@ -92,6 +92,7 @@ if dein#load_state(expand('~/.vim/bundles'))
 
   " Python
   call dein#add('hynek/vim-python-pep8-indent')  " identation
+  call dein#add('tmhedberg/SimpylFold')          " code folding
 
   " Required:
   call dein#end()

@@ -59,7 +59,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   " IDE
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/vimfiler.vim', { 'on': 'VimFiler', 'depends': 'unite.vim' }) " file explorer
-  call dein#add('vim-scripts/gitignore')
+  call dein#add('octref/RootIgnore')
 
   " motion
   call dein#add('easymotion/vim-easymotion')
@@ -102,6 +102,11 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
+
+
+" disable python 2 support
+let g:loaded_python_provider = 1
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 """"""""""""""""""""""""""
 " plugin settings

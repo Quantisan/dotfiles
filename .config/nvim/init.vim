@@ -92,6 +92,7 @@ if dein#load_state(expand('~/.vim/bundles'))
 
   " Python
   call dein#add('hynek/vim-python-pep8-indent')  " identation
+  call dein#add('nvie/vim-flake8')               " style and syntax checking
   call dein#add('tmhedberg/SimpylFold')          " code folding
 
   " Required:
@@ -151,6 +152,12 @@ setlocal lispwords+=GET
 setlocal lispwords+=PUT
 setlocal lispwords+=POST
 setlocal lispwords+=DELETE
+
+""""""""""""""""""""""""""
+" Python
+
+" run Flake8 every time when saving a .py file
+autocmd BufWritePost *.py call Flake8()
 
 """"""""""""""""""""""""""
 " Theme

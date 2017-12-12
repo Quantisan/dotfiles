@@ -166,10 +166,11 @@
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
-# URL shorthands
+# Github shorthands
 
 [url "git@github.com:"]
 
+  insteadOf = "https://github.com/"
 	insteadOf = "gh:"
 	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
@@ -187,3 +188,4 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+

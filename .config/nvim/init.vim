@@ -87,7 +87,6 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('guns/vim-clojure-static')       " indentation
   call dein#add('guns/vim-sexp')                 " paredit
   call dein#add('tpope/vim-sexp-mappings-for-regular-people')
-  call dein#add('clojure-vim/async-clj-omni', { 'depends': 'deoplete.nvim' }) " auto-complete
   call dein#add('luochen1990/rainbow')           " rainbow paren
 
   " Go
@@ -140,10 +139,6 @@ let g:terraform_align=1
 
 " rainbow
 let g:rainbow_active = 1
-
-" async-clj-omni
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
 " vim-clojure-static
 let g:clojure_align_multiline_strings = 1

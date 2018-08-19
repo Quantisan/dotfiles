@@ -60,6 +60,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/vimfiler.vim', { 'on': 'VimFiler', 'depends': 'unite.vim' }) " file explorer
   call dein#add('octref/RootIgnore')
+  call dein#add('godlygeek/tabular')
 
   " motion
   call dein#add('easymotion/vim-easymotion')

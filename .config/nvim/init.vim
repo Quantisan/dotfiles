@@ -83,7 +83,8 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('hashivim/vim-terraform')
 
   " Clojure
-  call dein#add('clojure-vim/acid.nvim')         " nREPL integration
+  call dein#add('tpope/vim-fireplace')           " nREPL integration
+  call dein#add('tpope/vim-classpath')           " 
   call dein#add('guns/vim-clojure-static')       " indentation
   call dein#add('guns/vim-sexp')                 " paredit
   call dein#add('tpope/vim-sexp-mappings-for-regular-people')
@@ -150,6 +151,17 @@ setlocal lispwords+=GET
 setlocal lispwords+=PUT
 setlocal lispwords+=POST
 setlocal lispwords+=DELETE
+
+" for vim-fireplace
+autocmd FileType clojure nnoremap <buffer> <localleader>re :Eval<cr>
+autocmd FileType clojure vnoremap <buffer> <localleader>re :Eval<cr>
+autocmd FileType clojure nnoremap <buffer> <localleader>rf :%Eval<cr>
+autocmd FileType clojure nnoremap <buffer> <localleader>rr :Require<cr>
+autocmd FileType clojure nnoremap <buffer> <localleader>rR :Require!<cr>
+autocmd FileType clojure nnoremap <buffer> <localleader>rt :RunTests<cr>
+autocmd FileType clojure nnoremap <buffer> <localleader>rl :Last<cr>
+autocmd FileType clojure nnoremap <buffer> <localleader>rc :FireplaceConnect<cr>
+autocmd FileType clojure nnoremap <buffer> gd :normal [<c-d><cr>
 
 """"""""""""""""""""""""""
 " Go

@@ -84,8 +84,11 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('hashivim/vim-terraform')
 
   " Clojure
+  call dein#add('tpope/vim-salve')               " status support
+  call dein#add('tpope/vim-projectionist')       " recommended for vim-salve
+  call dein#add('tpope/vim-dispatch')            " async dispatch
+  call dein#add('tpope/vim-classpath')           " JVM classpath
   call dein#add('tpope/vim-fireplace')           " nREPL integration
-  call dein#add('tpope/vim-classpath')           " 
   call dein#add('guns/vim-clojure-static')       " indentation
   call dein#add('guns/vim-sexp')                 " paredit
   call dein#add('tpope/vim-sexp-mappings-for-regular-people')

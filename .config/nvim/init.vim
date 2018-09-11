@@ -137,6 +137,7 @@ let g:vimfiler_marked_file_icon = '*'
 
 " vim-terraform
 let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " fzf.vim respect gitignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'

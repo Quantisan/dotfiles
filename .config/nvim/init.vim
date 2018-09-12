@@ -19,6 +19,10 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+" Display tabs
+set list
+set listchars=tab:>-
+
 " Don't let Vim hide characters or make loud dings
 set conceallevel=1
 set noerrorbells

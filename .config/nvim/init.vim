@@ -209,7 +209,7 @@ autocmd BufWritePost *.py call Flake8()
 colorscheme PaperColor
 
 " Choose light/dark colorscheme based on time of day
-if strftime("%H") >= 7 && strftime("%H") < 18
+if strftime("%H") >= 5 && strftime("%H") < 19
   set background=light
 else
   set background=dark

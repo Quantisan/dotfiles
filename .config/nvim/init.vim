@@ -74,6 +74,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('w0rp/ale')                 " linting
   call dein#add('scrooloose/nerdcommenter') " commenting
   call dein#add('tpope/vim-surround')       " quoting
+  call dein#add('tpope/vim-abolish')        " word variants
   call dein#add('editorconfig/editorconfig-vim')
 
   " CLI tools integration

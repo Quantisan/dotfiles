@@ -104,6 +104,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('hynek/vim-python-pep8-indent')  " identation
   call dein#add('nvie/vim-flake8')               " style and syntax checking
   call dein#add('tmhedberg/SimpylFold')          " code folding
+  call dein#add('python/black')                  " linting
 
   " Required:
   call dein#end()
@@ -195,6 +196,9 @@ endfunction
 " vim-terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
+
+" Black
+autocmd BufWritePre *.py execute ':Black'
 
 " fzf.vim respect gitignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'

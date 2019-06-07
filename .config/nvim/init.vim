@@ -278,7 +278,7 @@ endif
 " disable search highlight
 nmap <leader>q :nohlsearch<CR>
 
-map ` :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
+map ` :Defx<CR>
 
 " fzf.vim bindings
 nnoremap <silent> <leader><space> :Files<CR>

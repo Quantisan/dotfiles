@@ -278,7 +278,7 @@ endif
 " disable search highlight
 nmap <leader>q :nohlsearch<CR>
 
-map ` :Defx<CR>
+map ` :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 
 " fzf.vim bindings
 nnoremap <silent> <leader><space> :Files<CR>

@@ -210,7 +210,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:rainbow_active = 1
 
 " vim-clojure-static
-let g:clojure_maxlines = 0
+let g:clojure_maxlines = 200
 let g:clojure_align_multiline_strings = 1
 setlocal lispwords+=go,go-loop
 

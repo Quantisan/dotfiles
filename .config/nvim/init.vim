@@ -91,7 +91,6 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-salve')               " status support
   call dein#add('tpope/vim-projectionist')       " recommended for vim-salve
   call dein#add('tpope/vim-dispatch')            " async dispatch
-  call dein#add('tpope/vim-fireplace')           " nREPL integration
   call dein#add('guns/vim-clojure-static')       " indentation
   call dein#add('guns/vim-sexp')                 " paredit
   call dein#add('tpope/vim-sexp-mappings-for-regular-people')
@@ -223,9 +222,6 @@ setlocal lispwords+=GET
 setlocal lispwords+=PUT
 setlocal lispwords+=POST
 setlocal lispwords+=DELETE
-
-" for vim-fireplace
-autocmd FileType clojure nnoremap <buffer> gd :normal [<c-d><cr>
 
 """"""""""""""""""""""""""
 " Go

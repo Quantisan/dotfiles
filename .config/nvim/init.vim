@@ -70,6 +70,7 @@ if dein#load_state(expand('~/.vim/bundles'))
 
   " editing helpers
   call dein#add('Shougo/deoplete.nvim')     " auto-complete
+  call dein#add('ncm2/float-preview.nvim')
   call dein#add('w0rp/ale')                 " linting
   call dein#add('scrooloose/nerdcommenter') " commenting
   call dein#add('tpope/vim-surround')       " quoting
@@ -88,10 +89,10 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('hashivim/vim-terraform')
 
   " Clojure
+  call dein#add('Olical/conjure', {'rev': 'v4.*'})
   call dein#add('tpope/vim-salve')               " status support
   call dein#add('tpope/vim-projectionist')       " recommended for vim-salve
   call dein#add('tpope/vim-dispatch')            " async dispatch
-  call dein#add('tpope/vim-fireplace')           " nREPL integration
   call dein#add('guns/vim-clojure-static')       " indentation
   call dein#add('guns/vim-sexp')                 " paredit
   call dein#add('tpope/vim-sexp-mappings-for-regular-people')
@@ -123,8 +124,14 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 """"""""""""""""""""""""""
 " plugin settings
 
-" deoplete
+" auto-completer
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
+set completeopt-=preview
+
+let g:float_preview#docked = 0
+let g:float_preview#max_width = 80
+let g:float_preview#max_height = 40
 
 " defx
 autocmd FileType defx call s:defx_my_settings()
@@ -223,9 +230,6 @@ setlocal lispwords+=GET
 setlocal lispwords+=PUT
 setlocal lispwords+=POST
 setlocal lispwords+=DELETE
-
-" for vim-fireplace
-autocmd FileType clojure nnoremap <buffer> gd :normal [<c-d><cr>
 
 """"""""""""""""""""""""""
 " Go

@@ -131,11 +131,6 @@ set completeopt-=preview
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-
-let g:float_preview#docked = 0
-let g:float_preview#max_width = 80
-let g:float_preview#max_height = 40
-
 " defx
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
@@ -218,6 +213,10 @@ let g:ale_linters = {'clojure': ['clj-kondo']}
 
 """"""""""""""""""""""""""
 " Clojure
+
+" Conjure
+let g:conjure#log#hud#width = 0.8
+let g:float_preview#docked = 0
 
 " rainbow
 let g:rainbow_active = 1

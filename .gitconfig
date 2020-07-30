@@ -203,3 +203,6 @@
 [init]
 
 	templateDir = ~/.config/git/template/
+
+[pull]
+    rebase = false

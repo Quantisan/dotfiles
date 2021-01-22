@@ -158,7 +158,6 @@ alias ping='prettyping --nolegend'
 
 # Convenience aliases
 alias mog='mogrify -strip -interlace Plane -quality 85% -resize 540'
-alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 alias dc='docker-compose'
 alias t='terraform'

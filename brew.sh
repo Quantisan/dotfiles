@@ -40,11 +40,13 @@ brew install gnupg
 
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
+brew install neovim
 brew install grep
 brew install openssh
 brew install screen
 brew install php
 brew install gmp
+brew install python@3.9
 
 # Install font tools.
 brew tap bramstein/webfonttools
@@ -80,6 +82,7 @@ brew install xz
 
 # Install other useful binaries.
 brew install ack
+brew install fzf
 #brew install exiv2
 brew install git
 brew install git-lfs
@@ -99,3 +102,20 @@ brew install zopfli
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# Tools that I use for development
+brew install awscli
+brew install clojure
+brew install clj-kondo
+brew install leiningen
+brew install packer
+brew install pgcli
+brew install terraform
+
+# More tools I use
+brew install jq
+brew install q
+brew install speedtest-cli
+brew install tig
+brew install tldr
+brew install youtube-dl

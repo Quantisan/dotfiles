@@ -150,3 +150,32 @@ alias path='echo -e ${PATH//:/\\n}'
 # Defaults to python3
 alias python='python3'
 alias pip='pip3'
+
+# Replacing some commands
+alias cat='bat'
+alias vi='nvim'
+alias ping='prettyping --nolegend'
+
+# Convenience aliases
+alias mog='mogrify -strip -interlace Plane -quality 85% -resize 540'
+alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+alias dc='docker-compose'
+alias t='terraform'
+alias ecr='aws --region=us-west-2 ecr get-login-password | docker login --username AWS --password-stdin 658488433453.dkr.ecr.us-west-2.amazonaws.com'
+
+## Docker ##
+
+# Kill all running containers.
+alias dockerkillall='docker kill $(docker ps -q)'
+
+# Delete all stopped containers.
+alias dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+
+# Delete all untagged images.
+alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+
+alias dockercleanv='printf "\n>>> Deleting dangling volumes\n\n" && docker volume rm $(docker volume ls -qf dangling=true)'
+
+# Delete all stopped containers and untagged images.
+alias dockerclean='dockercleanc || true && dockercleani || true && dockercleanv'

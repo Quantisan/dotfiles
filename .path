@@ -1,0 +1,2 @@
+export PATH="(go env GOPATH)/bin:$(go env GOROOT)/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/gnupg/libexec/gpgbin:/usr/local/opt/openjdk@11/bin:$PATH"

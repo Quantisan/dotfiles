@@ -85,6 +85,7 @@ brew install terraform
 
 # More tools I use
 brew install jq
+brew install ncdu
 brew install q
 brew install speedtest-cli
 brew install the_silver_searcher

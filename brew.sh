@@ -74,6 +74,9 @@ brew install tree
 brew install vbindiff
 brew install zopfli
 
+brew install bat
+brew install prettyping
+
 # Tools that I use for development
 brew install awscli
 brew install clojure

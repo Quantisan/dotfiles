@@ -100,9 +100,6 @@ brew install tree
 brew install vbindiff
 brew install zopfli
 
-# Remove outdated versions from the cellar.
-brew cleanup
-
 # Tools that I use for development
 brew install awscli
 brew install clojure
@@ -119,3 +116,30 @@ brew install speedtest-cli
 brew install tig
 brew install tldr
 brew install youtube-dl
+
+# Brew Casks applications I use
+brew install anki
+brew install bitwarden
+brew install caffeine
+brew install caprine
+brew install docker
+brew install flux
+brew install google-backup-and-sync
+brew install google-chrome
+brew install iterm2
+brew install keepassx
+brew install keybase
+brew install postman
+brew install rectangle
+brew install skype
+brew install slack
+brew install spotify
+brew install sublime-text
+brew install the-unarchiver
+brew install transmission
+brew install vlc
+brew install whatsapp
+brew install zoom
+
+# Remove outdated versions from the cellar.
+brew cleanup

@@ -36,6 +36,10 @@ set sidescrolloff=5
 " Use true colour in terminal
 set termguicolors
 
+" disable python 2 support
+let g:loaded_python_provider = 1
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 """"""""""""""""""""""""""
 " dein.vim package manager
 
@@ -43,16 +47,12 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" Required:
-if dein#load_state(expand('~/.vim/bundles'))
-  call dein#begin(expand('~/.vim/bundles'))
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
 
-  " Let dein manage dein
-  " Required:
-  call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " visual
   call dein#add('NLKNguyen/papercolor-theme')
@@ -71,7 +71,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   " editing helpers
   call dein#add('Shougo/deoplete.nvim')     " auto-complete
   call dein#add('ncm2/float-preview.nvim')
-  call dein#add('w0rp/ale')                 " linting
+  call dein#add('dense-analysis/ale')       " linting
   call dein#add('scrooloose/nerdcommenter') " commenting
   call dein#add('tpope/vim-surround')       " quoting
   call dein#add('tpope/vim-abolish')        " word variants
@@ -106,19 +106,12 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('nvie/vim-flake8')               " style and syntax checking
   call dein#add('tmhedberg/SimpylFold')          " code folding
 
-  " Required:
   call dein#end()
   call dein#save_state()
 endif
 
-" Required:
 filetype plugin indent on
 syntax enable
-
-
-" disable python 2 support
-let g:loaded_python_provider = 1
-let g:python3_host_prog = '/usr/local/bin/python3'
 
 """"""""""""""""""""""""""
 " plugin settings

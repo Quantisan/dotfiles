@@ -299,8 +299,8 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " bind Fugitive functions
-nmap <leader>gb :Gbrowse<CR>
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gd :Gdiff<CR>
-nmap <leader>gl :Glog<CR>
+nmap <leader>gb :GBrowse<CR>
+nmap <leader>gs :Git<CR>
+nmap <leader>gd :Gvdiffsplit<CR>
+nmap <leader>gl :Git log<CR>
 nmap <leader>gp :Git push<CR>

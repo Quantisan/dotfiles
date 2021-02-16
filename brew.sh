@@ -32,14 +32,12 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
   chsh -s "${BREW_PREFIX}/bin/bash";
 fi;
 
-# Install `wget` with IRI support.
-brew install wget --with-iri
+brew install wget
 
 # Install GnuPG to enable PGP-signing commits.
 brew install gnupg
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
 brew install neovim
 brew install grep
 brew install openssh
@@ -61,7 +59,7 @@ brew install fzf
 brew install git
 brew install git-lfs
 brew install gs
-brew install imagemagick --with-webp
+brew install imagemagick
 brew install lua
 brew install lynx
 brew install p7zip
@@ -80,7 +78,7 @@ brew install prettyping
 # Tools that I use for development
 brew install awscli
 brew install clojure
-brew install clj-kondo
+brew install borkdude/brew/clj-kondo
 brew install leiningen
 brew install packer
 brew install pgcli
@@ -96,13 +94,14 @@ brew install tig
 brew install tldr
 brew install youtube-dl
 
+# Fonts
+brew tap homebrew/cask-fonts
+brew install font-jetbrains-mono
+
 # Brew Casks applications I use
 brew install anki
 # brew install bitwarden  ## must be installed through App Store
-brew install caffeine
 brew install caprine
-brew install docker
-brew install flux
 brew install google-backup-and-sync
 brew install google-chrome
 brew install iterm2

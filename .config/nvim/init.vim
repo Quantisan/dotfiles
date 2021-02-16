@@ -38,7 +38,7 @@ set termguicolors
 
 " disable python 2 support
 let g:loaded_python_provider = 1
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 """"""""""""""""""""""""""
 " dein.vim package manager

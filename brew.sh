@@ -98,7 +98,7 @@ brew install youtube-dl
 
 # Brew Casks applications I use
 brew install anki
-brew install bitwarden
+# brew install bitwarden  ## must be installed through App Store
 brew install caffeine
 brew install caprine
 brew install docker

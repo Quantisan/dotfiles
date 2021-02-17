@@ -111,7 +111,7 @@ brew install slack
 brew install spotify
 brew install sublime-text
 brew install the-unarchiver
-brew install transmission
+brew install homebrew/cask/transmission
 brew install vlc
 brew install whatsapp
 brew install zoom

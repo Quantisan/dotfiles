@@ -103,13 +103,10 @@ brew install anki
 # brew install bitwarden  ## must be installed through App Store
 brew install caprine
 brew install google-backup-and-sync
-brew install google-chrome
 brew install iterm2
 brew install keepassx
 brew install keybase
-brew install postman
 brew install rectangle
-brew install skype
 brew install slack
 brew install spotify
 brew install sublime-text

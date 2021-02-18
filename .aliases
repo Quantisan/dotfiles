@@ -48,8 +48,8 @@ alias sudo='sudo '
 # Get week number
 alias week='date +%V'
 
-# Update installed Homebrew, npm, and their installed packages
-alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g;'
+# Update installed Homebrew, and installed packages
+alias update='brew update; brew upgrade; brew cleanup;'
 
 # Google Chrome
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'

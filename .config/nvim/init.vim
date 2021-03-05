@@ -64,6 +64,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/defx.nvim')
   call dein#add('octref/RootIgnore')
   call dein#add('godlygeek/tabular')
+  call dein#add('mtth/scratch.vim')
 
   " motion
   call dein#add('easymotion/vim-easymotion')

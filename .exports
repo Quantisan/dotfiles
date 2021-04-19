@@ -47,3 +47,7 @@ export GOPATH=$HOME/Projects/gocode
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export LOLCOMMITS_DELAY=1
+
+# use Sekey
+export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+

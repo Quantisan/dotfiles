@@ -117,6 +117,10 @@ syntax enable
 """"""""""""""""""""""""""
 " plugin settings
 
+" scratch buffer
+nmap <leader>sp :ScratchPreview<CR>
+let g:scratch_insert_autohide = 0
+
 " auto-completer
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
@@ -220,7 +224,7 @@ let g:clojure_align_multiline_strings = 1
 setlocal lispwords+=go,go-loop
 
 " emulate clojure-mode indentation
-let g:clojure_align_subforms = 1 
+let g:clojure_align_subforms = 1
 
 " for compojure
 setlocal lispwords+=context

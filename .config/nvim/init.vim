@@ -220,11 +220,8 @@ let g:rainbow_active = 1
 
 " vim-clojure-static
 let g:clojure_maxlines = 200
-let g:clojure_align_multiline_strings = 1
 setlocal lispwords+=go,go-loop
-
-" emulate clojure-mode indentation
-let g:clojure_align_subforms = 1
+let g:clojure_align_subforms = 1 " emulate clojure-mode indentation
 
 " for compojure
 setlocal lispwords+=context

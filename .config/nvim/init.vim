@@ -94,7 +94,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-salve')               " status support
   call dein#add('tpope/vim-projectionist')       " recommended for vim-salve
   call dein#add('tpope/vim-dispatch')            " async dispatch
-  call dein#add('guns/vim-clojure-static')       " indentation
+  call dein#add('clojure-vim/clojure.vim')       " indentation
   call dein#add('guns/vim-sexp')                 " paredit
   call dein#add('tpope/vim-sexp-mappings-for-regular-people')
   call dein#add('luochen1990/rainbow')           " rainbow paren
@@ -111,8 +111,8 @@ if dein#load_state('~/.cache/dein')
   call dein#save_state()
 endif
 
-filetype plugin indent on
 syntax enable
+filetype plugin indent on
 
 """"""""""""""""""""""""""
 " plugin settings
@@ -218,17 +218,8 @@ let g:float_preview#docked = 0
 " rainbow
 let g:rainbow_active = 1
 
-" vim-clojure-static
-let g:clojure_maxlines = 200
-setlocal lispwords+=go,go-loop
+" Clojure.vim
 let g:clojure_align_subforms = 1 " emulate clojure-mode indentation
-
-" for compojure
-setlocal lispwords+=context
-setlocal lispwords+=GET
-setlocal lispwords+=PUT
-setlocal lispwords+=POST
-setlocal lispwords+=DELETE
 
 """"""""""""""""""""""""""
 " Go

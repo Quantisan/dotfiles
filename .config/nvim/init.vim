@@ -124,7 +124,7 @@ let g:scratch_insert_autohide = 0
 " auto-completer
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-set completeopt-=preview
+autocmd CompleteDone * silent! pclose! " close preview window after completion is done
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 

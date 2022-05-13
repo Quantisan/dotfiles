@@ -48,3 +48,5 @@ pom.xml.asc
 #######
 workbench.xmi
 .flake8
+.lsp/
+.clj-kondo/

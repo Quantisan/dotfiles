@@ -204,6 +204,7 @@ autocmd BufWritePre *.py execute ':Black'
 
 " fzf.vim respect gitignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $BAT_THEME = 'gruvbox-light'
 
 " ALE
 let g:ale_linters = {'clojure': ['clj-kondo']}

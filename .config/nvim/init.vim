@@ -118,7 +118,7 @@ filetype plugin indent on
 " plugin settings
 
 " scratch buffer
-nmap <leader>sp :ScratchPreview<CR>
+nmap <leader>sc :ScratchPreview<CR>
 let g:scratch_insert_autohide = 0
 
 " auto-completer

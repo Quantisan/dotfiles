@@ -1,6 +1,0 @@
-{:files {:ignore #{"target" "resources" "dev-resources"}}
-
- :rules {:namespaces  {:break-libs? false}
-
-         ; set Tonsky formatting rule https://liquidz.github.io/vim-iced/#customizing_tonsky_formatting_rule
-         :indentation {:indents ^:replace {#"^\w" [[:inner 0]]}}}}

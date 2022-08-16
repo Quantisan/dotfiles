@@ -40,6 +40,7 @@ Thumbs.db
 ############
 .Rhistory
 .lein*
+.cpcache/
 pom.xml.asc
 .tern-project
 *.pyc

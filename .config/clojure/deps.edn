@@ -16,7 +16,7 @@
   ;; :paths ["src"]
 
   ;; External dependencies
- 
+
   ;; :deps {
   ;;   org.clojure/clojure {:mvn/version "1.10.3"}
   ;; }
@@ -30,10 +30,9 @@
 	;;     :extra-paths - vector of additional paths to add to the classpath
 	;;     :classpath-overrides - map of lib to path that overrides the result of resolving deps
 
-  ;; :aliases {
-  ;;   :deps {:extra-deps {org.clojure/tools.deps.alpha {:mvn/version "0.11.910"}}}
-  ;;   :test {:extra-paths ["test"]}
-  ;; }
+  :aliases {:outdated {:deps {com.github.liquidz/antq {:mvn/version "RELEASE"}
+                              org.slf4j/slf4j-nop {:mvn/version "RELEASE"}}
+                       :main-opts ["-m" "antq.core"]}}
 
   ;; Provider attributes
 

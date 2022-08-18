@@ -39,10 +39,14 @@ Thumbs.db
 # Language breadcrumbs #
 ############
 .Rhistory
+
 .lein*
 .cpcache/
+.nrepl-port
 pom.xml.asc
+
 .tern-project
+
 *.pyc
 
 # IDE #

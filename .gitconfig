@@ -212,3 +212,14 @@
 
 [pull]
     rebase = false
+
+# GPG
+
+[user]
+  name = Paul Lam
+  email = paul@quantisan.com
+  signingkey = CA7F9457B822154F
+
+[gpg]
+  program = /opt/homebrew/bin/gpg
+

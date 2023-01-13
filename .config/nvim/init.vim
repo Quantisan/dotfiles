@@ -200,9 +200,6 @@ endfunction
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
-" Black
-autocmd BufWritePre *.py execute ':Black'
-
 " fzf.vim respect gitignore
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let $BAT_THEME = 'gruvbox-light'
@@ -259,6 +256,12 @@ au FileType go nmap <F12> <Plug>(go-def)
 
 " run Flake8 every time when saving a .py file
 autocmd BufWritePost *.py call Flake8()
+
+" Black
+autocmd BufWritePre *.py execute ':Black'
+
+" SimplyFold
+let g:SimpylFold_docstring_preview = 1
 
 """"""""""""""""""""""""""
 " Theme

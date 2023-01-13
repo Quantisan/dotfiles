@@ -106,6 +106,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('hynek/vim-python-pep8-indent')  " identation
   call dein#add('nvie/vim-flake8')               " style and syntax checking
   call dein#add('tmhedberg/SimpylFold')          " code folding
+  call dein#add('python/black')                  " linting
 
   call dein#end()
   call dein#save_state()

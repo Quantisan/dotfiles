@@ -22,6 +22,7 @@ set expandtab
 " Display tabs
 set list
 set listchars=tab:>-
+set foldlevelstart=1
 
 " Don't let Vim hide characters or make loud dings
 set conceallevel=1

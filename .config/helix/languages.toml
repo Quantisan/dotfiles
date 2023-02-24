@@ -1,0 +1,5 @@
+[[language]]
+name = "clojure"
+formatter = { command = "cljstyle" , args = ["pipe"] }
+auto-format = true
+

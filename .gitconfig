@@ -1,47 +1,45 @@
 [alias]
 
-  # View abbreviated SHA, description, and history graph of the latest 20 commits
-  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  # View the current working tree status using the short format
-  s = status
+	# View abbreviated SHA, description, and history graph of the latest 20 commits.
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
-  # Show the diff between the latest commit and the current state
-  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	# View the current working tree status using the short format.
+	s = status -s
 
-  # `git di $number` shows the diff between the state `$number` revisions ago and the current state
-  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+	# Show the diff between the latest commit and the current state.
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-  # Pull in remote changes for the current repository and all its submodules
-  p = pull --recurse-submodules
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-  # Clone a repository including all submodules
-  c = clone --recursive
+	# Pull in remote changes for the current repository and all its submodules.
+	p = pull --recurse-submodules
 
-  # Commit all changes
-  ca = !git add -A && git commit -av
+	# Clone a repository including all submodules.
+	c = clone --recursive
 
-  # Switch to a branch, creating it if necessary
-  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	# Commit all changes.
+	ca = !git add -A && git commit -av
 
-  # Show verbose output about tags, branches or remotes
-  tags = tag -l
-  b = branch -a
-  remotes = remote -v
+	# Switch to a branch, creating it if necessary.
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
-  # List aliases
-  aliases = config --get-regexp alias
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch --all
+	remotes = remote --verbose
 
-  # Amend the currently staged files to the latest commit
-  amend = commit --amend --reuse-message=HEAD
+	# List aliases.
+	aliases = config --get-regexp alias
 
-  # Credit an author on the latest commit
-  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+	# Amend the currently staged files to the latest commit.
+	amend = commit --amend --reuse-message=HEAD
 
-  # Interactive rebase with the given number of latest commits
-  reb = "!r() { git rebase -i HEAD~$1; }; r"
+	# Credit an author on the latest commit.
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
-  # Remove the old tag with this name and tag the latest commit with it.
-  retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+	# Interactive rebase with the given number of latest commits.
+	reb = "!r() { git rebase -i HEAD~$1; }; r"
 
   # Find branches containing commit
   fb = "!f() { git branch -a --contains $1; }; f"
@@ -61,30 +59,18 @@
   # Force push current branch to remote
   fp = "!git push -f origin \"$(git rev-parse --abbrev-ref HEAD)\""
 
+	# Remove branches that have already been merged with main.
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
   # Remove branches that have already been merged with main
   # a.k.a. ‘delete merged’
   dm = !"git branch --merged | ack -v '(\\*|^\\s*master$|^\\s*dev)' | xargs -n 1 git branch -d"
-    # Delete merged REMOTE branches, except master and dev
-    dmr = !"git branch -r --merged | grep origin | grep -v '>' | grep -v master | grep -v dev | sed 's/origin\\///' | xargs -n 1 git push --delete origin"
+  # Delete merged REMOTE branches, except master and dev
+  dmr = !"git branch -r --merged | grep origin | grep -v '>' | grep -v master | grep -v dev | sed 's/origin\\///' | xargs -n 1 git push --delete origin"
 
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
-
-  # Merge GitHub pull request on top of the current branch or,
-  # if a branch name is specified, on top of the specified branch
-  mpr = "!f() { \
-    declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
-    declare branch=\"${2:-$currentBranch}\"; \
-    if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-      git fetch origin refs/pull/$1/head:pr/$1 && \
-      git checkout -B $branch && \
-      git rebase $branch pr/$1 && \
-      git checkout -B $branch && \
-      git merge pr/$1 && \
-      git branch -D pr/$1 && \
-      git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
-    fi \
-  }; f"
 
   # Show the user email for the current repository.
   whoami = config user.email
@@ -94,20 +80,25 @@
   # Detect whitespace errors when applying a patch
   whitespace = fix
 
+[branch]
+
+	# Show most recently changed branches first.
+	sort = -committerdate
+
 [core]
 
-  # Use custom `.gitignore` and `.gitattributes`
-  excludesfile = ~/.gitignore
-  attributesfile = ~/.gitattributes
+	# Use custom `.gitignore` and `.gitattributes`.
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
 
-  # Treat spaces before tabs and all kinds of trailing whitespace as an error
-  # [default] trailing-space: looks for spaces at the end of a line
-  # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
-  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
-  # Make `git rebase` safer on macOS
-  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-  trustctime = false
+	# Make `git rebase` safer on macOS.
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
 
   # Prevent showing files whose names contain non-ASCII symbols as unversioned.
   # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
@@ -149,18 +140,18 @@
 
 [diff]
 
-  # Detect copies as well as renames
-  renames = copies
+	# Detect copies as well as renames.
+	renames = copies
 
 [diff "bin"]
 
-  # Use `hexdump` to diff binary files
-  textconv = hexdump -v -C
+	# Use `hexdump` to diff binary files.
+	textconv = hexdump -v -C
 
 [help]
 
-  # Automatically correct and execute mistyped commands
-  autocorrect = 1
+	# Automatically correct and execute mistyped commands.
+	autocorrect = 1
 
 [merge]
 
@@ -207,8 +198,7 @@
   insteadOf = "gist:"
 
 [init]
-
-  templateDir = ~/.config/git/template/
+	defaultBranch = main
 
 [pull]
     rebase = false
@@ -222,4 +212,3 @@
 
 [gpg]
   program = /opt/homebrew/bin/gpg
-

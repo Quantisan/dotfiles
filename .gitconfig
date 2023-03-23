@@ -53,12 +53,7 @@
   # Find commits by commit message
   fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-  # Push current branch to remote with same branch name
-  pu = "!git push origin \"$(git rev-parse --abbrev-ref HEAD)\""
-
-  # Force push current branch to remote
-  fp = "!git push -f origin \"$(git rev-parse --abbrev-ref HEAD)\""
-
+  
 	# Remove branches that have already been merged with main.
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"

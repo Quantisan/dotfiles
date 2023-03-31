@@ -2,3 +2,15 @@ git:
   merging:
       args: '--no-ff'
 
+customCommands:
+  - key: "<c-p>"
+    command: "git remote prune {{.SelectedRemote.Name}}"
+    context: "remotes"
+    loadingText: "Pruning..."
+    description: "prune deleted remote branches"
+
+  - key: "<c-p>"
+    command: 'git branch --merged | egrep -v "(^\*|master|main|develop)" | xargs git branch -d'
+    context: "localBranches"
+    loadingText: "Pruning..."
+    description: "prune local branches that have been merged to the current checked out branch"

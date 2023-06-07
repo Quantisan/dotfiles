@@ -160,7 +160,7 @@ alias ping='prettyping --nolegend'
 # Convenience aliases
 alias mog='mogrify -strip -interlace Plane -quality 85% -resize 640'
 
-alias dc='docker-compose'
+alias dc='docker compose'
 alias t='terraform'
 alias ecr='aws --region=us-west-2 ecr get-login-password | docker login --username AWS --password-stdin 658488433453.dkr.ecr.us-west-2.amazonaws.com'
 

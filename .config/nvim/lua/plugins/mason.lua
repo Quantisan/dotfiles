@@ -11,6 +11,8 @@ return {
         -- Python
         "flake8",
         "black",
+        "isort",
+        "ruff",
         "pyright",
 
         -- Terraform

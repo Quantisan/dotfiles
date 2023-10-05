@@ -14,7 +14,7 @@ return {
         "isort",
         "ruff",
         "mypy",
-        "pyright",
+        "python-lsp-server",
 
         -- Terraform
         "terraform-ls",
@@ -30,6 +30,19 @@ return {
         -- Others
         "json-lsp",
         "shfmt",
+      },
+    },
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        pyright = {
+          mason = false,
+          autostart = false,
+        },
+        pylsp = {}
       },
     },
   },

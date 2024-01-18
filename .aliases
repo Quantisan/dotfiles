@@ -164,6 +164,7 @@ alias dc='docker compose'
 alias t='terraform'
 alias ecr='aws --region=us-west-2 ecr get-login-password | docker login --username AWS --password-stdin 658488433453.dkr.ecr.us-west-2.amazonaws.com'
 
+# Show disk free space by folders
 alias du="ncdu -rr -x --exclude .git --exclude node_modules"
 
 ## Docker ##

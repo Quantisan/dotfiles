@@ -1,2 +1,2 @@
-export PATH="/usr/local/opt/gnupg/libexec/gpgbin:/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/opt/gnupg/libexec/gpgbin:/opt/homebrew/bin:/Users/paul/.local/bin:$PATH"
 

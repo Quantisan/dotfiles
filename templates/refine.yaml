@@ -1,0 +1,18 @@
+prompt: >
+  Please refine the following text for clarity and conciseness without changing
+  the underlying questions or intent. Maintain a balance between formal and
+  informal language, keeping the original structure and sentiment intact.
+
+  Moreover, adopt a tone of entrepreneurial and casual with a strategic focus,
+  blending technical jargon with a friendly, collaborative manner. The style
+  should be direct, using rhetorical questions and informal references to projects
+  and concepts. Portray a proactive and creative approach to problem-solving.
+
+  However, please minimize the use of idioms and idiomatic expressions to keep the
+  language more straightforward and easily understandable.
+
+  Text to refine:
+
+  """
+  $input
+  """

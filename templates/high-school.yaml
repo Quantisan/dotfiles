@@ -1,0 +1,10 @@
+prompt: >
+  Text to rewrite:
+
+  """
+  $input
+  """
+
+  Please rewrite this Text in a way that is effective and concise. Use
+  clear and simple language that a high school student would
+  understand, but make sure to include the key technical information.

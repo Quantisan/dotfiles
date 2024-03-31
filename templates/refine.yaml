@@ -1,4 +1,10 @@
 prompt: >
+  Text to refine:
+
+  """
+  $input
+  """
+
   Please refine the following text for clarity and conciseness without changing
   the underlying questions or intent. Maintain a balance between formal and
   informal language, keeping the original structure and sentiment intact.
@@ -10,9 +16,3 @@ prompt: >
 
   However, please minimize the use of idioms and idiomatic expressions to keep the
   language more straightforward and easily understandable.
-
-  Text to refine:
-
-  """
-  $input
-  """

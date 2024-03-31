@@ -1,0 +1,10 @@
+prompt: >
+  Please condense this work meeting Transcript for clarity. Prefix with
+  cue identifiers corresponding to the original Transcript's segments,
+  ensuring all critical information is preserved. Aim for a concise yet
+  naturally flowing dialogue.
+
+  <Transcript>
+  $input
+  </Transcript>
+

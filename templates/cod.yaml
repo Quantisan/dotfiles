@@ -18,7 +18,7 @@ prompt: >
   - Anywhere: located anywhere in the Text.
 
   Guidelines:
-  - The first summary should be long (4-5 sentences, ~80 words) yet highly non-specific, containing little information beyond the entities marked as missing. Use overly verbose language and fillers (e.g., "this Text discusses") to reach ~80 words.
+  - The first summary should be long (5-6 sentences, ~100 words) yet highly non-specific, containing little information beyond the entities marked as missing. Use overly verbose language and fillers (e.g., "this Text discusses") to reach ~80 words.
   - Make every word count: rewrite the previous summary to improve flow and make space for additional entities.
   - Make space with fusion, compression, and removal of uninformative phrases like "the Text discusses".
   - The summaries should become highly dense and concise yet self-contained, e.g., easily understood without the Text.

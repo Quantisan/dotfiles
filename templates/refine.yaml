@@ -1,3 +1,7 @@
+defaults:
+  tone: entrepreneurial
+  focus: strategic
+
 prompt: >
   Text to refine:
 
@@ -9,10 +13,10 @@ prompt: >
   the underlying questions or intent. Maintain a balance between formal and
   informal language, keeping the original structure and sentiment intact.
 
-  Moreover, adopt a tone of entrepreneurial and casual with a strategic focus,
+  Moreover, adopt a tone of $tone with a $focus focus,
   blending technical jargon with a friendly, collaborative manner. The style
-  should be direct, using rhetorical questions and informal references to projects
-  and concepts. Portray a proactive and creative approach to problem-solving.
+  should be direct and informal references to projects and concepts. Portray
+  a proactive and creative approach to problem-solving.
 
   However, please minimize the use of idioms and idiomatic expressions to keep the
   language more straightforward and easily understandable.

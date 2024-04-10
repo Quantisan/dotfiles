@@ -15,7 +15,7 @@ function doIt() {
                 -avh --no-perms . ~
 
         ## Link 'llm' templates
-        ln -s "$(pwd)/templates/" ~/Library/Application\ Support/io.datasette.llm/templates
+        ln -shf "$(pwd)/templates/" ~/Library/Application\ Support/io.datasette.llm/templates
 
         source ~/.bash_profile
 }

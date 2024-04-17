@@ -1,3 +1,4 @@
+model: gpt-4-turbo
 defaults:
   tone: entrepreneurial
   focus: strategic
@@ -9,14 +10,11 @@ prompt: >
   $input
   """
 
-  Please refine the following text for clarity and conciseness without changing
-  the underlying questions or intent. Maintain a balance between formal and
-  informal language, keeping the original structure and sentiment intact.
+  Refine the Text for clarity and conciseness using simpler words and shorter
+  sentences. Keep the original structure, questions, and intent while maintaining
+  a balance between formal and informal language.
 
-  Moreover, adopt a tone of $tone with a $focus focus,
-  blending technical jargon with a friendly, collaborative manner. The style
-  should be direct and informal references to projects and concepts. Portray
-  a proactive and creative approach to problem-solving.
-
-  However, please minimize the use of idioms and idiomatic expressions to keep the
-  language more straightforward and easily understandable.
+  Adopt a $tone tone with a $focus focus, using technical terms in a friendly
+  and collaborative way.  Be direct and informal when referring to projects and
+  concepts, showing a proactive and creative problem-solving approach.  Avoid
+  idioms to keep the language easy to understand.

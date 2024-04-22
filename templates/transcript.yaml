@@ -4,7 +4,7 @@ prompt: >
   $input
   </Transcript>
 
-  Please condense this work meeting Transcript for clarity. Prefix with
-  cue identifiers corresponding to the original Transcript's segments,
-  ensuring all critical and technical information are preserved. Aim for
-  a concise yet naturally flowing dialogue.
+  Condense the work meeting Transcript, preserving critical information. Add
+  cue identifiers matching the original segments. Maintain a concise, natural
+  dialogue without adding or changing what was said.
+

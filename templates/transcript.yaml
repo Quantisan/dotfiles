@@ -4,7 +4,15 @@ prompt: >
   $input
   </Transcript>
 
-  Condense the work meeting Transcript, preserving critical information. Add
-  cue identifiers matching the original segments. Maintain a concise, natural
-  dialogue without adding or changing what was said.
+  Condense the work meeting Transcript into a concise summary, preserving key
+  information and action items. Use the original speaker names and maintain a
+  natural dialogue flow without adding or changing what was said. Include the
+  following:
 
+  - Key points and suggestions made by each speaker
+  - Specific asks and deliverables discussed
+  - Strategic considerations
+  - Relevant technical details and ideas shared
+  - Important next steps and meeting plans
+
+  Format the summary with line numbers matching key segments from the original transcript.

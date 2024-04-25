@@ -185,3 +185,6 @@ alias dockerclean='dockercleanc || true && dockercleani || true && dockercleanv'
 
 # python
 alias activate='source $(poetry env info --path)/bin/activate'
+
+# text manipulation
+alias strip-vtt="eval \"sed -E '/^[0-9]+:[0-9]+:[0-9]+\.[0-9]+ --> [0-9]+:[0-9]+:[0-9]+\.[0-9]+/d'\" \"$@\""

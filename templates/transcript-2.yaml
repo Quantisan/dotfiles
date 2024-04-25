@@ -1,0 +1,10 @@
+model: claude-3-opus
+
+prompt: >
+  <Summary>
+  $input
+  </Summary>
+
+  Group this meeting Summary into topical chunks. Preserving speaker names
+  and cue identifier numbers. Aim for a total of 4 to 6 topics, fewer
+  topics is preferred.

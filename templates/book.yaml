@@ -1,4 +1,8 @@
 model: gemini-1.5-pro-latest
 
 prompt: >
-  Summarize this book chapter. Highlight any actionable advice.
+  <Chapter>
+  $input
+  </Chapter>
+
+  Summarize this book Chapter. Highlight any actionable advice.

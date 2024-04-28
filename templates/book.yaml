@@ -1,8 +1,23 @@
 model: gemini-1.5-pro-latest
 
 prompt: >
-  <Chapter>
+  <Book>
   $input
-  </Chapter>
+  </Book>
 
-  Summarize this book Chapter. Highlight any actionable advice.
+  Summarize each chapter of the given book in a concise manner, aiming for a
+  total summary length approximately 1/10th of the original book's length.
+  For each chapter summary:
+
+  1. Identify and highlight the main idea(s) and key points
+  2. Include relevant examples, key quotes, and specific details that
+  support the main idea(s) and key points
+  3. Maintain the tone and style of the original book to accurately
+  represent the author's voice and intent
+  4. Provide a detailed summary of the chapter, followed by bullet points
+
+  Please provide the chapter summaries in a sequential order, clearly
+  indicating the chapter number or title for each summary. The goal is
+  to create a condensed version of the book that captures the essential
+  information and allows readers to grasp the core concepts and narrative
+  flow without losing the essence of the original work.

@@ -1,0 +1,36 @@
+model: gemini-1.5-pro-latest
+
+prompt: >
+  <Chapter>
+  $input
+  </Chapter>
+
+  Please provide a summary of the given book chapter, focusing on the key
+  points, examples, quotes, and actionable advice. Maintain the tone and
+  style of the original book to accurately represent the author's voice
+  and intent. Use the following format:
+
+  ```
+  ## Chapter Title
+
+  A concise summary of the chapter in about 150 words, capturing the main
+  ideas and arguments.
+
+  ## Key Points
+  - Point 1
+  - Point 2
+  - ...
+
+  ## Examples / Quotes
+  - Exampla 1
+  - Quote 1
+  - ...
+
+  ## Actionable Advice
+  1. Advice 1
+  2. Advice 2
+  3. ...
+  ```
+
+  Aim for a total of approximately 500 words, and use markdown formatting
+  to clearly structure the output.

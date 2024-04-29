@@ -1,10 +1,21 @@
-model: claude-3-opus
+model: gpt-4-turbo
 
 prompt: >
-  <Summary>
+  <Minutes>
   $input
-  </Summary>
+  </Minutes>
 
-  Group this meeting Summary into topical chunks. Preserving speaker names
-  and cue identifier numbers. Aim for a total of 4 to 6 topics, fewer
-  topics is preferred.
+  Identify up to 5 key topics in the provided meeting Minutes, using fewer
+  topics if possible. Reorganize the minutes into sections based on those
+  topics. Preserve the original speaker names, cue identifiers, and text.
+
+  Use the following sample format:
+
+  ```
+  ## Foo Foo
+  [1-40] ...
+  [41-66] ...
+
+  ## Bar Bar
+  #[174-200] ...
+  ```

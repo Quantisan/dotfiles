@@ -19,7 +19,9 @@ prompt: >
   Format the minutes using cue identifiers that match key segments from the
   original transcript, like this:
 
+  ```
   [cue range] minutes text
-
-  For example:
-  [4-10] Paul talks about food.
+  [cue range] minutes text
+  [cue range] minutes text
+  ...
+  ```

@@ -5,17 +5,18 @@ prompt: >
   $input
   </Minutes>
 
-  Identify up to 5 key topics in the provided meeting Minutes, using fewer
-  topics if possible. Reorganize the minutes into sections based on those
-  topics. Preserve the original speaker names, cue identifiers, and text.
+  Identify up to 5 key topics in the above meeting Minutes. Use fewer topics
+  if possible. Reorganize the Minutes into sections based on those topics,
+  preserving the original speaker names, cue identifiers, text, and break
+  points. Add a concise subheading to each section. Use this markdown format:
 
-  Use the following sample format:
+  ```markdown
+  ## Topic 1
+  - **Subtopic 1** [cue range] Text
+  - **Subtopic 2** [cue range] Text
 
+  ## Topic 2
+  - **Subtopic 1** [cue range] Text
   ```
-  ## Foo Foo
-  [1-40] ...
-  [41-66] ...
 
-  ## Bar Bar
-  #[174-200] ...
-  ```
+  Vertically align the cue range and Text under each topic.

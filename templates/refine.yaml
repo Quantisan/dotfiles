@@ -4,17 +4,29 @@ defaults:
   focus: strategic
 
 prompt: >
-  Text to refine:
+  Please refine the following text:
 
-  """
+  <text>
   $input
-  """
+  </text>
 
-  Refine the Text for clarity and conciseness using simpler words and shorter
-  sentences. Keep the original structure, questions, and intent while maintaining
-  a balance between formal and informal language.
+  The goal is to make the text clearer and more concise while preserving the
+  original structure, questions, and intent. Use simpler words and shorter
+  sentences where possible, but maintain a balance between formal and informal
+  language.
 
-  Adopt a $tone tone with a $focus focus, using technical terms in a friendly
-  and collaborative way.  Be direct and informal when referring to projects and
-  concepts, showing a proactive and creative problem-solving approach.  Avoid
+  Adopt a $tone tone with a $focus focus. Use technical terms in a friendly and
+  collaborative way. Be direct and informal when referring to projects and
+  concepts, showing a proactive and creative problem-solving approach. Avoid
   idioms to keep the language easy to understand.
+
+  <scratchpad>
+  Before providing the refined text, think through your approach here. Consider how to:
+  - Simplify complex words and phrases
+  - Break up long sentences
+  - Maintain the original structure and flow
+  - Preserve key questions and main points
+  - Strike the right tone and focus
+  </scratchpad>
+
+  Please provide your refined version of the text inside <refined_text> tags.

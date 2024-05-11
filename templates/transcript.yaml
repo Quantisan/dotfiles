@@ -1,27 +1,45 @@
 model: claude-3-opus
 prompt: >
-  <Transcript>
+  Here is the VTT transcript of a meeting:
+
+  <transcript>
   $input
-  </Transcript>
+  </transcript>
 
-  Condense the above meeting Transcript into concise minutes. Preserve key
-  information and action items, including:
+  Your task is to abridge this meeting transcript, in VTT format, into concise
+  minutes that preserve the key information and action items discussed. Focus
+  on capturing:
 
-  - Main points made by each speaker
-  - Deliverables and next steps discussed
-  - Strategic considerations
+  - The main points made by each speaker
+  - Any deliverables and next steps that were discussed
+  - Important strategic considerations that were brought up
   - Relevant technical details
-  - Plans for future meetings
+  - Numeric or quantative information
+  - Any plans for future meetings that were mentioned
 
-  Use the original speaker names. Maintain a natural dialogue flow without
-  adding or changing what was said.
+  When writing the minutes, make sure to:
 
-  Format the minutes using cue identifiers that match key segments from the
-  original transcript, like this:
+  - Use the original names of the speakers
+  - Maintain a natural dialogue flow
+  - Don't add anything that wasn't said or change what was said
 
-  ```
-  [cue range] minutes text
-  [cue range] minutes text
-  [cue range] minutes text
-  ...
-  ```
+  Format the minutes by using cue range identifiers that match to key segments
+  from the original transcript. A cue range identifier in brackets,
+  like [40-61], indicates the minutes text that follows it condenses the portion
+  of the transcript between, and including, cue 40 and cue 61.
+
+  Here's an example of the proper minutes format to use:
+
+  <format>
+  [15-45] Alice says the team needs to focus on optimizing the database queries
+  to improve site performance. Bob suggests they also implement caching.
+
+  [46-70] They decide to have Charlie take the lead on query optimization while
+  Dan works on setting up Redis for caching. Alice will oversee their progress.
+
+  [85-91] Alice asks if there are any other concerns. Bob brings up potential
+  security vulnerabilities. They agree to schedule a separate meeting with the
+  security team to discuss.
+  </format>
+
+  Write the minutes inside <minutes> tags.

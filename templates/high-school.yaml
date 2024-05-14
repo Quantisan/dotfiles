@@ -1,3 +1,5 @@
+model: gpt-4o
+
 prompt: >
   Text to rewrite:
 

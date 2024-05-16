@@ -1,0 +1,19 @@
+model: gpt-4o
+
+prompt: >
+  Here is a raw, unedited transcript of a voice memo that needs to be tidied up into a more coherent
+  narrative form:
+
+  <transcript>
+  $input
+  </transcript>
+
+  Please carefully read through the transcript above and identify the key concepts, events, and
+  ideas being discussed. Then, organize those key points and rewrite the transcript in a more
+  structured, coherent narrative form.
+
+  Some important things to keep in mind:
+  - Do not add any new information or concepts that are not already present in the original transcript
+  - Do not remove or omit any concepts or ideas from the original, even if they seem less important
+  - Try to maintain the style and tone of the original speaker(s) as much as possible, while still
+    tidying up the text to flow better

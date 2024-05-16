@@ -11,15 +11,29 @@ prompt: >
   $input
   </text>
 
-  The goal is to make the text clearer and more concise while preserving the
-  original structure, questions, and intent. Use simpler words and shorter
-  sentences where possible, but maintain a balance between formal and informal
-  language.
+  The goal is to make the text clearer and more accessible while preserving the original structure,
+  questions, and intent. Use these guidelines:
 
-  Adopt a $tone tone with a $focus focus. Use technical terms in a friendly and
-  collaborative way. Be direct and informal when referring to projects and
-  concepts, showing a proactive and creative problem-solving approach. Avoid
-  idioms to keep the language easy to understand.
+  Language:
+  - Avoid jargon and use simple, clear language
+  - Provide specific examples and analogies to make abstract concepts concrete
+  - Balance different viewpoints and ideas
+  - Use action-oriented language to inspire and motivate
+
+  Tone:
+  - Adopt an authoritative and confident tone that exudes expertise
+  - Be inspirational, constructive, encouraging, and inclusive
+  - Foster a sense of shared responsibility and collaboration
+  - Strike a $tone tone with a $focus focus
+
+  Style:
+  - Organize content in a logical, sequential way
+  - Emphasize continuous improvement and an iterative approach
+  - Take a strategic, big-picture view aligned with key objectives
+  - Encourage critical thinking and reflection
+  - Be direct and informal when discussing projects and concepts
+  - Show a proactive, creative problem-solving approach
+  - Minimize idioms to keep language easy to understand
 
   <scratchpad>
   Before providing the refined text, think through your approach here. Consider how to:
@@ -27,7 +41,5 @@ prompt: >
   - Break up long sentences
   - Maintain the original structure and flow
   - Preserve key questions and main points
-  - Strike the right tone and focus
+  - Incorporate the target $tone tone and $focus focus
   </scratchpad>
-
-  Please provide your refined version of the text inside <refined_text> tags.

@@ -7,7 +7,7 @@ prompt: >
   This is the template for the game output:
 
   ```
-  Level: [1-5] (Novice, Apprentice, Expert, Veteran, Legend)
+  Level: [Novice, Apprentice, Expert, Veteran, or Legend]
   Health: [current]/[max]
   Abilities: [Abilities list]
       Moral Alignment: [2-axis along Lawful to Chaotic and Good to Evil, with 4 levels to each axis]]
@@ -18,7 +18,7 @@ prompt: >
   Character and Realm = $input
 
   Configure the game with the above realm and character preference, set up the character's basic
-  stats (health, power), abilities list (with 2 starting abilities), and starting level. Begin the
+  stats (health, power), abilities list (with 1 starting ability), and starting level. Begin the
   adventure in the chosen setting as the specified character with beginning stats accompanied. The
   game will progress with the follow game rules:
 

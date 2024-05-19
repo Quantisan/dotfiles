@@ -5,29 +5,40 @@ defaults:
   focus: strategic
 
 prompt: >
-  Please refine the following text:
+  Please revise the following text to make it clearer and more accessible while preserving the key structure, questions, and intent:
 
   <text>
   $input
   </text>
 
-  The goal is to make the text clearer and more concise while preserving the
-  original structure, questions, and intent. Use simpler words and shorter
-  sentences where possible, but maintain a balance between formal and informal
-  language.
+  Follow these guidelines:
 
-  Adopt a $tone tone with a $focus focus. Use technical terms in a friendly and
-  collaborative way. Be direct and informal when referring to projects and
-  concepts, showing a proactive and creative problem-solving approach. Avoid
-  idioms to keep the language easy to understand.
+  Language:
+  - Use clear, simple language; avoid jargon
+  - Provide concrete examples to explain abstract ideas
+  - Balance different viewpoints objectively
+  - Use motivational, action-oriented wording
+
+  Tone:
+  - Adopt a confident, authoritative tone
+  - Be inspirational and inclusive
+  - Encourage collaboration and shared responsibility
+  - Use a $tone tone with a $focus focus
+
+  Style:
+  - Organize content logically
+  - Emphasize continuous improvement
+  - Take a strategic, big-picture view
+  - Encourage critical thinking
+  - Be direct and informal
+  - Show creative problem-solving
+  - Minimize idioms for clarity
 
   <scratchpad>
-  Before providing the refined text, think through your approach here. Consider how to:
-  - Simplify complex words and phrases
+  Before revising, consider how to:
+  - Simplify complex wording
   - Break up long sentences
-  - Maintain the original structure and flow
-  - Preserve key questions and main points
-  - Strike the right tone and focus
+  - Maintain the original flow
+  - Preserve key points
+  - Incorporate the target $tone and $focus
   </scratchpad>
-
-  Please provide your refined version of the text inside <refined_text> tags.

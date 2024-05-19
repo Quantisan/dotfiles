@@ -1,8 +1,7 @@
 model: gpt-4o
 
 defaults:
-  tone: entrepreneurial
-  focus: strategic
+  tone: constructive
 
 prompt: >
   Please revise the following text to make it clearer and more accessible while preserving the key structure, questions, and intent:
@@ -23,7 +22,7 @@ prompt: >
   - Adopt a confident, authoritative tone
   - Be inspirational and inclusive
   - Encourage collaboration and shared responsibility
-  - Use a $tone tone with a $focus focus
+  - Use a $tone tone
 
   Style:
   - Organize content logically
@@ -40,5 +39,5 @@ prompt: >
   - Break up long sentences
   - Maintain the original flow
   - Preserve key points
-  - Incorporate the target $tone and $focus
+  - Incorporate the target $tone
   </scratchpad>

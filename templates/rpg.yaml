@@ -6,16 +6,15 @@ prompt: >
 
   1. A realm
   2. A character type
-  3. A companion creature
 
   Provide a couple random suggestions to each and have the player enter their chosen
-  realm, character type, and companion as a comma-separated list,
-  e.g.: "Cyberpunk megacity, Stealthy rogue, Wise-cracking dragon".
+  realm and character type as a comma-separated list,
+  e.g.: "Cyberpunk megacity, Stealthy rogue".
 
   Parse the player's input to configure the game, then set up the character's basic stats (health,
   power), abilities list (with 2 starting abilities), and starting level. Begin the adventure in the
-  chosen setting as the specified character with beginning stats accompanied by the selected
-  creature companion. The game will progress with the follow game rules:
+  chosen setting as the specified character with beginning stats accompanied. The game will progress
+  with the follow game rules:
 
 
   <rules>

@@ -20,7 +20,7 @@ prompt: >
   <rules>
   1. Begin with a compelling prologue that introduces the main conflict and the player's role, creating a strong narrative hook and sense of purpose.
   2. Immerse the player in a detailed setting and introduce a main quest or goal, along with foreshadowing elements and recurring themes or motifs.
-  3. Include interactive NPCs, objects, and events that offer information, assistance, or challenges related to the main quest and subplot.
+  3. Include interactive NPCs, objects, and events that offer information, assistance, or challenges related to the main quest and subplots.
   4. Present diverse characters, encounters, and subplots within the location, allowing for side quests and activities that impact the main storyline.
   5. Provide the player with four distinct choices on each turn, balancing expected and unexpected options leading to different outcomes or paths.
   6. Include morally ambiguous choices that significantly impact the story and endings, allowing players to shape their character's moral alignment through decisions.
@@ -28,6 +28,8 @@ prompt: >
   8. Update character stats, abilities, and level based on player choices and progress, reflecting their growth and impact on the world.
   9. Incorporate a mix of short-term and long-term goals, with smaller quests or challenges building up to major plot points or revelations.
   10. Ensure that the player's choices and actions have meaningful consequences, shaping the story's direction and the fate of the characters and world.
+  11. Maintain a quick pace with frequent, impactful decision points that prompt immediate responses, keeping the player constantly engaged.
+  12. Create tension and high stakes through encounters and choices, while rewarding player actions with immediate consequences and a sense of accomplishment and progression.
   </rules>
 
   This is the template for the game output:

@@ -1,0 +1,28 @@
+model: groq-llama3-70b
+
+defaults:
+  tone: constructive
+
+prompt: >
+  Please reframe the following text to match the target $tone tone:
+
+  <text>
+  $input
+  </text>
+
+  When rewriting the text, please follow these guidelines:
+
+  - Preserve the key structure, main questions, and overall intent of the original text as much as
+  possible. The reframed text should still fundamentally communicate the same things as the original.
+
+  - Keep the writing style relatively similar to the original. Even maintain some trivial errors like
+  lack of capitalization in order to keep a human touch. The reframed text should feel like it was
+  written by the same person as the original, just in a different tone.
+
+  - Be concise and succinct in your reframing. Get to the point in order to save the reader's time and
+  cognitive energy. Omit extraneous details.
+
+  - Write in a simple and direct way, as if you are speaking with a close colleague. Use clear
+  language and avoid unnecessary complexity or roundabout phrasing.
+
+  Please write your {{tone}} reframed version of the text inside <reframed_text> tags.

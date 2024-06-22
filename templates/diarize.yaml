@@ -24,7 +24,12 @@ prompt: >
   3. Assign a speaker to each line of dialogue. Use the following format:
     Speaker Name: [Dialogue text...]
 
-  4. If you are unsure about a particular speaker assignment, you may still provide your best guess
+  4. Group consecutive lines from the same speaker together. If a speaker continues talking across
+     multiple lines without interruption from another speaker, combine those lines into a single
+     entry. This will help maintain the logical flow of the conversation and make the transcript
+     easier to read.
+
+  5. If you are unsure about a particular speaker assignment, you may still provide your best guess
      based on the available context.
 
   Begin your analysis with the first line of dialogue and continue through the entire transcript.

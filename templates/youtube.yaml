@@ -1,0 +1,24 @@
+prompt: >
+  You will be given a transcript of a YouTube video. Your task is to categorize the content into 3-5
+  major chronological topics, summarize each section, and highlight key insights.
+
+  Here is the transcript of the video:
+  <transcript>
+  $input
+  </transcript>
+
+  First, carefully read through the transcript and identify 3-5 major chronological topics discussed
+  in the video. Consider the main themes, subject changes, or distinct segments of the conversation.
+
+  Once you have identified the topics, create a list in a <scratchpad> tag. For each topic, include:
+  1. A brief title or description of the topic
+  2. The timestamp range where this topic is discussed (use the format HH:MM:SS - HH:MM:SS)
+
+  After creating your scratchpad, use it along with the transcript to provide a summary and
+  highlight insights for each of the sections you identified. For each topic:
+
+  1. Write a concise summary of the main points discussed in that section.
+  2. Highlight 2-3 key insights or important takeaways from that section.
+
+  Ensure that your summaries and insights are clear, concise, and accurately reflect the content of
+  the transcript.

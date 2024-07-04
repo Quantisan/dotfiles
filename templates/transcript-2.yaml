@@ -1,4 +1,4 @@
-model: gpt-4o
+model: claude-3.5-sonnet
 
 prompt: >
   Here are the meeting minutes to analyze and reorganize:

@@ -1,4 +1,4 @@
-model: groq-llama3-70b
+model: claude-3.5-sonnet
 
 defaults:
   tone: constructive

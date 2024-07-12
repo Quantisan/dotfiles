@@ -1,0 +1,11 @@
+system: You are an expert LLM prompt engineer.
+
+prompt: >
+  You are tasked with copy editing and improving the clarity and effectiveness of this prompt:
+
+  <prompt>
+  $input
+  </prompt>
+
+  This is a crucial task as the quality of a prompt can significantly impact the performance of an
+  AI model. Your goal is to enhance the prompt while maintaining its original intent.

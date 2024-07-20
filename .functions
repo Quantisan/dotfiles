@@ -169,3 +169,14 @@ function o() {
 function tre() {
   tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# 'reader' returns LLM-friendly markdown from a URL
+function reader() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: reader <URL>"
+        return 1
+    fi
+
+    local url="$1"
+    curl "https://r.jina.ai/$url"
+}

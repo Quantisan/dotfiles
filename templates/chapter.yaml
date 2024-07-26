@@ -5,25 +5,35 @@ prompt: >
   $input
   </Chapter>
 
-  Please provide a summary of the given book chapter, focusing on the key
-  points, examples, quotes, and actionable advice. Maintain the tone and
-  style of the original book to accurately represent the author's voice
-  and intent. Use the following format:
+  Please provide a summary of the given book chapter, focusing on the key points, examples, quotes,
+  and actionable advice. Maintain the tone and style of the original book to accurately represent the
+  author's voice and intent. Use the following format:
 
   ```
   ## Chapter Title
 
-  A concise summary of the chapter in about 150 words, capturing the main
-  ideas and arguments.
+  A concise summary of the chapter in about 150 words, capturing the main ideas and arguments. Use
+  clear, concise language to avoid wordiness.
 
   ## Key Points
   - Point 1
   - Point 2
   - ...
 
-  ## Examples / Quotes
-  - Exampla 1
+  (For longer or more complex chapters, use subsections within Key Points to better organize
+  information.)
+
+  ## Core Concepts
+  - Highlight any central theories, models, or frameworks introduced in the chapter.
+
+  ## Examples
+  - Example 1
+  - Example 2
+  - ...
+
+  ## Quotes
   - Quote 1
+  - Quote 2
   - ...
 
   ## Actionable Advice
@@ -32,5 +42,8 @@ prompt: >
   3. ...
   ```
 
-  Aim for a total of approximately 500 words, and use markdown formatting
-  to clearly structure the output.
+  Aim for a total of approximately 500 words, and use markdown formatting to clearly structure the
+  output. Emphasize core concepts by explicitly highlighting any central theories, models, or
+  frameworks introduced in the chapter. Separate examples and quotes into two distinct sections for
+  clarity. Use clear, concise language throughout the summary to avoid wordiness and ensure the key
+  information is conveyed effectively.

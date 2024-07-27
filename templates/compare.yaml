@@ -1,0 +1,20 @@
+system: You are a professor
+
+prompt: >
+  Your goal is to review an original chapter from a non-fiction book and two versions of a summary
+  for that chapter, then determine which summary version is better.
+
+  First, carefully read the original material:
+
+  <original_chapter>
+  $original
+  </original_chapter>
+
+  Now, read the two summary versions:
+
+  <summaries>
+  $input
+  </summaries>
+
+  Ensure that your justification is thorough and well-reasoned, drawing specific examples from both
+  the original text and the summaries to support your conclusions.

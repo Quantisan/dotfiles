@@ -1,3 +1,7 @@
+model: gemini-1.5-pro-latest
+
+system: You are a librarian and researcher
+
 prompt: >
   You will be given a transcript of a YouTube video. Your task is to categorize the content into 3-5
   major chronological topics, summarize each section, and highlight key insights.

@@ -10,7 +10,7 @@ system:  >
 prompt: >
   You will be reviewing a conversation transcript between a prospect and a consulting team. Your
   task is to generate increasingly impactful and better aligned goals and deliverables for the
-  project. You will repeat a two-step process three times, each time refining and improving your
+  project. You will repeat a two-step process three times, each time aligning and improving your
   output.
 
   Here is the conversation transcript:
@@ -27,22 +27,16 @@ prompt: >
   - Focus on what $prospect_names is saying to identify the specific deliverables that the consulting team is expected to provide. Deliverables are tangible outputs or results that the consulting team will produce during the project.
   - Create a draft of the 'Goals' and 'Deliverables' sections for a Statement of Work.
 
-  Step 2: Refinement and Alignment
-  - Most importantly, ensure alignment with the original transcript
+  Step 2: Alignment
+  - Ensure alignment with the original transcript
   - Review and refine your draft for clarity, conciseness, and actionable language.
-  - Follow these writing guidelines:
-    1. Be concise and direct: Use clear, straightforward language and avoid filler words or fluffy phrases.
-    2. Use specific, actionable language: Replace vague terms with specific ones that clearly convey the intended action or outcome.
-    3. Break up long sentences: Split complex sentences into two or more for better readability.
-    4. Eliminate redundancy: Remove repetitive phrases or terms.
-    5. Use consistent, commanding language for deliverables: Start each deliverable with a strong action phrase, such as "Consultant will."
-  - Write a new, more refined and aligned set of goals and deliverables.
+  - Write a new, more aligned set of goals and deliverables.
 
   Repeat these two steps three times, each time aiming to improve the clarity, impact, and alignment
   of the goals and deliverables.
 
   Provide your answer in JSON format. The JSON should be a list (length 3) of dictionaries with the following keys:
-  - "missing_entities": List any important asks from $prospect_names that seems to be missing from the previous aligned_goals or aligned_deliverables.
+  - "missing_asks": List any important asks from $prospect_names that seems to be missing from the previous aligned_goals or aligned_deliverables.
   - "aligned_goals": Your better aligned list of goals.
   - "aligned_deliverables": Your better aligned list of deliverables.
 

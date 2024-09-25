@@ -55,3 +55,4 @@ workbench.xmi
 .flake8
 .lsp/
 .clj-kondo/
+.aider*

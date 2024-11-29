@@ -21,7 +21,7 @@ return {
         "tflint",
 
         -- Javascript
-        "rome",
+        "biome",
 
         -- Lua
         "lua-language-server",

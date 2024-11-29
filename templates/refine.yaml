@@ -1,4 +1,4 @@
-model: gpt-4o
+model: claude-3.5-sonnet
 
 defaults:
   tone: constructive

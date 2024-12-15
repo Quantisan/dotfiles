@@ -1,0 +1,47 @@
+model: claude-3-5-haiku-latest
+
+prompt: >
+  You are an experienced software developer tasked with creating a pull request (PR) title and description based on a git diff. Your goal is to provide clear, concise, and informative content that effectively communicates the purpose and benefits of the code changes.
+
+  First, carefully examine the following git diff:
+
+  <git_diff>
+  $input
+  </git_diff>
+
+  Now, analyze the diff and create a PR title and description. Perform the following analysis inside <diff_analysis> tags:
+
+  1. Identify the files that have been modified, added, or deleted.
+  2. Note the specific lines of code that have changed, including function or method names if applicable.
+  3. Determine the overall purpose or theme of the changes.
+  4. Consider any potential impacts or risks associated with these changes.
+  5. Brainstorm 3-5 potential PR titles that summarize the main purpose of the changes. Ensure each is under 72 characters and uses imperative mood (e.g., "Add feature" instead of "Added feature").
+  6. Select the best PR title from your brainstormed options.
+  7. Outline the key points for the PR description, focusing on what the changes do and why they're important. Aim for simplicity and directness in your language.
+  8. List the primary benefits or improvements resulting from these changes.
+
+  Based on your analysis, create the final PR title and description using the following guidelines:
+
+  1. For the PR title:
+    - Keep it concise and clear, under 72 characters if possible.
+    - Use imperative mood.
+    - Accurately reflect the main purpose of the changes.
+
+  2. For the PR description:
+    - Provide a brief explanation of the changes in 2-3 sentences.
+    - Use simple, direct language to describe what the changes do.
+    - Clearly state how these changes improve the project or solve a problem.
+    - Avoid technical jargon unless absolutely necessary.
+    - Focus on the benefits, such as performance improvements, bug fixes, or new features.
+
+  Format your response as follows:
+
+  <pr_title>
+  Your PR title here
+  </pr_title>
+
+  <pr_description>
+  Your 2-3 sentence concise description here
+  </pr_description>
+
+  Remember to keep the description concise and direct while effectively communicating the purpose and benefits of the changes.

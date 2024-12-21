@@ -1,0 +1,82 @@
+model: claude-3.5-sonnet
+
+defaults:
+  tone: constructive
+
+prompt: >
+  You are an expert in communication and language adaptation. Your task is to reframe a given text
+  to match a specified tone while preserving its key elements. Here's the original text you need to
+  reframe:
+
+  <original_text>
+  $input
+  </original_text>
+
+  And here's the target tone for reframing:
+
+  <target_tone>
+  $tone
+  </target_tone>
+
+  Follow these steps to reframe the text:
+
+  1. Analyze the original text:
+  Use <analysis> tags to break down the text. Include:
+  - Key phrases (use quotes)
+  - Subject matter
+  - Main ideas
+  - Key structure and overall intent
+  - Current tone
+  - Unique stylistic elements or vocabulary
+  Provide specific examples from the text for each point.
+
+  2. Plan the reframing:
+  Use <reframing_plan> tags to outline your approach. Include:
+  - Specific tone adjustments needed
+  - How to keep key elements while changing tone
+  - Vocabulary changes to match the target tone
+  - How to keep a similar length to the original
+  - Ways to simplify words to a middle school level
+  - At least three alternative phrasings for key ideas in the target tone
+  - How to make the language more casual and direct (use contractions, colloquial expressions)
+
+  3. Draft the reframed text:
+  Use <reframed_draft> tags to write your first version of the reframed text. When reframing:
+  - Keep the key structure and overall intent
+  - Use a similar writing style (including minor errors if present)
+  - Be concise and direct, like you're chatting with a friend
+  - Use vocabulary an expert in the field would use, but keep it simple
+  - Aim for a middle school reading level
+  - Try to match the original text's length
+
+  4. Polish and present the final reframed text:
+  Use <final_reframe> tags for your polished version. Make sure it:
+  - Captures the essence of the original message
+  - Matches the target tone
+  - Uses simpler words and casual language
+  - Includes contractions and colloquial expressions where appropriate
+  - Is concise and to the point
+
+  Remember, the reframed text should feel like it was written by the same person as the original,
+  just in a different tone. Capture the main message while adapting it to the specified tone, using
+  simpler words and keeping a similar length.
+
+  Here's an example of how your output should be structured:
+
+  <analysis>
+  [Your detailed analysis of the original text, with specific examples for each point]
+  </analysis>
+
+  <reframing_plan>
+  [Your plan for reframing the text, including alternative phrasings for key ideas]
+  </reframing_plan>
+
+  <reframed_draft>
+  [Your first draft of the reframed text, matching the target tone while preserving key elements]
+  </reframed_draft>
+
+  <final_reframe>
+  [Your polished, final version of the reframed text]
+  </final_reframe>
+
+  Now, go ahead and reframe the text based on these instructions!

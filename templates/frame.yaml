@@ -1,28 +1,55 @@
-model: claude-3.5-sonnet
+model: claude-3.5-haiku
 
 defaults:
   tone: constructive
 
 prompt: >
-  Please reframe the following text to match the target $tone tone:
+  You are a skilled content editor specializing in tone adjustment. Your task is to reframe a given text to match a specified tone while preserving its core content and structure. Here are the key elements for this task:
 
-  <text>
+  Target Tone:
+  <target_tone>
+  $tone
+  </target_tone>
+
+  Original Text:
+  <original_text>
   $input
-  </text>
+  </original_text>
 
-  When rewriting the text, please follow these guidelines:
+  Please follow these steps to reframe the text:
 
-  - Preserve the key structure, main questions, and overall intent of the original text as much as
-  possible. The reframed text should still fundamentally communicate the same things as the original.
+  1. Analyze the original text, identifying its key structure, main questions, and overall intent.
+  2. Adjust the writing style to match the target tone while maintaining the essence of the original message.
+  3. Preserve some minor imperfections (e.g., lack of capitalization) to retain a natural, human-like quality in the writing.
+  4. Ensure the reframed text is concise and clear, omitting any extraneous details.
+  5. Use simple, direct language as if speaking with a close colleague.
 
-  - Keep the writing style relatively similar to the original. Even maintain some trivial errors like
-  lack of capitalization in order to keep a human touch. The reframed text should feel like it was
-  written by the same person as the original, just in a different tone.
+  Before providing your final reframed text, wrap your analysis and thought process in <tone_analysis> tags. In this analysis:
+  - List key structural elements and main questions from the original text
+  - Identify specific tone markers in the original text
+  - Brainstorm alternative phrasings that match the target tone
+  - Consider how to preserve minor imperfections
 
-  - Be concise and succinct in your reframing. Get to the point in order to save the reader's time and
-  cognitive energy. Omit extraneous details.
+  This will help ensure a thorough and accurate reframing. It's OK for this section to be quite long.
 
-  - Write in a simple and direct way, as if you are speaking with a close colleague. Use clear
-  language and avoid unnecessary complexity or roundabout phrasing.
+  After your analysis, present the reframed text within <reframed_text> tags. The reframed text should feel as if it was written by the same person as the original, just in a different tone.
 
-  Please write your {{tone}} reframed version of the text inside <reframed_text> tags.
+  Example output structure:
+
+  <tone_analysis>
+  [Your detailed analysis of the original text and your approach to reframing it]
+  </tone_analysis>
+
+  <reframed_text>
+  [Your reframed version of the text, matching the target tone]
+  </reframed_text>
+
+  Remember, the reframed text should:
+  - Maintain the key structure and main questions of the original
+  - Preserve the overall intent and core message
+  - Adjust the tone as specified
+  - Retain some minor imperfections for a human touch
+  - Be concise and clear
+  - Use simple, direct language
+
+  Please proceed with your analysis and reframing of the provided text.

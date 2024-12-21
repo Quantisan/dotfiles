@@ -4,70 +4,25 @@ defaults:
   tone: constructive
 
 prompt: >
-  You are an expert in communication and language adaptation. Your task is to reframe a given text
-  to match a specified tone while preserving its key elements. Here's the process you'll follow:
+  Please reframe the following text to match the target $tone tone:
 
-  1. First, you'll receive the original text and the target tone.
-  2. Analyze the text and reframe it according to the given instructions.
-  3. Present your reframed text in the specified format.
-
-  Here is the original text to be reframed:
-
-  <original_text>
+  <text>
   $input
-  </original_text>
+  </text>
 
-  The target tone for reframing is:
+  When rewriting the text, please follow these guidelines:
 
-  <target_tone>
-  $tone
-  </target_tone>
+  - Preserve the key structure, main questions, and overall intent of the original text as much as
+  possible. The reframed text should still fundamentally communicate the same things as the original.
 
-  Please follow these steps to reframe the text:
+  - Keep the writing style relatively similar to the original. Even maintain some trivial errors like
+  lack of capitalization in order to keep a human touch. The reframed text should feel like it was
+  written by the same person as the original, just in a different tone.
 
-  1. Analyze the original text:
-    Wrap your text breakdown in <text_breakdown> tags. In this breakdown:
-    - Quote key phrases from the original text
-    - Identify the subject matter of the text
-    - List the main ideas
-    - Note the key structure, main questions, and overall intent of the original text
-    - Describe the current tone using specific adjectives
-    - Note any unique stylistic elements or vocabulary
+  - Be concise and succinct in your reframing. Get to the point in order to save the reader's time and
+  cognitive energy. Omit extraneous details.
 
-  2. Plan the reframing:
-    After your breakdown, plan your approach to reframing the text in <reframing_plan> tags:
-    - List specific tone adjustments needed
-    - Outline how to preserve key elements while changing tone
-    - Plan vocabulary changes to match the target tone
+  - Write in a simple and direct way, as if you are speaking with a close colleague. Use clear
+  language and avoid unnecessary complexity or roundabout phrasing.
 
-  3. Reframe the text:
-    After your analysis and planning, reframe the text to match the target tone. When rewriting:
-    - Preserve the key structure, main questions, and overall intent of the original text
-    - Maintain a similar writing style to the original, including minor errors if present, to keep a human touch
-    - Be concise and succinct, omitting extraneous details
-    - Use simple and direct language, as if speaking with a close colleague
-    - Employ the vocabulary and manner of a subject matter expert in the identified field
-
-  4. Present your reframed text:
-    Provide your reframed version of the text inside <reframed_text> tags.
-
-  Example output structure:
-
-  <text_breakdown>
-  [Your detailed breakdown of the original text, including quotes, subject matter, main ideas, key
-  elements, current tone, and stylistic notes]
-  </text_breakdown>
-
-  <reframing_plan>
-  [Your plan for reframing, including tone adjustments, preservation of key elements, and vocabulary
-  changes]
-  </reframing_plan>
-
-  <reframed_text>
-  [Your reframed version of the text, matching the target tone while preserving key elements]
-  </reframed_text>
-
-  Remember, the reframed text should feel like it was written by the same person as the original,
-  just in a different tone. Aim to capture the essence of the original message while adapting it to
-  the specified tone.
-
+  Please write your {{tone}} reframed version of the text inside <reframed_text> tags.

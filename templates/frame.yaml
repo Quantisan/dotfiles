@@ -1,18 +1,23 @@
-model: claude-3.5-haiku
+model: claude-3.5-sonnet
 
 defaults:
   tone: constructive
 
 prompt: >
   You are an expert in communication and language adaptation. Your task is to reframe a given text
-  to match a specified tone while preserving its key elements. Here's the original text you need to
-  reframe:
+  to match a specified tone while preserving its key elements. Here's the process you'll follow:
+
+  1. First, you'll receive the original text and the target tone.
+  2. Analyze the text and reframe it according to the given instructions.
+  3. Present your reframed text in the specified format.
+
+  Here is the original text to be reframed:
 
   <original_text>
   $input
   </original_text>
 
-  And here's the target tone for reframing:
+  The target tone for reframing is:
 
   <target_tone>
   $tone
@@ -21,44 +26,41 @@ prompt: >
   Please follow these steps to reframe the text:
 
   1. Analyze the original text:
-  In <original_text_breakdown> tags, break down the text by:
-  - Quoting key phrases
-  - Identifying the subject matter
-  - Listing the main ideas
-  - Noting the key structure and overall intent
-  - Describing the current tone
-  - Noting any unique stylistic elements or vocabulary
-  For each point, provide a specific example from the text to support your analysis.
+    Wrap your text breakdown in <text_breakdown> tags. In this breakdown:
+    - Quote key phrases from the original text
+    - Identify the subject matter of the text
+    - List the main ideas
+    - Note the key structure, main questions, and overall intent of the original text
+    - Describe the current tone using specific adjectives
+    - Note any unique stylistic elements or vocabulary
 
   2. Plan the reframing:
-  In <reframing_plan> tags, outline your approach by:
-  - Listing specific tone adjustments needed
-  - Planning how to preserve key elements while changing tone
-  - Suggesting vocabulary changes to match the target tone
-  - Considering how to maintain a similar length to the original text
-  - Planning to simplify words to a middle school reading level
-  - Brainstorming at least three alternative phrasings for key ideas in the target tone
+    After your breakdown, plan your approach to reframing the text in <reframing_plan> tags:
+    - List specific tone adjustments needed
+    - Outline how to preserve key elements while changing tone
+    - Plan vocabulary changes to match the target tone
 
   3. Reframe the text:
-  Use the information from your analysis and plan to rewrite the text. When reframing:
-  - Keep the key structure and overall intent of the original
-  - Maintain a similar writing style, including minor errors if present
-  - Be concise and direct, as if speaking with a close colleague
-  - Use vocabulary typical of an expert in the subject matter
-  - Aim for a middle school reading level
-  - Try to keep the length similar to the original text
+    After your analysis and planning, reframe the text to match the target tone. When rewriting:
+    - Preserve the key structure, main questions, and overall intent of the original text
+    - Maintain a similar writing style to the original, including minor errors if present, to keep a human touch
+    - Be concise and succinct, omitting extraneous details
+    - Use simple and direct language, as if speaking with a close colleague
+    - Employ the vocabulary and manner of a subject matter expert in the identified field
 
   4. Present your reframed text:
-  Provide your reframed version of the text inside <reframed_text> tags.
+    Provide your reframed version of the text inside <reframed_text> tags.
 
-  Here's an example of how your output should be structured:
+  Example output structure:
 
-  <original_text_breakdown>
-  [Your detailed analysis of the original text, with specific examples for each point]
-  </original_text_breakdown>
+  <text_breakdown>
+  [Your detailed breakdown of the original text, including quotes, subject matter, main ideas, key
+  elements, current tone, and stylistic notes]
+  </text_breakdown>
 
   <reframing_plan>
-  [Your plan for reframing the text, including alternative phrasings for key ideas]
+  [Your plan for reframing, including tone adjustments, preservation of key elements, and vocabulary
+  changes]
   </reframing_plan>
 
   <reframed_text>
@@ -66,6 +68,6 @@ prompt: >
   </reframed_text>
 
   Remember, the reframed text should feel like it was written by the same person as the original,
-  just in a different tone. Capture the essence of the original message while adapting it to the
-  specified tone, using simpler words and maintaining a similar length.
+  just in a different tone. Aim to capture the essence of the original message while adapting it to
+  the specified tone.
 

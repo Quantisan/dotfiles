@@ -1,4 +1,4 @@
-model: claude-3.5-haiku
+model: claude-3.5-sonnet
 
 defaults:
   tone: constructive

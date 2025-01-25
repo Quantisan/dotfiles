@@ -42,7 +42,7 @@ require("lazy").setup({
         "tarPlugin",
         "tohtml",
         "tutor",
-        "zipPlugin",
+        -- "zipPlugin", -- to support Clojure LSP jar analysis
       },
     },
   },

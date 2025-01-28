@@ -14,6 +14,23 @@ config.leader = { key = "Space", mods = "CTRL" }
 
 config.keys = {
     { key = "p", mods = "CTRL", action = act.PaneSelect },
+    -- TODO: key combo conflict
+    {
+        key = "-",
+        mods = "LEADER",
+        action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    -- TODO: key combo conflict
+    {
+        key = "|",
+        mods = "LEADER",
+        action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "w",
+        mods = "CMD",
+        action = act.CloseCurrentPane({ confirm = false }),
+    },
 }
 
 -- and finally, return the configuration to wezterm

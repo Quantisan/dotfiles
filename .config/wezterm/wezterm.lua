@@ -10,6 +10,8 @@ local config = wezterm.config_builder()
 config.color_scheme = "Tokyo Night"
 config.font_size = 13.0
 
+config.window_close_confirmation = "NeverPrompt"
+
 config.leader = { key = "Space", mods = "CTRL" }
 
 config.keys = {

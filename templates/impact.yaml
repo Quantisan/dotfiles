@@ -28,7 +28,7 @@ prompt: >
   [Repeat for each key message]
   </scratchpad>
 
-  After your analysis, choose 2-3 of Paul's statements that you believe could be improved to better
+  After your analysis, choose 2-4 of Paul's statements that you believe could be improved to better
   communicate business impact. For each statement:
 
   1. Quote the original statement
@@ -46,8 +46,3 @@ prompt: >
   [Repeat for each chosen statement]
   </analysis>
 
-  Finally, provide a brief summary of your overall recommendations for Paul in 2-3 sentences.
-
-  <summary>
-  [Your summary here]
-  </summary>

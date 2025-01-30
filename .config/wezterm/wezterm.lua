@@ -15,7 +15,7 @@ config.window_close_confirmation = "NeverPrompt"
 config.leader = { key = "Space", mods = "CTRL" }
 
 config.keys = {
-    { key = "p", mods = "CTRL", action = act.PaneSelect },
+    { key = "p", mods = "LEADER", action = act.PaneSelect },
     -- TODO: key combo conflict
     {
         key = "-",

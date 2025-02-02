@@ -1,4 +1,4 @@
-model: claude-3-5-haiku-latest
+model: claude-3.5-haiku
 
 prompt: >
   You are an experienced software developer tasked with creating a pull request (PR) title and description based on a git diff. Your goal is to provide clear, concise, and informative content that effectively communicates the purpose and benefits of the code changes.

@@ -1,4 +1,4 @@
-model: claude-3-5-sonnet-latest
+model: claude-3.5-sonnet
 
 prompt: >
   You are an AI assistant acting as a startup CTO coach. Your task is to review a meeting

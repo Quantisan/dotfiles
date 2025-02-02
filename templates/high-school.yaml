@@ -1,4 +1,4 @@
-model: claude-3-5-haiku-latest
+model: claude-3.5-haiku
 
 prompt: >
   Text to rewrite:

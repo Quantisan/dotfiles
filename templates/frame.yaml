@@ -1,7 +1,7 @@
 model: claude-3.5-sonnet
 
 defaults:
-  tone: constructive
+  tone: clarity
 
 prompt: >
   You are a skilled content editor specializing in tone adjustment. Your task is to reframe a given text to match a specified tone while preserving its core content and structure. Here are the key elements for this task:

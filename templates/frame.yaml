@@ -4,7 +4,9 @@ defaults:
   tone: clarity
 
 prompt: >
-  You are a skilled content editor specializing in tone adjustment. Your task is to reframe a given text to match a specified tone while preserving its core content and structure. Here are the key elements for this task:
+  You are a content editor specializing in tone adjustment. Your task is to reframe a given text to
+  match a specified tone while preserving its core content and structure. Here are the key elements
+  for this task:
 
   Target Tone:
   <target_tone>
@@ -20,36 +22,40 @@ prompt: >
 
   1. Analyze the original text, identifying its key structure, main questions, and overall intent.
   2. Adjust the writing style to match the target tone while maintaining the essence of the original message.
-  3. Preserve some minor imperfections (e.g., lack of capitalization) to retain a natural, human-like quality in the writing.
-  4. Ensure the reframed text is concise and clear, omitting any extraneous details.
-  5. Use simple, direct language as if speaking with a close colleague.
+  3. Preserve some minor imperfections to retain a natural, human-like quality in the writing.
+  4. Ensure the reframed text is concise and clear, using simple, direct language.
+  5. Create a simplified version that captures the core message even more succinctly.
 
-  Before providing your final reframed text, wrap your analysis and thought process in <tone_analysis> tags. In this analysis:
-  - List key structural elements and main questions from the original text
-  - Identify specific tone markers in the original text
-  - Brainstorm alternative phrasings that match the target tone
-  - Consider how to preserve minor imperfections
+  Before providing your final reframed text, show your analysis and thought process in <reframing_process> tags. In this process:
+  a. Quote and analyze key phrases from the original text
+  b. Identify tone markers and their impact
+  c. List main questions and structural elements
+  d. Brainstorm alternative phrasings that match the target tone
+  e. Plan how to preserve minor imperfections
+  f. Outline the structure for the reframed text
 
-  This will help ensure a thorough and accurate reframing. It's OK for this section to be quite long.
+  After your analysis, present the reframed text within <reframed_text> tags. The reframed text
+  should feel as if it was written by the same person as the original, just in a different tone.
 
-  After your analysis, present the reframed text within <reframed_text> tags. The reframed text should feel as if it was written by the same person as the original, just in a different tone.
+  Finally, provide a simplified version of the reframed text in <simplified_text> tags. Just "say it
+  simply" and try to keep the target tone: $tone.
 
-  Example output structure:
+  Your output should follow this structure:
 
-  <tone_analysis>
+  <reframing_process>
   [Your detailed analysis of the original text and your approach to reframing it]
-  </tone_analysis>
+  </reframing_process>
 
   <reframed_text>
   [Your reframed version of the text, matching the target tone]
   </reframed_text>
 
-  Remember, the reframed text should:
-  - Maintain the key structure and main questions of the original
-  - Preserve the overall intent and core message
-  - Adjust the tone as specified
-  - Retain some minor imperfections for a human touch
-  - Be concise and clear
-  - Use simple, direct language
+  <simplified_text>
+  [A simplified, more concise version of the reframed text]
+  </simplified_text>
 
-  Please proceed with your analysis and reframing of the provided text.
+  Remember to maintain the key structure, main questions, and overall intent of the original text
+  while adjusting the tone and ensuring conciseness.
+
+
+

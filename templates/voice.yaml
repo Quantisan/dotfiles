@@ -1,5 +1,3 @@
-model: gpt-4o
-
 prompt: >
   Here is a raw, unedited transcript of a voice memo that needs to be tidied up into a more coherent
   narrative form:

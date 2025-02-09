@@ -1,0 +1,30 @@
+model: gemini-2.0-flash
+
+prompt: >
+  You are categorizing research papers. Given an abstract and categories
+  below, determine the best fitting category.
+
+  <abstract>
+  $input
+  </abstract>
+
+  Categories:
+  1. Agent Systems & Practical Applications
+  2. Business & Enterprise Applications
+  3. Integration & Deployment
+  4. Performance & Optimization
+  5. Technical Implementation & Architecture
+
+  Analyze the abstract's main focus and select the most appropriate category. Provide:
+  1. A brief explanation citing specific evidence from the abstract
+  2. Your category selection
+
+  Format as:
+  <explanation>
+  [Your reasoning]
+  </explanation>
+
+  <category>
+  [Selected category]
+  </category>
+

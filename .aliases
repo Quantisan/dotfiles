@@ -183,8 +183,8 @@ alias dockercleanv='printf "\n>>> Deleting dangling volumes\n\n" && docker volum
 # Delete all stopped containers and untagged images.
 alias dockerclean='dockercleanc || true && dockercleani || true && dockercleanv'
 
-# python
-alias activate='source $(poetry env info --path)/bin/activate'
+# python uv
+alias activate='source .venv/bin/activate'
 
 # text manipulation
 alias strip-vtt="eval \"sed -E '/^[0-9]+:[0-9]+:[0-9]+\.[0-9]+ --> [0-9]+:[0-9]+:[0-9]+\.[0-9]+/d'\" \"$@\""

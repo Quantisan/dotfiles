@@ -1,5 +1,3 @@
-model: claude-3.5-sonnet
-
 prompt: >
   You are an AI assistant acting as a startup CTO coach. Your task is to review a meeting
   transcript, focusing on what Paul (the CTO) is saying, and provide suggestions on how he can

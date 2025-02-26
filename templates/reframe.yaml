@@ -1,5 +1,3 @@
-model: claude-3.5-sonnet
-
 defaults:
   tone: constructive
 

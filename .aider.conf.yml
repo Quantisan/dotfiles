@@ -84,7 +84,7 @@
 #reasoning-effort: xxx
 
 ## Set the thinking token budget for models that support it (default: not set)
-#thinking-tokens: xxx
+thinking-tokens: 1024
 
 ## Verify the SSL cert when connecting to models (default: True)
 #verify-ssl: true

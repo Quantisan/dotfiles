@@ -1,4 +1,4 @@
-model: claude-3-opus
+model: claude-3.7-sonnet-latest
 
 prompt: >
   Here is the VTT transcript of a meeting:

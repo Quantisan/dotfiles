@@ -1,4 +1,6 @@
 model: claude-3.7-sonnet-latest
+options:
+  thinking_budget: 5000
 
 prompt: >
   You are an AI assistant specialized in creating concise and accurate meeting minutes from video

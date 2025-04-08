@@ -1,46 +1,63 @@
-model: claude-3-opus
+model: claude-3.7-sonnet-latest
 
 prompt: >
-  Here is the VTT transcript of a meeting:
+  You are an AI assistant specialized in creating concise and accurate meeting minutes from video
+  transcript text (VTT) format. Your task is to analyze a meeting transcript and produce clear,
+  informative minutes that capture the essence of the discussion.
 
-  <transcript>
+  Here is the VTT transcript of the meeting:
+
+  <meeting_transcript>
   $input
-  </transcript>
+  </meeting_transcript>
 
-  Your task is to abridge this meeting transcript, in VTT format, into concise
-  minutes that preserve the key information and action items discussed. Focus
-  on capturing:
+  Your objective is to abridge this meeting transcript into concise minutes that preserve the key
+  information and action items discussed. Follow these steps:
 
-  - The main points made by each speaker
-  - Any deliverables and next steps that were discussed
-  - Important strategic considerations that were brought up
-  - Relevant technical details
-  - Numeric or quantative information
-  - Any plans for future meetings that were mentioned
+  1. Carefully read and analyze the transcript.
+  2. Identify and extract the following key elements:
+    - Main points made by each speaker
+    - Deliverables and next steps discussed
+    - Important strategic considerations
+    - Relevant technical details
+    - Numeric or quantitative information
+    - Any plans for future meetings
 
-  When writing the minutes, make sure to:
+  3. Organize the extracted information into a coherent summary.
 
+  4. Format the minutes using cue range identifiers that match key segments from the original
+     transcript. A cue range identifier in brackets, like [40-61], indicates that the following text
+     condenses the portion of the transcript between, and including, cue 40 and cue 61.
+
+  When writing the minutes, adhere to these guidelines:
   - Use the original names of the speakers
   - Maintain a natural dialogue flow
-  - Don't add anything that wasn't said or change what was said
+  - Do not add any information that wasn't in the original transcript
+  - Do not alter the meaning of what was said
 
-  Format the minutes by using cue range identifiers that match to key segments
-  from the original transcript. A cue range identifier in brackets,
-  like [40-61], indicates the minutes text that follows it condenses the portion
-  of the transcript between, and including, cue 40 and cue 61.
+  Before writing the final minutes, inside your thinking block, break down your thought process and
+  show how you're interpreting the transcript in <transcript_breakdown> tags. In this breakdown:
 
-  Here's an example of the proper minutes format to use:
+  1. List the main speakers and their roles (if apparent from the transcript).
+  2. Identify and quote key discussion points, decisions, and action items.
+  3. Note any potential speech-to-text errors or ambiguities that might affect your summary.
+  4. Create a rough outline of the meeting structure.
 
-  <format>
-  [15-45] Alice says the team needs to focus on optimizing the database queries
-  to improve site performance. Bob suggests they also implement caching.
+  Be mindful of potential speech-to-text errors in the transcript. Use context to interpret unclear
+  segments and note any ambiguities that might affect your summary.
 
-  [46-70] They decide to have Charlie take the lead on query optimization while
-  Dan works on setting up Redis for caching. Alice will oversee their progress.
+  After your analysis, present the final minutes in <minutes> tags, following this format:
 
-  [85-91] Alice asks if there are any other concerns. Bob brings up potential
-  security vulnerabilities. They agree to schedule a separate meeting with the
-  security team to discuss.
-  </format>
+  <minutes>
+  [cue range] Speaker name says/mentions/discusses [summary of key points].
 
-  Write the minutes inside <minutes> tags.
+  [cue range] They decide/agree/conclude [summary of decisions or action items].
+
+  [cue range] Speaker name brings up [any new topics or concerns]. They agree to [any follow-up actions or future plans].
+  </minutes>
+
+  Remember, your goal is to produce a clear, concise, and accurate summary of the meeting that
+  captures all essential information while eliminating unnecessary details. Your final output should
+  consist only of the minutes and should not duplicate or rehash any of the work you did in the
+  transcript breakdown.
+

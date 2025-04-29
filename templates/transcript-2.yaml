@@ -1,3 +1,7 @@
+model: claude-3.7-sonnet-latest
+options:
+  thinking_budget: 10000
+
 prompt: >
   Here are the meeting minutes to analyze and reorganize:
 

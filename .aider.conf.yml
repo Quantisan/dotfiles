@@ -18,7 +18,7 @@
 # Main model:
 
 ## Specify the model to use for the main chat
-#model: xxx
+model: gemini-2.5-pro
 
 ########################
 # API Keys and settings:
@@ -84,7 +84,7 @@
 #reasoning-effort: xxx
 
 ## Set the thinking token budget for models that support it (default: not set)
-thinking-tokens: 8000
+thinking-tokens: 20000
 
 ## Verify the SSL cert when connecting to models (default: True)
 #verify-ssl: true
@@ -98,17 +98,23 @@ thinking-tokens: 8000
 ## Use architect edit format for the main chat
 architect: true
 
+## Enable/disable automatic acceptance of architect changes (default: True)
+auto-accept-architect: false
+
 ## Specify the model to use for commit messages and chat history summarization (default depends on --model)
-#weak-model: xxx
+weak-model: haiku
 
 ## Specify the model to use for editor tasks (default depends on --model)
-#editor-model: xxx
+editor-model: sonnet
 
 ## Specify the edit format for the editor model (default: depends on editor model)
 #editor-edit-format: xxx
 
 ## Only work with models that have meta-data available (default: True)
 #show-model-warnings: true
+
+## Check if model accepts settings like reasoning_effort/thinking_tokens (default: True)
+#check-model-accepts-settings: true
 
 ## Soft limit on tokens for chat history, after which summarization begins. If unspecified, defaults to the model's max_chat_history_tokens.
 #max-chat-history-tokens: xxx
@@ -165,19 +171,19 @@ architect: true
 #stream: true
 
 ## Set the color for user input (default: #00cc00)
-#user-input-color: #00cc00
+#user-input-color: "#00cc00"
 
 ## Set the color for tool output (default: None)
 #tool-output-color: "xxx"
 
 ## Set the color for tool error messages (default: #FF2222)
-#tool-error-color: #FF2222
+#tool-error-color: "#FF2222"
 
 ## Set the color for tool warning messages (default: #FFA500)
-#tool-warning-color: #FFA500
+#tool-warning-color: "#FFA500"
 
 ## Set the color for assistant output (default: #0088ff)
-#assistant-output-color: #0088ff
+#assistant-output-color: "#0088ff"
 
 ## Set the color for the completion menu (default: terminal's default text color)
 #completion-menu-color: "xxx"
@@ -218,17 +224,23 @@ gitignore: false
 ## Enable/disable commits when repo is found dirty (default: True)
 #dirty-commits: true
 
-## Attribute aider code changes in the git author name (default: True)
-#attribute-author: true
+## Attribute aider code changes in the git author name (default: True). If explicitly set to True, overrides --attribute-co-authored-by precedence.
+#attribute-author: xxx
 
-## Attribute aider commits in the git committer name (default: True)
-#attribute-committer: true
+## Attribute aider commits in the git committer name (default: True). If explicitly set to True, overrides --attribute-co-authored-by precedence for aider edits.
+#attribute-committer: xxx
 
 ## Prefix commit messages with 'aider: ' if aider authored the changes (default: False)
 #attribute-commit-message-author: false
 
 ## Prefix all commit messages with 'aider: ' (default: False)
 #attribute-commit-message-committer: false
+
+## Attribute aider edits using the Co-authored-by trailer in the commit message (default: False). If True, this takes precedence over default --attribute-author and --attribute-committer behavior unless they are explicitly set to True.
+#attribute-co-authored-by: false
+
+## Enable/disable git pre-commit hooks with --no-verify (default: False)
+#git-commit-verify: false
 
 ## Commit all pending changes with a suitable commit message, then exit
 #commit: false
@@ -349,6 +361,9 @@ gitignore: false
 #################
 # Other settings:
 
+## Never prompt for or attempt to install Playwright for web scraping (default: False).
+#disable-playwright: false
+
 ## specify a file to edit (can be used multiple times)
 #file: xxx
 ## Specify multiple values like this:
@@ -413,6 +428,9 @@ gitignore: false
 ## Specify which editor to use for the /editor command
 #editor: xxx
 
+## Print shell completion script for the specified SHELL and exit. Supported shells: bash, tcsh, zsh. Example: aider --shell-completions bash
+#shell-completions: xxx
+
 ############################
 # Deprecated model settings:
 
@@ -420,7 +438,7 @@ gitignore: false
 #opus: false
 
 ## Use anthropic/claude-3-7-sonnet-20250219 model for the main chat (deprecated, use --model)
-sonnet: true
+#sonnet: false
 
 ## Use claude-3-5-haiku-20241022 model for the main chat (deprecated, use --model)
 #haiku: false

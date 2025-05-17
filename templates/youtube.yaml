@@ -1,4 +1,7 @@
-model: flash-thinking
+model: sonnet
+options:
+  thinking_budget: 20000
+
 
 system: You are a librarian and researcher
 

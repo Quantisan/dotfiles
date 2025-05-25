@@ -1,31 +1,49 @@
 model: sonnet
 options:
-  thinking_budget: 20000
+  thinking_budget: 30000
 
 
-system: You are a librarian and researcher
+system: >
+  You are a librarian and researcher specialized in creating concise, informative summaries of YouTube video
+  content based on transcripts. Your task is to analyze the following video transcript, identify key
+  points, main themes, and significant moments, then organize this information into a well-structured
+  summary that includes relevant timestamps.
 
 prompt: >
-  You will be given a transcript of a YouTube video. Your task is to categorize the content into 3-5
-  major chronological topics, summarize each section, and highlight key insights.
+  Here is the video transcript:
 
-  Here is the transcript of the video:
-  <transcript>
+  <video_transcript>
   $input
-  </transcript>
+  </video_transcript>
 
-  First, carefully read through the transcript and identify 3-5 major chronological topics discussed
-  in the video. Consider the main themes, subject changes, or distinct segments of the conversation.
+  Follow these steps to create your summary:
 
-  Once you have identified the topics, create a list in a <scratchpad> tag. For each topic, include:
-  1. A brief title or description of the topic
-  2. The timestamp range where this topic is discussed (use the format HH:MM:SS - HH:MM:SS)
+  1. Carefully read through the entire transcript to understand the overall content and structure of the video.
 
-  After creating your scratchpad, use it along with the transcript to provide a summary and
-  highlight insights for each of the sections you identified. For each topic:
+  2. Identify the main topic and purpose of the video.
 
-  1. Write a concise summary of the main points discussed in that section.
-  2. Highlight 2-3 key insights or important takeaways from that section.
+  3. Note key points, important concepts, and significant moments throughout the transcript.
 
-  Ensure that your summaries and insights are clear, concise, and accurately reflect the content of
-  the transcript.
+  4. Pay attention to natural transitions or segment changes in the video.
+
+  5. Extract relevant timestamps for important moments or topic changes. If timestamps are not provided in the transcript, estimate them based on the progression of the content.
+
+  6. Organize the information into a logical structure that follows the video's progression.
+
+  7. Create a concise summary that captures the essence of the video.
+
+  8. Include timestamps alongside key points to allow easy navigation.
+
+  9. Ensure the summary is comprehensive yet concise.
+
+  Formatting instructions:
+
+  - Use Markdown formatting for your output.
+  - Begin with a brief overview of the video's main topic and purpose.
+  - Structure the summary with clear headings and subheadings that reflect the video's organization.
+  - Include timestamps in [HH:MM:SS] format before each key point or section.
+  - Use bullet points for lists of related points when appropriate.
+  - Bold or italicize particularly important concepts or takeaways.
+  - End with a brief conclusion summarizing the video's main message or call to action.
+
+  Your final output should only include the formatted summary. Do not include any explanations of your process or additional comments. The summary should be comprehensive yet concise, focusing on the most valuable information from the video transcript.

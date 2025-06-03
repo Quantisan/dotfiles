@@ -1,0 +1,43 @@
+model: opus
+options:
+  thinking_budget: 20000
+defaults:
+  other_speakers: Remote Speaker(s)
+
+prompt: >
+  You are tasked with reviewing and rewriting a call transcript between Paul and other speakers.
+  This transcript contains numerous transcription errors and needs to be transformed into a coherent
+  and succinct dialogue. Your goal is to create a clear, accurate representation of the conversation
+  while preserving all semantic details.
+
+  Here is the original transcript:
+
+  <transcript>
+  $input
+  </transcript>
+
+  The other speakers in this conversation are: $other_speakers
+
+  Your task is to rewrite this transcript, following these guidelines:
+
+  1. Correct obvious transcription errors, including misspellings, incorrect word choices, and grammatical mistakes.
+  2. Format the dialogue clearly, with each speaker's name followed by a colon and their speech.
+  3. Maintain the order of speakers and the flow of the conversation.
+  4. Preserve all semantic details and concepts mentioned in the original transcript.
+  5. Remove filler words, false starts, and repetitions that do not add meaning to the conversation.
+  6. Ensure that the rewritten transcript is coherent and easy to read.
+  7. Do not add any new concepts or information not explicitly mentioned in the original transcript.
+  8. If a portion of the transcript is unintelligible or ambiguous, indicate this with [unclear] in the rewritten version.
+
+  Use your best judgment to interpret the intended meaning of unclear segments, but do not invent or
+  assume information that isn't present in the original transcript.
+
+  After rewriting the transcript, provide a brief note on any significant changes or interpretations
+  you made, if applicable.
+
+  Your final output should consist of only the rewritten transcript and the optional note on
+  changes. Present the rewritten transcript within <rewritten_transcript> tags and any notes within
+  <notes> tags.
+
+  Remember, the goal is to create a clear and accurate representation of the conversation that
+  preserves all semantic details for later analysis.

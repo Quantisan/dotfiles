@@ -1,6 +1,6 @@
 model: opus
 options:
-  thinking_budget: 20000
+  thinking_budget: 30000
 defaults:
   other_speakers: Remote Speaker(s)
 

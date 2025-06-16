@@ -1,4 +1,4 @@
-model: sonnet
+model: opus
 options:
   thinking_budget: 30000
 

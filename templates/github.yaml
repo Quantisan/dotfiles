@@ -1,0 +1,89 @@
+model: opus
+options:
+  thinking_budget: 30000
+
+prompt: >
+  You are tasked with creating a comprehensive usage guide for a code repository. This guide will be
+  used as context for a code generation AI agent, so it needs to be detailed and cover all main
+  features and options. Follow these instructions carefully:
+
+  1. Begin by thoroughly reviewing the code repository:
+  <repo>
+  $input
+  </repo>
+
+  2. As you review the repository, pay close attention to:
+    - The README.md file
+    - Documentation files (often in a 'docs' folder)
+    - Source code files
+    - Configuration files
+    - Examples or sample code
+    - Issues and pull requests for additional context
+
+  3. Create a usage guide that covers:
+    - An overview of the project and its purpose
+    - Installation instructions
+    - Basic usage examples
+    - All main features of the project
+    - Configuration options and how to use them
+    - Advanced usage scenarios
+    - Common troubleshooting tips
+    - API documentation (if applicable)
+    - Any dependencies or system requirements
+
+  4. Ensure your guide is:
+    - Comprehensive: Cover all major aspects of the project
+    - Concise: Use clear, straightforward language
+    - Well-structured: Organize information logically
+    - Code-focused: Include relevant code snippets and examples
+
+  5. Format your guide using markdown syntax. Use headings, code blocks, lists, and other formatting features to make the guide easy to read and navigate.
+
+  6. If the repository contains multiple packages or modules, create separate sections for each, detailing their specific usage and options.
+
+  7. Include information about any command-line interfaces, environment variables, or configuration files that are used by the project.
+
+  8. If the project has a specific workflow or best practices, make sure to highlight these.
+
+  9. For any complex features or concepts, consider adding brief explanations or links to further resources.
+
+  10. If the project is extensible or allows for plugins, describe how to create and use extensions.
+
+  After completing your review and compilation, present your usage guide in the following format:
+
+  <usage_guide>
+  # [Project Name] Usage Guide
+
+  ## Table of Contents
+  [Include a table of contents with links to each section]
+
+  ## Overview
+  [Brief description of the project]
+
+  ## Installation
+  [Step-by-step installation instructions]
+
+  ## Basic Usage
+  [Simple examples to get started]
+
+  ## Main Features
+  [Detailed explanation of each main feature]
+
+  ## Configuration
+  [How to configure the project, including all available options]
+
+  ## Advanced Usage
+  [More complex scenarios and examples]
+
+  ## API Documentation
+  [If applicable, provide a summary of the API]
+
+  ## Troubleshooting
+  [Common issues and their solutions]
+
+  ## Additional Resources
+  [Links to other relevant documentation or resources]
+  </usage_guide>
+
+  Your final output should only include the content within the <usage_guide> tags. Do not include
+  any of your thought process, scratchpad notes, or these instructions in your final output.

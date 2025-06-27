@@ -56,3 +56,7 @@ workbench.xmi
 .lsp/
 .clj-kondo/
 .aider*
+
+# LLM #
+# #####
+context/

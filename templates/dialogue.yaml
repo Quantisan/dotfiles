@@ -20,7 +20,20 @@ prompt: >
 
   Your task is to rewrite this transcript, following these guidelines:
 
-  1. Correct obvious transcription errors, including misspellings, incorrect word choices, and grammatical mistakes.
+  1. Correct transcription errors, particularly:
+   - Silence hallucinations (repeated "Thank you" or filler phrases, like "Yeah")
+   - Excessive "yeah" insertions: Remove most instances of "yeah" EXCEPT when it's:
+     * A direct answer to a yes/no question
+     * An explicit confirmation or agreement
+     * Part of a meaningful response
+     Example: "Yeah, so yeah, I was thinking yeah" → "So I was thinking"
+   - Proper noun mistakes ("Balay" → "ballet")
+   - Number formatting ("twenty twenty" → "2020")
+   - Word repetitions/stuttering ("your your your your" → "your")
+   - Missing contractions ("don think" → "don't think")
+   - Grammar/agreement errors ("them is" → "them are")
+   - Technical term errors ("reinforcing learning" → "reinforcement learning")
+   - Incomplete sentences and context-dependent word choices
   2. Format the dialogue clearly, with each speaker's name followed by a colon and their speech.
   3. Maintain the order of speakers and the flow of the conversation.
   4. Preserve all semantic details and concepts mentioned in the original transcript.

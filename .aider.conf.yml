@@ -405,7 +405,7 @@ gitignore: false
 #config: xxx
 
 ## Specify the .env file to load (default: .env in git root)
-#env-file: .env
+env-file: .env.aider
 
 ## Enable/disable suggesting shell commands (default: True)
 #suggest-shell-commands: true

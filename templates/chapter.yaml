@@ -1,4 +1,4 @@
-model: gemini-1.5-pro-latest
+model: gemini-2.5-pro-latest
 
 prompt: >
   <Chapter>

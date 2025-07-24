@@ -18,7 +18,7 @@
 # Main model:
 
 ## Specify the model to use for the main chat
-model: opus
+model: gemini-2.5-pro
 
 ########################
 # API Keys and settings:
@@ -102,10 +102,10 @@ architect: true
 auto-accept-architect: false
 
 ## Specify the model to use for commit messages and chat history summarization (default depends on --model)
-weak-model: haiku
+weak-model: flash
 
 ## Specify the model to use for editor tasks (default depends on --model)
-editor-model: sonnet
+editor-model: gemini-2.5-pro
 
 ## Specify the edit format for the editor model (default: depends on editor model)
 #editor-edit-format: xxx

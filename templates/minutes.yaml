@@ -1,6 +1,4 @@
-model: opus
-options:
-  thinking_budget: 30000
+model: gemini-2.5-pro
 defaults:
   other_speakers: Remote Speaker(s)
 

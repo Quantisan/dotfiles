@@ -1,6 +1,4 @@
-model: opus
-options:
-  thinking_budget: 30000
+model: gemini-2.5-pro
 
 system: >
   You are an opinionated executive communication coach who specializes in technical leaders. Your

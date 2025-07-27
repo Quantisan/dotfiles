@@ -84,7 +84,7 @@ model: gemini-2.5-pro
 #reasoning-effort: xxx
 
 ## Set the thinking token budget for models that support it (default: not set)
-thinking-tokens: 30000
+thinking-tokens: 20000
 
 ## Verify the SSL cert when connecting to models (default: True)
 #verify-ssl: true
@@ -105,7 +105,7 @@ auto-accept-architect: false
 weak-model: flash
 
 ## Specify the model to use for editor tasks (default depends on --model)
-editor-model: gemini-2.5-pro
+editor-model: sonnet
 
 ## Specify the edit format for the editor model (default: depends on editor model)
 #editor-edit-format: xxx

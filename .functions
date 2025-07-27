@@ -180,3 +180,9 @@ function reader() {
     local url="$1"
     curl "https://r.jina.ai/$url"
 }
+
+aider() {
+  # Using the 'command' keyword to call the real aider executable,
+  # not this function, to avoid an infinite loop.
+  command aider --anthropic-api-key "$AIDER_ANTHROPIC_API_KEY" "$@"
+}

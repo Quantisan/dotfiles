@@ -12,14 +12,10 @@ function doIt() {
                 --exclude "bootstrap.sh" \
                 --exclude "README.md" \
                 --exclude "LICENSE-MIT.txt" \
-                --exclude "setup_symlinks.sh" \
                 -avh --no-perms . ~
 
         ## Link 'llm' templates
         ln -shf "$(pwd)/templates/" ~/Library/Application\ Support/io.datasette.llm/templates
-
-        # Run symlink setup (SRP)
-        bash "$(pwd)/setup_symlinks.sh"
 
         source ~/.bash_profile
 }

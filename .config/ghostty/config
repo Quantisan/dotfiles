@@ -1,3 +1,4 @@
 clipboard-paste-protection = false
 copy-on-select = clipboard
 keybind = shift+enter=text:\n
+theme = dark:tokyonight,light:tokyonight-day

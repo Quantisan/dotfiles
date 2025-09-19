@@ -18,7 +18,7 @@
 # Main model:
 
 ## Specify the model to use for the main chat
-model: anthropic/claude-opus-4-1-20250805
+model: gpt-5
 
 ########################
 # API Keys and settings:
@@ -81,10 +81,10 @@ model: anthropic/claude-opus-4-1-20250805
 #  - zzz
 
 ## Set the reasoning_effort API parameter (default: not set)
-# reasoning-effort: high
+reasoning-effort: high
 
 ## Set the thinking token budget for models that support it (default: not set)
-thinking-tokens: 30000
+# thinking-tokens: 30000
 
 ## Verify the SSL cert when connecting to models (default: True)
 #verify-ssl: true

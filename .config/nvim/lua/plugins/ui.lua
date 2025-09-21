@@ -18,6 +18,14 @@ return {
           bottom = 0, -- No bottom margin, so notifications appear at the bottom
         },
       },
+      picker = {
+        sources = {
+          explorer = {
+            layout = { layout = { position = "right" } },
+            hidden = true,
+          },
+        },
+      },
     },
   },
 }

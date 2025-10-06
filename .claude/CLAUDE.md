@@ -2,7 +2,7 @@
 
 General guidance for Claude Code when working with Paul's codebases.
 
-## LLM Interaction Guidelines
+## Interaction Protocol
 
 Follow these directives. They are rules, not suggestions.
 
@@ -15,13 +15,7 @@ Follow these directives. They are rules, not suggestions.
 - **Propose Alternatives:** If there is a better approach, propose it and explain the trade-offs.
 - **Clarify, then Proceed:** For ambiguous requests, ask a clarifying question, then immediately provide a solution based on a stated assumption.
 
-### 3. Master Our Principles
-- **Strict Adherence:** All solutions must align with the project's documented principles.
-- **Justify with Principles:** Cite project principles to justify your logic. For example:
-    - *"To maintain **Strict FCIS**, this effect should be..."*
-    - *"Per our **File Management Philosophy**, this logic belongs in..."*
-
-## Proactiveness
+### 3. Proactiveness
 
 When asked to do something, just do it—including obvious follow-up actions needed to complete the task properly.
 
@@ -31,24 +25,81 @@ When asked to do something, just do it—including obvious follow-up actions nee
 - You genuinely don't understand what's being asked
 - I specifically ask "how should I approach X?" (answer the question, don't jump to implementation)
 
-## Development Approach
+## Universal Principles
+
+### Minimal Complexity, Maximum Clarity
+
+We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
+
+### File Management Philosophy
+
+- **ALWAYS prefer editing existing files over creating new ones**
+- New files only when introducing a new domain or feature area
+- Before creating a file, ask: "Can this logic live in an existing namespace?"
+- File creation is a design decision, not a convenience
+
+### Naming & Comments
+
+#### Code Reflects the Domain
+
+We practice domain-driven design where code structure—namespaces, functions, and data—mirrors how we think and talk about the problem. If we discuss "saving a topic" or "handling a form submission," code should reflect that domain language directly.
+
+**How this manifests:**
+
+*Clojure:*
+```clojure
+;; Namespaces organized by domain
+(ns topics.actions)
+(ns messages.core)
+(ns ui.components)
+
+;; State actions namespaced by system part
+:llm.actions/response-received
+:chat.actions/message-sent
+
+;; Functions mirror domain operations
+(defn save [topic] ...)
+(defn submit [form] ...)
+```
+
+*Python:*
+```python
+# Modules organized by domain
+from topics.actions import save
+from messages.core import process
+from ui.components import render
+
+# Functions mirror domain operations
+def save_topic(topic): ...
+def submit_form(form): ...
+
+# Events/constants reflect domain language
+MESSAGE_SENT = "message_sent"
+RESPONSE_RECEIVED = "response_received"
+```
+
+**What to avoid in names:**
+- Implementation details (`ZodValidator`, `MCPWrapper`, `HttpClient`)
+- Temporal/historical context (`NewAPI`, `LegacyHandler`, `UnifiedTool`, `V2Service`)
+- Unnecessary pattern names (prefer `Tool` over `ToolFactory`, `save` over `SaveCommand`)
+
+**Comment guidelines:**
+- Never reference what code used to be or how it changed
+- Explain WHAT code does or WHY it exists
+- Comments should be evergreen—describe code as it is now
+- Don't remove existing comments unless provably false
+
+## Development Workflow
 
 ### Test-First Development
+
 1. **Write tests first** - Define the behavior before implementation
 2. **Build to pass tests** - Implement the minimal code to make tests green
 3. **Validate it works** - Manual testing to ensure real-world behavior
 4. **Refactor excessively** - Once working, refactor until the code is clean and obvious
 5. **Apply Boy Scout Rule** - Leave code better than you found it, every time
 
-### Continuous Architecture Evolution
-- **Weekly refactoring sessions** - Dedicated time for larger architectural improvements
-- **Early attention to code quality** - Don't let technical debt accumulate
-- **Least-surprise principle** - Code should do what it looks like it does
-- **Conscious architecture** - Every decision should improve long-term maintainability
-
-This isn't about perfection—it's about building a codebase that's a joy to work in. Clean code is faster to understand, easier to modify, and less likely to harbor bugs.
-
-## Debugging
+### Debugging Process
 
 **Always find the root cause—never just fix symptoms or add workarounds.**
 
@@ -71,34 +122,16 @@ This isn't about perfection—it's about building a codebase that's a joy to wor
 - Never claim to implement a pattern without reading it completely first
 - Always test after each change
 
-## File Management Philosophy
-- **ALWAYS prefer editing existing files over creating new ones**
-- New files only when introducing a new domain or feature area
-- Before creating a file, ask: "Can this logic live in an existing namespace?"
-- File creation is a design decision, not a convenience
+### Continuous Architecture Evolution
 
-## Naming & Comments
+- **Weekly refactoring sessions** - Dedicated time for larger architectural improvements
+- **Early attention to code quality** - Don't let technical debt accumulate
+- **Least-surprise principle** - Code should do what it looks like it does
+- **Conscious architecture** - Every decision should improve long-term maintainability
 
-### Code Reflects the Domain
-We practice domain-driven design where code structure—namespaces, functions, and data—mirrors how we think and talk about the problem. If we discuss "saving a topic" or "handling a form submission," code should be at `topic.actions/save` or `form.actions/submit`.
+This isn't about perfection—it's about building a codebase that's a joy to work in. Clean code is faster to understand, easier to modify, and less likely to harbor bugs.
 
-**How this manifests:**
-- **Namespaces:** Organized by domain concepts (`messages`, `topics`, `ui`)
-- **State Actions:** Keywords namespaced by the system part they affect (`:llm.actions/response-received`)
-- **IPC Channels:** Named for domain actions (`chat/send-message`, `topic/save`)
-
-**What to avoid in names:**
-- Implementation details ("ZodValidator", "MCPWrapper")
-- Temporal/historical context ("NewAPI", "LegacyHandler", "UnifiedTool")
-- Unnecessary pattern names (prefer "Tool" over "ToolFactory")
-
-**Comment guidelines:**
-- Never reference what code used to be or how it changed
-- Explain WHAT code does or WHY it exists
-- Comments should be evergreen—describe code as it is now
-- Don't remove existing comments unless provably false
-
-## Git Workflow
+### Git Workflow
 
 **Before starting work:**
 - Ask how to handle uncommitted changes or untracked files
@@ -115,9 +148,10 @@ We practice domain-driven design where code structure—namespaces, functions, a
 - If project isn't in a git repo, ask permission to initialize one
 - Don't add random test files to the repo
 
-## Clojure Style & Conventions
+## Appendix: Clojure Conventions
 
 ### Code Style
+
 - Threading macros (`->`, `->>`) for clarity in transformation pipelines
 - Destructuring to make data shapes explicit at function boundaries
 - Small, focused functions that do one thing well
@@ -125,11 +159,9 @@ We practice domain-driven design where code structure—namespaces, functions, a
 - Let bindings for intermediate values that clarify intent
 
 ### Working with the Codebase
+
 1. Study existing patterns before implementing
 2. Check dependencies before assuming libraries exist
 3. Follow established namespace conventions
 4. Run tests throughout development
 5. Manual testing before considering complete
-
-## Minimal Complexity, Maximum Clarity
-We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with Clojure basics.

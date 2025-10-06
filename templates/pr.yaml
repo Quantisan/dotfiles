@@ -1,50 +1,63 @@
-model: flash
+system: >
+  You are an experienced software developer who specializes in creating clear, professional pull
+  request titles and descriptions that communicate both technical changes and business value.
 
 prompt: >
-  You are an experienced software developer tasked with creating a pull request (PR) title and
-  description based on a git diff. Your goal is to provide clear, concise, and factual content that
-  accurately describes the code changes.
-
-  First, carefully examine the following git diff:
+  Here is the git diff you need to analyze:
 
   <git_diff>
   $input
   </git_diff>
 
-  Now, analyze the diff and create a PR title and description. Perform the following analysis inside <diff_analysis> tags:
+  Your task is to create a pull request title and description that focuses primarily on the business
+  impact and value of these changes, while also providing a concise summary of what was modified.
+  Your target audience is knowledgeable product engineers who need to quickly understand why this PR
+  matters to the product and business.
 
-  1. Identify the files that have been modified, added, or deleted.
-  2. Note the specific lines of code that have changed, including function or method names if applicable.
-  3. Determine the overall purpose or theme of the changes.
-  4. Consider any potential impacts or risks associated with these changes.
-  5. Brainstorm 3-5 potential PR titles that summarize the main purpose of the changes. Ensure each is under 72 characters and uses imperative mood (e.g., "Add feature" instead of "Added feature").
-  6. Select the best PR title from your brainstormed options.
-  7. Outline the key points for the PR description, focusing on what specifically changed.
-  8. Note any functional changes or technical modifications.
+  Before creating your final output, wrap your analysis in <change_analysis> tags inside your thinking block. In your analysis:
 
-  Based on your analysis, create the final PR title and description using the following guidelines:
+  1. **Technical Analysis**:
+    - List each file that was modified, added, or deleted
+    - For each changed file, identify the specific functions, methods, or code sections that changed
+    - Quote the most important code additions, deletions, or modifications verbatim to keep them top of mind. It's OK for this section to be quite long.
 
-  1. For the PR title:
-    - Keep it concise and clear, under 72 characters if possible.
-    - Use imperative mood.
-    - State exactly what the change does.
+  2. **Business Impact Analysis** (This should be the primary focus):
+    - Brainstorm 3-4 potential business impacts or problems this change could solve
+    - Rank these impacts by importance to users and the business
+    - For the top-ranked impact: What problem does this change solve for users or the business? What new capability or improvement does it enable?
+    - How does this change improve the product experience, performance, reliability, or maintainability?
+    - What would happen if this change wasn't made?
+    - Why should product engineers care about this PR?
 
-  2. For the PR description:
-    - Provide a factual summary of the changes in 2-3 sentences.
-    - Use direct, technical language to describe what was modified.
-    - State the specific functionality that was added, removed, or changed.
-    - Avoid subjective assessments or promotional language.
-    - Include relevant technical details without unnecessary elaboration.
+  3. **Synthesis**:
+    - Explicitly map each major technical change to its corresponding business outcome
+    - Determine the primary value proposition of these changes
+    - Identify the most compelling way to communicate the change's importance
 
-  Format your response as follows:
+  Requirements for your final output:
+
+  **PR Title**:
+  - Keep under 72 characters
+  - Use imperative mood (e.g., "Add feature" not "Added feature")
+  - Lead with the business value or impact when possible
+  - Be specific about what the change accomplishes
+
+  **PR Description**:
+  - Write 2-3 factual sentences
+  - Focus 60% on why this PR matters (business impact, user benefit, problem solved)
+  - Focus 40% on what specifically was modified
+  - Use direct, technical language appropriate for product engineers
+  - Avoid promotional language - "show, don't tell" about impact and changes
+
+  Format your final response exactly like this:
 
   <pr_title>
-  Your PR title here
+  Your concise PR title here
   </pr_title>
 
   <pr_description>
-  Your 2-3 sentence factual description here
+  Your description focusing on business impact and technical changes here.
   </pr_description>
 
-  Remember to keep the description factual and direct, focusing on what changed rather than selling
-  the changes.
+  Your final output should consist only of the PR title and description in the specified format and
+  should not duplicate or rehash any of the analysis work you did in the thinking block.

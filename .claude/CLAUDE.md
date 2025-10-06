@@ -21,6 +21,16 @@ Follow these directives. They are rules, not suggestions.
     - *"To maintain **Strict FCIS**, this effect should be..."*
     - *"Per our **File Management Philosophy**, this logic belongs in..."*
 
+## Proactiveness
+
+When asked to do something, just do it—including obvious follow-up actions needed to complete the task properly.
+
+**Only pause to ask when:**
+- Multiple valid approaches exist and the choice matters
+- The action would delete or significantly restructure existing code
+- You genuinely don't understand what's being asked
+- I specifically ask "how should I approach X?" (answer the question, don't jump to implementation)
+
 ## Development Approach
 
 ### Test-First Development
@@ -38,11 +48,72 @@ Follow these directives. They are rules, not suggestions.
 
 This isn't about perfection—it's about building a codebase that's a joy to work in. Clean code is faster to understand, easier to modify, and less likely to harbor bugs.
 
+## Debugging
+
+**Always find the root cause—never just fix symptoms or add workarounds.**
+
+**Investigation process:**
+1. **Read error messages carefully** - They often contain the exact solution
+2. **Reproduce consistently** - Ensure you can reliably reproduce the issue
+3. **Check recent changes** - What changed that could have caused this?
+4. **Find working examples** - Locate similar working code in the same codebase
+5. **Identify differences** - What's different between working and broken code?
+
+**Testing hypotheses:**
+- Form a single, clear hypothesis about the root cause
+- Make the smallest possible change to test it
+- Verify before continuing—if it doesn't work, form a new hypothesis
+- When you don't know, say "I don't understand X" rather than pretending
+
+**Rules:**
+- Always have the simplest possible failing test case
+- Never add multiple fixes at once
+- Never claim to implement a pattern without reading it completely first
+- Always test after each change
+
 ## File Management Philosophy
 - **ALWAYS prefer editing existing files over creating new ones**
 - New files only when introducing a new domain or feature area
 - Before creating a file, ask: "Can this logic live in an existing namespace?"
 - File creation is a design decision, not a convenience
+
+## Naming & Comments
+
+### Code Reflects the Domain
+We practice domain-driven design where code structure—namespaces, functions, and data—mirrors how we think and talk about the problem. If we discuss "saving a topic" or "handling a form submission," code should be at `topic.actions/save` or `form.actions/submit`.
+
+**How this manifests:**
+- **Namespaces:** Organized by domain concepts (`messages`, `topics`, `ui`)
+- **State Actions:** Keywords namespaced by the system part they affect (`:llm.actions/response-received`)
+- **IPC Channels:** Named for domain actions (`chat/send-message`, `topic/save`)
+
+**What to avoid in names:**
+- Implementation details ("ZodValidator", "MCPWrapper")
+- Temporal/historical context ("NewAPI", "LegacyHandler", "UnifiedTool")
+- Unnecessary pattern names (prefer "Tool" over "ToolFactory")
+
+**Comment guidelines:**
+- Never reference what code used to be or how it changed
+- Explain WHAT code does or WHY it exists
+- Comments should be evergreen—describe code as it is now
+- Don't remove existing comments unless provably false
+
+## Git Workflow
+
+**Before starting work:**
+- Ask how to handle uncommitted changes or untracked files
+- Suggest committing existing work first
+- Create a WIP branch when starting a task without a clear branch
+
+**During development:**
+- Track all non-trivial changes in git
+- Commit frequently throughout development, even if high-level tasks aren't done
+- Never use `git add -A` unless you've just done `git status`
+- Never skip, evade, or disable pre-commit hooks
+
+**General principles:**
+- If project isn't in a git repo, ask permission to initialize one
+- Don't add random test files to the repo
 
 ## Clojure Style & Conventions
 

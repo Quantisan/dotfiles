@@ -1,6 +1,17 @@
-# CLAUDE.md
-
 General guidance for Claude Code when working with Paul's codebases.
+
+## Core Philosophy: Decomplecting
+
+We practice decomplecting—separating concerns that have become intertwined. One function does one thing. Modules have clear boundaries. State is explicit.
+
+We ship working software, not perfect architecture. Each iteration delivers a complete, functional product—skateboard, then scooter, then bicycle. Don't over-engineer for hypothetical futures.
+
+**Acceptable coupling only when:**
+- Domain boundary is genuinely unclear
+- Active prototype/spike to learn the domain
+- Will refactor before work session ends
+
+When coupling concerns, explicitly state what's being coupled and which threshold permits it.
 
 ## Interaction Protocol
 
@@ -29,9 +40,13 @@ When asked to do something, just do it—including obvious follow-up actions nee
 
 ### Minimal Complexity, Maximum Clarity
 
+*(Complexity obscures boundaries between concerns)*
+
 We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
 
 ### File Management Philosophy
+
+*(Each file is a boundary; unnecessary files couple unrelated concerns)*
 
 - **ALWAYS prefer editing existing files over creating new ones**
 - New files only when introducing a new domain or feature area
@@ -39,6 +54,8 @@ We resist adding abstractions until they prove their worth. Every line of code s
 - File creation is a design decision, not a convenience
 
 ### Naming & Comments
+
+*(Domain names make boundaries explicit; implementation details hide them)*
 
 #### Code Reflects the Domain
 
@@ -92,6 +109,8 @@ RESPONSE_RECEIVED = "response_received"
 ## Development Workflow
 
 ### Test-First Development
+
+Tests define boundaries—what each unit does independently.
 
 1. **Write tests first** - Define the behavior before implementation
 2. **Build to pass tests** - Implement the minimal code to make tests green

@@ -38,20 +38,59 @@ When asked to do something, just do it—including obvious follow-up actions nee
 
 ## Universal Principles
 
+### Functional Core, Imperative Shell
+
+*(Side effects obscure what code does; isolation makes behavior predictable)*
+
+Pure functions contain all business logic, decisions, and transformations. Side effects—I/O, randomness, state mutations, API calls—are isolated in a thin shell at the edges. The core returns descriptions of effects; the shell executes them.
+
+**This manifests as:**
+- Actions/commands return effect data structures, not perform effects
+- Business logic functions are testable without mocking
+- Console logging for debugging is acceptable in pure code
+- Effect handlers are registered in one obvious location per process/module
+
+### Explicit Boundaries
+
+*(Implicit boundaries leak concerns; explicit boundaries contain them)*
+
+Every trust boundary—between processes, persistence layers, external APIs, or subsystems—has explicit transformation and validation. Data entering the system is validated and normalized at the boundary, not deep in business logic.
+
+**This manifests as:**
+- Schema validation at every boundary (IPC, disk, HTTP, etc.)
+- Coercion functions named for their boundary: `topic-from-ipc`, `user-from-db`, `request-from-api`
+- Different formats for different contexts (internal vs. persisted vs. transmitted)
+- Fail fast at boundaries, not in core logic
+
+### Centralized Registration
+
+*(Scattered registration makes systems ungraspable; central registration creates a map)*
+
+Every system has one obvious place where you can see its complete inventory—all actions, routes, commands, or capabilities. This serves as both documentation and enforcement point.
+
+**This manifests as:**
+- Effect/action registration in a single file per process
+- Route definitions in one router file
+- Event handlers in one registry
+- You can understand what the system does by reading one file
+
+### Files as Boundaries
+
+*(File creation is a design decision about scope and API)*
+
+Each file defines a boundary with a clear public interface. Before creating a file, ask: "What boundary am I creating? What's the public contract?" Small files enforce thinking about single responsibility and API clarity.
+
+**This manifests as:**
+- Files stay small (30-90 lines) by having narrow scope
+- File separation forces consideration of what's public vs. internal
+- New files only when introducing genuinely new boundaries
+- Prefer editing existing files when logic fits within current boundaries
+
 ### Minimal Complexity, Maximum Clarity
 
 *(Complexity obscures boundaries between concerns)*
 
 We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
-
-### File Management Philosophy
-
-*(Each file is a boundary; unnecessary files couple unrelated concerns)*
-
-- **ALWAYS prefer editing existing files over creating new ones**
-- New files only when introducing a new domain or feature area
-- Before creating a file, ask: "Can this logic live in an existing namespace?"
-- File creation is a design decision, not a convenience
 
 ### Naming & Comments
 

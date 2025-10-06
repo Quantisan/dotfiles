@@ -77,18 +77,6 @@ We practice domain-driven design where code structure—namespaces, functions, a
 ;; Functions mirror domain operations
 (defn save [topic] ...)
 (defn submit [form] ...)
-```
-
-*Python:*
-```python
-# Modules organized by domain
-from topics.actions import save
-from messages.core import process
-from ui.components import render
-
-# Functions mirror domain operations
-def save_topic(topic): ...
-def submit_form(form): ...
 
 # Events/constants reflect domain language
 MESSAGE_SENT = "message_sent"

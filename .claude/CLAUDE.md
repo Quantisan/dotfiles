@@ -40,7 +40,10 @@ When asked to do something, just do it—including obvious follow-up actions nee
 
 ### Functional Core, Imperative Shell
 
-*(Side effects obscure what code does; isolation makes behavior predictable)*
+*We choose: Local reasoning over inline convenience*
+
+**Cost:** Navigate between pure action functions and impure effect handlers instead of writing effects inline
+**Benefit:** Understand code by reading it, without chasing through chains of side effects
 
 Pure functions contain all business logic, decisions, and transformations. Side effects—I/O, randomness, state mutations, API calls—are isolated in a thin shell at the edges. The core returns descriptions of effects; the shell executes them.
 
@@ -52,7 +55,10 @@ Pure functions contain all business logic, decisions, and transformations. Side 
 
 ### Explicit Boundaries
 
-*(Implicit boundaries leak concerns; explicit boundaries contain them)*
+*We choose: Trust boundary clarity over data pass-through*
+
+**Cost:** Manage multiple data representations (internal keywords, persisted EDN, transmitted JSON)
+**Benefit:** Know exactly where untrusted external data becomes trusted internal data
 
 Every trust boundary—between processes, persistence layers, external APIs, or subsystems—has explicit transformation and validation. Data entering the system is validated and normalized at the boundary, not deep in business logic.
 
@@ -64,7 +70,10 @@ Every trust boundary—between processes, persistence layers, external APIs, or 
 
 ### Centralized Registration
 
-*(Scattered registration makes systems ungraspable; central registration creates a map)*
+*We choose: System inventory over colocation*
+
+**Cost:** Separate registration from implementation; action definition in one file, registration in another
+**Benefit:** Understand all system capabilities by reading one file
 
 Every system has one obvious place where you can see its complete inventory—all actions, routes, commands, or capabilities. This serves as both documentation and enforcement point.
 
@@ -76,7 +85,10 @@ Every system has one obvious place where you can see its complete inventory—al
 
 ### Files as Boundaries
 
-*(File creation is a design decision about scope and API)*
+*We choose: Premature boundaries over deferred organization*
+
+**Cost:** Decide file scope before fully understanding the domain
+**Benefit:** Small scope forces API thinking; when boundaries are wrong, small files reorganize easily
 
 Each file defines a boundary with a clear public interface. Before creating a file, ask: "What boundary am I creating? What's the public contract?" Small files enforce thinking about single responsibility and API clarity.
 
@@ -88,7 +100,10 @@ Each file defines a boundary with a clear public interface. Before creating a fi
 
 ### Minimal Complexity, Maximum Clarity
 
-*(Complexity obscures boundaries between concerns)*
+*We choose: Concrete duplication over premature abstraction*
+
+**Cost:** Accept visible duplication until the right abstraction becomes clear
+**Benefit:** Concrete code is simpler to understand than parameterized abstractions
 
 We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
 

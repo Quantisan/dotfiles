@@ -60,3 +60,4 @@ workbench.xmi
 # LLM #
 # #####
 context/
+*.local.md

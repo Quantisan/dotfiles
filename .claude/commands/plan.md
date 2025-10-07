@@ -1,55 +1,13 @@
-Review the preceding /idea conversation and create an actionable implementation plan for the refined task.
+Using the preceding /idea discussion, produce an actionable implementation plan for a tech lead to review with the team before implementation. Aim for a 5‑minute read (~750–1000 words; guideline). Be direct and concrete .Incorporate any additional context: '''$ARGUMENTS'''. Ultrathink with DRY, YAGNI, TDD, frequent commits, and CLAUDE.md principles in mind. Write the plan to a file named `{short_descriptive_name}_plan.local.md`, where the short name captures the task.
 
-**Audience**: The engineer has read CLAUDE.md and understands codebase principles (DRY, YAGNI, TDD, functional core/imperative shell, explicit boundaries, etc.). Don't re-explain these unless directly relevant to a specific design choice.
+Balance prescriptiveness: include specifics (e.g. files to touch, sample tech design code, acceptance checks) where risk or ambiguity is high; otherwise keep it concise. Add a brief “first files to read/inspect” shortlist if it helps orientation.
 
-**Target**: 750-1000 words, readable in 5 minutes. Prefer bullets over prose. Be direct and concrete.
+Cover these essentials (natural structure; headings optional):
+- Context & decisions: Key decisions (problem, chosen approach, constraints/tradeoffs) from /idea
+  discussion.
+- System design overview: one concise paragraph on architecture, component boundaries, fit with existing system, and responsibilities.
+- Critical patterns: Focused code samples (10–20 lines) for the highest‑risk/novel aspects, each with a brief “why this matters.”
+- Implementation path: 3–4 phases; for each, begin with “Phase N: [Goal]” and list files to touch, key decisions, concrete actions, and validation steps where helpful.
+- Open questions: 2–3 decisions to defer that don’t block starting.
 
-**Additional context**: $ARGUMENTS
-
-## Plan Structure
-
-### 1. Context & Decisions
-Extract 2-3 key decisions from the /idea discussion:
-- What problem are we solving?
-- What approach did we choose?
-- What constraints or tradeoffs matter?
-
-### 2. System Design
-Single paragraph (100-150 words) covering:
-- Architecture and component boundaries
-- How this fits into existing system structure
-- Key responsibilities of each component
-- CLAUDE.md principles only where they inform major design choices
-
-Focus on *what* we're building, not *how* to implement every detail.
-
-### 3. Critical Patterns
-Provide 1-2 concrete code samples covering the highest-risk, most novel, or most important aspects. For each sample:
-- Show the pattern/approach
-- Brief "why this matters" explanation
-- Keep samples focused (10-20 lines max)
-
-These are examples to review before starting, not prescriptive templates.
-
-### 4. Implementation Phases
-Break work into 3-4 phases with concrete next steps.
-
-Format for each phase:
-```
-Phase N: [Goal]
-- [Specific files to touch]
-- [Key decisions to make]
-- [Concrete actions to take]
-- [How to validate this phase]
-```
-
-Provide enough guidance to start confidently, not so much that discovery is eliminated.
-
-### 5. Open Questions
-List 2-4 decisions to defer until implementation time. These should be "figure out when you get there" items that don't block starting work.
-
-## Output
-
-Write the plan to a file named `{short_descriptive_name}_plan.local.md` where the short name captures the essence of the task (e.g., `auth_refactor_plan.local.md`).
-
-Keep the plan focused, actionable, and respectful of the engineer's intelligence and existing context.
+Keep it focused, actionable, and respectful of the engineer’s existing context.

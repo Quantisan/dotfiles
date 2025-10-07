@@ -60,4 +60,5 @@ workbench.xmi
 # LLM #
 # #####
 context/
+**/.claude/*.local.json
 *.local.md

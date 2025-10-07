@@ -12,6 +12,7 @@ function doIt() {
                 --exclude "bootstrap.sh" \
                 --exclude "README.md" \
                 --exclude "LICENSE-MIT.txt" \
+                --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~
 
         ## Link 'llm' templates

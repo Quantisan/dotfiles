@@ -8,6 +8,23 @@ return {
 
   {
     "snacks.nvim",
+    keys = {
+      -- Override default keymaps to switch behavior
+      {
+        "<leader>e",
+        function()
+          Snacks.explorer({ cwd = vim.fn.getcwd() })
+        end,
+        desc = "Explorer Snacks (cwd)",
+      },
+      {
+        "<leader>E",
+        function()
+          Snacks.explorer({ cwd = LazyVim.root() })
+        end,
+        desc = "Explorer Snacks (Root Dir)",
+      },
+    },
     opts = {
       notifier = {
         enabled = true,

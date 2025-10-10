@@ -11,6 +11,7 @@ function doIt() {
                 --exclude ".osx" \
                 --exclude "bootstrap.sh" \
                 --exclude "README.md" \
+                --exclude "CLAUDE.md" \
                 --exclude "LICENSE-MIT.txt" \
                 --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~

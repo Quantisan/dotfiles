@@ -7,7 +7,7 @@ Cover these essentials (natural structure; headings optional):
   discussion.
 - System design overview: one concise paragraph on architecture, component boundaries, fit with existing system, and responsibilities.
 - Critical patterns: Focused code samples (10–20 lines) for the highest‑risk/novel aspects, each with a brief “why this matters.”
-- Implementation path: 3–4 phases; for each, begin with “Phase N: [Goal]” and list files to touch, key decisions, concrete actions, and validation steps where helpful.
+- Implementation path: 3–4 phases; for each, begin with "Phase N: [Goal]" and list files to touch, key decisions, concrete actions, and validation steps where helpful. Library API verification: For any library beyond language/framework core, validate the current API before use (quick web search/docs check) to avoid outdated patterns.
 - Open questions: 2–3 decisions to defer that don’t block starting.
 
 Keep it focused, actionable, and respectful of the engineer’s existing context.

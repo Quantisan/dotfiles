@@ -1,6 +1,13 @@
 {
   "permissions": {
-    "defaultMode": "plan"
+    "defaultMode": "plan",
+    "allow": [
+      "Bash(pwd:*)",
+      "Bash(which:*)",
+      "Bash(echo:*)",
+      "Bash(git branch:*)",
+      "Bash(git status:*)"
+    ]
   },
   "env": {
     "MAX_THINKING_TOKENS": "30000"

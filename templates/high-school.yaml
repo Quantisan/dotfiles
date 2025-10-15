@@ -1,4 +1,4 @@
-model: gemini-2.5-pro
+model: gemini/gemini-2.5-pro
 
 prompt: >
   Text to rewrite:

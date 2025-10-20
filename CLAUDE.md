@@ -31,6 +31,18 @@ Installs all development tools, applications, and fonts via Homebrew.
 ```
 Configures macOS system preferences (Finder, Dock, keyboard, etc.).
 
+### Set up LaunchAgents
+```bash
+./launch-agents.sh
+```
+Symlinks LaunchAgent plist files to `~/Library/LaunchAgents/` and loads them. Currently manages:
+- `claude-auto-renew` - Pings Claude CLI Monday-Saturday at 4:30 AM to maintain session
+
+For force setup without confirmation:
+```bash
+./launch-agents.sh -f
+```
+
 ## Architecture
 
 ### Modular Dotfile Loading System
@@ -57,6 +69,19 @@ This integrates custom LLM prompt templates (in `templates/`) with the `llm` CLI
 - `pr.yaml` - Generates PR titles and descriptions focused on business impact
 - `youtube.yaml` - Uses Gemini 2.5 Flash for YouTube content analysis
 - Various others for code review, refactoring, communication, etc.
+
+### LaunchAgents Integration
+
+The `launch-agents.sh` script manages macOS LaunchAgents that run scheduled tasks:
+```
+launch-agents/ -> symlinked to ~/Library/LaunchAgents/
+```
+
+**claude-auto-renew** (`com.quantisan.claude-auto-renew.plist`):
+- Runs Monday-Saturday at 4:30 AM
+- Executes `echo "ping" | claude -p` to keep Claude CLI session alive
+- Logs to `~/.claude-cron.log`
+- Prevents session expiration for daily Claude CLI usage
 
 ### Custom Function Wrappers
 

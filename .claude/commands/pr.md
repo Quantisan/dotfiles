@@ -30,4 +30,12 @@ Analyze the current branch against `main` (or base branch specified in $ARGUMENT
 - Questions should help articulate why the change matters beyond what code reveals
 - Be conservative - most PRs shouldn't need questions
 
-Output the title and description in a clean format ready to copy-paste into GitHub.
+**After generating the PR content:**
+1. Check if the current branch is pushed to remote (use `git status` to check tracking status)
+2. If not pushed, push the branch: `git push -u origin <branch-name>`
+3. Create a draft PR using the `gh` command:
+   ```bash
+   gh pr create --draft --web --title "..." --body "..."
+   ```
+4. The `--web` flag will automatically open the browser to the draft PR for final review
+5. Use a HEREDOC for the body to ensure proper formatting (same as commit messages)

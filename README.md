@@ -81,7 +81,20 @@ When setting up a new Mac, you may want to install some common [Homebrew](https:
 ./brew.sh
 ```
 
-Some of the functionality of these dotfiles depends on formulae installed by `brew.sh`. If you don’t plan to run `brew.sh`, you should look carefully through the script and manually install any particularly important ones. A good example is Bash/Git completion: the dotfiles use a special version from Homebrew.
+Some of the functionality of these dotfiles depends on formulae installed by `brew.sh`. If you don't plan to run `brew.sh`, you should look carefully through the script and manually install any particularly important ones. A good example is Bash/Git completion: the dotfiles use a special version from Homebrew.
+
+### Set up LaunchAgents
+
+To install and load the LaunchAgents (automated tasks that run on a schedule):
+
+```bash
+./launch-agents.sh
+```
+
+This currently sets up:
+- **claude-auto-renew**: Pings Claude CLI Monday-Saturday at 4:30 AM to keep the session alive
+
+The plist files are symlinked from this repo to `~/Library/LaunchAgents/`, so any changes you make to the plists in the repo will be reflected in the active agents.
 
 ## Feedback
 

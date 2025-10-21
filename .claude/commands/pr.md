@@ -1,4 +1,4 @@
-Analyze the current branch against `main` (or base branch specified in $ARGUMENTS) to generate a PR title and description.
+Analyze the current branch against `main` (or base branch specified in `$ARGUMENTS`) to generate a PR title and description.
 
 **Analysis approach:**
 - Examine both commit messages and code diffs to understand what changed and why
@@ -30,12 +30,18 @@ Analyze the current branch against `main` (or base branch specified in $ARGUMENT
 - Questions should help articulate why the change matters beyond what code reveals
 - Be conservative - most PRs shouldn't need questions
 
-**After generating the PR content:**
-1. Check if the current branch is pushed to remote (use `git status` to check tracking status)
-2. If not pushed, push the branch: `git push -u origin <branch-name>`
-3. Create a draft PR using the `gh` command:
+**After generating the PR content, execute these steps automatically:**
+
+Don't stop after generating the title and description—create the actual PR.
+
+1. Check if the current branch is pushed to remote: `git status`
+2. If not pushed, push it: `git push -u origin <branch-name>`
+3. Create the draft PR open it in browser:
    ```bash
-   gh pr create --draft --web --title "..." --body "..."
+   gh pr create --draft --base <branch-name> --title "..." --body "$(cat <<'EOF'
+   ...
+   EOF
+   )"
    ```
-4. The `--web` flag will automatically open the browser to the draft PR for final review
+4. Open it in browser: `gh pr view --web`
 5. Use a HEREDOC for the body to ensure proper formatting (same as commit messages)

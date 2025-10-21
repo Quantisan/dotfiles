@@ -3,6 +3,7 @@
 cd "$(dirname "${BASH_SOURCE}")"
 
 LAUNCH_AGENTS_DIR=~/Library/LaunchAgents
+# IMPORTANT: plist filename must match the <key>Label</key> value inside the plist
 PLIST_NAME="com.quantisan.claude-auto-renew.plist"
 REPO_PLIST="$(pwd)/launch-agents/${PLIST_NAME}"
 TARGET_PLIST="${LAUNCH_AGENTS_DIR}/${PLIST_NAME}"

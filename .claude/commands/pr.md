@@ -1,7 +1,8 @@
-Analyze the current branch against `main` (or base branch specified in `$ARGUMENTS`) to generate a PR title and description.
+Analyze the current branch against `$1` (default: `main`) to generate a PR title and description. If `$2` provided, read that plan file for additional context.
 
 **Analysis approach:**
 - Examine both commit messages and code diffs to understand what changed and why
+- If plan file provided in `$2`, use it to understand the original intent and context
 - Check recent merged PRs to detect title format conventions (conventional commits prefixes or not)
 - Assess significance: is this a routine change or something substantial (new feature, breaking change, major refactor, architectural shift)?
 
@@ -35,10 +36,10 @@ Analyze the current branch against `main` (or base branch specified in `$ARGUMEN
 Don't stop after generating the title and description—create the actual PR.
 
 1. Check if the current branch is pushed to remote: `git status`
-2. If not pushed, push it: `git push -u origin <branch-name>`
-3. Create the draft PR open it in browser:
+2. If not pushed, push it: `git push -u origin <current-branch-name>`
+3. Create the draft PR targeting the base branch from `$1`:
    ```bash
-   gh pr create --draft --base <branch-name> --title "..." --body "$(cat <<'EOF'
+   gh pr create --draft --base <base-branch-from-$1> --title "..." --body "$(cat <<'EOF'
    ...
    EOF
    )"

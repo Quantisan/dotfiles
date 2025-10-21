@@ -1,0 +1,1 @@
+Compare current branch against `$1` (default: `main`). If `$2` provided, read that plan file for context. Review changes w.r.t. Design Principles. Spot code smells and bring to my attention for reviewing together.

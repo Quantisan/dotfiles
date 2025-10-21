@@ -1,35 +1,8 @@
 Analyze the current branch against `$1` (default: `main`) to generate a PR title and description. If `$2` provided, read that plan file for additional context.
 
-**Analysis approach:**
-- Examine both commit messages and code diffs to understand what changed and why
-- If plan file provided in `$2`, use it to understand the original intent and context
-- Check recent merged PRs to detect title format conventions (conventional commits prefixes or not)
-- Assess significance: is this a routine change or something substantial (new feature, breaking change, major refactor, architectural shift)?
+Examine commits and diffs to understand what changed. Check recent merged PRs to match the repo's title conventions. Generate a title that articulates the technical change and its purpose (e.g., "Add OAuth authentication for secure user access").
 
-**Generate PR content:**
-
-**Title format:**
-- Match the repo's existing PR title conventions
-- Articulate both the technical change AND its outcome/purpose in the wording
-- Examples: "Add OAuth authentication for secure user access", "Refactor cache layer to eliminate race conditions"
-
-**Description (1-2 paragraphs):**
-- First paragraph: Lead with technical substance. What specifically changed? What problems does it solve? Be precise about the technical decisions and implementation.
-- Second paragraph: Explain why it matters. User impact, business value, or strategic context. Keep it concrete and direct.
-
-**Voice and tone:**
-- Simple, direct language overall
-- Precise technical terminology where needed
-- Engineer-first but accessible to product/research stakeholders
-- Straightforward peer communication - no marketing speak, no fluff
-- Assume intelligent readers who want clarity
-
-**Collaborative questioning:**
-- Default: generate quickly without questions (don't interrupt flow)
-- ONLY ask 1-2 targeted questions IF changes are significant AND business context isn't deducible from code alone
-- Use multiple-choice format with specific, decision-forcing options
-- Questions should help articulate why the change matters beyond what code reveals
-- Be conservative - most PRs shouldn't need questions
+Write a 1-2 paragraph description: Lead with technical substance—what specifically changed, what problems it solves, what decisions were made. Then explain why it matters—user impact, business value, or strategic context.
 
 **After generating the PR content, execute these steps automatically:**
 

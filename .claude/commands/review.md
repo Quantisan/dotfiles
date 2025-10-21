@@ -1,1 +1,1 @@
-Compare my branch against `main` (or `$ARGUMENTS`, if specified). Review our changes w.r.t. our Design Principles. Spot any potential code smell and bring to my attention for reviewing together.
+Compare current branch against `$1` (default: `main`). If `$2` provided, read that plan file for context. Review changes w.r.t. Design Principles. Spot code smells and bring to my attention for reviewing together.

@@ -150,15 +150,61 @@ RESPONSE_RECEIVED = "response_received"
 
 ## Development Workflow
 
-### Test-First Development
+### Testing as Guardrails
 
-Tests define boundaries—what each unit does independently.
+*We choose: Simple code over comprehensive tests*
 
-1. **Write tests first** - Define the behavior before implementation
-2. **Build to pass tests** - Implement the minimal code to make tests green
-3. **Validate it works** - Manual testing to ensure real-world behavior
-4. **Refactor excessively** - Once working, refactor until the code is clean and obvious
-5. **Apply Boy Scout Rule** - Leave code better than you found it, every time
+**Cost:** Less safety net when refactoring; must trust code clarity and design
+**Benefit:** Focus energy on simplicity and correctness rather than test maintenance
+
+Tests are guardrails, not specifications. They prevent catastrophic failures on critical paths—they don't prove correctness. Well-designed, simple code is the primary defense against bugs. Tests exist to catch regressions in domain logic and verify boundaries hold, not to exhaustively explore every possible code path.
+
+Write the minimum tests needed to work confidently. Each test should protect something genuinely important—a core domain transformation, a critical business rule, or a trust boundary. If removing a test wouldn't make you nervous about changing code, delete it.
+
+**This manifests as:**
+- Test-first for domain logic, but few tests total
+- Quality over quantity—each test earns its place
+- Focus on what could cause real user/system harm
+- Skip tactical concerns like edge cases, malformed inputs, or "what-if" scenarios
+- Simple code is easier to verify than complex tests
+
+#### What to Test
+
+**Priority 1: Critical domain paths**
+Test the core transformations and business rules that define what your system does. If it's in the functional core and represents a key domain operation, it needs a test. Example: "saving a topic validates required fields and returns save command" or "message routing selects correct handler based on type."
+
+**Priority 2: System boundaries**
+Test that trust boundaries transform and validate correctly. These tests verify your `topic-from-ipc`, `user-from-db` coercion functions work as expected. Boundary tests protect against malformed external data corrupting your domain model.
+
+**Priority 3: Public contracts**
+Test the public interface of each module/file boundary. If another module depends on it, test it. Internal implementation details that don't cross boundaries don't need tests—refactor them until they're obviously correct.
+
+**What NOT to test:**
+- Edge cases and error handling minutiae
+- Effect handlers in the imperative shell (they should be too simple to break)
+- Multiple variations of the same domain logic
+- Implementation details of private functions
+- Anything you could verify by reading the code
+
+#### Testing Workflow
+
+**1. Write the test first**
+Define the critical domain behavior or boundary contract before implementation. One test for the core path. If you find yourself writing a second test for the same function, question whether you need it.
+
+**2. Implement to pass**
+Write the simplest code that makes the test green. Favor obviousness over cleverness.
+
+**3. Refactor for simplicity**
+Once working, refactor until the code is so simple and clear that the test feels almost redundant. If the code becomes obvious enough, consider whether you still need the test. Simple code is the goal—tests are just scaffolding.
+
+**4. Validate manually**
+Run the actual system. Tests don't prove real-world behavior—they catch regressions. Manual verification ensures it actually works.
+
+**5. Delete tests that don't earn their keep**
+If a test doesn't protect critical domain logic, boundaries, or contracts—if it just tests framework behavior or obvious code—remove it. Test code has maintenance cost.
+
+**Connection to architecture:**
+The functional core/imperative shell pattern makes this practical. Pure domain functions are naturally testable without mocks. Effect handlers are too thin to need tests. Focus tests on the pure core where domain logic lives.
 
 ### Debugging Process
 

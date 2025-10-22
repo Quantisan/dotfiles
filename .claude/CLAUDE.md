@@ -152,13 +152,30 @@ RESPONSE_RECEIVED = "response_received"
 
 ### Test-First Development
 
-Tests define boundaries—what each unit does independently.
+*We choose: Test-first workflow with selective coverage*
 
-1. **Write tests first** - Define the behavior before implementation
-2. **Build to pass tests** - Implement the minimal code to make tests green
-3. **Validate it works** - Manual testing to ensure real-world behavior
-4. **Refactor excessively** - Once working, refactor until the code is clean and obvious
-5. **Apply Boy Scout Rule** - Leave code better than you found it, every time
+**Cost:** Write tests before implementation, but only for what matters
+**Benefit:** Design through tests while avoiding test maintenance burden
+
+Write tests first to define behavior, then implement to make them pass. But resist comprehensive coverage—only test what would cause real harm if broken. The workflow is test-first; the constraint is selectivity.
+
+**Workflow:**
+1. **Write the test first** - Define the behavior before implementation
+2. **Make it pass** - Implement minimal code to green the test
+3. **Refactor** - Clean the code once working
+4. **Verify manually** - Ensure real-world behavior matches
+
+**What to test:**
+- Domain transformations and business logic
+- Trust boundaries (validation, coercion functions)
+- Public contracts and APIs
+- Critical paths that cause real harm if broken
+
+**What to skip:**
+- Edge cases and exhaustive scenarios
+- Implementation details
+- Obvious code
+- Tests that don't make you nervous to delete
 
 ### Debugging Process
 

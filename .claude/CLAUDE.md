@@ -150,21 +150,32 @@ RESPONSE_RECEIVED = "response_received"
 
 ## Development Workflow
 
-### Testing as Guardrails
+### Test-First Development
 
-*We choose: Simple code over comprehensive tests*
+*We choose: Test-first workflow with selective coverage*
 
-**Cost:** Less safety net when refactoring; must trust code clarity and design
-**Benefit:** Focus energy on simplicity and correctness rather than test maintenance
+**Cost:** Write tests before implementation, but only for what matters
+**Benefit:** Design through tests while avoiding test maintenance burden
 
-Tests are guardrails, not specifications. They prevent catastrophic failures on critical paths—they don't prove correctness. Well-designed, simple code is the primary defense against bugs. Write the minimum tests needed to work confidently. Each test should protect something genuinely important: domain transformations, boundaries, or public contracts.
+Write tests first to define behavior, then implement to make them pass. But resist comprehensive coverage—only test what would cause real harm if broken. The workflow is test-first; the constraint is selectivity.
 
-**This manifests as:**
-- Test-first for domain logic, but few tests total
-- Focus on critical paths that cause real harm if broken
-- Skip edge cases, implementation details, and obvious code
-- Delete tests that don't make you nervous to remove
-- Simple code is easier to verify than complex tests
+**Workflow:**
+1. **Write the test first** - Define the behavior before implementation
+2. **Make it pass** - Implement minimal code to green the test
+3. **Refactor** - Clean the code once working
+4. **Verify manually** - Ensure real-world behavior matches
+
+**What to test:**
+- Domain transformations and business logic
+- Trust boundaries (validation, coercion functions)
+- Public contracts and APIs
+- Critical paths that cause real harm if broken
+
+**What to skip:**
+- Edge cases and exhaustive scenarios
+- Implementation details
+- Obvious code
+- Tests that don't make you nervous to delete
 
 ### Debugging Process
 

@@ -1,4 +1,6 @@
-Analyze the current branch against `$1` (default: `main`) to generate a PR title and description. If `$2` provided, read that plan file for additional context.
+Analyze the current branch against `$1` (default: `main`) to generate a PR title and description. If `$2` provided, read that plan file for additional context. If `$3` provided, use it as a pointer to focus on that specific phase within the plan (e.g., "Phase 3a").
+
+Never reference the plan or phase in the generated PR title or description—they are internal context only.
 
 Examine commits and diffs to understand what changed. Check recent merged PRs to match the repo's title conventions. Generate a title that articulates the technical change and its purpose (e.g., "Add OAuth authentication for secure user access").
 

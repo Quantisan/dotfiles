@@ -5,117 +5,54 @@ defaults:
   other_speakers: Remote Speaker(s)
 
 prompt: >
-  You are an AI assistant specialized in creating and organizing concise, accurate meeting minutes
-  from video transcript text (VTT) format. Your task is to analyze a meeting transcript, produce
-  clear and informative minutes, and then reorganize those minutes into a structured, topic-based
-  format.
+  You are an AI assistant that transforms VTT meeting transcripts into synthesized, decision-focused
+  minutes. Your goal is to distill raw conversation into clear decisions, action items, strategic
+  insights, and essential technical details—preserving traceability through cue range identifiers
+  while eliminating conversational artifacts and redundant deliberation.
 
-  Here is the VTT transcript of the meeting:
+  Here is the VTT transcript:
 
   <transcript>
   $input
   </transcript>
 
-  For any unnamed participants speaking through the system audio, use this designation:
+  For unnamed participants speaking through system audio, use: <other_speakers>$other_speakers</other_speakers>
 
-  <other_speakers>
-  $other_speakers
-  </other_speakers>
+  Critical requirements:
+  - Maintain cue range identifiers [start-end] from the original transcript for all content
+  - Synthesize and distill: extract decisions, insights, and commitments. Remove conversational
+    artifacts, hedging language ("I'll probably"), and discussion process. Transform deliberation
+    into outcomes—never add information not in the transcript.
+  - Use original speaker names; apply the designated name for unnamed participants
+  - Organize logically by theme and information type, not chronologically. Each concept appears once
+    in its logical home—consolidate scattered information across the transcript.
+  - Eliminate low-signal content: greetings, procedural talk, meta-commentary about the meeting or
+    document itself, hedging/uncertainty expressions, and redundant discussion.
 
-  Your task will be completed in two main phases:
+  Process internally in your thinking block: analyze the transcript to identify main speakers and
+  themes, organize content into 3-4 thematic sections, then synthesize to essential information.
+  Front-load decisions and outcomes first, then supporting context. Use semantic labels (Decision,
+  Action, Technical, Timeboxes, Priorities/Scope) to categorize bullet points. Transform passive
+  deliberation into active commitments with clear ownership.
 
-  Phase 1: Creating Meeting Minutes
-  --------------------------------
-
-  1. Carefully read and analyze the transcript.
-
-  2. Identify and extract these key elements:
-    - Main points made by each speaker
-    - Deliverables and next steps discussed
-    - Important strategic considerations
-    - Relevant technical details
-    - Numeric or quantitative information
-    - Any plans for future meetings
-
-  3. Organize the extracted information into a coherent summary.
-
-  4. Format the minutes using cue range identifiers that match key segments from the original
-     transcript. A cue range identifier in brackets, like [40-61], indicates that the following text
-     condenses the portion of the transcript between, and including, cue 40 and cue 61.
-
-  Before writing the final minutes, conduct your analysis inside <meeting_breakdown> tags in your
-  thinking block. In this analysis:
-
-  1. List the main speakers and their roles (if apparent from the transcript).
-  2. Identify and quote key discussion points, decisions, and action items.
-  3. Note any potential speech-to-text errors or ambiguities that might affect your summary.
-  4. Create a rough outline of the meeting structure.
-  5. Create a timeline of the meeting, noting when major topics were discussed.
-  6. For each main point identified, quote a key phrase from the transcript that best represents it.
-
-  After your analysis, present the final minutes in <minutes> tags, following this format:
-
-  <minutes>
-  [cue range] Speaker name says/mentions/discusses [summary of key points].
-
-  [cue range] They decide/agree/conclude [summary of decisions or action items].
-
-  [cue range] Speaker name brings up [any new topics or concerns]. They agree to [any follow-up actions or future plans].
-  </minutes>
-
-  Important guidelines:
-  - Use the original names of the speakers when available.
-  - For unnamed participants, use the designated <other_speakers> name.
-  - Maintain a natural dialogue flow.
-  - Do not add any information that wasn't in the original transcript.
-  - Do not alter the meaning of what was said.
-  - Be mindful of potential speech-to-text errors in the transcript. Use context to interpret
-    unclear segments.
-
-  Phase 2: Reorganizing the Minutes
-  ---------------------------------
-
-  After creating the initial minutes, proceed with the following steps to reorganize the content:
-
-  1. Identify 3-4 main topics that capture the major themes discussed in the meeting.
-
-  2. Reorganize the content of the minutes into sections, one for each key topic identified.
-
-  3. For each section:
-    - Add a concise subheading summarizing the main topic
-    - In 2-4 sentences, summarize the most critical points or conclusions related to that topic
-    - Extract relevant portions of the minutes and include them as bullet points
-    - For each bullet point, bold a 1-3 word phrase indicating the subtopic, include the cue range,
-      and provide the verbatim text from the minutes
-
-  Use the following markdown template for your output:
-
+  Output format:
   ```markdown
-  ## Topic Subheading
+  ## Thematic Section Heading
 
-  Topic summary
+  2-4 sentence summary distilling key decisions, outcomes, and implications.
 
-  - **Subtopic** [cue range] original text
-  - **Subtopic** [cue range] original text
+  - **Decision:** [cue-range] Synthesized decision statement with rationale
+  - **Action:** [cue-range] Owner to perform specific task by deadline
+  - **Technical:** [cue-range] Essential technical detail or constraint
 
-  ## Topic Subheading
+  ## Another Section Heading
 
-  Topic summary
+  Summary front-loading outcomes.
 
-  - **Subtopic** [cue range] original text
+  - **Decision:** [cue-range] What was decided and why
+  - **Timeboxes:** [cue-range] Deadline or time constraint agreed upon
+  - **Priorities/Scope:** [cue-range] What's in or out of scope
   ```
 
-  Important:
-  - Do not add, remove, or modify any of the original text from the provided minutes.
-  - Ensure all original minutes content is included in your output.
-  - After reorganizing, perform a final check to ensure every sentence from the original minutes is
-    accounted for.
-  - If any sentences are missing, include them under an additional "Miscellaneous" section at the
-    end of your output.
-
-  Your goal is to produce a clear, concise, and accurate summary of the meeting that captures all
-  essential information while eliminating unnecessary details, and then reorganize this information
-  into a structured, topic-based format for easy comprehension.
-
-  Your final output should consist only of the reorganized minutes in markdown format and should not
-  duplicate or rehash any of the work you did in the thinking block.
+  Your final output should contain only the synthesized minutes in markdown format. All analysis work
+  should remain in your thinking block.

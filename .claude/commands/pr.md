@@ -4,7 +4,7 @@ Never reference the plan or phase in the generated PR title or description—the
 
 Examine commits and diffs to understand what changed. Check recent merged PRs to match the repo's title conventions. Generate a title that articulates the technical change and its purpose (e.g., "Add OAuth authentication for secure user access").
 
-Write a 1-2 paragraph description: Lead with technical substance—what specifically changed, what problems it solves, what decisions were made. Then explain why it matters—user impact, business value, or strategic context.
+Write a concise 2-4 sentence description. First sentence: what specifically changed. Second sentence: what problem it solves or why it matters. Be direct—no filler words, no throat-clearing. If key decisions were made, add one sentence maximum.
 
 **After generating the PR content, execute these steps automatically:**
 

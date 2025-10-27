@@ -113,9 +113,39 @@ prompt: >
   - If any sentences are missing, include them under an additional "Miscellaneous" section at the
     end of your output.
 
-  Your goal is to produce a clear, concise, and accurate summary of the meeting that captures all
-  essential information while eliminating unnecessary details, and then reorganize this information
-  into a structured, topic-based format for easy comprehension.
+  Phase 3: Condensing the Minutes (Internal Processing Only)
+  ----------------------------------------------------------
 
-  Your final output should consist only of the reorganized minutes in markdown format and should not
-  duplicate or rehash any of the work you did in the thinking block.
+  After completing Phase 2, conduct a final distillation pass in your thinking block. This phase
+  produces the actual output the user will see.
+
+  In your thinking block:
+
+  1. Review the reorganized minutes from Phase 2 critically.
+
+  2. Identify content to condense or remove:
+    - Merge related bullet points that cover the same subtopic
+    - Eliminate redundant information across sections
+    - Remove low-signal content: procedural talk, greetings, non-actionable discussion
+    - Tighten verbose language while preserving meaning
+
+  3. Prioritize retention of:
+    - Decisions made and their rationale
+    - Action items and deliverables
+    - Key insights and strategic considerations
+    - Quantitative information and timelines
+    - Technical details that matter
+
+  4. For each topic section:
+    - Keep the topic summary tight (2-4 sentences maximum)
+    - Reduce bullet points to only those containing essential information
+    - Combine bullets where logical without losing clarity
+
+  5. Produce the condensed version as your final output.
+
+  Your goal is to produce a clear, concise, and accurate summary of the meeting that captures all
+  essential information while eliminating unnecessary details, reorganized into a structured,
+  topic-based format for easy comprehension.
+
+  Your final output should consist only of the condensed minutes from Phase 3 in markdown format.
+  All work from Phases 1, 2, and the condensing analysis should remain in your thinking block.

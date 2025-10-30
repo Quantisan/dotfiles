@@ -5,3 +5,12 @@ Both subagents get the same competitive prompt: they're competing to identify th
 **Tactical guidance**: Examine files in full, find related code, trace patterns across the codebase. Read relevant context files (library docs, architecture docs, etc. referenced from CLAUDE.md) when available. Step back from the diff to understand broader architectural context.
 
 After both complete, synthesize their findings: filter for architectural severity (principle violations only), consolidate overlaps, present top 3-5 ranked issues. Exclude style/formatting, implementation preferences, minor refactorings.
+
+Format each issue as:
+
+**[Principle Violated]**
+[One sentence on architectural impact]
+
+Evidence: `file:line` - [brief concrete example from the code]
+
+[One sentence explaining why this violates the principle]

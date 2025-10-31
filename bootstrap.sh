@@ -15,6 +15,8 @@ function doIt() {
                 --exclude "launch-agents.sh" \
                 --exclude "README.md" \
                 --exclude "CLAUDE.md" \
+                --exclude "AGENTS.md" \
+                --exclude ".codex/config.toml" \
                 --exclude "LICENSE-MIT.txt" \
                 --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~

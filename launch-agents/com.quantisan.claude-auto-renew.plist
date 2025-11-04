@@ -15,60 +15,45 @@
     <array>
         <string>/bin/sh</string>
         <string>-c</string>
-        <string>{ date; echo "ping" | /opt/homebrew/bin/claude -p; } >> /Users/paul/.claude-cron.log 2>&1</string>
+        <string>date; echo "ping" | /opt/homebrew/bin/claude -p</string>
     </array>
 
     <key>StartCalendarInterval</key>
     <array>
         <dict>
-            <key>Weekday</key>
-            <integer>1</integer>
-            <key>Hour</key>
-            <integer>4</integer>
-            <key>Minute</key>
-            <integer>30</integer>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>4</integer>
+            <key>Minute</key><integer>30</integer>
         </dict>
         <dict>
-            <key>Weekday</key>
-            <integer>2</integer>
-            <key>Hour</key>
-            <integer>4</integer>
-            <key>Minute</key>
-            <integer>30</integer>
+            <key>Weekday</key><integer>2</integer>
+            <key>Hour</key><integer>4</integer>
+            <key>Minute</key><integer>30</integer>
         </dict>
         <dict>
-            <key>Weekday</key>
-            <integer>3</integer>
-            <key>Hour</key>
-            <integer>4</integer>
-            <key>Minute</key>
-            <integer>30</integer>
+            <key>Weekday</key><integer>3</integer>
+            <key>Hour</key><integer>4</integer>
+            <key>Minute</key><integer>30</integer>
         </dict>
         <dict>
-            <key>Weekday</key>
-            <integer>4</integer>
-            <key>Hour</key>
-            <integer>4</integer>
-            <key>Minute</key>
-            <integer>30</integer>
+            <key>Weekday</key><integer>4</integer>
+            <key>Hour</key><integer>4</integer>
+            <key>Minute</key><integer>30</integer>
         </dict>
         <dict>
-            <key>Weekday</key>
-            <integer>5</integer>
-            <key>Hour</key>
-            <integer>4</integer>
-            <key>Minute</key>
-            <integer>30</integer>
+            <key>Weekday</key><integer>5</integer>
+            <key>Hour</key><integer>4</integer>
+            <key>Minute</key><integer>30</integer>
         </dict>
         <dict>
-            <key>Weekday</key>
-            <integer>6</integer>
-            <key>Hour</key>
-            <integer>4</integer>
-            <key>Minute</key>
-            <integer>30</integer>
+            <key>Weekday</key><integer>6</integer>
+            <key>Hour</key><integer>4</integer>
+            <key>Minute</key><integer>30</integer>
         </dict>
     </array>
+
+    <key>StandardInPath</key>
+    <string>/dev/null</string>
 
     <key>StandardOutPath</key>
     <string>/Users/paul/.claude-cron.log</string>

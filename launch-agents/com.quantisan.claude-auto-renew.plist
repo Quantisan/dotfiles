@@ -63,5 +63,11 @@
 
     <key>RunAtLoad</key>
     <false/>
+
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
 </dict>
 </plist>

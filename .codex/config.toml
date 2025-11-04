@@ -1,8 +1,7 @@
 # NOTE: Codex writes to ~/.codex/config.toml (e.g., updating projects.<path>.trust_level),
 # so this repo copy is reference only. Remember to sync any local edits manually.
 model = "gpt-5-codex"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 
 # always ask for approval mode
 approval_policy = "on-request"
-sandbox_mode    = "read-only"

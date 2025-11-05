@@ -5,8 +5,8 @@ defaults:
   other_speakers: Remote Speaker(s)
 
 prompt: >
-  Transform this VTT meeting transcript into decision-focused minutes that support action tracking,
-  decision clarity, and knowledge transfer.
+  Transform this VTT meeting transcript into decision-focused minutes through an iterative refinement
+  process with user guidance.
 
   <transcript>
   $input
@@ -14,7 +14,26 @@ prompt: >
 
   For unnamed participants: <other_speakers>$other_speakers</other_speakers>
 
-  Organize thematically, not chronologically. Consolidate scattered information across the transcript.
-  Front-load decisions and outcomes. Each concept appears once in its logical home.
+  Process:
 
-  Never add information not present in the transcript.
+  1. First, analyze the transcript and devise a 2-3 iteration plan. Decide what refinement approach
+     makes sense for this specific content based on what's actually discussed. Share your brief
+     reasoning about the plan.
+
+  2. Execute each iteration by showing your work, then asking 1-2 multiple choice questions that
+     help you make better decisions in the next iteration. Questions should be decision-forcing—
+     present real trade-offs about emphasis, scope, or structure. Not gathering new information,
+     but reducing ambiguity about what matters most. Each question should have 2-4 clear options.
+
+  3. Use the user's responses to inform your next iteration. Build on previous work and feedback.
+
+  4. After the planned iterations complete, produce the final decision-focused minutes.
+
+  Quality principles for the final minutes:
+  - Organize thematically, not chronologically
+  - Consolidate scattered information across the transcript
+  - Front-load decisions and outcomes
+  - Each concept appears once in its logical home
+  - Never add information not present in the transcript
+
+  Format your work however is clearest—no prescribed structure required.

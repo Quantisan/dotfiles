@@ -5,54 +5,35 @@ defaults:
   other_speakers: Remote Speaker(s)
 
 prompt: >
-  You are an AI assistant that transforms VTT meeting transcripts into synthesized, decision-focused
-  minutes. Your goal is to distill raw conversation into clear decisions, action items, strategic
-  insights, and essential technical details—preserving traceability through cue range identifiers
-  while eliminating conversational artifacts and redundant deliberation.
-
-  Here is the VTT transcript:
+  Transform this VTT meeting transcript into decision-focused minutes through an iterative refinement
+  process with user guidance.
 
   <transcript>
   $input
   </transcript>
 
-  For unnamed participants speaking through system audio, use: <other_speakers>$other_speakers</other_speakers>
+  For unnamed participants: <other_speakers>$other_speakers</other_speakers>
 
-  Critical requirements:
-  - Maintain cue range identifiers [start-end] from the original transcript for all content
-  - Synthesize and distill: extract decisions, insights, and commitments. Remove conversational
-    artifacts, hedging language ("I'll probably"), and discussion process. Transform deliberation
-    into outcomes—never add information not in the transcript.
-  - Use original speaker names; apply the designated name for unnamed participants
-  - Organize logically by theme and information type, not chronologically. Each concept appears once
-    in its logical home—consolidate scattered information across the transcript.
-  - Eliminate low-signal content: greetings, procedural talk, meta-commentary about the meeting or
-    document itself, hedging/uncertainty expressions, and redundant discussion.
+  Process:
 
-  Process internally in your thinking block: analyze the transcript to identify main speakers and
-  themes, organize content into 3-4 thematic sections, then synthesize to essential information.
-  Front-load decisions and outcomes first, then supporting context. Use semantic labels (Decision,
-  Action, Technical, Timeboxes, Priorities/Scope) to categorize bullet points. Transform passive
-  deliberation into active commitments with clear ownership.
+  1. First, analyze the transcript and devise a 2-3 iteration plan. Decide what refinement approach
+     makes sense for this specific content based on what's actually discussed. Share your brief
+     reasoning about the plan.
 
-  Output format:
-  ```markdown
-  ## Thematic Section Heading
+  2. Execute each iteration by showing your work, then asking 1-2 multiple choice questions that
+     help you make better decisions in the next iteration. Questions should be decision-forcing—
+     present real trade-offs about emphasis, scope, or structure. Not gathering new information,
+     but reducing ambiguity about what matters most. Each question should have 2-4 clear options.
 
-  2-4 sentence summary distilling key decisions, outcomes, and implications.
+  3. Use the user's responses to inform your next iteration. Build on previous work and feedback.
 
-  - **Decision:** [cue-range] Synthesized decision statement with rationale
-  - **Action:** [cue-range] Owner to perform specific task by deadline
-  - **Technical:** [cue-range] Essential technical detail or constraint
+  4. After the planned iterations complete, produce the final decision-focused minutes.
 
-  ## Another Section Heading
+  Quality principles for the final minutes:
+  - Organize thematically, not chronologically
+  - Consolidate scattered information across the transcript
+  - Front-load decisions and outcomes
+  - Each concept appears once in its logical home
+  - Never add information not present in the transcript
 
-  Summary front-loading outcomes.
-
-  - **Decision:** [cue-range] What was decided and why
-  - **Timeboxes:** [cue-range] Deadline or time constraint agreed upon
-  - **Priorities/Scope:** [cue-range] What's in or out of scope
-  ```
-
-  Your final output should contain only the synthesized minutes in markdown format. All analysis work
-  should remain in your thinking block.
+  Format your work however is clearest—no prescribed structure required.

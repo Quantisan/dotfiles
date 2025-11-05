@@ -2,7 +2,7 @@ Analyze the current branch against `$1` (default: `main`) to generate a PR title
 
 Never reference the plan or phase in the generated PR title or description—they are internal context only.
 
-Examine commits and diffs to understand what changed. Check recent merged PRs to match the repo's title conventions. Generate a title that articulates the technical change and its purpose (e.g., "Add OAuth authentication for secure user access").
+Examine commit titles, descriptions, and diffs to understand what changed and why. Check recent merged PRs to match the repo's title conventions. Generate a title that articulates the technical change and its purpose (e.g., "Add OAuth authentication for secure user access").
 
 Write a concise 2-4 sentence description. First sentence: what specifically changed. Second sentence: what problem it solves or why it matters. Be direct—no filler words, no throat-clearing. If key decisions were made, add one sentence maximum.
 

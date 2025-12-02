@@ -27,7 +27,8 @@ prompt: >
 
   3. Use the user's responses to inform your next iteration. Build on previous work and feedback.
 
-  4. After the planned iterations complete, produce the final decision-focused minutes.
+  4. After the planned iterations complete, produce the final decision-focused minutes in markdown
+     format.
 
   Quality principles for the final minutes:
   - Organize thematically, not chronologically

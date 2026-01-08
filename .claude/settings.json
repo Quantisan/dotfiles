@@ -1,6 +1,8 @@
 {
+  "env": {
+    "MAX_THINKING_TOKENS": "30000"
+  },
   "permissions": {
-    "defaultMode": "plan",
     "allow": [
       "Bash(pwd:*)",
       "Bash(which:*)",
@@ -8,9 +10,8 @@
       "Bash(git branch:*)",
       "Bash(git status:*)",
       "Bash(gh pr list:*)"
-    ]
+    ],
+    "defaultMode": "plan"
   },
-  "env": {
-    "MAX_THINKING_TOKENS": "30000"
-  }
+  "model": "opus"
 }

@@ -83,6 +83,15 @@ launch-agents/ -> symlinked to ~/Library/LaunchAgents/
 - Logs to `~/.claude-cron.log`
 - Prevents session expiration for daily Claude CLI usage
 
+### Claude Code Configuration
+
+The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code config):
+- `.claude/CLAUDE.md` → copied to `~/.claude/CLAUDE.md` (global instructions)
+- `.claude/commands/` → copied to `~/.claude/commands/` (custom slash commands)
+- `.claude/settings.json` → copied to `~/.claude/settings.json`
+
+**Important:** Edits to `.claude/` files require running `source bootstrap.sh` to copy them to `~/.claude/` and take effect globally.
+
 ### Custom Function Wrappers
 
 **Aider wrapper** (`.functions:184-188`): Wraps the Aider AI coding assistant with API keys from environment variables:

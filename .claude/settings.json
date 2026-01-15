@@ -9,7 +9,8 @@
       "Bash(echo:*)",
       "Bash(git branch:*)",
       "Bash(git status:*)",
-      "Bash(gh pr list:*)"
+      "Bash(gh pr list:*)",
+      "Skill(commit)"
     ],
     "deny": [
       "Read(./.env)",

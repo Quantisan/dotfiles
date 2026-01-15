@@ -18,12 +18,19 @@ function doIt() {
                 --exclude "AGENTS.md" \
                 --exclude ".codex/config.toml" \
                 --exclude ".cache/" \
+                --exclude ".claude/" \
                 --exclude "LICENSE-MIT.txt" \
                 --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~
 
         ## Link 'llm' templates
         ln -shf "$(pwd)/templates/" ~/Library/Application\ Support/io.datasette.llm/templates
+
+        ## Set up Claude Code config
+        mkdir -p ~/.claude
+        ln -shf "$(pwd)/.claude/settings.json" ~/.claude/settings.json
+        cp .claude/CLAUDE.md ~/.claude/CLAUDE.md
+        rsync -avh --delete .claude/commands/ ~/.claude/commands/
 
         source ~/.bash_profile
 }

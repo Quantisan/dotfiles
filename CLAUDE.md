@@ -88,9 +88,9 @@ launch-agents/ -> symlinked to ~/Library/LaunchAgents/
 The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code config):
 - `.claude/CLAUDE.md` → copied to `~/.claude/CLAUDE.md` (global instructions)
 - `.claude/commands/` → copied to `~/.claude/commands/` (custom slash commands)
-- `.claude/settings.json` → copied to `~/.claude/settings.json`
+- `.claude/settings.json` → **symlinked** to `~/.claude/settings.json`
 
-**Important:** Edits to `.claude/` files require running `source bootstrap.sh` to copy them to `~/.claude/` and take effect globally.
+**Important:** `CLAUDE.md` and `commands/` edits require running `source bootstrap.sh` to copy them to `~/.claude/`. Settings changes are immediate since it's symlinked—Claude's runtime permission changes appear as git modifications in the dotfiles repo.
 
 ### Custom Function Wrappers
 

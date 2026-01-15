@@ -1,3 +1,7 @@
+---
+model: claude-sonnet-4-5
+---
+
 Analyze the current branch against `$1` (default: `main`) to generate a PR title and description. If `$2` provided, read that plan file for additional context. If `$3` provided, use it as a pointer to focus on that specific phase within the plan (e.g., "Phase 3a").
 
 Never reference the plan or phase in the generated PR title or description—they are internal context only.

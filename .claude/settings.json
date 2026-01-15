@@ -19,5 +19,8 @@
       "Read(./build)"
     ]
   },
-  "model": "opus"
+  "model": "opus",
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  }
 }

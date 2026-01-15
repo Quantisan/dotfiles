@@ -21,6 +21,7 @@
   },
   "model": "opus",
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "elements-of-style@superpowers-marketplace": true
   }
 }

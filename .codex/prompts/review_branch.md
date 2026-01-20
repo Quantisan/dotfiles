@@ -1,5 +1,5 @@
 ---
-model: claude-sonnet-4-5
+description: Walk through branch changes from usage to implementation
 ---
 
 Review this branch in a usage-first order.

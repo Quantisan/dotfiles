@@ -15,7 +15,7 @@
     <array>
         <string>/bin/sh</string>
         <string>-c</string>
-        <string>date; echo "ping" | /opt/homebrew/bin/claude -p</string>
+        <string>echo "ping" | /opt/homebrew/bin/claude -p --model haiku --tools "" --disable-slash-commands --no-session-persistence</string>
     </array>
 
     <key>StartCalendarInterval</key>

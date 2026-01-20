@@ -1,16 +1,15 @@
-Launch two competing general-purpose subagents in parallel (single message, two Task calls) to review the git diff between the current branch and `$1` (default: `main`). If `$2` is provided, include that plan file for context.
+---
+model: claude-sonnet-4-5
+---
 
-Both subagents get the same competitive prompt: they're competing to identify the most severe architectural and design concerns—whoever identifies the most critical principle violations gets promoted. Minor issues and implementation details count AGAINST you. Review against the Design Principles from CLAUDE.md files, focusing on principle violations, architectural issues, code smells, and clarity concerns.
+Help me review this branch. Walk me through from usage backward into the details.
 
-**Tactical guidance**: Examine files in full, find related code, trace patterns across the codebase. Read relevant context files (library docs, architecture docs, etc. referenced from CLAUDE.md) when available. Step back from the diff to understand broader architectural context.
+Start from the public API or exported functions. If the changes are internal, start from the branch's main entry point. Either way: usage first, then implementation.
 
-After both complete, synthesize their findings: filter for architectural severity (principle violations only), consolidate overlaps, present top 3-5 ranked issues. Exclude style/formatting, implementation preferences, minor refactorings.
+Group changes by concept or responsibility - logical units that belong together, even if they span multiple files. Balance chunk sizes so each is digestible.
 
-Format each issue as:
+For each chunk: explain what the code does. Reference files and line numbers - don't reprint the code. I'll navigate on my own.
 
-**[Principle Violated]**
-[One sentence on architectural impact]
+Pause after each chunk. Wait for me to respond before continuing to the next.
 
-Evidence: `file:line` - [brief concrete example from the code]
-
-[One sentence explaining why this violates the principle]
+If I ask questions or want to dig deeper, answer inline and continue from where we were.

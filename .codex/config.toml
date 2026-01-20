@@ -1,7 +1,19 @@
-# NOTE: Codex writes to ~/.codex/config.toml (e.g., updating projects.<path>.trust_level),
-# so this repo copy is reference only. Remember to sync any local edits manually.
 model = "gpt-5.2-codex"
 model_reasoning_effort = "medium"
 
-# always ask for approval mode
-approval_policy = "on-request"
+[features]
+web_search_request = true
+
+[sandbox_workspace_write]
+network_access = true
+
+[notice]
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+gpt-5-codex = "gpt-5.2-codex"
+
+[projects."/Users/paul/Projects/gremllm"]
+trust_level = "trusted"
+

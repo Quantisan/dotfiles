@@ -32,6 +32,10 @@ function doIt() {
         cp .claude/CLAUDE.md ~/.claude/CLAUDE.md
         rsync -avh --delete .claude/commands/ ~/.claude/commands/
 
+        ## Set up Codex config
+        mkdir -p ~/.codex
+        ln -shf "$(pwd)/.codex/config.toml" ~/.codex/config.toml
+
         source ~/.bash_profile
 }
 

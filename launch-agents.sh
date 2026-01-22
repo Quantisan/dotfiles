@@ -31,7 +31,7 @@ function doIt() {
     if launchctl print gui/$(id -u)/"${PLIST_NAME%.plist}" &>/dev/null; then
         echo "✓ Successfully loaded ${PLIST_NAME}"
         echo ""
-        echo "The agent will run Monday-Saturday at 4:30 AM."
+        echo "Schedule defined in ${PLIST_NAME}"
         echo "Logs are written to ~/.claude-cron.log"
     else
         echo "✗ Failed to load ${PLIST_NAME}"

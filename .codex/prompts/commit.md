@@ -2,4 +2,14 @@
 description: Suggest a commit message for staged changes
 ---
 
-Review `git diff --cached` (staged changes only). Suggest a concise commit title following Conventional Commits, and a description only if it adds clarity beyond the title. Do not make any changes.
+## Context
+
+- Staged changes: !`git diff --cached`
+- Recent commits: !`git log --oneline -3`
+- Current branch: !`git branch --show-current`
+
+## Your task
+
+Create a commit with the changes already staged. Do NOT add any unstaged files.
+
+Match the commit style of recent commits. Use a concise Conventional Commits title. Description should capture user intent and decisions relevant only to staged changes—exclude unrelated conversation. Be minimal and direct.

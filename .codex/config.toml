@@ -3,6 +3,8 @@ model_reasoning_effort = "medium"
 
 [features]
 web_search_request = true
+collab = true
+steer = true
 
 [sandbox_workspace_write]
 network_access = true

@@ -1,6 +1,7 @@
 model = "gpt-5.2-codex"
 model_reasoning_effort = "high"
 web_search = "cached"
+personality = "pragmatic"
 
 [sandbox_workspace_write]
 network_access = true
@@ -16,5 +17,11 @@ gpt-5-codex = "gpt-5.2-codex"
 trust_level = "trusted"
 
 [projects."/Users/paul/Library/CloudStorage/GoogleDrive-paul@quantisan.com/My Drive/Data Guild/Mass Witness/research_poc_components"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/nexus"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/dotfiles"]
 trust_level = "trusted"
 

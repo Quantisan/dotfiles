@@ -1,10 +1,7 @@
-# Git credentials
-# Not in the repository, to prevent people from accidentally committing under my name
+# Git credentials (applied by git-setup.sh during bootstrap)
 GIT_AUTHOR_NAME="Paul Lam"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --global user.name "$GIT_AUTHOR_NAME"
 GIT_AUTHOR_EMAIL="paul@quantisan.com"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
-git config --global user.signingkey CA7F9457B822154F
-git config --global commit.gpgsign true
+GIT_SIGNING_KEY="CA7F9457B822154F"
+GIT_GPGSIGN="true"

@@ -12,6 +12,7 @@ function doIt() {
                 --exclude ".osx" \
                 --exclude "bootstrap.sh" \
                 --exclude "brew.sh" \
+                --exclude "git-setup.sh" \
                 --exclude "launch-agents.sh" \
                 --exclude "README.md" \
                 --exclude "CLAUDE.md" \
@@ -22,6 +23,9 @@ function doIt() {
                 --exclude "LICENSE-MIT.txt" \
                 --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~
+
+        ## Set up Git identity and signing preferences
+        bash "$(pwd)/git-setup.sh"
 
         ## Link 'llm' templates
         ln -shf "$(pwd)/templates/" ~/Library/Application\ Support/io.datasette.llm/templates

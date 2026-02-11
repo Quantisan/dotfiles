@@ -1,0 +1,25 @@
+name: Claude Auto-Renew
+
+on:
+  schedule:
+    # Mon-Fri 3:30 AM JST = Sun-Thu 18:30 UTC
+    - cron: "30 18 * * 0-4"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Ping Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "ping"
+          claude_args: '--model haiku --max-turns 1 --tools "" --disable-slash-commands --no-session-persistence'

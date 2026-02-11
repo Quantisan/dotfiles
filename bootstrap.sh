@@ -7,13 +7,11 @@ git pull origin main
 function doIt() {
         rsync --exclude ".git/" \
                 --exclude "templates/" \
-                --exclude "launch-agents/" \
                 --exclude ".DS_Store" \
                 --exclude ".osx" \
                 --exclude "bootstrap.sh" \
                 --exclude "brew.sh" \
                 --exclude "git-setup.sh" \
-                --exclude "launch-agents.sh" \
                 --exclude "README.md" \
                 --exclude "CLAUDE.md" \
                 --exclude "AGENTS.md" \

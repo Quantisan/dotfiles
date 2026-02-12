@@ -18,6 +18,7 @@ function doIt() {
                 --exclude ".codex/config.toml" \
                 --exclude ".cache/" \
                 --exclude ".claude/" \
+                --exclude ".github/" \
                 --exclude "LICENSE-MIT.txt" \
                 --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~

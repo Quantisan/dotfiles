@@ -27,5 +27,5 @@ trust_level = "trusted"
 
 [tui]
 experimental_mode = "plan"
-status_line = ["model-with-reasoning", "five-hour-limit"]
+status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit"]
 

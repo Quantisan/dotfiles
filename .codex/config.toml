@@ -1,4 +1,4 @@
-model = "gpt-5.2-codex"
+model = "gpt-5.3-codex"
 model_reasoning_effort = "high"
 web_search = "cached"
 personality = "pragmatic"
@@ -10,8 +10,8 @@ network_access = true
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
 [notice.model_migrations]
-"gpt-5.1-codex-max" = "gpt-5.2-codex"
 gpt-5-codex = "gpt-5.2-codex"
+"gpt-5.2-codex" = "gpt-5.3-codex"
 
 [projects."/Users/paul/Projects/gremllm"]
 trust_level = "trusted"

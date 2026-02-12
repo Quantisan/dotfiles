@@ -55,6 +55,7 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 # This loads NVM
 [ -s $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh
 
-if [ -z "$CLAUDECODE" ] && [ -z "$CODEX_SANDBOX" ]; then
+# only auto-cd for interactive shells started in $HOME
+if [[ $- == *i* ]] && [[ "$PWD" == "$HOME" ]]; then
         cd ~/Projects
 fi

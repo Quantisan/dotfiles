@@ -1,4 +1,3 @@
-model: gpt-5
 options:
   reasoning_effort: high
 defaults:

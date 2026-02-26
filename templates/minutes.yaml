@@ -1,7 +1,7 @@
 options:
   reasoning_effort: high
 defaults:
-  other_speakers: Remote Speaker(s)
+  additional_context: work meeting transcript
 
 prompt: >
   Transform this VTT meeting transcript into decision-focused minutes through an iterative refinement
@@ -11,7 +11,8 @@ prompt: >
   $input
   </transcript>
 
-  For unnamed participants: <other_speakers>$other_speakers</other_speakers>
+  Additional context from the user about this transcript:
+  <additional_context>$additional_context</additional_context>
 
   Process:
 

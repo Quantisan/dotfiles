@@ -11,6 +11,8 @@
       "Bash(git status:*)",
       "Bash(gh pr list:*)",
       "Skill(commit)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
       "Bash(git log:*)",
       "Bash(gh pr view:*)"
     ],

@@ -1,8 +1,23 @@
+local function current_colorscheme()
+  if vim.fn.has("mac") ~= 1 then
+    return "dayfox"
+  end
+
+  local appearance = vim.fn.system({ "defaults", "read", "-g", "AppleInterfaceStyle" })
+  if vim.v.shell_error == 0 and vim.trim(appearance) == "Dark" then
+    return "duskfox"
+  end
+
+  return "dayfox"
+end
+
 return {
+  { "EdenEast/nightfox.nvim" },
+
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = current_colorscheme(),
     },
   },
 

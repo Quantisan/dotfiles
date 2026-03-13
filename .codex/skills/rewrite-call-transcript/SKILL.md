@@ -18,9 +18,9 @@ Turn noisy transcript text into readable dialogue without adding meaning that is
 
 ## Workflow
 
-Use a controller workflow with sub-agents so the main context holds conversation structure, not every raw utterance.
+Use a controller workflow with sub-agents so the main context holds conversation structure, not every raw utterance. The controller must not load the full raw transcript into its own context.
 
-1. Read the speaker roster and inspect the transcript enough to understand the conversation shape.
+1. Read the speaker roster and the user's task framing only. Do not load the full raw transcript into the controller context.
 2. Dispatch a mapper sub-agent to read the full raw transcript and return a compact `conversation_map` with:
    - likely speakers and source labels
    - topic shifts and natural chunk boundaries
@@ -32,7 +32,14 @@ Use a controller workflow with sub-agents so the main context holds conversation
    - `open_questions`: anything still ambiguous after best-effort cleanup
 6. Only when a chunk contains a real ambiguity hotspot, dispatch a challenger sub-agent for that span and ask for 2 conservative `hotspot_variants`. Use this for uncertainty, not for stylistic experimentation.
 7. The controller chooses the most defensible variant, updates the `continuity_ledger`, harmonizes overlaps and naming, and assembles the final transcript.
-8. Re-check the raw transcript directly when seams, speaker continuity, or hotspot choices remain uncertain. Do not rely on summaries alone for final judgments.
+8. When seams, speaker continuity, or hotspot choices remain uncertain, dispatch a follow-up sub-agent to inspect only the relevant raw span and return a minimal excerpt or resolution note. The controller should not reopen the raw transcript itself.
+
+## Controller Rules
+
+- Do not paste, quote, or load the entire raw transcript into the controller context.
+- Keep the controller working set limited to the speaker roster, `conversation_map`, `continuity_ledger`, rewritten chunks, and small targeted raw excerpts returned by sub-agents.
+- If more raw evidence is needed, ask a sub-agent to inspect the specific span and return only the minimum needed to decide.
+- Use sub-agents for transcript inspection. Use the controller for coordination, consistency, and final assembly.
 
 ## Cleaner Rules
 

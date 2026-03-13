@@ -1,18 +1,35 @@
 local function current_colorscheme()
   if vim.fn.has("mac") ~= 1 then
-    return "dayfox"
+    return "kanagawa-lotus"
   end
 
   local appearance = vim.fn.system({ "defaults", "read", "-g", "AppleInterfaceStyle" })
   if vim.v.shell_error == 0 and vim.trim(appearance) == "Dark" then
-    return "duskfox"
+    return "kanagawa-wave"
   end
 
-  return "dayfox"
+  return "kanagawa-lotus"
 end
 
 return {
-  { "EdenEast/nightfox.nvim" },
+  {
+    "rebelot/kanagawa.nvim",
+    opts = {
+      background = {
+        dark = "wave",
+        light = "lotus",
+      },
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
+    },
+  },
 
   {
     "LazyVim/LazyVim",

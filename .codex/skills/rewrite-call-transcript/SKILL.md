@@ -1,49 +1,56 @@
 ---
 name: rewrite-call-transcript
-description: Use when a user provides a call, meeting, interview, podcast, or other conversation transcript that needs to be rewritten into clean speaker-by-speaker dialogue while preserving meaning. Trigger on requests to fix transcription errors, remove filler and repeated words, normalize speaker labels, repair likely ASR mistakes, or mark uncertain audio as [unclear].
+description: Use when a user provides a call, meeting, interview, podcast, or other conversation transcript that needs to be rewritten into clean speaker-by-speaker dialogue, especially when the transcript has filler, ASR errors, or ambiguous speaker labels and the user can provide speaker names with short descriptions.
 ---
 
 # Rewrite Call Transcript
 
-Turn noisy transcript text into readable dialogue without losing semantic content.
+Turn noisy transcript text into readable dialogue without adding meaning that is not present in the source.
 
 ## Inputs
 
 - Require the raw transcript text.
-- Accept speaker names if the user provides them.
-- Reuse any speaker labels already present in the source.
-- If one named speaker is known and the rest are unspecified, use `Remote Speaker(s)` for the unknown side unless the user asks for different labels.
-- If identities are unknown, use neutral labels rather than inventing names.
+- Expect a speaker roster before the transcript, with each speaker described in 2-3 words.
+- Treat the speaker roster as primary attribution context.
+- Use the roster heavily to resolve vague labels, role references, and likely speaker continuity.
+- Reuse raw speaker labels only when they help map a turn to the roster.
+- If the roster is missing or incomplete, stay conservative: do not invent names.
 
 ## Rewrite Process
 
-1. Read the full transcript before rewriting so local fixes do not break later context.
+1. Read the full transcript and the speaker roster before rewriting so local fixes do not break later context.
 2. Keep speaker order and conversational flow intact.
-3. Format each turn as `Speaker: utterance`.
+3. Format each turn as `Speaker: utterance` or `Speaker [uncertain]: utterance`.
 4. Correct transcription problems conservatively:
    - Remove silence hallucinations and filler loops.
    - Remove most repeated `yeah` or similar filler insertions unless they answer a yes/no question, confirm something explicitly, or carry real meaning.
-   - Fix obvious proper nouns, numbers, contractions, grammar, agreement, technical terms, and stutters when context strongly supports the correction.
+   - Remove filler, false starts, stutters, and repetitions only when meaning does not change.
+   - Fix proper nouns, numbers, contractions, grammar, agreement, and technical terms only when nearby transcript context, repeated usage, or the speaker roster strongly supports the repair.
    - Rewrite fragments only enough to recover the intended meaning.
-5. Remove filler, false starts, and repetitions that do not change meaning.
-6. Preserve all concepts, claims, and details present in the source.
-7. Do not add new information, interpretation, or speaker intent that is not grounded in the transcript.
-8. When a segment remains ambiguous after best-effort cleanup, write `[unclear]`.
+5. Preserve all concepts, claims, decisions, numbers, and technical details present in the source.
+6. Do not add new information, interpretation, speaker intent, or implied context that is not grounded in the transcript.
+7. Do not summarize, combine turns, or smooth wording in ways that introduce new concepts.
+8. When a word or segment cannot be recovered confidently after best-effort cleanup, write `[unclear]`.
+9. Attribute speakers with a confidence ladder:
+   - Use `Speaker: utterance` when the transcript and roster support the attribution confidently.
+   - Use `Speaker [uncertain]: utterance` when a named speaker is plausible but not certain.
+   - If no named attribution is defensible, preserve the source label and mark it `[uncertain]` when that helps, otherwise use `Unknown Speaker [uncertain]: utterance`.
 
 ## Output
 
 Return only the rewritten transcript inside `<rewritten_transcript>` tags.
 
-If you made any significant interpretation or non-obvious repair, add a `<notes>` block after the transcript. Omit `<notes>` when there is nothing material to flag.
+If you made any significant interpretation, non-obvious speaker mapping, or material repair that could affect how the transcript is read, add a `<notes>` block after the transcript. Omit `<notes>` when there is nothing material to flag.
 
 Use this exact shape:
 
 ```xml
 <rewritten_transcript>
-Speaker: First cleaned utterance.
-Speaker: Second cleaned utterance.
+Alice: First cleaned utterance.
+Bob [uncertain]: Second cleaned utterance.
+Unknown Speaker [uncertain]: Third cleaned utterance.
 </rewritten_transcript>
 <notes>
-- Brief explanation of major interpretation, if needed.
+- Brief explanation of a major repair or non-obvious speaker mapping, if needed.
 </notes>
 ```

@@ -1,3 +1,4 @@
 interface:
   display_name: "Rewrite Transcript"
-  short_description: "Clean messy transcripts into readable dialogue"
+  short_description: "Clean transcripts with roster-guided speaker attribution"
+  default_prompt: "Use $rewrite-call-transcript to clean this transcript. Start by listing the speakers with a 2-3 word description for each person, then provide the raw transcript."

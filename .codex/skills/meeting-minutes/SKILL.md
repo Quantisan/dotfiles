@@ -22,7 +22,10 @@ Turn raw meeting transcripts into decision-first minutes that consolidate scatte
    - Ask 1-2 multiple-choice questions that force a choice about emphasis, scope, or structure.
    - Keep questions about prioritization, not about collecting new facts already absent from the transcript.
 4. Use the user's answers to refine the next iteration.
-5. After the planned iterations, deliver the final minutes in Markdown.
+5. After the planned iterations, make one final internal pass with this exact instruction: `Simplify and shorten each point to the key idea. Use a direct tone.`
+6. Apply that final pass conservatively. Preserve decisions, commitments, owners, dates, and explicit uncertainty.
+7. Use that final pass only for the delivered minutes, not for intermediate drafts.
+8. Deliver the final minutes in Markdown.
 
 ## Quality Rules
 
@@ -30,6 +33,7 @@ Turn raw meeting transcripts into decision-first minutes that consolidate scatte
 - Front-load decisions, outcomes, and commitments.
 - Consolidate repeated or scattered discussion into one logical section.
 - Mention each concept once in its best location.
+- Shorten points to the core idea without dropping owners, dates, commitments, or ambiguity markers.
 - Keep uncertainty explicit when the transcript is ambiguous.
 - Never add information not grounded in the transcript or user-supplied context.
 
@@ -41,4 +45,4 @@ Turn raw meeting transcripts into decision-first minutes that consolidate scatte
 
 ## Final Output
 
-Return polished meeting minutes in Markdown. Prefer sections such as `Decisions`, `Key Points`, `Open Questions`, `Action Items`, and `Next Steps` when the transcript supports them, but adapt the structure to the meeting.
+Return polished meeting minutes in Markdown. The delivered minutes must reflect the final shortening pass and use a direct tone. Prefer sections such as `Decisions`, `Key Points`, `Open Questions`, `Action Items`, and `Next Steps` when the transcript supports them, but adapt the structure to the meeting.

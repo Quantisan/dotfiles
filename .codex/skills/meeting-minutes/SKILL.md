@@ -17,13 +17,21 @@ Turn raw meeting transcripts into structured minutes that capture decisions, exp
 
 ### Pass 1: Conversation Map
 
-Read the full transcript and any user context. Produce a conversation map — a compact outline of every identified thread. Present it as a table or list with these fields per thread:
+Read the full transcript and any user context. Produce a conversation map — a compact numbered list, one line per thread:
 
-- **Theme name** — what was discussed (e.g., "Auth System Rewrite")
-- **Thread type** — one of: `decision`, `exploration`, `context`
-- **Layers touched** — free-form labels for which levels the thread spans (e.g., technical, strategic, personal, operational)
-- **Key signal** — one sentence capturing the most important point
-- **Proposed depth** — `full` (nested strategic + technical + open threads), `summary` (2-4 bullets, no layering), or `mention` (single sentence noting it occurred)
+```
+1. **Auth System Rewrite** [decision, full] — Switching to JWT removes the last mobile blocker.
+2. **Team Dynamics** [context, summary] — Alex flagged burnout risk on the infra team.
+3. **Pricing Model** [exploration, mention] — Floated usage-based pricing but no conclusion.
+```
+
+Format: `**Theme** [type, depth] — key signal`
+
+- **type** — one of: `decision`, `exploration`, `context`
+- **depth** — `full` (nested strategic + technical + open threads), `summary` (2-4 bullets, no layering), or `mention` (single sentence noting it occurred)
+- **key signal** — one sentence capturing the most important point
+
+**Grouping guidance:** Prefer fewer, broader themes over many granular threads. Group related sub-topics under one theme rather than splitting them. The user can split a theme during review if they want more granularity.
 
 Present the map to the user. They can:
 - Merge or split themes

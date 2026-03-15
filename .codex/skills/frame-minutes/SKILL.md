@@ -29,7 +29,7 @@ Every extracted fact gets one label:
 ### Turn 1: Extract & Score
 
 Read the full transcript. Internally:
-1. Extract atomic facts as `(statement, speaker, context)` tuples
+1. Extract atomic facts as `(distilled utterance, speaker, context)` tuples — distill by cutting, not rewriting. Remove filler, false starts, and redundancy, but keep the speaker's phrasing and style. The result should sound like them, just shorter.
 2. Label each fact: Decision / Alignment / Insight / Context
 3. Score relevance 1–10 relative to this transcript (decisions tend toward 9–10, supporting context toward 4–6)
 4. Cluster facts by topic proximity — themes emerge bottom-up from where facts cluster
@@ -70,13 +70,12 @@ Using the validated theme map:
 
 ```
 ## Auth migration path [decision]
-- Switching to JWT — removes last mobile blocker (Paul, by Mar 22)
-- Session handling: server-side tokens deprecated
-  - Migration window agreed: 2 weeks with fallback
+- JWT is the move — kills the last mobile blocker (Paul, by Mar 22)
+- "We're done with server-side tokens" — deprecated, 2-week window with fallback baked in
 
 ## Series A timing [alignment]
-- Both leaning Q3 if ARR hits 800k
-  - Investor intros paused until metrics milestone
+- Both "pretty convinced" Q3 if ARR hits 800k
+  - "Not worth the distraction" — intros paused until milestone hit
 ```
 
 **Questions (max 2):** Multiple-choice, targeting ambiguity. User should be able to answer by reading the outline, without returning to the transcript. Default path proceeds if user doesn't engage.
@@ -97,21 +96,22 @@ No questions. Final output:
 2. Shortening pass: compress each point to the key idea
    - Preserve: decisions, commitments, owners, dates, alignment markers, explicit uncertainty
    - Remove: filler, redundancy, over-explanation
+   - Distill by cutting, not rewriting — what remains after compression should be the speaker's own phrasing, their style, rhythm, and word choices. Don't normalize into a "minutes voice."
 
 Example final output:
 
 ```
 ## Auth migration path
 
-- [decision] Switching to JWT for mobile auth — removes last blocker (Paul, by Mar 22)
-- [decision] Server-side session tokens deprecated; 2-week migration window with fallback
-- [alignment] Both comfortable with migration risk given current user count
+- [decision] JWT is the move — kills the last mobile blocker (Paul, by Mar 22)
+- [decision] "Done with server-side tokens" — deprecated; 2-week migration window with fallback
+- [alignment] Both "fine with the risk at this scale"
 
 ## Series A timing
 
-- [alignment] Leaning Q3 if ARR hits 800k — shared conviction this is the threshold
-- [decision] Investor intros paused until metrics milestone hit
-- [insight] Board seat expectations may differ between target leads — needs research
+- [alignment] "Pretty convinced" Q3 if ARR hits 800k — shared threshold
+- [decision] "Not worth the distraction" — intros paused until milestone hit
+- [insight] Board seat expectations may "vary a lot" between target leads — needs research
 ```
 
 ## Quality Rules
@@ -123,6 +123,7 @@ Example final output:
 - Keep uncertainty explicit — never upgrade "we should think about" to a decision
 - Never add information not grounded in the transcript
 - Alignment and context are first-class, not supporting detail for decisions
+- Distill by cutting, not rewriting — the minutes should sound like the speakers, not like a secretary. Preserve each speaker's phrasing, style, and voice. Remove filler and redundancy; never normalize language.
 
 ## Baked-in Reader Assumptions
 

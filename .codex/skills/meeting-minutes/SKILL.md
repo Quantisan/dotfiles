@@ -17,7 +17,7 @@ Turn raw meeting transcripts into structured minutes that capture decisions, exp
 
 ### Pass 1: Conversation Map
 
-Read the full transcript and any user context. Produce a conversation map — a compact numbered list, one line per thread:
+Read the full transcript and any user context. Scan for signals: decisions made, action items assigned, insights surfaced, and context established. Cluster related signals into 3-5 themes. Present the result as a compact numbered list, one line per theme:
 
 ```
 1. **Auth System Rewrite** [decision, full] — Switching to JWT removes the last mobile blocker.
@@ -27,13 +27,19 @@ Read the full transcript and any user context. Produce a conversation map — a 
 
 Format: `**Theme** [type, depth] — key signal`
 
-- **type** — one of: `decision`, `exploration`, `context`
-- **depth** — `full` (nested strategic + technical + open threads), `summary` (2-4 bullets, no layering), or `mention` (single sentence noting it occurred)
-- **key signal** — one sentence capturing the most important point
+- **type** — dominant signal in the cluster: `decision` (commitments made), `exploration` (insights without resolution), `context` (relational or situational)
+- **depth** — signal density: `full` (rich cluster — multiple decisions, supporting detail, open threads), `summary` (a few clear signals, 2-4 bullets), or `mention` (sparse — single sentence noting it occurred)
+- **key signal** — the most important point in ≤12 words
 
-**Grouping guidance:** Prefer fewer, broader themes over many granular threads. Group related sub-topics under one theme rather than splitting them. The user can split a theme during review if they want more granularity.
+**Grouping guidance:** Aim for 3-5 themes total. Prefer fewer, broader themes over many granular threads. Group related sub-topics under one theme rather than splitting them. The user can split a theme during review if they want more granularity.
 
-Present the map to the user. They can:
+After the numbered thread list, include a one-line note of topics excluded from the map:
+
+*"Excluded: [brief list of topics discussed but not mapped]."*
+
+Present the map as a default that will proceed unless the user changes it. Surface 1-2 specific judgment calls as targeted questions — e.g., "I grouped X and Y together — should I split them?" or "I classified Z as exploration but they may have decided."
+
+Available adjustments:
 - Merge or split themes
 - Reclassify thread types
 - Adjust proposed depth per theme

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frame Minutes"
+  short_description: "Bottom-up fact extraction into structured meeting minutes"
+  default_prompt: "Use $frame-minutes to process this transcript into structured minutes using bottom-up fact extraction."

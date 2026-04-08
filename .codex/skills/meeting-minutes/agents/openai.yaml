@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meeting Minutes"
+  short_description: "Turn transcripts into decision-first minutes"
+  default_prompt: "Use $meeting-minutes to turn this transcript into decision-focused meeting minutes."

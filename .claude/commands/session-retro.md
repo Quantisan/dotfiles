@@ -1,5 +1,5 @@
 ---
-description: Analyze the current session for repo-side problems that likely caused wasted motion
+description: Analyze the current session for problems that likely caused wasted motion
 model: sonnet
 ---
 
@@ -13,7 +13,9 @@ Use this process:
 
 1. State the session goal.
 2. Reconstruct the path the agent took.
-3. Identify concrete friction points with evidence from the session.
+3. Identify concrete friction points with evidence from the session. Inspect two dimensions:
+   - **Repo-side**: missing instructions, ambiguous docs, undocumented conventions, conflicting guidance
+   - **Agent-internal**: tool selection, search strategy, parallelization choices, agent dispatch scope, reactive vs. anticipatory file reads, precondition checking before actions
 4. For each friction point, explain why the detour made sense at the time.
 5. Map each friction point to exactly one primary problem classification:
    - `instruction ambiguity`
@@ -21,6 +23,9 @@ Use this process:
    - `missing concrete example`
    - `boundary opacity`
    - `workflow friction`
+   - `agent: tool selection` — wrong tool for the task (Agent when Read/Grep sufficed, or vice versa)
+   - `agent: missed parallelism` — sequential tool calls that could have been parallel
+   - `agent: search strategy` — didn't check existing patterns before acting, reactive reads, redundant operations
 6. Rank findings by likely future token or time savings.
 7. Return only the 3-5 highest-leverage findings.
 8. Stop and ask the user which items to keep, merge, drop, or reprioritize.
@@ -50,3 +55,4 @@ Guardrails:
 - Do not produce generic "improve docs" advice.
 - Name the exact file or code area when possible.
 - If no meaningful wasted motion is visible, say so directly.
+- Analyze both user-facing interactions AND internal tool-use patterns. Do not bias toward one dimension.

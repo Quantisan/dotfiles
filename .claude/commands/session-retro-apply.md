@@ -1,6 +1,7 @@
 ---
 argument-hint: [confirmed-change]
 description: Apply one user-confirmed retrospective change
+model: sonnet
 ---
 
 Implement exactly one confirmed retrospective change: $ARGUMENTS

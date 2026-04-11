@@ -1,5 +1,6 @@
 ---
 description: Analyze the current session for repo-side improvements that would have reduced wasted motion
+model: sonnet
 ---
 
 Analyze the current live Claude Code session only.

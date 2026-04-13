@@ -31,3 +31,5 @@ trust_level = "trusted"
 experimental_mode = "plan"
 status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit"]
 
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"

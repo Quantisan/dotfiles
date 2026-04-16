@@ -11,6 +11,7 @@ function doIt() {
                 --exclude ".osx" \
                 --exclude "bootstrap.sh" \
                 --exclude "brew.sh" \
+                --exclude "docs/" \
                 --exclude "git-setup.sh" \
                 --exclude "README.md" \
                 --exclude "CLAUDE.md" \

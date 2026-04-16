@@ -92,17 +92,6 @@ The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code con
 
 **Important:** `CLAUDE.md` and `commands/` edits require running `source bootstrap.sh` to copy them to `~/.claude/`. Settings changes are immediate since it's symlinked—Claude's runtime permission changes appear as git modifications in the dotfiles repo.
 
-### Custom Function Wrappers
-
-**Aider wrapper** (`.functions:184-188`): Wraps the Aider AI coding assistant with API keys from environment variables:
-```bash
-aider() {
-    command aider --anthropic-api-key "$AIDER_ANTHROPIC_API_KEY" --openai-api-key "$AIDER_OPENAI_API_KEY" "$@"
-}
-```
-
-**Reader function** (`.functions:173-182`): Fetches LLM-friendly markdown from URLs using Jina AI's reader service.
-
 ## Key Customizations
 
 ### Development Tools
@@ -118,14 +107,6 @@ aider() {
 - Default branch is `main`
 - Custom aliases: `git l` (graph log), `git s` (short status), `git dm` (delete merged branches)
 - Repository author: Paul Lam <paul@quantisan.com>
-
-### Aider Configuration
-- Model: GPT-5 with architect mode enabled
-- Reasoning effort set to "high"
-- Auto-accept architect changes disabled (manual review required)
-- Prompt caching enabled
-- Config file: `.aider.conf.yml`
-- Environment file: `.env.aider`
 
 ### Environment Variables
 - `EDITOR=nvim`

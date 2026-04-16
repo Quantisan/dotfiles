@@ -21,7 +21,6 @@ function doIt() {
                 --exclude ".claude/" \
                 --exclude ".github/" \
                 --exclude "LICENSE-MIT.txt" \
-                --exclude ".aider.chat.history.md" \
                 -avh --no-perms . ~
 
         ## Set up Git identity and signing preferences

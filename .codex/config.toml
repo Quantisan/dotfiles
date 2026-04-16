@@ -28,9 +28,27 @@ trust_level = "trusted"
 [projects."/Users/paul/Projects/dotfiles"]
 trust_level = "trusted"
 
+[projects."/Users/paul/Projects/delphi"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/wri/planning"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Library/CloudStorage/GoogleDrive-paul@quantisan.com/.shortcut-targets-by-id/1OZrt_MCsAOdkYArY9n2CDwTy1uWLDdWy/AI Collab/Calls"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/nagato"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/superpowers"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Library/CloudStorage/GoogleDrive-paul@quantisan.com/My Drive/Quantisan LLC/meeting minutes"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/moonshine"]
+trust_level = "trusted"
+
 [tui]
 experimental_mode = "plan"
 status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit"]
-
-[mcp_servers.openaiDeveloperDocs]
-url = "https://developers.openai.com/mcp"

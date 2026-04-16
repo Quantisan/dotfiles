@@ -1,6 +1,6 @@
 ---
 description: Create a commit for staged changes
-model: claude-haiku-4-5
+model: haiku
 ---
 
 ## Context

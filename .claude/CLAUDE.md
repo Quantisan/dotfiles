@@ -36,6 +36,10 @@ When asked to do something, just do it—including obvious follow-up actions nee
 - You genuinely don't understand what's being asked
 - I specifically ask "how should I approach X?" (answer the question, don't jump to implementation)
 
+## Code Review Posture
+
+When reviewing code, prefer a senior architectural lens over a line-by-line critique. Focus on conceptual fit, domain modeling, and keeping responsibilities simple and well-bounded. Respect intentional distinctions already encoded in comments, specs, and naming; if something looks awkward but codified, treat it as potentially meaningful and ask whether it is intentional or whether the documentation needs clarification before collapsing the distinction.
+
 ## Universal Principles
 
 ### Functional Core, Imperative Shell

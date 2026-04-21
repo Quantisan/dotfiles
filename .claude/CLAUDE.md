@@ -1,6 +1,20 @@
 General guidance for Claude Code when working with Paul's codebases.
 
-## Core Philosophy: Decomplecting
+## Core Philosophy 1
+
+## Write clearly, don't be too clever
+
+It is more important to make the purpose of the code unmistakable than to display virtuosity. The problem with obscure code is that debugging and modification become much more difficult, and these are already the hardest aspects of computer programming.
+
+Real programs are like prose.
+
+Although details vary from language to language, the principles of style are the same. Branching around branches is confusing in any language.
+
+The job of critical reading doesn't end when you find a typo or even a poor coding practice.
+
+Don't treat computer output as gospel. If you learn to be wary of everyone else's programs, you will be better able to check your own.
+
+## Core Philosophy 2: Decomplecting
 
 We practice decomplecting—separating concerns that have become intertwined. One function does one thing. Modules have clear boundaries. State is explicit.
 
@@ -110,6 +124,21 @@ Each file defines a boundary with a clear public interface. Before creating a fi
 **Benefit:** Concrete code is simpler to understand than parameterized abstractions
 
 We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
+
+### Stable Meaning
+
+*We choose: Semantic consistency over convenient reuse*
+
+**Cost:** Introduce new names or intermediate values instead of overloading an existing variable
+**Benefit:** A reader can trust what a value represents without re-evaluating surrounding control flow
+
+A variable should mean one thing, and one thing only. It should not mean one thing in one circumstance, and carry a different value from a different domain some other time. It should not mean two things at once. It must not be both a floor polish and a dessert topping. It should mean One Thing, and should mean it all of the time.
+
+**This manifests as:**
+- Variable names map to one domain concept
+- Reassignments do not change a value's semantic role
+- Boundary transformations get new names when the domain changes
+- Split overloaded values instead of making one identifier carry multiple meanings
 
 ### Naming & Comments
 

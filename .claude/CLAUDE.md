@@ -125,6 +125,26 @@ Each file defines a boundary with a clear public interface. Before creating a fi
 
 We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
 
+### Use Library Functions
+
+*We choose: Proven building blocks over bespoke cleverness*
+
+**Cost:** Spend time understanding existing APIs and occasionally researching current options
+**Benefit:** Smaller programs, fewer bugs, and less custom code to debug
+
+Prefer open source libraries and library functions when they make code smaller, clearer, and more obvious. Prefer narrowly focused, well-designed libraries over broad or merely popular ones. Build on proven work instead of starting from scratch unless a custom implementation makes the domain meaning substantially clearer or avoids a real dependency problem.
+
+Debugging is twice as hard as writing a program in the first place, so avoid spending complexity budget on clever code you did not need to write.
+
+When a task may benefit from a library, do not rely on memory alone. Check current open source options and compatibility first. Prefer a lightweight search to confirm what is current, but if the search is likely to change the architecture, add a dependency, or consume noticeable time or tokens, confirm with the user before doing a broader library evaluation. Otherwise, do the lightweight search and explain what you found.
+
+**This manifests as:**
+- Prefer open source libraries over custom implementations for common problems
+- Prefer narrowly scoped, well-designed libraries over broad or merely popular ones
+- Do a quick current check before recommending a library
+- Ask before spending time on a broad library evaluation or adding a new dependency
+- Explain why a library is better than a local implementation in this case
+
 ### Stable Meaning
 
 *We choose: Semantic consistency over convenient reuse*

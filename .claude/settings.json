@@ -25,8 +25,7 @@
       "Read(./config/credentials.json)",
       "Read(./build)"
     ],
-    "ask": [],
-    "defaultMode": "plan"
+    "ask": []
   },
   "model": "opusplan",
   "statusLine": {
@@ -39,6 +38,6 @@
     "frontend-design@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "advisorModel": "opus"
 }

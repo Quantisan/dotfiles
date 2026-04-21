@@ -1,16 +1,15 @@
 ---
-description: Create a commit for staged changes
-model: haiku
+description: Group unstaged changes into 2–4 logical commits
+model: sonnet
 ---
 
 ## Context
 
-- Staged changes: !`git diff --cached`
-- Recent commits: !`git log --oneline -3`
+- Working tree status: !`git status --short`
+- Unstaged diff: !`git diff`
+- Recent commits: !`git log --oneline -5`
 - Current branch: !`git branch --show-current`
 
 ## Your task
 
-Create a commit with the changes already staged. Do NOT add any unstaged files.
-
-Match the commit style of recent commits. Use a concise Conventional Commits title. Description should capture user intent and decisions relevant only to staged changes—exclude unrelated conversation. Be minimal and direct.
+Review the unstaged changes and group them into 2 to 4 logical commits, each telling one coherent story. Stage and commit each group in turn, matching the style of recent commits. Leave any changes that don't fit a coherent group unstaged.

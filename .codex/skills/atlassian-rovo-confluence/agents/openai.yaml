@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atlassian Rovo Confluence"
+  short_description: "GFW Confluence via Atlassian MCP"
+  default_prompt: "Use $atlassian-rovo-confluence to summarize, compare, or find Confluence pages on gfw.atlassian.net."

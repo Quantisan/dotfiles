@@ -2,17 +2,7 @@
 description: Analyze past sessions for wrong-turn patterns and derive CLAUDE.md improvements
 ---
 
-## Scanner
-
-!`python ~/.claude/commands/analyze_sessions.py 2>&1`
-
-## Manifest
-
-!`cat docs/analysis/session-audit/manifest.md 2>/dev/null || echo "(manifest not found)"`
-
-## Extracts
-
-!`find docs/analysis/session-audit/extracts/ -name "*.md" 2>/dev/null | sort | xargs cat 2>/dev/null || echo "(no extracts found)"`
+!`python ~/.claude/commands/analyze_sessions.py --dump 2>&1`
 
 ## Your task
 

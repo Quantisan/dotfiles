@@ -283,6 +283,8 @@ def main():
     parser.add_argument("--max-turns", type=int, default=400, help="Skip sessions with more assistant turns")
     parser.add_argument("--top-windows", type=int, default=8, help="Number of highest-density windows to extract")
     parser.add_argument("--output-dir", default="docs/analysis/session-audit/")
+    parser.add_argument("--dump", action="store_true",
+                        help="After writing files, print manifest and all extracts to stdout")
     args = parser.parse_args()
 
     if args.project_dir is None:
@@ -363,6 +365,19 @@ def main():
         print(f"Extract  → extracts/{sid[:20]}….md")
 
     print(f"\nDone. Top {len(top)} windows across {len(by_session)} sessions.")
+
+    if args.dump:
+        manifest_path = output_dir / "manifest.md"
+        extracts_dir = output_dir / "extracts"
+        print("\n---MANIFEST---")
+        print(manifest_path.read_text() if manifest_path.exists() else "(manifest not found)")
+        extract_files = sorted(extracts_dir.glob("*.md")) if extracts_dir.exists() else []
+        if extract_files:
+            print("\n---EXTRACTS---")
+            for ef in extract_files:
+                print(ef.read_text())
+        else:
+            print("\n---EXTRACTS---\n(no extracts found)")
 
 
 if __name__ == "__main__":

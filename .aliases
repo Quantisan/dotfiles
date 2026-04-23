@@ -12,6 +12,7 @@ alias dl='cd ~/Downloads'
 alias dt='cd ~/Desktop'
 alias p='cd ~/Projects'
 alias g='git'
+alias gcm='codex exec -m gpt-5.4-mini --sandbox workspace-write --add-dir "$PWD/.git" --cd "$PWD" '"'"'Use $create-commit'"'"''
 alias lg='lazygit'
 
 ## Listing & Search ##

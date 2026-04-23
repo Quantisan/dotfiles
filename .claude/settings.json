@@ -16,7 +16,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git log:*)",
-      "Bash(gh pr view:*)"
+      "Bash(gh pr view:*)",
+      "Bash(python ~/.claude/commands/analyze_sessions.py*)"
     ],
     "deny": [
       "Read(./.env)",

@@ -33,7 +33,9 @@ function doIt() {
         mkdir -p ~/.claude
         ln -shf "$(pwd)/.claude/settings.json" ~/.claude/settings.json
         cp .claude/CLAUDE.md ~/.claude/CLAUDE.md
-        rsync -avh --delete .claude/commands/ ~/.claude/commands/
+        rsync -avh --delete \
+                --exclude "qb-*.md" \
+                .claude/commands/ ~/.claude/commands/
 
         ## Set up Codex config
         mkdir -p ~/.codex

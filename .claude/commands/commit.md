@@ -1,5 +1,5 @@
 ---
-description: Group unstaged changes into 2–4 logical commits
+description: Group unstaged changes into 1–4 logical commits
 model: sonnet
 ---
 
@@ -12,4 +12,4 @@ model: sonnet
 
 ## Your task
 
-Review the unstaged changes and group them into 2 to 4 logical commits, each telling one coherent story. Stage and commit each group in turn, matching the style of recent commits. Leave any changes that don't fit a coherent group unstaged.
+Review the unstaged changes and group them into 1 to 4 logical commits, each telling one coherent story. Stage and commit each group in turn, matching the style of recent commits. Leave any changes that don't fit a coherent group unstaged.

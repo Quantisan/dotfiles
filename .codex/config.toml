@@ -49,9 +49,33 @@ trust_level = "trusted"
 [projects."/Users/paul/Projects/moonshine"]
 trust_level = "trusted"
 
+[projects."/Users/paul/Projects/japanese-learning"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/clearance"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/Motiva/infrastructure"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/Motiva/front-end-cledus"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Library/CloudStorage/GoogleDrive-paul@quantisan.com/My Drive/Motiva/transcripts"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/spithre-discovery"]
+trust_level = "trusted"
+
+[projects."/Users/paul/Projects/wri/askwri"]
+trust_level = "trusted"
+
 [tui]
 experimental_mode = "plan"
 status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "weekly-limit"]
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
 
 [mcp_servers.atlassianRovo]
 url = "https://mcp.atlassian.com/v1/mcp"

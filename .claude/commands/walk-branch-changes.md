@@ -12,12 +12,12 @@ Assume the reader has broad codebase familiarity; supply only the context needed
 
 Present one chunk at a time:
 
-- `Chunk N` with a one-line trace slice: `upstream event → changed operation → downstream effect`
-- A tight sequence of numbered steps, each one sentence shaped as `input/event → operation/transformation → emitted value/state effect`, with an inline `path:line` ref on the step it supports
+- Single chunk header line: `Chunk N — <concrete upstream event> → <concrete changed operation> → <concrete downstream effect>`. Substitute domain terms inline; do not emit the placeholder labels or repeat the pattern as a separate meta-line.
+- A tight sequence of numbered steps. Each step is exactly one transition shaped as `input/event → operation/transformation → emitted value/state effect`, with an inline `path:line` ref on the step it supports. If a single sentence would carry two transitions (e.g. predicate-match AND construction; validate AND emit), split into two steps. A brief cause clause attached to the transition's outcome is fine ("validates and passes — because X"); chaining a second transition behind an em-dash or semicolon is not.
 - Use the codebase's namespaced domain terms over generic wording; use exact symbol names only when they materially improve precision or editor lookup
-- Tag a step `(unchanged)` only when it exists purely to orient between changed steps; keep these rare and brief
+- When you must insert a bridge step purely to orient the reader between changed steps, tag it `(bridge)`. The originating-event step and the final state-effect step are bookends, not bridges, and carry no tag. Do not use any tag to mean "this code wasn't modified on the branch."
 
-Before writing each chunk, do two passes internally: first map the changed steps (with any minimal `(unchanged)` bridges needed for legibility), then rewrite the same chunk for display in clearer language without changing technical meaning, sequencing, project-specific terms, or `(unchanged)` labeling. Show only the second-pass result.
+Before writing each chunk, do two passes internally: first map the changed steps (with any minimal `(bridge)` steps needed for legibility), then rewrite the same chunk for display in clearer language without changing technical meaning, sequencing, project-specific terms, or `(bridge)` labeling. Show only the second-pass result.
 
 Trace the primary changed path; defer substantial alternate paths to later chunks. Include schemas or shared contracts as steps only when the branch changed them or they're needed to read a changed boundary.
 

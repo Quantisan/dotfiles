@@ -34,7 +34,7 @@ function doIt() {
         ln -shf "$(pwd)/.claude/settings.json" ~/.claude/settings.json
         cp .claude/CLAUDE.md ~/.claude/CLAUDE.md
         rsync -avh --delete \
-                --exclude "qb-*.md" \
+                --exclude "rk-*.md" \
                 .claude/commands/ ~/.claude/commands/
 
         ## Set up Codex config

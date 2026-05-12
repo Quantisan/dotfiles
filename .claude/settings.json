@@ -6,6 +6,7 @@
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
   },
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       "Bash(pwd:*)",
       "Bash(which:*)",
@@ -38,6 +39,12 @@
     "elements-of-style@superpowers-marketplace": true,
     "frontend-design@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
+  },
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Source control: github.com/Quantisan and all repos under it"
+    ]
   },
   "effortLevel": "xhigh",
   "advisorModel": "opus",

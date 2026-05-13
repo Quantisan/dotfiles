@@ -48,5 +48,7 @@
       "$defaults",
       "Source control: github.com/Quantisan and all repos under it"
     ]
-  }
+  },
+  "preferredNotifChannel": "ghostty",
+  "inputNeededNotifEnabled": true
 }

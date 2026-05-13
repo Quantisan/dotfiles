@@ -6,7 +6,6 @@
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
   },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(pwd:*)",
       "Bash(which:*)",
@@ -27,9 +26,10 @@
       "Read(./config/credentials.json)",
       "Read(./build)"
     ],
-    "ask": []
+    "ask": [],
+    "defaultMode": "auto"
   },
-  "model": "opusplan",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name // empty'); effort=$(jq -r '.effortLevel // \"default\"' ~/.claude/settings.json); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir // empty'); branch=$([ -n \"$cwd\" ] && git -C \"$cwd\" --no-optional-locks rev-parse --abbrev-ref HEAD 2>/dev/null); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); five=$(echo \"$input\" | jq -r '.rate_limits.five_hour.used_percentage // empty'); week=$(echo \"$input\" | jq -r '.rate_limits.seven_day.used_percentage // empty'); out=\"\"; sep=\" · \"; append() { [ -n \"$1\" ] || return; [ -n \"$out\" ] && out=\"${out}${sep}\"; out=\"${out}$1\"; }; append \"$model\"; append \"effort:$effort\"; append \"$branch\"; [ -n \"$used\" ] && { used_pct=$(printf '%.0f' \"$used\"); filled=$(printf '%.0f' \"$(echo \"$used * 10 / 100\" | bc -l)\"); [ \"$filled\" -gt 10 ] && filled=10; [ \"$filled\" -lt 0 ] && filled=0; empty=$((10 - filled)); bar=$(printf '%0.s#' $(seq 1 $filled 2>/dev/null))$(printf '%0.s-' $(seq 1 $empty 2>/dev/null)); append \"Context window: [$bar] ${used_pct}% filled\"; }; [ -n \"$five\" ] && { five_left=$(printf '%.0f' \"$(echo \"100 - $five\" | bc -l)\"); append \"5h: ${five_left}% left\"; }; [ -n \"$week\" ] && { week_left=$(printf '%.0f' \"$(echo \"100 - $week\" | bc -l)\"); append \"7d: ${week_left}% left\"; }; echo \"$out\""
@@ -40,13 +40,13 @@
     "frontend-design@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
+  "effortLevel": "xhigh",
+  "advisorModel": "opus",
+  "theme": "light",
   "autoMode": {
     "environment": [
       "$defaults",
       "Source control: github.com/Quantisan and all repos under it"
     ]
-  },
-  "effortLevel": "xhigh",
-  "advisorModel": "opus",
-  "theme": "light"
+  }
 }

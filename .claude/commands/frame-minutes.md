@@ -31,7 +31,7 @@ Preserve speaker names from the transcript. Attribute facts, decisions, and acti
 
 **Do internally (do not show this work in your reply):**
 
-1. Extract atomic facts as `(distilled utterance, speaker, context)` tuples — distill by cutting, not rewriting. Remove filler, false starts, and redundancy; keep the speaker's phrasing and style.
+1. Extract atomic facts as `(distilled utterance, speaker, line, context)` tuples — distill by cutting, not rewriting. Remove filler, false starts, and redundancy; keep the speaker's phrasing and style. `line` is the line number where the fact lands in the dialogue file (the `Read` tool returns lines with line-number prefixes). Capture line numbers now — they become citations in Turn 3.
 2. Label each fact: `Decision` / `Alignment` / `Insight` / `Context`.
    - **Decision** — a choice was made or commitment given. Action items surface through metadata (owner + deadline) on Decision labels — a decision with an owner and date is an action item.
    - **Alignment** — shared understanding established or confirmed between participants.
@@ -103,9 +103,13 @@ No questions this turn.
 
 Render the final structured outline:
 
-- Theme headings ordered by significance.
-- Nested bullets with inline function labels: `[decision]`, `[alignment]`, `[insight]`, `[context]`.
-- Metadata where applicable (speakers, owners, dates).
+- Theme headings (`##`) ordered by significance. No type tag on the heading.
+- Optional plain-text sub-section headers within a theme when discussion clusters into sub-threads (no bold, no bullet — just a line).
+- Bullets begin with the function label: `[decision]`, `[alignment]`, `[insight]`, `[context]`.
+- Speaker attribution at the start of the bullet when one speaker drives the fact (`Paul: …`, `Dave: …`). Omit when the fact is jointly held.
+- **Weave direct quotes from the transcript wherever they carry the punch.** Quote the speaker's exact wording for the spicy bits; paraphrase only the connective tissue. This is how "distill by cutting, not rewriting" shows up in the final output — the page should feel like the speakers, not like a summary of them.
+- **Cite each bullet** with the dialogue line number as `:NNN` at the end. The dialogue filename is constant for the run, so do not repeat it per bullet — citing the bare line number is intentional, not an oversight.
+- Metadata (owners, dates) inline, not in a separate block.
 
 Apply one shortening pass: compress each point to the key idea.
 
@@ -118,15 +122,16 @@ Example final shape:
 ```
 ## Auth migration path
 
-- [decision] JWT is the move — kills the last mobile blocker (Paul, by Mar 22)
-- [decision] "Done with server-side tokens" — deprecated; 2-week migration window with fallback
-- [alignment] Both "fine with the risk at this scale"
+JWT cutover
+- [decision] Paul: JWT is "the move" — kills the last mobile blocker. Target Mar 22. :225
+- [decision] "Done with server-side tokens" — deprecated; 2-week window with fallback. :243
+- [alignment] Both "fine with the risk at this scale." :251
 
 ## Series A timing
 
-- [alignment] "Pretty convinced" Q3 if ARR hits 800k — shared threshold
-- [decision] "Not worth the distraction" — intros paused until milestone hit
-- [insight] Board seat expectations may "vary a lot" between target leads — needs research
+- [alignment] Both "pretty convinced" Q3 if ARR hits 800k. :310
+- [decision] "Not worth the distraction" — intros paused until milestone hit. :322
+- [insight] Board seat expectations "vary a lot" between target leads — needs research. :340
 ```
 
 Write this content to the output path resolved in Step 1 using the `Write` tool. Overwrite if the path already exists.

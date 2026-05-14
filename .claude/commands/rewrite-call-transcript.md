@@ -12,7 +12,18 @@ Transcript file: `$ARGUMENTS`
 
 Before anything else, ask the user to paste a speaker roster: each speaker on one line with a 2-3 word description (e.g. `Alice — founder, technical`). Wait for their reply. Treat the roster as the primary attribution context; use it to resolve vague labels, role references, and likely speaker continuity. If the roster is missing or incomplete, stay conservative — never invent names.
 
-## Step 2 — Map the conversation
+## Step 2 — Resolve the output path
+
+Dispatch an `Agent` (`subagent_type: general-purpose`, `model: haiku`) to resolve the cleaned-dialogue output path. Brief it with the input transcript path (`$ARGUMENTS`) only. Ask it to:
+
+- `ls` the parent directory of the input.
+- Identify the input's trailing suffix segments (e.g. `.transcript.vtt`).
+- Look for sibling files that share the input's stem but use a `dialogue`-containing suffix (e.g. `.dialogue.txt`, `.dialogue.md`). If found, build the output path by replacing the input's suffix with that sibling-attested dialogue suffix. If multiple variants exist, pick the most common one.
+- If no informative sibling pattern exists, fall back: strip the input's extension(s) and append `.dialogue.txt`.
+
+The sub-agent returns one line: the resolved output path. No directory listing, no rationale, nothing else. Hold this path in your working notes and use it verbatim in Step 7.
+
+## Step 3 — Map the conversation
 
 Dispatch an `Agent` (`subagent_type: general-purpose`) to read the full transcript file and return a compact `conversation_map`:
 - likely speakers and the source labels they appear under
@@ -21,11 +32,11 @@ Dispatch an `Agent` (`subagent_type: general-purpose`) to read the full transcri
 
 The mapper returns the map only. It must not return the full transcript text.
 
-## Step 3 — Maintain a continuity ledger
+## Step 4 — Maintain a continuity ledger
 
 In your own context, keep a `continuity_ledger`: canonical speaker names, stable technical terms, unresolved mappings, and consistency decisions. Update it as cleaner sub-agents return chunks.
 
-## Step 4 — Clean each chunk
+## Step 5 — Clean each chunk
 
 For each chunk the mapper identified (a short transcript may stay as a single chunk), dispatch an `Agent` (`subagent_type: general-purpose`) with:
 - the transcript file path and the chunk's line range, with a small overlap into the previous chunk's tail
@@ -49,15 +60,15 @@ Brief each cleaner with these rules:
 - Never summarize, combine turns, or smooth wording in ways that introduce new concepts.
 - When a word or segment cannot be recovered confidently, write `[unclear]`.
 
-## Step 5 — Challenge hotspots (only when needed)
+## Step 6 — Challenge hotspots (only when needed)
 
 For chunks the mapper flagged as real ambiguity hotspots, dispatch an `Agent` (`subagent_type: general-purpose`) to produce 2 conservative `hotspot_variants` for that span. Choose the most defensible variant. Use this for uncertainty, not stylistic experimentation.
 
-## Step 6 — Assemble and write
+## Step 7 — Assemble and write
 
 Harmonize overlaps and naming across chunks using the ledger. Assemble the final transcript.
 
-Compute the output path by stripping the extension from `$ARGUMENTS` and appending `.dialogue.txt` (e.g. `notes/call.txt` → `notes/call.dialogue.txt`). Overwrite if the path already exists. Write the file using this exact shape:
+Write to the output path resolved in Step 2. Overwrite if the path already exists. Write the file using this exact shape:
 
 ```xml
 <cleaned_transcript>

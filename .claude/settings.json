@@ -43,12 +43,13 @@
   "effortLevel": "xhigh",
   "advisorModel": "opus",
   "theme": "light",
+  "preferredNotifChannel": "ghostty",
+  "inputNeededNotifEnabled": true,
   "autoMode": {
     "environment": [
       "$defaults",
       "Source control: github.com/Quantisan and all repos under it"
     ]
   },
-  "preferredNotifChannel": "ghostty",
-  "inputNeededNotifEnabled": true
+  "skipAutoPermissionPrompt": true
 }

@@ -7,9 +7,9 @@
 
 A spec author reviewing their own work is constrained by their own frame. They can check for internal consistency, completeness, and clarity — but they cannot see the assumptions they don't know they're making. A single external reviewer helps, but still brings one perspective.
 
-Running multiple independent reviewers from orthogonal perspectives breaks the author's frame open. Where independent reviewers converge on the same pressure point, that convergence is a high-confidence signal that the spec has a real gap.
+Running multiple reviewers from structurally different perspectives surfaces more concerns than any single reviewer. Where reviewers converge on the same pressure point despite different review lenses, that convergence is a useful prioritization signal — stronger than any individual finding, though not equivalent to triangulation by genuinely independent experts. All reviewers share a model substrate, so convergence is a heuristic, not a proof.
 
-This pattern was developed during review of the Excerpt-Anchored Sessions spec, where a cognitive psychologist, a PE due diligence analyst, and an accessibility engineer independently surfaced the same three structural ambiguities from completely different angles.
+This pattern was developed during review of the Excerpt-Anchored Sessions spec, where a cognitive psychologist, a PE due diligence analyst, and an accessibility engineer independently surfaced the same three structural ambiguities from completely different angles. The command uses structural diversity techniques (different review tasks, different priming context) to push simulated reviewers further apart than persona labels alone would achieve.
 
 ## Goal
 
@@ -41,10 +41,16 @@ State the axes being covered and why this combination maximizes coverage.
 
 ### Step 4: Launch 3 parallel reviews
 
-Each persona reviews independently as a subagent. The review prompt:
+Each persona reviews independently as a subagent. Two mechanisms push reviewers toward structural diversity beyond persona labels:
+
+**Different review lenses.** Each reviewer gets a different primary task — not the same instructions with a different name. One hunts for unstated assumptions. One hunts for internal contradictions. One hunts for missing stakeholder impacts. This shifts the model's search space: different questions produce different outputs even from the same substrate.
+
+**Different priming context.** Each reviewer is primed with different context before seeing the spec — a relevant failure mode, an end-user scenario, or an analogous approach from another domain. This gives reviewers genuinely different epistemic starting points.
+
+The review prompt for each:
 
 - Embody the persona with enough specificity that the professional lens is real, not decorative.
-- Find high-level, customer-focused ambiguities — questions the spec doesn't answer but must answer before implementation.
+- Pursue your assigned review lens — this is your primary task, not a suggestion.
 - Quality over quantity. Max 3-5 findings; fewer is better if sharper.
 - Each finding must identify the hidden assumption and explain why it's load-bearing.
 - Focus on ambiguities, not feature requests. Not "you should add X" but "the spec assumes X without examining it."
@@ -75,7 +81,9 @@ The synthesis is the deliverable. The command ends here.
 
 **Competitive framing in subagent prompts.** Without it, reviewers pad findings. The framing drives prioritization and concision.
 
-**Synthesis focuses on convergence.** Any single reviewer's best finding is useful. Where multiple independent perspectives hit the same wall is where the real gaps live.
+**Structural diversity, not just persona diversity.** Persona labels alone produce shallow variation from a shared model substrate. Different review lenses and different priming context push reviewers into genuinely different regions of the output space.
+
+**Synthesis focuses on convergence as a prioritization heuristic.** Convergence across structurally diverse reviewers is stronger signal than any individual finding, though not equivalent to independent expert triangulation. The synthesis is honest about this distinction.
 
 **No writing back to the spec.** The command is a review tool, not an editing tool. What the author does with the findings is their decision.
 

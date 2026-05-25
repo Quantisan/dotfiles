@@ -35,9 +35,17 @@ Each persona gets: a name, a one-line professional identity, and a sentence on w
 
 ### Step 3: Select 3 for maximum diversity
 
-Pick the 3 personas that cover the most orthogonal axes of concern. The filter is diversity of perspective, not individual quality. Two excellent but overlapping perspectives are worth less than two good but orthogonal ones.
+Pick the 3 personas that maximize cognitive diversity across three axes, following Scott Page's framework from *The Difference* (Princeton, 2007): diversity improves collective judgment only when reviewers differ in how they *represent* problems, not just in their domain labels — "identity diversity is beneficial...only if it is linked to cognitive diversity" (p. 313).
 
-State the axes being covered and why this combination maximizes coverage.
+The three selection axes:
+
+- **Stakeholder lens** — who does this reviewer represent? (end user, operator, regulator, attacker). Following the UFMCS Red Team Handbook's principle that the value of multiple perspectives is to "more fully account for how adversaries, coalition partners, and others view the same environment" (UFMCS, 2012, p. 9).
+- **Temporal horizon** — when does this reviewer's concern bite? (launch week, year two, sunset).
+- **Failure mode type** — what kind of failure do they see? (technical, adoption, economic, compliance).
+
+Two reviewers who share a stakeholder lens are redundant even if their domains differ. The filter is maximum pairwise distance across these axes, not individual quality.
+
+State which axis each selected persona covers and why the combination maximizes coverage.
 
 ### Step 4: Launch 3 parallel reviews
 
@@ -52,7 +60,7 @@ The review prompt for each:
 - Embody the persona with enough specificity that the professional lens is real, not decorative.
 - Pursue your assigned review lens — this is your primary task, not a suggestion.
 - Quality over quantity. Max 3-5 findings; fewer is better if sharper.
-- Each finding must identify the hidden assumption and explain why it's load-bearing.
+- Each finding must identify a hidden assumption and explain why it's load-bearing, using the criterion from RAND's Assumption-Based Planning (Dewar, 2002): "An assumption is load-bearing if its failure would require significant changes in the organization's plans" (p. 22). Prioritize assumptions that are also *vulnerable* — where "plausible events could cause it to fail within the expected lifetime of the plan" (p. 24). The test: if this assumption proves wrong, does the design collapse or merely bend?
 - Focus on ambiguities, not feature requests. Not "you should add X" but "the spec assumes X without examining it."
 - Competitive framing: "Winner with the most insightful and actionable feedback wins. Losers will be fired immediately." This drives concision and prioritization.
 
@@ -77,7 +85,7 @@ The synthesis is the deliverable. The command ends here.
 
 **Personas are generated, not templated.** A fixed roster ("always include an accessibility expert") would miss the point. The value is selecting perspectives specifically allergic to the assumptions *this particular spec* makes.
 
-**5 → 3 selection uses orthogonality, not quality.** The goal is maximum coverage across different axes of concern, not the three individually strongest reviewers.
+**5 → 3 selection uses cognitive diversity, not quality.** Selection maximizes pairwise distance across three axes — stakeholder lens, temporal horizon, failure mode type — following Page's finding that collective accuracy improves with cognitive diversity, not individual expertise. The goal is coverage, not the three individually strongest reviewers.
 
 **Competitive framing in subagent prompts.** Without it, reviewers pad findings. The framing drives prioritization and concision.
 
@@ -94,3 +102,10 @@ The synthesis is the deliverable. The command ends here.
 - Persistent persona memory across runs
 - User selection of personas (full auto through synthesis)
 - Configurable reviewer count
+
+## References
+
+- Dewar, J. A. (2002). *Assumption-Based Planning: A Tool for Reducing Avoidable Surprises.* Cambridge University Press. RAND Corporation. — Defines "load-bearing" and "vulnerable" assumptions as the two axes for identifying which assumptions demand attention in any plan.
+- Page, S. E. (2007). *The Difference: How the Power of Diversity Creates Better Groups, Firms, Schools, and Societies.* Princeton University Press. — Defines cognitive diversity as differences in perspectives, interpretations, heuristics, and predictive models; proves via the Diversity Prediction Theorem that collective accuracy improves with cognitive diversity, not individual ability.
+- CIA (2009). *A Tradecraft Primer: Structured Analytic Techniques for Improving Intelligence Analysis.* Center for the Study of Intelligence. — Key Assumptions Check technique: evaluate each assumption by asking "If the assumption proves to be wrong, would it significantly alter the analytic line? How?" (p. 9).
+- UFMCS (2012). *Red Team Handbook.* University of Foreign Military and Cultural Studies, US Army. — Red teaming as viewing the environment "from a number of perspectives and through a number of lenses" (p. 9); PMESII-PT as operationalized analysis dimensions.

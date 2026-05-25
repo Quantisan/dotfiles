@@ -62,7 +62,9 @@ The review prompt for each:
 - Quality over quantity. Max 3-5 findings; fewer is better if sharper.
 - Each finding must identify a hidden assumption and explain why it's load-bearing, using the criterion from RAND's Assumption-Based Planning (Dewar, 2002): "An assumption is load-bearing if its failure would require significant changes in the organization's plans" (p. 22). Prioritize assumptions that are also *vulnerable* — where "plausible events could cause it to fail within the expected lifetime of the plan" (p. 24). The test: if this assumption proves wrong, does the design collapse or merely bend?
 - Focus on ambiguities, not feature requests. Not "you should add X" but "the spec assumes X without examining it."
-- Competitive framing: "Winner with the most insightful and actionable feedback wins. Losers will be fired immediately." This drives concision and prioritization.
+- Before critiquing, list the specific claims in the spec you would need to verify to assess each finding. This grounds the review in the document's actual content before the reviewer commits to confident-sounding positions (FaR prompting; Qin et al., 2024).
+- For each finding, state whether you are confident or whether it requires verification the reviewer cannot perform. Do not drop uncertain-but-important findings — flag them with your reasoning. Uncertainty is signal, not weakness (MetaFaith; Yang et al., 2025).
+- Severity tiers constrain output: at most 2 Critical findings (assumption failure would collapse the design), at most 2 Significant (would require meaningful rework), and at most 1 Minor (worth noting). Order by impact within each tier. This structural constraint produces fewer, higher-precision findings more reliably than motivational pressure (Bai et al., 2024).
 
 ### Step 5: Synthesize cross-cutting themes
 
@@ -87,7 +89,7 @@ The synthesis is the deliverable. The command ends here.
 
 **5 → 3 selection uses cognitive diversity, not quality.** Selection maximizes pairwise distance across three axes — stakeholder lens, temporal horizon, failure mode type — following Page's finding that collective accuracy improves with cognitive diversity, not individual expertise. The goal is coverage, not the three individually strongest reviewers.
 
-**Competitive framing in subagent prompts.** Without it, reviewers pad findings. The framing drives prioritization and concision.
+**Structural constraints over motivational pressure.** Competitive framing ("losers will be fired") inflates expressed confidence without improving accuracy (Abeysinghe et al., 2025). Instead, severity tiers with count caps produce fewer, higher-precision findings. FaR pre-flight grounds findings in the document's actual claims. MetaFaith uncertainty instruction preserves uncertain-but-important findings that competitive pressure would suppress.
 
 **Structural diversity, not just persona diversity.** Persona labels alone produce shallow variation from a shared model substrate. Different review lenses and different priming context push reviewers into genuinely different regions of the output space.
 
@@ -109,3 +111,7 @@ The synthesis is the deliverable. The command ends here.
 - Page, S. E. (2007). *The Difference: How the Power of Diversity Creates Better Groups, Firms, Schools, and Societies.* Princeton University Press. — Defines cognitive diversity as differences in perspectives, interpretations, heuristics, and predictive models; proves via the Diversity Prediction Theorem that collective accuracy improves with cognitive diversity, not individual ability.
 - CIA (2009). *A Tradecraft Primer: Structured Analytic Techniques for Improving Intelligence Analysis.* Center for the Study of Intelligence. — Key Assumptions Check technique: evaluate each assumption by asking "If the assumption proves to be wrong, would it significantly alter the analytic line? How?" (p. 9).
 - UFMCS (2012). *Red Team Handbook.* University of Foreign Military and Cultural Studies, US Army. — Red teaming as viewing the environment "from a number of perspectives and through a number of lenses" (p. 9); PMESII-PT as operationalized analysis dimensions.
+- Qin, C., et al. (2024). *FaR: Fact-and-Reflection Improves Confidence Calibration of Large Language Models.* arXiv:2402.17124. — Two-step prompting (list relevant facts, then reflect before concluding) reduced Expected Calibration Error by 23.5%; grounds reasoning in document content before commitment.
+- Yang, Y., et al. (2025). *MetaFaith: Faithful Natural Language Uncertainty Expression for Large Language Models.* arXiv:2505.24858. — Metacognitive self-reflection on intrinsic confidence before answering improved calibration faithfulness by 61%; prevents dropping uncertain-but-important findings.
+- Bai, J., et al. (2024). *LLM Critics Help Catch LLM Bugs.* OpenAI. arXiv:2407.00215. — Critics producing fewer, higher-precision findings outperformed those maximizing coverage; structural output constraints beat motivational framing for review quality.
+- Abeysinghe, M., et al. (2025). *Analysis of Threat-Based Manipulation in Large Language Models.* arXiv:2507.21133. — Threat-based prompts increased expressed confidence without improving accuracy across 3,390 responses; competitive framing produces confidence aesthetics, not better signal.

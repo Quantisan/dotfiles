@@ -57,14 +57,25 @@ Each persona reviews independently as a subagent. Two mechanisms push reviewers 
 
 The review prompt for each:
 
+**Reviewer identity:**
+
 - Embody the persona with enough specificity that the professional lens is real, not decorative.
 - Pursue your assigned review lens — this is your primary task, not a suggestion.
-- Quality over quantity. Max 3-5 findings; fewer is better if sharper.
+
+**Preparation (before reviewing the spec):**
+
+- Search for established frameworks from your field that apply to this spec's domain. Search for each independently. Each framework you apply must cite a specific source (author, year, title). No citation, no framework. Do not accept the first plausible search result; evaluate whether each retrieved source is relevant to the problem and whether your use of it is supported by what the source actually says. (See "Grounded review lenses" in Key Design Decisions for rationale.)
+- Before critiquing, list the specific claims in the spec you would need to verify to assess each finding. This grounds the review in the document's actual content before the reviewer commits to confident-sounding positions (FaR prompting; Qin et al., 2024).
+
+**Finding constraints (what counts as a valid finding):**
+
 - Each finding must identify a hidden assumption and explain why it's load-bearing, using the criterion from RAND's Assumption-Based Planning (Dewar, 2002): "An assumption is load-bearing if its failure would require significant changes in the organization's plans" (p. 22). Prioritize assumptions that are also *vulnerable* — where "plausible events could cause it to fail within the expected lifetime of the plan" (p. 24). The test: if this assumption proves wrong, does the design collapse or merely bend?
 - Focus on ambiguities, not feature requests. Not "you should add X" but "the spec assumes X without examining it."
 - Each finding must quote the specific spec text it challenges before stating the finding. No quote, no finding. (See "Evidence-anchored findings" in Key Design Decisions for rationale.)
-- Before reviewing, search for established frameworks from your field that apply to this spec's domain. Search for each independently. Each framework you apply must cite a specific source (author, year, title). No citation, no framework. Do not accept the first plausible search result; evaluate whether each retrieved source is relevant to the problem and whether your use of it is supported by what the source actually says. (See "Grounded review lenses" in Key Design Decisions for rationale.)
-- Before critiquing, list the specific claims in the spec you would need to verify to assess each finding. This grounds the review in the document's actual content before the reviewer commits to confident-sounding positions (FaR prompting; Qin et al., 2024).
+
+**Output structure:**
+
+- Quality over quantity. Max 3-5 findings; fewer is better if sharper.
 - For each finding, state whether you are confident or whether it requires verification the reviewer cannot perform. Do not drop uncertain-but-important findings — flag them with your reasoning. Uncertainty is signal, not weakness (MetaFaith; Yang et al., 2025).
 - Severity tiers constrain output: at most 2 Critical findings (assumption failure would collapse the design), at most 2 Significant (would require meaningful rework), and at most 1 Minor (worth noting). Order by impact within each tier. This structural constraint produces fewer, higher-precision findings more reliably than motivational pressure (Bai et al., 2024).
 

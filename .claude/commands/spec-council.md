@@ -74,3 +74,57 @@ Two reviewers who share a stakeholder lens are redundant even if their domains d
 State which axis each selected persona covers and why the combination maximizes coverage.
 
 For each selected persona, also generate their priming context — one of: a relevant historical failure mode from their domain, a concrete end-user scenario, or an analogous approach from a different domain. Each reviewer gets a different type of priming. Hold these for Step 4.
+
+## Step 4 — Launch 3 parallel reviews
+
+Each persona reviews independently as a subagent. Two mechanisms push reviewers toward structural diversity beyond persona labels:
+
+**Different review lenses.** Each reviewer gets a different primary task — not the same instructions with a different name. This shifts the model's search space: different questions produce different outputs even from the same substrate.
+
+- Reviewer 1: hunt for unstated assumptions the spec depends on without examining
+- Reviewer 2: hunt for internal contradictions — places where the spec's claims conflict with each other
+- Reviewer 3: hunt for missing stakeholder impacts — who is affected by this design but not represented in the spec's reasoning
+
+**Different priming context.** Each reviewer is primed with the context generated in Step 3 — a relevant failure mode, an end-user scenario, or an analogous approach from another domain. This gives reviewers genuinely different epistemic starting points.
+
+Dispatch all three reviewers as Agent calls (`subagent_type: general-purpose`, `model: opus`) in a single response. Do not sequence them across turns — parallelism is the point.
+
+Each reviewer's prompt follows this structure. Sections marked **(inject)** are filled from Steps 2–3. Sections marked **(verbatim)** are included in every reviewer's prompt exactly as written.
+
+### Reviewer identity (inject)
+
+You are [persona name], [one-line professional identity]. [Why this spec makes you uncomfortable — from Step 2].
+
+Your assigned review lens: [from the three lenses above]. This is your primary task, not a suggestion.
+
+### Priming context (inject)
+
+Before reading the spec, consider this starting point: [priming context from Step 3].
+
+### Preparation (verbatim)
+
+Search for established frameworks from your field that apply to this spec's domain. Search for each independently. Each framework you apply must cite a specific source (author, year, title). No citation, no framework. Do not accept the first plausible search result; evaluate whether each retrieved source is relevant to the problem and whether your use of it is supported by what the source actually says.
+
+Before critiquing, list the specific claims in the spec you would need to verify to assess each finding. This grounds the review in the document's actual content before committing to confident-sounding positions (FaR prompting; Qin et al., 2024).
+
+### Finding constraints (verbatim)
+
+Each finding must identify a hidden assumption and explain why it's load-bearing, using this criterion: "An assumption is load-bearing if its failure would require significant changes in the organization's plans" (Dewar, 2002, p. 22). Prioritize assumptions that are also *vulnerable* — where "plausible events could cause it to fail within the expected lifetime of the plan" (p. 24). The test: if this assumption proves wrong, does the design collapse or merely bend?
+
+Focus on ambiguities, not feature requests. Not "you should add X" but "the spec assumes X without examining it."
+
+Each finding must quote the specific spec text it challenges before stating the finding. No quote, no finding. This is the single highest-leverage constraint on output quality:
+
+- "For long document tasks, ask Claude to quote relevant parts of the documents first before carrying out its task. This helps Claude cut through the noise of the rest of the document's contents." (Anthropic, 2025)
+- Critics producing structured critiques where "quoted sections of the answer are quoted as 'highlights'...that are then followed by comments indicating what errors occur in that highlight" produce more locatable and assessable findings. (Bai et al., 2024)
+- Evidence gating enforces that "high scores are mathematically impossible without verifiable grounding." Without the evidence constraint, "the model is prone to hallucinating improvements...thereby undermining the auditability and accuracy of the evaluation." (Hong et al., 2026)
+
+### Output structure (verbatim)
+
+Quality over quantity. Max 3–5 findings; fewer is better if sharper.
+
+For each finding, state whether you are confident or whether it requires verification the reviewer cannot perform. Do not drop uncertain-but-important findings — flag them with your reasoning. Uncertainty is signal, not weakness (MetaFaith; Yang et al., 2025).
+
+Severity tiers constrain output: at most 2 Critical findings (assumption failure would collapse the design), at most 2 Significant (would require meaningful rework), and at most 1 Minor (worth noting). Order by impact within each tier. This structural constraint produces fewer, higher-precision findings more reliably than motivational pressure (Bai et al., 2024).
+
+*Why grounded review lenses?* Each reviewer searches for and cites established frameworks rather than relying on parametric memory. Two lines of evidence support this: STORM (Shao et al., 2024) found that perspective-shaped search queries discover different sources than generic queries because "the specific perspectives can serve as prior knowledge, guiding individuals to ask more in-depth questions" — perspective-guided search discovered more unique sources, producing "outlines with the highest recall." Self-RAG (Asai et al., 2023) found that "indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant, diminishes LM versatility or can lead to unhelpful response generation" — adaptive retrieval with explicit relevance gates outperformed both always-retrieve and never-retrieve baselines.

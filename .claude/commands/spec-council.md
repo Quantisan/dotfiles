@@ -127,6 +127,8 @@ For each finding, state whether you are confident or whether it requires verific
 
 Severity tiers constrain output: at most 2 Critical findings (assumption failure would collapse the design), at most 2 Significant (would require meaningful rework), and at most 1 Minor (worth noting). Order by impact within each tier. This structural constraint produces fewer, higher-precision findings more reliably than motivational pressure (Bai et al., 2024).
 
+**(End of reviewer prompt template.)**
+
 *Why grounded review lenses?* Each reviewer searches for and cites established frameworks rather than relying on parametric memory. Two lines of evidence support this: STORM (Shao et al., 2024) found that perspective-shaped search queries discover different sources than generic queries because "the specific perspectives can serve as prior knowledge, guiding individuals to ask more in-depth questions" — perspective-guided search discovered more unique sources, producing "outlines with the highest recall." Self-RAG (Asai et al., 2023) found that "indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant, diminishes LM versatility or can lead to unhelpful response generation" — adaptive retrieval with explicit relevance gates outperformed both always-retrieve and never-retrieve baselines.
 
 ## Step 5 — Synthesize and write the review

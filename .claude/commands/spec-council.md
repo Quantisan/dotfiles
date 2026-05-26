@@ -47,3 +47,30 @@ Format the bets as a numbered list. Each entry includes:
 The output is not summarization — it is excavation.
 
 Print the numbered bets list. Stop after the bets list and wait for the user's reply before Step 2. Do not roll into Step 2 in the same response.
+
+## Step 2 — Generate 5 personas
+
+Each persona is chosen to challenge a specific bet identified in Step 1. Personas are not generic roles ("QA engineer", "senior developer"). They are specific experts whose professional experience would make them *allergic* to a particular hidden assumption in *this specific spec*.
+
+A spec about margin-bar navigation needs a spatial cognition researcher. A spec about data pipeline reliability needs an SRE who's been paged at 3am. The personas are reactive to the document, not templated.
+
+Each persona gets:
+- A name
+- A one-line professional identity
+- A sentence on why *this spec* would make them uncomfortable — tied to a specific bet from Step 1
+
+## Step 3 — Select 3 for maximum cognitive diversity
+
+From the 5 candidates, pick the 3 that maximize cognitive diversity across the bets from Step 1. Selection follows Scott Page's framework from *The Difference* (Princeton, 2007): diversity improves collective judgment only when reviewers differ in how they *represent* problems, not just in their domain labels — "identity diversity is beneficial...only if it is linked to cognitive diversity" (p. 313).
+
+Select on three axes:
+
+- **Stakeholder lens** — who does this reviewer represent? (end user, operator, regulator, attacker). Following the UFMCS Red Team Handbook's principle that the value of multiple perspectives is to "more fully account for how adversaries, coalition partners, and others view the same environment" (UFMCS, 2012, p. 9).
+- **Temporal horizon** — when does this reviewer's concern bite? (launch week, year two, sunset).
+- **Failure mode type** — what kind of failure do they see? (technical, adoption, economic, compliance).
+
+Two reviewers who share a stakeholder lens are redundant even if their domains differ. The filter is maximum pairwise distance across these axes, not individual quality.
+
+State which axis each selected persona covers and why the combination maximizes coverage.
+
+For each selected persona, also generate their priming context — one of: a relevant historical failure mode from their domain, a concrete end-user scenario, or an analogous approach from a different domain. Each reviewer gets a different type of priming. Hold these for Step 4.

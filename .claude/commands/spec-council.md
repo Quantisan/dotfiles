@@ -128,3 +128,85 @@ For each finding, state whether you are confident or whether it requires verific
 Severity tiers constrain output: at most 2 Critical findings (assumption failure would collapse the design), at most 2 Significant (would require meaningful rework), and at most 1 Minor (worth noting). Order by impact within each tier. This structural constraint produces fewer, higher-precision findings more reliably than motivational pressure (Bai et al., 2024).
 
 *Why grounded review lenses?* Each reviewer searches for and cites established frameworks rather than relying on parametric memory. Two lines of evidence support this: STORM (Shao et al., 2024) found that perspective-shaped search queries discover different sources than generic queries because "the specific perspectives can serve as prior knowledge, guiding individuals to ask more in-depth questions" — perspective-guided search discovered more unique sources, producing "outlines with the highest recall." Self-RAG (Asai et al., 2023) found that "indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant, diminishes LM versatility or can lead to unhelpful response generation" — adaptive retrieval with explicit relevance gates outperformed both always-retrieve and never-retrieve baselines.
+
+## Step 5 — Synthesize and write the review
+
+After all three reviews return, synthesize the findings.
+
+### Cross-cutting themes
+
+Identify where independent reviewers converged on the same pressure point from different angles. For each convergent theme:
+
+- State the theme plainly in one paragraph — no jargon, no field-specific framing
+- Name which reviewers hit it and from what angle
+- Note the combined severity signal
+
+Convergence across structurally diverse reviewers is stronger signal than any individual finding, though not equivalent to independent expert triangulation. Be honest about this distinction.
+
+### Notable solo findings
+
+Preserve findings that were unique to one reviewer but whose severity is Critical or Significant. State which reviewer surfaced it and why it matters despite lacking convergence.
+
+### HTML output
+
+Render the synthesis as a self-contained HTML file. No CSS frameworks, no JavaScript, no external assets. Use this structure:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>[spec filename] — Council Review</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; background: #fafafa; color: #1a1a1a; line-height: 1.6; }
+  h1 { font-size: 1.1rem; font-weight: 600; border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+  h2 { font-size: 0.95rem; font-weight: 600; margin-top: 2rem; color: #333; }
+  .meta { font-size: 0.8rem; color: #999; margin: 0.25rem 0 1.5rem; }
+  .theme { margin: 1.5rem 0; }
+  .reviewers { font-size: 0.75rem; color: #888; margin: 0.25rem 0 0.75rem; }
+  .finding { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #ddd; }
+  .finding.critical { border-left-color: #c00; }
+  .finding.significant { border-left-color: #e80; }
+  .finding.minor { border-left-color: #090; }
+  .tier { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .tier.critical { color: #c00; }
+  .tier.significant { color: #e80; }
+  .tier.minor { color: #090; }
+  blockquote { margin: 0.5rem 0; padding: 0.5rem 0.75rem; background: #f0f0f0; border-left: 3px solid #bbb; font-style: italic; font-size: 0.85rem; }
+  .confidence { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
+</style>
+</head>
+<body>
+<h1>[spec filename] — Spec Council Review</h1>
+<p class="meta">[date] · 3 reviewers: [persona names with one-line identities]</p>
+
+<h2>Cross-cutting themes</h2>
+<!-- For each convergent theme: -->
+<div class="theme">
+  <h3>[Theme name]</h3>
+  <p class="reviewers">Surfaced by: [reviewer names] · Angles: [their respective lenses]</p>
+  <p>[Plain-language paragraph explaining the theme]</p>
+  <div class="finding [severity]">
+    <span class="tier [severity]">[severity]</span>
+    <blockquote>[Quoted spec text]</blockquote>
+    <p>[Finding explanation]</p>
+    <p class="confidence">[Confidence level and reasoning]</p>
+  </div>
+</div>
+
+<h2>Notable solo findings</h2>
+<!-- For each unique-but-important finding: -->
+<div class="finding [severity]">
+  <span class="tier [severity]">[severity]</span> · <span class="reviewers">[reviewer name]</span>
+  <blockquote>[Quoted spec text]</blockquote>
+  <p>[Finding explanation]</p>
+  <p class="confidence">[Confidence level and reasoning]</p>
+</div>
+
+</body>
+</html>
+```
+
+Write the HTML to the output path computed at the start of this run. Overwrite if the file already exists.
+
+After writing, print one line: the output path. The command ends here.

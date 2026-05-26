@@ -9,7 +9,7 @@ A spec author reviewing their own work is constrained by their own frame. They c
 
 Running multiple reviewers from structurally different perspectives surfaces more concerns than any single reviewer. Where reviewers converge on the same pressure point despite different review lenses, that convergence is a useful prioritization signal — stronger than any individual finding, though not equivalent to triangulation by genuinely independent experts. All reviewers share a model substrate, so convergence is a heuristic, not a proof.
 
-This pattern was developed during review of the Excerpt-Anchored Sessions spec, where a cognitive psychologist, a PE due diligence analyst, and an accessibility engineer independently surfaced the same three structural ambiguities from completely different angles. The command uses structural diversity techniques (different review tasks, different priming context) to push simulated reviewers further apart than persona labels alone would achieve.
+This pattern was developed during review of the Excerpt-Anchored Sessions spec, where three reviewers from unrelated fields independently surfaced the same three structural ambiguities from completely different angles. The command uses structural diversity techniques (different review tasks, different priming context) to push simulated reviewers further apart than persona labels alone would achieve.
 
 ## Goal
 
@@ -27,7 +27,7 @@ Read the spec. Identify its core claims, assumptions, and design bets — the lo
 
 ### Step 2: Generate 5 personas
 
-Each persona is chosen to challenge the spec from a fundamentally different angle. Personas are not generic roles ("QA engineer", "senior developer"). They are specific experts whose professional experience would make them *allergic* to a particular hidden assumption in *this specific spec*.
+Each persona is chosen to challenge a specific bet identified in Step 1. Personas are not generic roles ("QA engineer", "senior developer"). They are specific experts whose professional experience would make them *allergic* to a particular hidden assumption in *this specific spec*.
 
 A spec about margin-bar navigation needs a spatial cognition researcher. A spec about data pipeline reliability needs an SRE who's been paged at 3am. The personas are reactive to the document, not templated.
 
@@ -35,7 +35,7 @@ Each persona gets: a name, a one-line professional identity, and a sentence on w
 
 ### Step 3: Select 3 for maximum diversity
 
-Pick the 3 personas that maximize cognitive diversity across three axes, following Scott Page's framework from *The Difference* (Princeton, 2007): diversity improves collective judgment only when reviewers differ in how they *represent* problems, not just in their domain labels — "identity diversity is beneficial...only if it is linked to cognitive diversity" (p. 313).
+From the 5 candidates, pick the 3 that maximize cognitive diversity across the bets from Step 1, using three axes following Scott Page's framework from *The Difference* (Princeton, 2007): diversity improves collective judgment only when reviewers differ in how they *represent* problems, not just in their domain labels — "identity diversity is beneficial...only if it is linked to cognitive diversity" (p. 313).
 
 The three selection axes:
 
@@ -78,12 +78,9 @@ After all three reviews return, identify where independent reviewers converged o
 
 The synthesis is the deliverable. The command ends here.
 
-### What the command does not do
+### Output format
 
-- Propose solutions to the ambiguities it finds.
-- Edit the spec or write open questions into it.
-- Review code, PRs, or non-spec prose.
-- Use fixed or templated personas.
+The synthesis is rendered as HTML optimized for human digestion — scan first, read selectively. Use semantic structure (headings, lists, emphasis) to let the reader locate the finding that matters to them without reading linearly. No CSS frameworks or JavaScript; the HTML should be self-contained and readable when opened directly in a browser.
 
 ## Key Design Decisions
 
@@ -112,7 +109,15 @@ The synthesis is the deliverable. The command ends here.
 
 ## Out of Scope
 
-- Reviewing anything other than specs and design documents
+The command does not:
+
+- Propose solutions to the ambiguities it finds
+- Edit the spec or write open questions into it
+- Review code, PRs, or non-spec prose
+- Use fixed or templated personas
+
+Not planned for this version:
+
 - Iterative review (run it again after changes)
 - Persistent persona memory across runs
 - User selection of personas (full auto through synthesis)

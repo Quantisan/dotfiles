@@ -63,3 +63,4 @@ context/
 **/.claude/*.local.json
 *.local.md
 .worktrees/
+.superpowers/

@@ -70,7 +70,12 @@ return {
       picker = {
         sources = {
           explorer = {
-            layout = { layout = { position = "right" } },
+            layout = {
+              layout = { position = "right" },
+
+              -- hide the Filter Input box
+              auto_hide = { "input" },
+            },
             hidden = true,
             win = {
               list = {

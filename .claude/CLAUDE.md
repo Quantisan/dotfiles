@@ -212,11 +212,14 @@ RESPONSE_RECEIVED = "response_received"
 
 Write tests first to define behavior, then implement to make them pass. But resist comprehensive coverage—only test what would cause real harm if broken. The workflow is test-first; the constraint is selectivity.
 
+Tests are guardrails against bad design, not a coverage target—test code is liability like any other code. The cheapest place to fix a bug is in design; testing catches implementation defects, never misconception (Hickey). Default to fewer.
+
 **Workflow:**
 1. **Write the test first** - Define the behavior before implementation
 2. **Make it pass** - Implement minimal code to green the test
 3. **Refactor** - Clean the code once working
 4. **Verify manually** - Ensure real-world behavior matches
+5. **Prune before done** - Review your own test diff as a skeptic: can any test be removed or merged? Cut the ones that don't earn their place.
 
 **What to test:**
 - Domain transformations and business logic

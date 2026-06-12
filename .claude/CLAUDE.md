@@ -203,6 +203,25 @@ RESPONSE_RECEIVED = "response_received"
 
 ## Development Workflow
 
+### Problem Framing (Hammock-Driven)
+
+*We choose: Shared understanding over fast typing*
+
+**Cost:** Frame the problem and surface evidence before any code
+**Benefit:** Catch misconception at design time, where Hickey notes bugs are cheapest to fix — the class of bug tests and types never catch
+
+Before building anything with real misconception risk, agent and user frame the problem together. The agent does the legwork; the user makes the design calls. The agent advises, it does not decide.
+
+The agent leads:
+1. **State the problem.** "We are solving X so that Y." If it was never written down, draft it and confirm — an unstated problem is the seed of solving the wrong one. This is about the *problem* — requirements, constraints, why this, why now — not the code.
+2. **Surface evidence from ground truth, not memory.** Real data shapes, inputs/outputs, edge cases drawn from actual data, and prior art in the codebase — cited by `file:line`. Read specifically and broadly.
+3. **Name the unknowns.** List what we don't know and what's ambiguous. "If there are no question marks, you're missing a step" (Hickey). A confident summary that hides the gaps fails this step.
+4. **Frame the decision, take a position.** For a genuine design fork, lay out the options with tradeoffs and recommend one with a defended rationale — advise, don't option-dump. When one path is obvious, say so and proceed.
+
+Then the user decides, and only then does the build/test loop begin.
+
+**When to skip:** mechanical or obvious changes — known data shapes, one clear approach. Same bar as testing: frame where misconception is a real risk (unclear data, ambiguous requirements, new territory, competing designs); just do it everywhere else. Default artifact is a short in-conversation brief, not a file — write a spec or plan only when the task already warrants one. For net-new features large enough to need structured exploration, use the `brainstorming` skill: this rule is the everyday lightweight posture, brainstorming is its heavy form.
+
 ### Test-First Development
 
 *We choose: Test-first workflow with selective coverage*

@@ -1,8 +1,8 @@
-# Working with Paul's codebases
+# Working with Paul's projects
 
 These are rules, not suggestions. User instructions override anything here.
 
-When writing or reviewing Clojure, read `~/.claude/clojure.md` first.
+Sessions split between code and product/writing work. The sections below apply always, except the **Engineering** section at the end—that one is code work only; ignore it for product and writing tasks.
 
 ## Interaction Protocol
 
@@ -32,7 +32,30 @@ Ship working software, not perfect architecture. Each iteration delivers a compl
 
 **Acceptable coupling only when** the domain boundary is genuinely unclear, you're spiking to learn the domain, or you'll refactor before the session ends. When you couple, state what's coupled and which threshold permits it.
 
-## Design Principles
+## Problem Framing (Hammock-Driven)
+
+Before building anything with real misconception risk, frame the problem with the user first—this catches the class of bug that tests and types never do, at the design stage where it's cheapest to fix (Hickey). You do the legwork; the user makes the design calls. You advise, you don't decide.
+
+1. **State the problem.** "We're solving X so that Y." If it was never written down, draft it and confirm. This is about the problem—requirements, constraints, why this, why now—not the code.
+2. **Surface evidence from ground truth, not memory.** Real data shapes, inputs/outputs, edge cases from actual data, and prior art in the codebase—cited by `file:line`.
+3. **Name the unknowns.** List what's ambiguous. "If there are no question marks, you're missing a step." A confident summary that hides the gaps fails this step.
+4. **Frame the decision, take a position.** For a genuine design fork, lay out the options with tradeoffs and recommend one with a defended rationale. When one path is obvious, say so and proceed.
+
+Then the user decides, and the build/test loop begins.
+
+**When to skip:** mechanical or obvious changes—known data shapes, one clear approach. Frame where misconception is a real risk (unclear data, ambiguous requirements, new territory, competing designs); just do it everywhere else. Default artifact is a short in-conversation brief, not a file. For net-new features large enough to need structured exploration, use the `brainstorming` skill—this rule is its everyday lightweight form.
+
+## Git Workflow
+
+**Before starting:** ask how to handle uncommitted/untracked files; suggest committing existing work first; create a WIP branch when starting without a clear branch.
+
+**During development:** track all non-trivial changes; commit frequently even before high-level tasks are done; never `git add -A` unless you've just run `git status`; never skip or disable pre-commit hooks.
+
+**General:** if the project isn't a git repo, ask before initializing one; don't add random test files to the repo.
+
+## Engineering (code work only — ignore for product and writing tasks)
+
+When writing or reviewing Clojure, read `~/.claude/clojure.md` first.
 
 ### Functional Core, Imperative Shell
 
@@ -99,26 +122,11 @@ Comments:
 - Never reference what code used to be or how it changed
 - Don't remove existing comments unless provably false
 
-## Code Review Posture
+### Code Review Posture
 
 - Prefer a senior architectural lens over line-by-line critique
 - Focus on conceptual fit, domain modeling, and simple well-bounded responsibilities
 - Respect distinctions already codified in comments, specs, and naming. If something looks awkward but codified, treat it as potentially meaningful—ask whether it's intentional before collapsing the distinction
-
-## Development Workflow
-
-### Problem Framing (Hammock-Driven)
-
-Before building anything with real misconception risk, frame the problem with the user first—this catches the class of bug that tests and types never do, at the design stage where it's cheapest to fix (Hickey). You do the legwork; the user makes the design calls. You advise, you don't decide.
-
-1. **State the problem.** "We're solving X so that Y." If it was never written down, draft it and confirm. This is about the problem—requirements, constraints, why this, why now—not the code.
-2. **Surface evidence from ground truth, not memory.** Real data shapes, inputs/outputs, edge cases from actual data, and prior art in the codebase—cited by `file:line`.
-3. **Name the unknowns.** List what's ambiguous. "If there are no question marks, you're missing a step." A confident summary that hides the gaps fails this step.
-4. **Frame the decision, take a position.** For a genuine design fork, lay out the options with tradeoffs and recommend one with a defended rationale. When one path is obvious, say so and proceed.
-
-Then the user decides, and the build/test loop begins.
-
-**When to skip:** mechanical or obvious changes—known data shapes, one clear approach. Frame where misconception is a real risk (unclear data, ambiguous requirements, new territory, competing designs); just do it everywhere else. Default artifact is a short in-conversation brief, not a file. For net-new features large enough to need structured exploration, use the `brainstorming` skill—this rule is its everyday lightweight form.
 
 ### Test-First Development
 
@@ -157,11 +165,3 @@ Always find the root cause—never just patch symptoms or add workarounds.
 - Don't let technical debt accumulate—attend to code quality early
 - Least-surprise principle: code should do what it looks like it does
 - Every decision should improve long-term maintainability
-
-### Git Workflow
-
-**Before starting:** ask how to handle uncommitted/untracked files; suggest committing existing work first; create a WIP branch when starting without a clear branch.
-
-**During development:** track all non-trivial changes; commit frequently even before high-level tasks are done; never `git add -A` unless you've just run `git status`; never skip or disable pre-commit hooks.
-
-**General:** if the project isn't a git repo, ask before initializing one; don't add random test files to the repo.

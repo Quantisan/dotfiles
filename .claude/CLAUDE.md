@@ -1,320 +1,167 @@
-General guidance for Claude Code when working with Paul's codebases.
+# Working with Paul's codebases
 
-## Core Philosophy 1
+These are rules, not suggestions. User instructions override anything here.
 
-## Write clearly, don't be too clever
-
-It is more important to make the purpose of the code unmistakable than to display virtuosity. The problem with obscure code is that debugging and modification become much more difficult, and these are already the hardest aspects of computer programming.
-
-Real programs are like prose.
-
-Although details vary from language to language, the principles of style are the same. Branching around branches is confusing in any language.
-
-The job of critical reading doesn't end when you find a typo or even a poor coding practice.
-
-Don't treat computer output as gospel. If you learn to be wary of everyone else's programs, you will be better able to check your own.
-
-## Core Philosophy 2: Decomplecting
-
-We practice decomplecting—separating concerns that have become intertwined. One function does one thing. Modules have clear boundaries. State is explicit.
-
-We ship working software, not perfect architecture. Each iteration delivers a complete, functional product—skateboard, then scooter, then bicycle. Don't over-engineer for hypothetical futures.
-
-**Acceptable coupling only when:**
-- Domain boundary is genuinely unclear
-- Active prototype/spike to learn the domain
-- Will refactor before work session ends
-
-When coupling concerns, explicitly state what's being coupled and which threshold permits it.
+When writing or reviewing Clojure, read `~/.claude/clojure.md` first.
 
 ## Interaction Protocol
 
-Follow these directives. They are rules, not suggestions.
+- **Be direct.** No pleasantries ("good", "great"). Answer first, explain after.
+- **Be a critical partner.** Challenge any request that is ambiguous, flawed, or violates these principles. Propose better approaches with their tradeoffs.
+- **Clarify, then proceed.** On ambiguity, ask one clarifying question, then act on a stated assumption.
+- **Be proactive.** Do the obvious follow-ups a task needs. Pause to ask only when:
+  - Multiple valid approaches exist and the choice matters
+  - The action would delete or significantly restructure existing code
+  - You genuinely don't understand the request
+  - I ask "how should I approach X?" — answer the question, don't jump to implementation
 
-### 1. Be Direct
-- **No Pleasantries:** Omit praise like "good" or "great."
-- **Answer First:** Deliver the solution before the explanation.
+## Clarity Over Cleverness
 
-### 2. Be a Critical Partner
-- **Challenge Flaws:** Challenge any request that is ambiguous, flawed, or violates our principles.
-- **Propose Alternatives:** If there is a better approach, propose it and explain the trade-offs.
-- **Clarify, then Proceed:** For ambiguous requests, ask a clarifying question, then immediately provide a solution based on a stated assumption.
+Make the purpose of code unmistakable. Clear over clever, simple over sophisticated, explicit over implicit. Obscure code makes debugging and modification—already the hardest parts of programming—harder.
 
-### 3. Proactiveness
+- Resist abstractions until they prove their worth; accept visible duplication until the right one is obvious
+- Every line has a clear purpose; code is approachable to someone who knows the language basics
+- Branching around branches is confusing in any language
+- Don't treat computer output as gospel—be as wary of your own programs as of everyone else's
 
-When asked to do something, just do it—including obvious follow-up actions needed to complete the task properly.
+## Decomplecting
 
-**Only pause to ask when:**
-- Multiple valid approaches exist and the choice matters
-- The action would delete or significantly restructure existing code
-- You genuinely don't understand what's being asked
-- I specifically ask "how should I approach X?" (answer the question, don't jump to implementation)
+Separate concerns that have become intertwined. One function does one thing; modules have clear boundaries; state is explicit.
 
-## Code Review Posture
+Ship working software, not perfect architecture. Each iteration delivers a complete product—skateboard, then scooter, then bicycle. Don't over-engineer for hypothetical futures.
 
-When reviewing code, prefer a senior architectural lens over a line-by-line critique. Focus on conceptual fit, domain modeling, and keeping responsibilities simple and well-bounded. Respect intentional distinctions already encoded in comments, specs, and naming; if something looks awkward but codified, treat it as potentially meaningful and ask whether it is intentional or whether the documentation needs clarification before collapsing the distinction.
+**Acceptable coupling only when** the domain boundary is genuinely unclear, you're spiking to learn the domain, or you'll refactor before the session ends. When you couple, state what's coupled and which threshold permits it.
 
-## Universal Principles
+## Design Principles
 
 ### Functional Core, Imperative Shell
 
-*We choose: Local reasoning over inline convenience*
+Pure functions hold all business logic, decisions, and transformations. Side effects—I/O, randomness, state mutations, API calls—are isolated in a thin shell at the edges. The core returns descriptions of effects; the shell executes them.
 
-**Cost:** Navigate between pure action functions and impure effect handlers instead of writing effects inline
-**Benefit:** Understand code by reading it, without chasing through chains of side effects
-
-Pure functions contain all business logic, decisions, and transformations. Side effects—I/O, randomness, state mutations, API calls—are isolated in a thin shell at the edges. The core returns descriptions of effects; the shell executes them.
-
-**This manifests as:**
 - Actions/commands return effect data structures, not perform effects
-- Business logic functions are testable without mocking
+- Business logic is testable without mocking
 - Console logging for debugging is acceptable in pure code
-- Effect handlers are registered in one obvious location per process/module
+- Effect handlers registered in one obvious location per process/module
 
 ### Explicit Boundaries
 
-*We choose: Trust boundary clarity over data pass-through*
+Every trust boundary—process, persistence, external API, subsystem—validates and transforms data at the edge, not deep in business logic.
 
-**Cost:** Manage multiple data representations (internal keywords, persisted EDN, transmitted JSON)
-**Benefit:** Know exactly where untrusted external data becomes trusted internal data
-
-Every trust boundary—between processes, persistence layers, external APIs, or subsystems—has explicit transformation and validation. Data entering the system is validated and normalized at the boundary, not deep in business logic.
-
-**This manifests as:**
-- Schema validation at every boundary (IPC, disk, HTTP, etc.)
+- Schema validation at every boundary (IPC, disk, HTTP)
 - Coercion functions named for their boundary: `topic-from-ipc`, `user-from-db`, `request-from-api`
-- Different formats for different contexts (internal vs. persisted vs. transmitted)
+- Different formats for internal vs. persisted vs. transmitted data
 - Fail fast at boundaries, not in core logic
 
 ### Centralized Registration
 
-*We choose: System inventory over colocation*
+One obvious place shows a system's complete inventory—actions, routes, commands, handlers. It serves as both documentation and enforcement point.
 
-**Cost:** Separate registration from implementation; action definition in one file, registration in another
-**Benefit:** Understand all system capabilities by reading one file
-
-Every system has one obvious place where you can see its complete inventory—all actions, routes, commands, or capabilities. This serves as both documentation and enforcement point.
-
-**This manifests as:**
-- Effect/action registration in a single file per process
-- Route definitions in one router file
-- Event handlers in one registry
+- Effect/action registration in one file per process
+- Routes in one router; event handlers in one registry
 - You can understand what the system does by reading one file
 
 ### Files as Boundaries
 
-*We choose: Premature boundaries over deferred organization*
+Each file is a boundary with a clear public interface. Before creating one, ask: what boundary am I creating, and what's its public contract? Small scope forces API thinking; when boundaries are wrong, small files reorganize easily.
 
-**Cost:** Decide file scope before fully understanding the domain
-**Benefit:** Small scope forces API thinking; when boundaries are wrong, small files reorganize easily
-
-Each file defines a boundary with a clear public interface. Before creating a file, ask: "What boundary am I creating? What's the public contract?" Small files enforce thinking about single responsibility and API clarity.
-
-**This manifests as:**
-- Files stay small (30-90 lines) by having narrow scope
-- File separation forces consideration of what's public vs. internal
-- New files only when introducing genuinely new boundaries
-- Prefer editing existing files when logic fits within current boundaries
-
-### Minimal Complexity, Maximum Clarity
-
-*We choose: Concrete duplication over premature abstraction*
-
-**Cost:** Accept visible duplication until the right abstraction becomes clear
-**Benefit:** Concrete code is simpler to understand than parameterized abstractions
-
-We resist adding abstractions until they prove their worth. Every line of code should have a clear purpose. We prefer explicit over clever, simple over sophisticated. The codebase should be approachable for someone familiar with the language basics.
-
-### Use Library Functions
-
-*We choose: Proven building blocks over bespoke cleverness*
-
-**Cost:** Spend time understanding existing APIs and occasionally researching current options
-**Benefit:** Smaller programs, fewer bugs, and less custom code to debug
-
-Prefer open source libraries and library functions when they make code smaller, clearer, and more obvious. Prefer narrowly focused, well-designed libraries over broad or merely popular ones. Build on proven work instead of starting from scratch unless a custom implementation makes the domain meaning substantially clearer or avoids a real dependency problem.
-
-Debugging is twice as hard as writing a program in the first place, so avoid spending complexity budget on clever code you did not need to write.
-
-When a task may benefit from a library, do not rely on memory alone. Check current open source options and compatibility first. Prefer a lightweight search to confirm what is current, but if the search is likely to change the architecture, add a dependency, or consume noticeable time or tokens, confirm with the user before doing a broader library evaluation. Otherwise, do the lightweight search and explain what you found.
-
-**This manifests as:**
-- Prefer open source libraries over custom implementations for common problems
-- Prefer narrowly scoped, well-designed libraries over broad or merely popular ones
-- Do a quick current check before recommending a library
-- Ask before spending time on a broad library evaluation or adding a new dependency
-- Explain why a library is better than a local implementation in this case
+- Files stay small (30–90 lines) by having narrow scope
+- New files only for genuinely new boundaries; otherwise edit existing files
+- Separation forces thinking about what's public vs. internal
 
 ### Stable Meaning
 
-*We choose: Semantic consistency over convenient reuse*
+A variable means one thing, and one thing only—not a different value from a different domain depending on circumstance. Not both floor polish and dessert topping.
 
-**Cost:** Introduce new names or intermediate values instead of overloading an existing variable
-**Benefit:** A reader can trust what a value represents without re-evaluating surrounding control flow
-
-A variable should mean one thing, and one thing only. It should not mean one thing in one circumstance, and carry a different value from a different domain some other time. It should not mean two things at once. It must not be both a floor polish and a dessert topping. It should mean One Thing, and should mean it all of the time.
-
-**This manifests as:**
 - Variable names map to one domain concept
-- Reassignments do not change a value's semantic role
-- Boundary transformations get new names when the domain changes
-- Split overloaded values instead of making one identifier carry multiple meanings
+- Reassignments don't change a value's semantic role
+- Boundary transformations get new names; split overloaded values instead of overloading one identifier
 
-### Naming & Comments
+### Use Library Functions
 
-*(Domain names make boundaries explicit; implementation details hide them)*
+Prefer proven, narrowly-scoped libraries over bespoke cleverness when they make code smaller and clearer—unless a custom implementation makes the domain meaning substantially clearer or avoids a real dependency problem. Debugging is twice as hard as writing—don't spend complexity budget on clever code you didn't need to write.
 
-#### Code Reflects the Domain
+- Prefer narrowly scoped, well-designed libraries over broad or merely popular ones
+- Don't rely on memory: do a quick check of current options before recommending one
+- Ask before adding a dependency or doing a broad library evaluation
+- Explain why the library beats a local implementation in this case
 
-We practice domain-driven design where code structure—namespaces, functions, and data—mirrors how we think and talk about the problem. If we discuss "saving a topic" or "handling a form submission," code should reflect that domain language directly.
+### Naming Reflects the Domain
 
-**How this manifests:**
+Code structure—names, functions, data—mirrors how we talk about the problem. If we discuss "saving a topic," the code says `save`.
 
-*Clojure:*
-```clojure
-;; Namespaces organized by domain
-(ns topics.actions)
-(ns messages.core)
-(ns ui.components)
-
-;; State actions namespaced by system part
-:llm.actions/response-received
-:chat.actions/message-sent
-
-;; Functions mirror domain operations
-(defn save [topic] ...)
-(defn submit [form] ...)
-
-# Events/constants reflect domain language
-MESSAGE_SENT = "message_sent"
-RESPONSE_RECEIVED = "response_received"
-```
-
-**What to avoid in names:**
+Avoid in names:
 - Implementation details (`ZodValidator`, `MCPWrapper`, `HttpClient`)
-- Temporal/historical context (`NewAPI`, `LegacyHandler`, `UnifiedTool`, `V2Service`)
-- Unnecessary pattern names (prefer `Tool` over `ToolFactory`, `save` over `SaveCommand`)
+- Temporal/historical context (`NewAPI`, `LegacyHandler`, `V2Service`)
+- Unnecessary pattern names (`Tool` over `ToolFactory`, `save` over `SaveCommand`)
 
-**Comment guidelines:**
+Comments:
+- Explain WHAT code does or WHY it exists; keep them evergreen
 - Never reference what code used to be or how it changed
-- Explain WHAT code does or WHY it exists
-- Comments should be evergreen—describe code as it is now
 - Don't remove existing comments unless provably false
+
+## Code Review Posture
+
+- Prefer a senior architectural lens over line-by-line critique
+- Focus on conceptual fit, domain modeling, and simple well-bounded responsibilities
+- Respect distinctions already codified in comments, specs, and naming. If something looks awkward but codified, treat it as potentially meaningful—ask whether it's intentional before collapsing the distinction
 
 ## Development Workflow
 
 ### Problem Framing (Hammock-Driven)
 
-*We choose: Shared understanding over fast typing*
+Before building anything with real misconception risk, frame the problem with the user first—this catches the class of bug that tests and types never do, at the design stage where it's cheapest to fix (Hickey). You do the legwork; the user makes the design calls. You advise, you don't decide.
 
-**Cost:** Frame the problem and surface evidence before any code
-**Benefit:** Catch misconception at design time, where Hickey notes bugs are cheapest to fix — the class of bug tests and types never catch
+1. **State the problem.** "We're solving X so that Y." If it was never written down, draft it and confirm. This is about the problem—requirements, constraints, why this, why now—not the code.
+2. **Surface evidence from ground truth, not memory.** Real data shapes, inputs/outputs, edge cases from actual data, and prior art in the codebase—cited by `file:line`.
+3. **Name the unknowns.** List what's ambiguous. "If there are no question marks, you're missing a step." A confident summary that hides the gaps fails this step.
+4. **Frame the decision, take a position.** For a genuine design fork, lay out the options with tradeoffs and recommend one with a defended rationale. When one path is obvious, say so and proceed.
 
-Before building anything with real misconception risk, agent and user frame the problem together. The agent does the legwork; the user makes the design calls. The agent advises, it does not decide.
+Then the user decides, and the build/test loop begins.
 
-The agent leads:
-1. **State the problem.** "We are solving X so that Y." If it was never written down, draft it and confirm — an unstated problem is the seed of solving the wrong one. This is about the *problem* — requirements, constraints, why this, why now — not the code.
-2. **Surface evidence from ground truth, not memory.** Real data shapes, inputs/outputs, edge cases drawn from actual data, and prior art in the codebase — cited by `file:line`. Read specifically and broadly.
-3. **Name the unknowns.** List what we don't know and what's ambiguous. "If there are no question marks, you're missing a step" (Hickey). A confident summary that hides the gaps fails this step.
-4. **Frame the decision, take a position.** For a genuine design fork, lay out the options with tradeoffs and recommend one with a defended rationale — advise, don't option-dump. When one path is obvious, say so and proceed.
-
-Then the user decides, and only then does the build/test loop begin.
-
-**When to skip:** mechanical or obvious changes — known data shapes, one clear approach. Same bar as testing: frame where misconception is a real risk (unclear data, ambiguous requirements, new territory, competing designs); just do it everywhere else. Default artifact is a short in-conversation brief, not a file — write a spec or plan only when the task already warrants one. For net-new features large enough to need structured exploration, use the `brainstorming` skill: this rule is the everyday lightweight posture, brainstorming is its heavy form.
+**When to skip:** mechanical or obvious changes—known data shapes, one clear approach. Frame where misconception is a real risk (unclear data, ambiguous requirements, new territory, competing designs); just do it everywhere else. Default artifact is a short in-conversation brief, not a file. For net-new features large enough to need structured exploration, use the `brainstorming` skill—this rule is its everyday lightweight form.
 
 ### Test-First Development
 
-*We choose: Test-first workflow with selective coverage*
+Write tests first to define behavior, then implement to pass them. But resist comprehensive coverage—test code is liability like any other code. Testing catches implementation defects, never misconception (that's design's job). Default to fewer.
 
-**Cost:** Write tests before implementation, but only for what matters
-**Benefit:** Design through tests while avoiding test maintenance burden
+1. **Write the test first** — define the behavior
+2. **Make it pass** — minimal code to green it
+3. **Refactor** — clean the code once working
+4. **Verify manually** — ensure real-world behavior matches
+5. **Prune before done** — review your own test diff as a skeptic; cut tests that don't earn their place
 
-Write tests first to define behavior, then implement to make them pass. But resist comprehensive coverage—only test what would cause real harm if broken. The workflow is test-first; the constraint is selectivity.
+**Test:** domain transformations and business logic, trust boundaries (validation/coercion), public contracts and APIs, critical paths that cause real harm if broken.
 
-Tests are guardrails against bad design, not a coverage target—test code is liability like any other code. The cheapest place to fix a bug is in design; testing catches implementation defects, never misconception (Hickey). Default to fewer.
-
-**Workflow:**
-1. **Write the test first** - Define the behavior before implementation
-2. **Make it pass** - Implement minimal code to green the test
-3. **Refactor** - Clean the code once working
-4. **Verify manually** - Ensure real-world behavior matches
-5. **Prune before done** - Review your own test diff as a skeptic: can any test be removed or merged? Cut the ones that don't earn their place.
-
-**What to test:**
-- Domain transformations and business logic
-- Trust boundaries (validation, coercion functions)
-- Public contracts and APIs
-- Critical paths that cause real harm if broken
-
-**What to skip:**
-- Edge cases and exhaustive scenarios
-- Implementation details
-- Obvious code
-- Tests that don't make you nervous to delete
+**Skip:** edge cases and exhaustive scenarios, implementation details, obvious code, tests you wouldn't be nervous to delete.
 
 ### Debugging Process
 
-**Always find the root cause—never just fix symptoms or add workarounds.**
+Always find the root cause—never just patch symptoms or add workarounds.
 
-**Investigation process:**
-1. **Read error messages carefully** - They often contain the exact solution
-2. **Reproduce consistently** - Ensure you can reliably reproduce the issue
-3. **Check recent changes** - What changed that could have caused this?
-4. **Find working examples** - Locate similar working code in the same codebase
-5. **Identify differences** - What's different between working and broken code?
+**Investigate:**
+1. Read error messages carefully—they often contain the exact solution
+2. Reproduce consistently
+3. Check recent changes—what could have caused this?
+4. Find similar working code in the same codebase
+5. Identify what's different between working and broken
 
-**Testing hypotheses:**
+**Test hypotheses:**
 - Form a single, clear hypothesis about the root cause
-- Make the smallest possible change to test it
-- Verify before continuing—if it doesn't work, form a new hypothesis
+- Make the smallest possible change to test it; verify before continuing
 - When you don't know, say "I don't understand X" rather than pretending
 
-**Rules:**
-- Always have the simplest possible failing test case
-- Never add multiple fixes at once
-- Never claim to implement a pattern without reading it completely first
-- Always test after each change
+**Rules:** always have the simplest possible failing test case; never add multiple fixes at once; never claim to implement a pattern without reading it completely first; always test after each change.
 
-### Continuous Architecture Evolution
+### Architecture Evolution
 
-- **Weekly refactoring sessions** - Dedicated time for larger architectural improvements
-- **Early attention to code quality** - Don't let technical debt accumulate
-- **Least-surprise principle** - Code should do what it looks like it does
-- **Conscious architecture** - Every decision should improve long-term maintainability
-
-This isn't about perfection—it's about building a codebase that's a joy to work in. Clean code is faster to understand, easier to modify, and less likely to harbor bugs.
+- Don't let technical debt accumulate—attend to code quality early
+- Least-surprise principle: code should do what it looks like it does
+- Every decision should improve long-term maintainability
 
 ### Git Workflow
 
-**Before starting work:**
-- Ask how to handle uncommitted changes or untracked files
-- Suggest committing existing work first
-- Create a WIP branch when starting a task without a clear branch
+**Before starting:** ask how to handle uncommitted/untracked files; suggest committing existing work first; create a WIP branch when starting without a clear branch.
 
-**During development:**
-- Track all non-trivial changes in git
-- Commit frequently throughout development, even if high-level tasks aren't done
-- Never use `git add -A` unless you've just done `git status`
-- Never skip, evade, or disable pre-commit hooks
+**During development:** track all non-trivial changes; commit frequently even before high-level tasks are done; never `git add -A` unless you've just run `git status`; never skip or disable pre-commit hooks.
 
-**General principles:**
-- If project isn't in a git repo, ask permission to initialize one
-- Don't add random test files to the repo
-
-## Appendix: Clojure Conventions
-
-### Code Style
-
-- Threading macros (`->`, `->>`) for clarity in transformation pipelines
-- Destructuring to make data shapes explicit at function boundaries
-- Small, focused functions that do one thing well
-- Descriptive names that make code self-documenting
-- Let bindings for intermediate values that clarify intent
-
-### Working with the Codebase
-
-1. Study existing patterns before implementing
-2. Check dependencies before assuming libraries exist
-3. Follow established namespace conventions
-4. Run tests throughout development
-5. Manual testing before considering complete
+**General:** if the project isn't a git repo, ask before initializing one; don't add random test files to the repo.

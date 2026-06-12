@@ -33,6 +33,7 @@ function doIt() {
         mkdir -p ~/.claude
         ln -shf "$(pwd)/.claude/settings.json" ~/.claude/settings.json
         cp .claude/CLAUDE.md ~/.claude/CLAUDE.md
+        cp .claude/clojure.md ~/.claude/clojure.md
         rsync -avh --delete \
                 --exclude "rk-*.md" \
                 .claude/commands/ ~/.claude/commands/

@@ -87,6 +87,7 @@ launch-agents/ -> symlinked to ~/Library/LaunchAgents/
 
 The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code config):
 - `.claude/CLAUDE.md` → copied to `~/.claude/CLAUDE.md` (global instructions)
+- `.claude/clojure.md` → copied to `~/.claude/clojure.md` (Clojure conventions, referenced on demand from CLAUDE.md)
 - `.claude/commands/` → copied to `~/.claude/commands/` (custom slash commands)
 - `.claude/settings.json` → **symlinked** to `~/.claude/settings.json`
 

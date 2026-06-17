@@ -1,0 +1,12 @@
+{
+  "lastChangelogVersion": "0.79.6",
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4-pro",
+  "collapseChangelog": true,
+  "theme": "light",
+  "defaultThinkingLevel": "xhigh",
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "hideThinkingBlock": true
+}

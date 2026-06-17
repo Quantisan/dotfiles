@@ -79,3 +79,6 @@ status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "
 
 [mcp_servers.atlassianRovo]
 url = "https://mcp.atlassian.com/v1/mcp"
+
+[plugins."superpowers@openai-curated"]
+enabled = true

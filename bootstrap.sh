@@ -47,6 +47,7 @@ function doIt() {
         mkdir -p ~/.pi/agent
         ln -shf "$(pwd)/.pi/settings.json" ~/.pi/agent/settings.json
         ln -shf "$(pwd)/.claude/CLAUDE.md" ~/.pi/agent/AGENTS.md
+        ln -shf "$(pwd)/.pi/extensions" ~/.pi/agent/extensions
 
         source ~/.bash_profile
 }

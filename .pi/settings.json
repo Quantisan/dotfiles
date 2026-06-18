@@ -8,5 +8,8 @@
   "terminal": {
     "showTerminalProgress": true
   },
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "packages": [
+    "npm:@aliou/pi-guardrails"
+  ]
 }

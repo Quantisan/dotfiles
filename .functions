@@ -271,7 +271,9 @@ function _claude_afk_watch() {
                                 tries=$((tries + 1))
                         done
                 fi
-                sleep 30
+                # Poll every ~3min, but nap in chunks so we notice an exit (and
+                # tear down) within ~15s instead of blocking for the full cycle.
+                _claude_afk_nap 180 "$session" "$main" || break
         done
         # claude exited -> tear down the whole session so no window lingers.
         echo "$(date '+%F %T') claude window gone; killing session $session" >> "$log"
@@ -279,7 +281,7 @@ function _claude_afk_watch() {
 }
 
 # Given the limit banner line (e.g. '... resets 9:40am (Asia/Tokyo)'), print the
-# seconds until that wall-clock time next occurs in that timezone, plus a 60s
+# seconds until that wall-clock time next occurs in that timezone, plus a 5min
 # buffer. Prints 300 on any parse failure so the watcher still retries safely.
 function _claude_afk_wait_secs() {
         python3 - "$1" <<'PY' 2>/dev/null || echo 300
@@ -301,6 +303,6 @@ now = datetime.datetime.now(tz)
 target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
 if target <= now:
     target += datetime.timedelta(days=1)
-print(int((target - now).total_seconds()) + 60)
+print(int((target - now).total_seconds()) + 300)
 PY
 }

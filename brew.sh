@@ -92,6 +92,7 @@ brew install speedtest-cli
 brew install the_silver_searcher
 brew install tig
 brew install tldr
+brew install tmux
 brew install youtube-dl
 
 # Fonts

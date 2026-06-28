@@ -180,3 +180,127 @@ function reader() {
         local url="$1"
         curl "https://r.jina.ai/$url"
 }
+
+# 'claude-afk' launches an unattended Claude Code session that resumes itself
+# when the 5-hour usage window runs out. Run it instead of `claude` for a long
+# job you want to walk away from. It runs Claude in a tmux session alongside a
+# watcher window that waits for the "hit your session limit" banner, sleeps
+# until the stated reset time, then sends `continue`. Closing the terminal does
+# not kill the run; re-attach with `tmux attach -t afk-<pid>`.
+function claude-afk() {
+        # Internal watcher mode, launched in the tmux 'watch' window:
+        #   claude-afk __watch <session> <main-window-id>
+        if [ "$1" = "__watch" ]; then
+                _claude_afk_watch "$2" "$3"
+                return
+        fi
+
+        if ! command -v tmux >/dev/null 2>&1; then
+                echo "claude-afk: needs tmux (brew install tmux)" >&2
+                return 1
+        fi
+
+        local sess="afk-$$"
+        local cmd="claude"
+        if [ "$#" -gt 0 ]; then
+                cmd="claude $(printf '%q ' "$@")"
+        fi
+
+        # Pass the caller's PATH so `claude` resolves even if a tmux server is
+        # already running with a minimal environment.
+        tmux new-session -d -s "$sess" -n main -e "PATH=$PATH" "$cmd"
+
+        # Identify the claude window by its immutable id, not its name (tmux's
+        # automatic-rename can change the name out from under us).
+        local main_id
+        main_id="$(tmux display-message -p -t "$sess:main" '#{window_id}')"
+        tmux new-window -d -t "$sess" -n watch "bash -lc 'claude-afk __watch $sess $main_id'"
+
+        if [ -n "$TMUX" ]; then
+                tmux switch-client -t "$sess"
+        else
+                tmux attach-session -t "$sess"
+        fi
+}
+
+# Sleep up to the given seconds in 15s chunks, returning early (non-zero) if the
+# claude window disappears. Keeps the watcher responsive to claude exiting even
+# in the middle of a multi-hour wait for the usage window to reset.
+function _claude_afk_nap() {
+        local total="$1" session="$2" main="$3" slept=0
+        while [ "$slept" -lt "$total" ]; do
+                tmux list-windows -t "$session" -F '#{window_id}' 2>/dev/null \
+                        | grep -qx "$main" || return 1
+                sleep 15
+                slept=$((slept + 15))
+        done
+        return 0
+}
+
+# Watcher loop for claude-afk. Polls the claude window; when Claude reports the
+# session limit, waits until the reset time it prints, then sends `continue`.
+# Logs every action to ~/.claude-afk.log. Tears the session down when claude exits.
+function _claude_afk_watch() {
+        local session="$1"
+        local main="$2"   # the claude window's tmux id, e.g. @3
+        local log="$HOME/.claude-afk.log"
+        local banner="hit your session limit"
+
+        echo "$(date '+%F %T') claude-afk watching $session ($main)" >> "$log"
+        # Loop while the claude window still exists. Guarding on the session
+        # would be circular — this watcher's own window keeps the session alive —
+        # so we key off the main window's disappearance when claude exits.
+        while tmux list-windows -t "$session" -F '#{window_id}' 2>/dev/null | grep -qx "$main"; do
+                local screen
+                screen="$(tmux capture-pane -p -t "$main" 2>/dev/null)"
+                if printf '%s\n' "$screen" | grep -qF "$banner"; then
+                        local line secs
+                        line="$(printf '%s\n' "$screen" | grep -F "$banner" | tail -1)"
+                        secs="$(_claude_afk_wait_secs "$line")"
+                        echo "$(date '+%F %T') limit hit; waiting ${secs}s ($line)" >> "$log"
+                        _claude_afk_nap "$secs" "$session" "$main" || continue
+                        tmux send-keys -t "$main" "continue" Enter
+                        echo "$(date '+%F %T') sent 'continue' to $main" >> "$log"
+                        # Let the screen redraw, then wait for the banner to clear
+                        # (cap ~10 min) so we never re-send on the lingering message.
+                        _claude_afk_nap 60 "$session" "$main" || continue
+                        local tries=0
+                        while [ "$tries" -lt 18 ] && \
+                                tmux capture-pane -p -t "$main" 2>/dev/null | grep -qF "$banner"; do
+                                sleep 30
+                                tries=$((tries + 1))
+                        done
+                fi
+                sleep 30
+        done
+        # claude exited -> tear down the whole session so no window lingers.
+        echo "$(date '+%F %T') claude window gone; killing session $session" >> "$log"
+        tmux kill-session -t "$session" 2>/dev/null
+}
+
+# Given the limit banner line (e.g. '... resets 9:40am (Asia/Tokyo)'), print the
+# seconds until that wall-clock time next occurs in that timezone, plus a 60s
+# buffer. Prints 300 on any parse failure so the watcher still retries safely.
+function _claude_afk_wait_secs() {
+        python3 - "$1" <<'PY' 2>/dev/null || echo 300
+import re, sys, datetime
+try:
+    from zoneinfo import ZoneInfo
+except Exception:
+    print(300); raise SystemExit
+m = re.search(r'resets\s+(\d{1,2})(?::(\d{2}))?\s*([ap]m)\s*\(([^)]+)\)', sys.argv[1], re.I)
+if not m:
+    print(300); raise SystemExit
+hour = int(m.group(1)) % 12 + (12 if m.group(3).lower() == 'pm' else 0)
+minute = int(m.group(2) or 0)
+try:
+    tz = ZoneInfo(m.group(4).strip())
+except Exception:
+    print(300); raise SystemExit
+now = datetime.datetime.now(tz)
+target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+if target <= now:
+    target += datetime.timedelta(days=1)
+print(int((target - now).total_seconds()) + 60)
+PY
+}

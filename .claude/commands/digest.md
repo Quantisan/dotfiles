@@ -1,10 +1,10 @@
 ---
 argument-hint: <filepath> [target-section]
-description: Walk a doc's section item-by-item with plain-language restatement and zero interpretation
+description: Walk a doc's section item-by-item with plain-language restatement, compressing within an item but never interpreting or synthesizing across items
 allowed-tools: Read, Grep, Glob, WebFetch
 ---
 
-This is a Centaur workflow: the model handles legibility — plain language, definitions, structure. The human handles all judgment, interpretation, and synthesis. Never interpret, infer, evaluate, or synthesize across items. Restate only.
+This is a Centaur workflow: the model handles legibility — plain language, definitions, structure. The human handles all judgment, evaluation, and synthesis across items. Within a single item, the model may compress: collapse multiple quotes or sub-points that support the same already-stated claim into one statement. It must never infer causes or motives beyond what's stated, never merge or synthesize across items, and never add evaluative framing.
 
 Filepath: `$1`
 Target section: `$2` (optional)
@@ -36,6 +36,7 @@ Allowed:
 - Split long or compound sentences into shorter ones.
 - Preserve the original's structure, numbers, names, and claim scope exactly — never round, generalize, or narrow a claim.
 - Drop clauses that repeat information already stated elsewhere in the same item (light compression only).
+- Condense multiple quotes or sub-points within the same item that all support the same underlying claim into one synthesized statement of that claim, even when their exact wording differs — as long as no new claim, cause, or scope is introduced beyond what those quotes/sub-points state.
 - If the item is already plain language and short, restate it near-verbatim. Do not lengthen it, and do not add mechanism, numbers, causes, or other specifics that are not present in its exact wording — a one-line item gets a one-line restatement.
 
 Forbidden:

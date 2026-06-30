@@ -2,22 +2,23 @@
 argument-hint: <filepath> [target-section]
 description: Walk a doc's section item-by-item with plain-language restatement, compressing within an item but never interpreting or synthesizing across items
 allowed-tools: Read, Grep, Glob, WebFetch
+arguments: [filepath, target_section]
 ---
 
 This is a Centaur workflow: the model handles legibility — plain language, definitions, structure. The human handles all judgment, evaluation, and synthesis across items. Within a single item, the model may compress: collapse multiple quotes or sub-points that support the same already-stated claim into one statement. It must never infer causes or motives beyond what's stated, never merge or synthesize across items, and never add evaluative framing.
 
-Filepath: `$1`
-Target section: `$2` (optional)
+Filepath: `$filepath`
+Target section: `$target_section` (optional)
 
 ## Setup
 
-Read `$1`. If it doesn't exist or can't be read, say so plainly and stop.
+Read `$filepath`. If it doesn't exist or can't be read, say so plainly and stop.
 
-If `$2` is given, match it case-insensitively as a substring against the file's headings.
+If `$target_section` is given, match it case-insensitively as a substring against the file's headings.
 - Multiple headings match: list the candidate headings, stop, ask which one. Do not guess.
 - No heading matches: say so, list the file's actual top-level headings, stop. Do not guess or fall back silently.
 
-If `$2` is omitted, walk the whole document, chunked by its top-level heading. Detect whether H1 or H2 is the doc's actual top organizing level from the file itself — don't assume.
+If `$target_section` is omitted, walk the whole document, chunked by its top-level heading. Detect whether H1 or H2 is the doc's actual top organizing level from the file itself — don't assume.
 
 ## Segmentation
 
@@ -25,7 +26,7 @@ Items inside the matched section are the section's own first level of nested str
 
 If the matched section is plain prose with no list/heading structure under it, the whole section is one item. Do not split it into paragraphs.
 
-When `$2` is omitted, each top-level heading is its own segment. Within each segment, apply the same item-segmentation rule above (bullets/sub-headings, or single-item-if-prose) that an explicit target would get. Re-announce the item count and titles (see below) on entering each new top-level segment, then continue per-turn pacing item-by-item across the whole walk. Never collapse a segment's bullets into one item for the sake of covering the segment in a single turn — that's the same "summarizing across items" violation the Restatement rules forbid below.
+When `$target_section` is omitted, each top-level heading is its own segment. Within each segment, apply the same item-segmentation rule above (bullets/sub-headings, or single-item-if-prose) that an explicit target would get. Re-announce the item count and titles (see below) on entering each new top-level segment, then continue per-turn pacing item-by-item across the whole walk. Never collapse a segment's bullets into one item for the sake of covering the segment in a single turn — that's the same "summarizing across items" violation the Restatement rules forbid below.
 
 Before walking, announce the count and titles of items found under the target — a structural list only, titles/headings verbatim as they appear, not a summary of content.
 

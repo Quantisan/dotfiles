@@ -1,7 +1,7 @@
 ---
 argument-hint: <filepath> [target-section]
 description: Single-shot synthesized TLDR of a doc/section — compresses and connects what the source states, grounded, no per-item pacing
-allowed-tools: Read, Grep, Glob, WebFetch
+allowed-tools: Read, Grep, Glob, WebFetch, Task
 arguments: [filepath, target_section]
 ---
 
@@ -49,6 +49,21 @@ Source priority, in order:
 If no defining passage is found via any of these, say so in the Context block rather than guessing ("not defined in this doc or repo"). Never present an unconfirmed referent as settled fact anywhere in the output.
 
 Mark each grounded term inline in the gist prose with a short bracketed slug derived from the term itself (e.g. `[epistemic]`), and define it in the Context block using the same slug as the key — so the block is scannable on its own without rereading the prose. Grounding never changes what the gist says: it only attaches a citation to a term already used. Any fact that exists only because of the grounding lookup (qualifiers, dates, ticket numbers, file paths, mechanisms) belongs only in the Context block, never the gist prose.
+
+## Plain-language pass
+
+The first pass juggles grounding, compression, and connection all at once, so plainness suffers. After assembling the gist draft (the full Gist/Citation/Context block below), hand it to a fresh-context subagent whose only job is to make the `Gist:` prose simpler and more concise for clarity, without sacrificing technical precision or terminology.
+
+Dispatch a subagent (Task tool, model opus). Give it ONLY the assembled draft — never the source file. It rephrases sentences; it does not rethink content. Because it cannot see the source, it cannot add or verify anything — that is the point. Its instructions:
+
+- Simplify only the `Gist:` prose. Leave the `Citation:` line and the entire `Context:` block verbatim.
+- Preserve every bracketed `[slug]` marker exactly where it sits.
+- Change no facts. This is lexical rephrasing, not re-synthesis.
+- Do not infer a cause, motive, or implication the draft doesn't state — never turn "X. Y." into "X, so Y."
+- Do not add evaluation, emphasis, or framing the draft doesn't already make itself.
+- Do not drop a qualifier or hedge because it reads like fluff — it may be load-bearing.
+
+The subagent's returned block is the final output. Before showing it, diff it against the draft: if it added or dropped a fact, or slipped in a causal/evaluative connective, keep the first-pass wording for that sentence.
 
 ## Output
 

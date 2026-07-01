@@ -52,16 +52,14 @@ Mark each grounded term inline in the gist prose with a short bracketed slug der
 
 ## Plain-language pass
 
-The first pass juggles grounding, compression, and connection all at once, so plainness suffers. After assembling the gist draft (the full Gist/Citation/Context block below), hand it to a fresh-context subagent whose only job is to make the `Gist:` prose simpler and more concise for clarity, without sacrificing technical precision or terminology.
+The first pass juggles grounding, compression, and connection all at once, so plainness suffers. After assembling the gist draft (the full Gist/Citation/Context block below), hand it to the `restater` subagent — a fresh, source-blind context whose only job is to restate prose more simply. Because it cannot see the source, it cannot add or verify anything — that is the point.
 
-Dispatch a subagent (Task tool, model opus). Give it ONLY the assembled draft — never the source file. It rephrases sentences; it does not rethink content. Because it cannot see the source, it cannot add or verify anything — that is the point. Its instructions:
+Dispatch the `restater` subagent (Task tool). Give it ONLY the assembled draft — never the source file — plus these scoping instructions:
 
-- Simplify only the `Gist:` prose. Leave the `Citation:` line and the entire `Context:` block verbatim.
+- Restate only the `Gist:` prose. Leave the `Citation:` line and the entire `Context:` block verbatim.
 - Preserve every bracketed `[slug]` marker exactly where it sits.
-- Change no facts. This is lexical rephrasing, not re-synthesis.
-- Do not infer a cause, motive, or implication the draft doesn't state — never turn "X. Y." into "X, so Y."
-- Do not add evaluation, emphasis, or framing the draft doesn't already make itself.
-- Do not drop a qualifier or hedge because it reads like fluff — it may be load-bearing.
+
+The meaning-preserving guardrails (no added cause/emphasis, no dropped qualifiers) live in the `restate` skill the subagent carries — do not repeat them here.
 
 The subagent's returned block is the final output. Before showing it, diff it against the draft: if it added or dropped a fact, or slipped in a causal/evaluative connective, keep the first-pass wording for that sentence.
 

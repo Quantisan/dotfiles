@@ -38,6 +38,8 @@ function doIt() {
         rsync -avh --delete \
                 --exclude "rk-*.md" \
                 .claude/commands/ ~/.claude/commands/
+        rsync -avh --delete .claude/skills/ ~/.claude/skills/
+        rsync -avh --delete .claude/agents/ ~/.claude/agents/
 
         ## Set up Codex config
         mkdir -p ~/.codex

@@ -40,6 +40,7 @@
   },
   "effortLevel": "high",
   "advisorModel": "opus",
+  "askUserQuestionTimeout": "never",
   "tui": "default",
   "skipWorkflowUsageWarning": true,
   "theme": "light",

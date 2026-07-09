@@ -7,13 +7,13 @@ description: Use when Paul directs a new "what's out there" research round — a
 
 Turns a directional prompt into a full research round: materialized launch brief → Paul's go/no-go → 3-phase multi-agent engine → findings survey. The methodology is invariant and lives in the engine; the per-round slots are the only authored parts. The why of the engine's design is in `reference.md` beside this file — **read it before editing the engine**, and record any post-shakedown engine edit's rationale there.
 
-**Paths.** The skill is repo-agnostic — it runs in whatever project Paul directs a round from. The engine runs from its installed location `~/.claude/workflows/research-hunt.js`; its canonical source is the dotfiles repo (`~/Projects/dotfiles/.claude/workflows/research-hunt.js`), and edits go there, then `source bootstrap.sh` reinstalls it. Round artifacts (brief, survey) are written into the **current project**, at its inferred research location (see Step 2).
+**Paths.** The skill is repo-agnostic — it runs in whatever project Paul directs a round from. The engine runs from its installed location `~/.claude/workflows/research-hunt.js`; its canonical source lives in the dotfiles repo, whose checkout path bootstrap records at `~/.claude/workflows/.source`. Edits go to the canonical source, then `source bootstrap.sh` reinstalls it. Round artifacts (brief, survey) are written into the **current project**, at its inferred research location (see Step 2).
 
 Hard rule: **the engine never launches without Paul's go on a materialized brief.** No exception for "obvious" rounds or re-runs with edited slots.
 
 ## Step 1 — Fill the slots
 
-Read `brief-template.md` (beside this file) and fill its slots from the directional prompt. Infer aggressively: prior briefs in the project's research location (`*launch-brief*.md`, if any exist) show the house style per slot, and the template carries budget-knob defaults. Then ask narrowing questions — **only for slots you genuinely cannot infer, 2–3 at most, in one batch** (AskUserQuestion). Typical genuinely-open slots: the rank spec's order, the Phase-3 mode, a scope edge the prompt leaves ambiguous. Never ask about a slot with a template default or an inferable answer.
+Read `brief-template.md` (beside this file) and fill its slots from the directional prompt. Infer aggressively: prior briefs in the project's research location (`*launch-brief*.md`, if any exist) show the house style per slot, and the template carries budget-knob defaults. First round in a project — no prior briefs — is normal: infer from the template defaults and the directional prompt alone, and expect to spend the full question budget below. Then ask narrowing questions — **only for slots you genuinely cannot infer, 2–3 at most, in one batch** (AskUserQuestion). Typical genuinely-open slots: the rank spec's order, the Phase-3 mode, a scope edge the prompt leaves ambiguous. Never ask about a slot with a template default or an inferable answer.
 
 ## Step 2 — Materialize the brief
 
@@ -26,7 +26,7 @@ First, resolve the **research location** in the current project (do this once; b
 
 Write the filled brief to `<research-location>/YYYY-MM-DD.<slug>-launch-brief.md`, following the template's invariant text exactly. The template's header block (What it is / is not · Status & authorship · Related artifacts · provenance trail) **is** the artifact convention — this skill is self-contained and needs no external artifact skill. The header+trail shape is deliberately kept so a downstream artifact skill (e.g. a `strategic-artifact` skill, where one exists) can adopt the file — but nothing requires one.
 
-Record the engine's version in the Status slot: the short-hash of the canonical engine source, `git -C ~/Projects/dotfiles log -1 --format=%h -- .claude/workflows/research-hunt.js`.
+Record the engine's version in the Status slot: the short-hash of the canonical engine source, `git -C "$(cat ~/.claude/workflows/.source)" log -1 --format=%h -- .claude/workflows/research-hunt.js`.
 
 Then run the **self-verify pass** (same pass used for the survey in Step 5):
 
@@ -39,12 +39,14 @@ The brief is written **before** the go/no-go on purpose: an aborted run still le
 
 ## Step 3 — Go/no-go
 
-Present one screen: the goal, the axes + rank spec, the perspectives and lenses, the seeds + novelty floor, the Phase-3 mode, the budget knobs — and stop. Paul decides.
+Present one screen: the goal, the axes + rank spec, the perspectives and lenses, the seeds + novelty floor, the Phase-3 mode, the budget knobs, **and the expected cost** — the agent-call count the knobs imply: perspectives + wildcard + ~1 clustering pass per perspective pair + gate + seed benchmark, then 6 per gated candidate (3 lens scouts, case lead, 2 verifiers) + cross-case gate, then question gate + up to maxRefuterRounds refuters + verdict, + 1 critic. Defaults land around 40–70 calls (mixed Sonnet/Opus); the dominant term is 6 × maxGated. Then stop. Paul decides.
 
 - **Go** → update the brief's Status slot to `go (Paul, date)`, proceed.
 - **Abort** → update Status to `aborted (reason)`, stop. The brief stays.
 
 ## Step 4 — Launch the engine
+
+Pre-flight: the installed engine must match the canonical source — `diff -q ~/.claude/workflows/research-hunt.js "$(cat ~/.claude/workflows/.source)/.claude/workflows/research-hunt.js"`; if they differ, `source bootstrap.sh` first (the version stamp in the brief is otherwise a lie).
 
 Build `args` from the brief per the ARGS CONTRACT block at the top of `research-hunt.js` (slots map one-to-one; pass `date` in — the engine cannot call Date). Launch by explicit path — the engine registers as `research-hunt-engine`, but the installed path is unambiguous and cwd-independent (expand `~` to the home directory):
 
@@ -69,12 +71,12 @@ The engine returns one structured result object; the survey is written here in t
 
 1. Header block — What it is / is not (run mechanics in one line; the NOT list), Status & authorship (verification-integrity claim), Related artifacts (prose pointers to prior rounds and the anchor artifact, if any), Reading notation (axes, tags, and the weaker-evidence flag for seed-benchmark rows)
 2. The ranking in one view — full-treatment candidates table (deep-dive scores; note that gate scores were provisional and superseded)
-3. The seed benchmark — light-pass table, flagged as lower-rigor by design
+3. The seed benchmark — light-pass table, flagged as lower-rigor by design (only when seeds went unbenched; omit when `result.phase1.seedBenchmark` is null)
 4. Phase 1, auditable — discovery counts and access failures, the saturation sequence (`result.phase1.saturation.sequence`), the gate table with per-row rationale and the novelty-floor arithmetic
 5. Per-candidate profiles, one section each — scores with justification, reception verdict, specimens (if any), reading list with per-item confirmation tags, field read
 6. Cross-case observations (from the cross-case gate)
 7. The honest read — the round's headline conclusion
-8. Phase 3 — the question gate's selection rationale (or skip reasons), the refuter trail summary, the stop-rule state, the verdict; `underdetermined-build-probe` is reported as a finding with its probe suggestion
+8. Phase 3 — the question gate's selection rationale (or skip reasons), the refuter trail summary, the stop-rule state, the verdict; `underdetermined-build-probe` is reported as a finding with its probe suggestion (the engine re-asks once when it's missing; if still absent, report the gap)
 9. Completeness critic — routed here, tagged next-round input, never into this round's argument
 10. Appendix — Leads not pursued (`result.parkedLeads`, grouped by origin, one line each)
 11. Caveats — corrections and fabrications caught (verifier lane + your re-checks), scope and evidence limits

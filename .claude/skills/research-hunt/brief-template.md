@@ -4,7 +4,7 @@ The invariant text of a research-hunt launch brief. `{{double-braced}}` parts ar
 
 Slot-filling rules:
 
-- **Infer before asking.** Most slots are inferable from the directional prompt plus the prior rounds' briefs. Narrowing questions (2–3 max) are only for slots that genuinely cannot be inferred — typically the rank spec's order, the Phase-3 mode, and scope edges.
+- **Infer before asking.** Most slots are inferable from the directional prompt plus the prior rounds' briefs; when no prior briefs exist (first round in a project), the template defaults and the prompt are the whole basis — that is normal, not a blocker. Narrowing questions (2–3 max) are only for slots that genuinely cannot be inferred — typically the rank spec's order, the Phase-3 mode, and scope edges.
 - **Budget knobs have defaults** — use them unless the prompt says otherwise; never ask about them: `maxGated: 8`, `noveltyFloor: 0.33` (a number, not a fraction string — the engine does arithmetic on it), `emptyDoorK: 3`, `stabilityK: 5`, `maxRefuterRounds: 4`. **Scout counts** are the remaining budget knob and are carried by the lists themselves: one scout per Phase-1 perspective entry, three lens scouts per candidate (one per lens entry), one wildcard pass — sizing the lists is how scout counts are set.
 - **The rank-spec guardrail is mandatory prose**, not a formality: state how the rank function serves the round's thesis. A rank rule that would top the table with a weak-on-thesis candidate needs that tension named in the brief.
 

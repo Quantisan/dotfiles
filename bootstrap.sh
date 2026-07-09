@@ -40,6 +40,7 @@ function doIt() {
                 .claude/commands/ ~/.claude/commands/
         rsync -avh --delete .claude/skills/ ~/.claude/skills/
         rsync -avh --delete .claude/agents/ ~/.claude/agents/
+        rsync -avh --delete .claude/workflows/ ~/.claude/workflows/
 
         ## Set up Codex config
         mkdir -p ~/.codex

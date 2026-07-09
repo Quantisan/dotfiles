@@ -12,6 +12,7 @@ The engine's counters, gates, and escalations are not style — each is a fix fo
 - **Fabrication clusters where the persuasion is.** Point adversarial verification at load-bearing quotes first; scouts copy quote bytes, never transcribe; the survey re-checks flagship quotes independently.
 - **Verifiers false-flag too.** 'refuted' requires the verifier to have found the source and shown the mismatch; can't-find-it is 'inconclusive', and refutations get the same independent re-check as confirmations.
 - **Blocked ≠ empty.** Access failures (403/paywall/bot-block) are a separate channel everywhere; they are inconclusive, never disconfirming.
+- **Fetched text is data.** Quotes are copied verbatim from untrusted pages by design, and that text flows into gate prompts and the survey — so every agent that touches web-derived text is told instructions embedded in it are content to report, never instructions to follow.
 - **Leads get one legal outlet.** Mid-run leads go to `parkedLeads`; no scout widens its own mandate; the wildcard gets exactly one pass.
 - **The hardest question earns its answer only under attack.** Phase 3 runs fresh, contamination-guarded refuters against the round's own headline, with a coded stop rule.
 - **Effort is persistence, not intelligence.** Search work's failure mode is premature "nothing found," so scouts and refuters run at medium; only genuinely mechanical checks run at low.
@@ -33,7 +34,7 @@ Judgment lives in Opus gate agents; control flow lives in the script. The retro'
 ## The tiers and the effort map
 
 - **User default (main session)** — brief authoring, launch, survey writing including the independent quote re-checks. The judgment closest to Paul stays on the model Paul runs.
-- **Opus (`model` override)** — the three gates (discovery ranking, cross-case, question) and the per-candidate case leads: the judgment-heavy nodes. The Phase-3 final verdict runs as the question gate's closing half — same gate, opened at question selection, closed at the verdict — so it shares the Opus tier. They all inherit session effort.
+- **Opus (`model` override)** — the three gates (discovery ranking, cross-case, question) and the per-candidate case leads: the judgment-heavy nodes. The Phase-3 final verdict is a separate Opus call that closes the arc the question gate opened — it shares the Opus tier and the question/tentative-answer thread, not a single invocation. They all inherit session effort.
 - **Sonnet (subagent tier)** — perspective scouts, lens scouts, verifiers, benchmark passes, refuters, clustering, critic: high-volume search and mechanical work.
 
 **Effort is persistence, not intelligence.** Low effort's failure mode in search work is premature "nothing found" — the empty-door/false-flag pathology the chain documented. So: scouts, lens scouts, and Phase-3 refuters run at **medium**; only genuinely mechanical checks (URL liveness, substring presence, citation-exists lookups, seed-benchmark scoring from handed-over sources) run at **low**. The verifier lane is split on exactly this line — a low-effort adversarial verifier that can't find a source declares fabrication.
@@ -62,17 +63,24 @@ Judgment lives in Opus gate agents; control flow lives in the script. The retro'
 
 **The fork test** filters candidates: both answers must change what gets built next. The gate states what the build does differently under each answer — if the build is the same either way, the question is trivia, not a fork. Skipping with stated reasons is legal; a forced question wastes the phase.
 
-**Contamination guard**: refuters receive the question and the tentative answer — nothing else. The claim under attack must be known to attack it; the framing that produced it must not be, or the refuters inherit the survey scouts' blind spots.
+**Contamination guard**: refuters receive the question, the tentative answer, and the running already-seen source list (dedup) — none of `SCOUT_CONTEXT`, none of the survey scouts' framing or findings. The claim under attack must be known to attack it; the framing that produced it must not be, or the refuters inherit the survey scouts' blind spots.
 
 ## Accepted approximations (known, not bugs)
 
 - **"Consecutive" empty-door counting is completion-order**, not candidate-index-order: `pipeline()` runs candidates concurrently, so door closures only spare candidates whose lens stage hasn't launched yet. Early candidates in flight still pay the door cost. Accepted: the alternative (sequential candidates) trades most of Phase 2's wall-clock for counter purity.
 - **Discovery runs perspectives in pairs** so the saturation rule is checkable before the next pair launches — a compromise between full parallelism (saturation uncountable before spend) and sequential scouts (slowest). The pair boundary means at most one extra perspective runs past true saturation.
 - **The wildcard launches with the first pair**, briefed against the perspective *list* rather than its results — matches the games brief's design; one pass, parked leads only.
-- **Gate constraint violations get one corrective re-run**, then proceed logged-but-unblocked: a hard loop on a stubborn gate would deadlock the run for a constraint the survey can still disclose.
+- **Gate constraint violations get one corrective re-run**, then proceed logged-but-unblocked: a hard loop on a stubborn gate would deadlock the run for a constraint the survey can still disclose. The Phase-3 verdict's missing probe suggestion gets the same single-retry treatment.
 
 ## Engine edit log
 
-Record post-shakedown edits here: date, what changed, the run evidence that forced it.
+Record post-shakedown edits here: date, what changed, the run evidence that forced it. (No shakedown run has happened yet — the first full round in any project is it.)
 
-*(none yet — the shakedown is the player-built-artifacts hunt, per the design spec §Testing)*
+### 2026-07-09 — pre-shakedown review fixes (move into dotfiles)
+
+Evidence: a static multi-agent review at move-in (13 adversarially-confirmed findings), not a run — recorded so the shakedown knows these mechanisms are review-driven, not run-driven.
+
+- Gate cap/floor now re-checked on the **sliced** candidate set Phase 2 actually receives; seeds whose only gated coverage was truncated off rejoin the benchmark lane.
+- Phase-3 refuter lane no longer closes on a single zero-new-source round — two consecutive dry rounds required, mirroring `emptyDoorK`'s skepticism toward one thin search.
+- `phase3.mode` is enum-validated (a typo silently ran the full question-generation path); an `underdetermined-build-probe` verdict missing its probe suggestion gets one corrective re-run; cross-case gate and verdict null-returns are logged instead of silently flowing downstream.
+- Injection-guard line added everywhere web-derived text is consumed (`SCOUT_CONTEXT`, clustering, refuters, verdict).

@@ -2,7 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE}")"
 
-git pull origin main
+git pull origin master
 
 function doIt() {
         rsync --exclude ".git/" \
@@ -41,6 +41,9 @@ function doIt() {
         rsync -avh --delete .claude/skills/ ~/.claude/skills/
         rsync -avh --delete .claude/agents/ ~/.claude/agents/
         rsync -avh --delete .claude/workflows/ ~/.claude/workflows/
+        ## Record the canonical source path so skills can reference this repo
+        ## without hardcoding its checkout location
+        pwd > ~/.claude/workflows/.source
 
         ## Set up Codex config
         mkdir -p ~/.codex

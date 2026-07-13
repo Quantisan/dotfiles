@@ -17,6 +17,7 @@ function doIt() {
                 --exclude "CLAUDE.md" \
                 --exclude "AGENTS.md" \
                 --exclude ".codex/config.toml" \
+                --exclude ".codex/personal.config.toml" \
                 --exclude ".pi/" \
                 --exclude ".cache/" \
                 --exclude ".claude/" \
@@ -47,7 +48,7 @@ function doIt() {
 
         ## Set up Codex config
         mkdir -p ~/.codex
-        ln -shf "$(pwd)/.codex/config.toml" ~/.codex/config.toml
+        ln -shf "$(pwd)/.codex/personal.config.toml" ~/.codex/personal.config.toml
 
         ## Set up pi config
         mkdir -p ~/.pi/agent

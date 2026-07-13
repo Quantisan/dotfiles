@@ -5,6 +5,26 @@ function mkd() {
         mkdir -p "$@" && cd "$_"
 }
 
+# Use the personal profile for Codex runtime commands. Administrative commands
+# reject --profile, so pass those through unchanged.
+function codex() {
+        case "${1:-}" in
+        login | logout | plugin | mcp-server | app-server | remote-control | app | completion | update | doctor | apply | a | cloud | exec-server | features | help)
+                command codex "$@"
+                ;;
+        debug)
+                if [ "${2:-}" = "prompt-input" ]; then
+                        command codex --profile personal "$@"
+                else
+                        command codex "$@"
+                fi
+                ;;
+        *)
+                command codex --profile personal "$@"
+                ;;
+        esac
+}
+
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
         cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"

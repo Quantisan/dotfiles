@@ -48,6 +48,10 @@ export const meta = {
 // }
 // ----------------------------------------------------------------------------
 
+// The Workflow harness delivers `args` as a JSON string (observed 2026-07-09
+// and 2026-07-19); accept both shapes at the boundary.
+if (typeof args === 'string') args = JSON.parse(args)
+
 const REQUIRED = ['slug', 'date', 'goal', 'anchorArtifact', 'axes', 'rankSpec', 'clusteringKey', 'scopeRule', 'perspectives', 'lenses', 'seeds', 'noveltyFloor', 'exclusions', 'accessStrategy', 'phase3', 'budgets']
 for (const k of REQUIRED) {
   if (args == null || args[k] == null) throw new Error(`research-hunt: missing brief slot '${k}' in args — launch only via the research-hunt skill with a confirmed brief`)

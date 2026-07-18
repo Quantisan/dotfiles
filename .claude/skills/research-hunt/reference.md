@@ -82,6 +82,10 @@ Judgment lives in gate agents on the session model; control flow lives in the sc
 
 Record post-shakedown edits here: date, what changed, the run evidence that forced it. (No shakedown run has happened yet — the first full round in any project is it.)
 
+### 2026-07-19 — boundary tolerates string-delivered `args`
+
+Evidence: two launches (2026-07-09 reasoning-trail chain, 2026-07-19 japan-sme-manufacturing-niches round) where the Workflow harness delivered `args` as a JSON string and the engine died at validation with `missing brief slot 'slug'` — 0 agent calls, ~15ms, but each launch needed a hand-written parse-and-delegate shim workflow to proceed. The boundary now does `if (typeof args === 'string') args = JSON.parse(args)` before validation; harmless if the harness delivers a real object.
+
 ### 2026-07-09 — pre-shakedown review fixes (move into dotfiles)
 
 Evidence: a static multi-agent review at move-in (13 adversarially-confirmed findings), not a run — recorded so the shakedown knows these mechanisms are review-driven, not run-driven.

@@ -1,6 +1,6 @@
 ---
 name: strategic-artifact
-description: Naming, forward header, handoff delta, and lineage map for dated strategic artifacts, in any repo that declares an artifact root. Invoke as /strategic-artifact when creating, saving, renaming, or moving a file under the artifact root.
+description: Naming, forward header, provenance trail, and lineage map for dated strategic artifacts, in any repo that declares an artifact root. Invoke as /strategic-artifact when creating, saving, renaming, or moving a file under the artifact root.
 disable-model-invocation: true
 ---
 
@@ -79,64 +79,40 @@ Rules:
 - **List what this was directly produced from — and only what the file's own body sources.** The edge must be defensible from this artifact's header/prose, not reconstructed from a README narrative or your memory. If the body doesn't say it built on X, don't assert the edge — that's the mis-stated-lineage bug this whole convention exists to prevent.
 - **A direct input still counts even if it's also reachable another way.** If this was produced from both X and Y, and Y also feeds X, list both — that overlap is the *convergence* the map exists to show. Only drop an ancestor you didn't directly use (you merely reach it through an edge).
 - **Exclude siblings and background reading** — a doc you read alongside, or cite for context, is not an edge. Those stay in the prose bullets.
-- **A new version of a previous artifact lists that version as a parent.** The preceding version is one `Builds on:` path among possibly several; step 4's baseline preamble names which one.
 - **Upstream only, never downstream** — "what feeds off this" is derived by reversing edges when the map is built. Maintaining a `Feeds:` line by hand is the drift trap; don't.
 - **Paths relative to the artifact root** — a bare slug is a root-level file; a `<subfolder>/…` prefix is a file under that subfolder. This is what keeps the edge correct after a move.
 - This line is the **canonical lineage edge**. The README Lineage map is only a rendered view of it (step 5).
 
-## Step 4 — Handoff delta (version provenance, one edge back)
+## Step 4 — Provenance trail (lineage, looking back)
 
-So a later *agent* can answer provenance questions about this version for a reader who already knows the preceding one. It indexes: what substantive concept was added, changed, or removed; where to compare the two versions; why the change was made; and whether the rationale is an openable source, Paul's direct steer, or unsupported agent synthesis. It does not explain the full idea, replace the artifact body, or preserve a concept's lifetime history.
+So a later *human* can trace why a decision came out this way. Close with:
 
-**Scope.** Only a **versioned artifact** — a new delivered version of a preceding artifact — carries a handoff delta. A standalone artifact has none: its sources stay in the body, its direct inputs in `Builds on:`. Existing artifacts with an accumulating `## Provenance trail` remain valid; don't migrate them.
+```
+## Provenance trail
 
-**Version model.** Each delivered version is a separate file. The new file names its immediate **baseline** — the preceding version — via the `Builds on:` edge (step 3) and contains only the delta from that baseline. A later version builds on this file and carries its own one-step delta; full history stays recoverable by walking the chain, so no artifact repeats or accumulates it. The baseline is exactly one of the `Builds on:` paths; the preamble below distinguishes it from the other direct inputs.
+### YYYY-MM-DD
+- <body anchor> ← <right side>
+```
 
-Close the artifact with:
+**Gate — the trail records steers, not edits.** An entry earns its line only as one of:
 
-````
-## Handoff delta
-
-_Baseline: `path/to/previous-version.md`. Agent-facing. Records only substantive
-conceptual changes introduced in this version; the document body is canonical._
-
-- Changed: `v1 §Target customer` → `§Target customer` ← “Focus on teams already attempting this manually.”
-- Added: `§Adoption constraint` ← `calls/2026-07-20.aman.md §Adoption`
-- Removed: `v1 §Enterprise expansion` ← agent synthesis, no source
-````
-
-`v1` is the baseline declared in the preamble; an unqualified `§` anchor is the current artifact. Anchors are exact section titles, unique in their file.
-
-- **Left — a routing label**, one of three. It tells the agent where to retrieve the change — not how important or confident it is:
-  - `Added:` points to the current artifact.
-  - `Changed:` points from an exact baseline anchor to an exact current anchor.
-  - `Removed:` points to an exact baseline anchor.
-- **Right — one of three honest shapes, never a paraphrase:**
-  - **openable pointer** — an exact repository-relative path with a section or timestamp. The reader can open it and re-check.
-  - **verbatim steering quote** — when the decision was Paul's in-session call, his words *are* the source; quote them. Only here — a quote dressing an externally-driven decision is laundering.
-  - **`agent synthesis, no source`** — when it came from the model's reasoning with nothing under it. The flag *is* the signal: distrust this entry first.
-- Never point at the session log — it isn't committed. If the substance lives only in the session, lift it into the delta (quote or no-source marker).
-
-**Gate — substantive conceptual changes only.** A line earns its place only for a substantive conceptual difference delivered in this version: a reframe, addition, removal, altitude change, scope change, reordering that changes meaning, or other strategically meaningful adjustment. Record the **final adopted rationale** for the delivered change, not the drafting process that preceded it. One line per substantive concept change — never one line per mapping, example, or wording adjustment inside the anchored section.
+- **a strategic steer** — Paul's call that shaped the artifact: a reframe, an add or drop, an altitude call, a reorder, a scope change.
+- **a trust flag** — an agent inference or synthesis a later reader should distrust first. All of one session's synthesis (mappings, enumerations, decompositions) collapses into **one** `agent synthesis, no source` line — never one entry per mapping.
 
 No entry for:
-- unchanged concepts;
-- spelling, notation, link, filename, or numbering corrections;
-- layout-only reordering;
-- intermediate decisions abandoned before delivery;
-- a restatement of what is already clear from comparing the two anchored sections.
+- a claim already cited inline in the body — the body's citation *is* the trail;
+- mechanical or corrective work — a move or rename, a spelling, notation, or label correction (even one you verified), link fixes, renumbering. If a renumber shifts item numbers embedded in earlier verbatim quotes, add one reconciliation note to the trail's preamble instead of per-entry keys.
 
-If nothing passes the gate, retain the section with exactly this state — never invent an entry to satisfy the format:
+Self-check per entry: *would it survive a prune down to the strategic steers?* If not, don't write it.
 
-````
-_No substantive conceptual changes from the stated baseline._
-````
-
-**Maintenance.** Never append lifetime history, copy the preceding version's delta forward, or preserve superseded drafting decisions. Every internal pointer must resolve before the artifact is complete.
-
-**How a later agent digests it.** Answering a provenance question about this version: (1) read the handoff delta and pick the relevant entry; (2) open the named baseline and current sections; (3) compare them to determine the actual change; (4) follow the right-side source for why it changed; (5) answer only the version delta unless the user explicitly asks for broader history; (6) state plainly when the rationale is `agent synthesis, no source`. The body stays canonical for what a concept currently means — the delta is an index into the comparison and its rationale, not a summary of the concept.
-
-**Terminology.** *Lineage* is reserved for relationships between artifacts (`Builds on:`, the README map). The handoff delta is decision provenance for a single version transition.
+- **Left — body anchor.** A few words to Ctrl-F the decision in the body. A findable handle, not a restatement.
+- **Right — one of three honest shapes, never a paraphrase:**
+  - **openable pointer** — `Calls/…minutes.md §section/timestamp`, a reckon bullet ID, or a dated lived-observation. The reader can open it and re-check.
+  - **verbatim steering quote** — when the decision was Paul's in-session call, his words *are* the source; quote them. Only here — a quote dressing an externally-driven decision is laundering.
+  - **`agent synthesis, no source`** — when it came from the model's reasoning with nothing under it. The flag *is* the signal: distrust this entry first.
+- One line each. No significance labels, no type tags, no considered-options block.
+- Never point at the session log — it isn't committed. If the substance lives only in the session, lift it into the trail (quote or no-source marker).
+- Later edits **append a new dated entry** — never overwrite; the trail accretes. Pruning an accreted trail happens only at Paul's explicit request — keep the gate-passing entries and open the trail with a one-line note that it was pruned and that the full record lives in git history.
 
 ## Step 5 — Rebuild the lineage map
 
@@ -158,20 +134,17 @@ A clean run (0 dead edges) is the signal the move is complete.
 
 ## Step 6 — Authoring boundary
 
-You scaffold the artifact and record the handoff delta. You do **not** draft Paul's body — his principle, catalog entries, or core claims. Leave `[Paul to author]` markers where his content goes. A polished draft from you is not his thinking.
+You build the scaffold and maintain the trail. You do **not** draft Paul's body — his principle, catalog entries, or core claims. Leave `[Paul to author]` markers where his content goes. A polished draft from you is not his thinking.
 
 ## Step 7 — Self-verify
 
 Re-read the file you just wrote and confirm, out loud, in your reply:
 
 - Filename matches `YYYY-MM-DD.<slug>.md`, or `YYYY-MM-DD.<chain-slug>.<N>.<step-slug>.md` for a file in a dependency chain.
-- If strategic artifact: both `[invariant]` header slots present.
+- If strategic artifact: both `[invariant]` header slots present; `## Provenance trail` present with at least the relevant decisions.
+- Every trail right-side is one of the three shapes — **flag any paraphrase**, it's the most common failure.
+- Every trail entry passes the gate — a strategic steer or a trust flag; no entries for inline-cited claims or mechanical/corrective work; at most one consolidated `agent synthesis, no source` line per session.
 - If the artifact has direct upstream: a `Builds on:` line is present, names only direct parents, and uses paths relative to the artifact root.
-- If versioned: `## Handoff delta` present, and its baseline path exists and matches the preceding version named in `Builds on:`. If standalone: no handoff delta.
-- Every delta entry is `Added`, `Changed`, or `Removed`, with baseline (`v1 §`) and current (`§`) anchors that exist on the appropriate side of the change.
-- Every right side is one of the three shapes — **flag any paraphrase**, it's the most common failure.
-- Every entry passes the gate — a substantive delivered change, not a mechanical correction or an abandoned drafting decision; unchanged material is absent. If nothing passed the gate, the explicit no-change state is present.
-- Every internal pointer resolves.
 - The generator ran clean — **0 dead edges** — and the README map reflects this file.
 
 Report pass/fail per check. If a check fails, fix it before declaring done. This step is the point of the skill — skipping it reintroduces the silent miss.

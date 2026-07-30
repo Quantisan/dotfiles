@@ -7,16 +7,17 @@ with a baseline-scoped provenance delta.
 
 The provenance delta is an agent-facing retrieval layer. It helps an agent answer
 a user's provenance questions about a newly delivered artifact. The delta is
-measured from a baseline, as in a code diff: a revision's baseline is its
-preceding version; a reply's baseline is the document it answers; a standalone
-first artifact has no baseline, so its delta from nothing is all `Added`. The
-recipient already knows the baseline; the delta scopes retrieval to what is
-new against it.
+measured from declared baseline inputs: the actual material the user supplied or
+explicitly referenced as the starting point. A revision includes its preceding
+version; a reply includes the document it answers; a first artifact includes the
+user's initiating prompt verbatim and any supplied or referenced sources. The
+delta scopes retrieval to what the artifact introduced or changed against those
+inputs.
 
 It answers:
 
 - What substantive concept was added, changed, or removed?
-- Where should the agent compare the old and new versions?
+- Which baseline input and artifact section should the agent compare?
 - Why was the change made?
 - Was the rationale an openable source, Paul's direct steer, or unsupported
   agent synthesis?
@@ -26,32 +27,47 @@ concept's lifetime history.
 
 ## Baseline model
 
-Each delivered artifact is a separate file. The new artifact names its immediate
-baseline with the existing canonical lineage edge:
+Each delivered artifact is a separate file. The new artifact declares the inputs
+it directly starts from. When an input is another repository artifact, it also
+uses the existing canonical lineage edge:
 
 ```markdown
 **Related artifacts**
 - Builds on: `path/to/previous-version.md`
 ```
 
-The new file contains only the delta from that baseline. A later version builds
-on the current file and carries its own one-step delta. Full history remains
-recoverable by traversing the chain, but no artifact repeats or accumulates the
-whole history.
+The new file contains only the delta from its declared inputs. A later version
+builds on the current file and carries its own one-step delta. Full artifact
+history remains recoverable by traversing the chain, but no artifact repeats or
+accumulates the whole history.
 
-A declared baseline is exactly one of the paths in `Builds on:`. Other direct
-inputs may remain as additional lineage parents; the baseline preamble
-distinguishes the baseline from those sources.
+Baseline inputs may be:
+
+- the user's initiating prompt, preserved verbatim;
+- exact repository-relative paths with a section or timestamp;
+- external links the user supplied or sources and known concepts the user
+  explicitly referenced.
+
+Link a referenced source or concept when it has an unambiguous openable target.
+If the reference is ambiguous, retain the user's exact words and do not guess a
+link. Do not promote background knowledge, agent-selected reading, or a
+plausible-looking source into the baseline after the fact.
+
+Every repository artifact used as a baseline input must also appear in
+`Builds on:`. Prompts and external links are provenance inputs, not artifact
+lineage edges.
 
 Three baseline cases, one grammar:
 
-- A revision's baseline is its preceding version.
-- A reply's baseline is the document it answers. The reply is a new artifact,
-  not a revision of that document; `Removed` means the reply proposes dropping
-  the concept, not that the document lost it.
-- A standalone first artifact has no baseline. Its preamble declares
-  `Baseline: none`, its delta is all `Added`, and every `Builds on:` path is
-  an ordinary lineage parent.
+- A revision includes its preceding version, the revision prompt verbatim, and
+  any additional user-supplied or explicitly referenced inputs.
+- A reply includes the document it answers, the reply prompt verbatim, and any
+  additional inputs. The reply is a new artifact, not a revision of that
+  document; `Removed` means the reply proposes dropping the concept, not that
+  the source document lost it.
+- A first artifact includes the initiating prompt verbatim and any additional
+  inputs. `Baseline: none` is permitted only when no identifiable input exists;
+  an interactive user prompt normally makes that state inapplicable.
 
 ## Artifact format
 
@@ -60,42 +76,63 @@ Replace `## Provenance trail` with:
 ```markdown
 ## Provenance delta
 
-_Baseline: `path/to/previous-version.md`. Agent-facing. Records only substantive
-conceptual changes introduced in this version; the document body is canonical._
+_Baseline inputs:_
 
-- Changed: `v1 §Target customer` → `§Target customer` ← “Focus on teams already attempting this manually.”
-- Added: `§Adoption constraint` ← `calls/2026-07-20.aman.md §Adoption`
-- Removed: `v1 §Enterprise expansion` ← agent synthesis, no source
+- `B1` — `path/to/previous-version.md`
+- `P1` — User prompt: “Focus on teams already attempting this manually.”
+- `S1` — [Jobs to Be Done](https://en.wikipedia.org/wiki/Jobs_to_Be_Done)
+
+_Agent-facing. Records only substantive conceptual changes introduced in this
+version; the document body is canonical._
+
+- Changed: `B1 §Target customer` → `§Target customer` ← `P1`
+- Added: `§Adoption constraint` ← `S1`
+- Removed: `B1 §Enterprise expansion` ← agent synthesis, no source
 ```
 
-`v1` means the baseline declared in the preamble. An unqualified section anchor
-means the current artifact.
+Each short identifier names one declared input. An unqualified section anchor
+means the current artifact. Prompt text is quoted once in the input list; entries
+may point to its identifier without repeating it. When a prompt itself is the
+comparison target, use an exact excerpt as its anchor, such as
+`P1 “enterprise users”`.
 
-A standalone first artifact declares the empty baseline explicitly:
+A first artifact declares its real starting material:
 
 ```markdown
 ## Provenance delta
 
-_Baseline: none (first artifact). Agent-facing. Records the substantive
-concepts this artifact introduces; the document body is canonical._
+_Baseline inputs:_
 
-- Added: `§Adoption constraint` ← `calls/2026-07-20.aman.md §Adoption`
+- `P1` — User prompt: “Identify the constraints preventing adoption.”
+- `S1` — `calls/2026-07-20.aman.md §Adoption`
+
+_Agent-facing. Records only substantive conceptual changes introduced in this
+artifact; the document body is canonical._
+
+- Added: `§Adoption constraint` ← `S1`
 ```
 
 The left side uses one of three routing labels:
 
 - `Added` points to the current artifact.
-- `Changed` points from an exact baseline anchor to an exact current anchor.
-- `Removed` points to an exact baseline anchor.
+- `Changed` points from an exact anchor in a comparable baseline input to an
+  exact current anchor.
+- `Removed` points to an exact anchor in a comparable baseline input.
 
 These labels describe how the agent should retrieve the change. They are not
-importance or confidence labels.
+importance or confidence labels. `Added` means introduced into the delivered
+artifact; it does not mean invented without a source.
 
 The right side keeps the existing three honest provenance forms:
 
-- an exact, openable repository-relative path with a section or timestamp;
-- Paul's verbatim steering quote;
+- an exact, openable source pointer: a declared input identifier, repository
+  path, or external link with a section, fragment, or timestamp when available;
+- Paul's verbatim steering quote when it was given after the declared starting
+  inputs;
 - `agent synthesis, no source`.
+
+An agent-discovered source may appear on the right when it actually informed the
+change, but it does not become a baseline input after the fact.
 
 ## Inclusion gate
 
@@ -117,7 +154,7 @@ not the drafting process that preceded it.
 If no change passes the gate, retain the section with this explicit state:
 
 ```markdown
-_No substantive conceptual changes from the stated baseline._
+_No substantive conceptual changes from the stated baseline inputs._
 ```
 
 This prevents an agent from inventing an entry to satisfy the format.
@@ -127,14 +164,15 @@ This prevents an agent from inventing an entry to satisfy the format.
 When answering a provenance question about the new version, the agent:
 
 1. Reads the provenance delta and selects the relevant entry.
-2. Opens the named baseline and current sections.
-3. Compares those sections to determine the actual change.
+2. Opens the named baseline input and current section.
+3. Compares the anchored material to determine the actual change.
 4. Follows the right-side provenance source to determine why it changed.
-5. Answers only the version delta unless the user explicitly asks for broader
+5. Answers only the artifact delta unless the user explicitly asks for broader
    history.
 6. States plainly when the rationale is `agent synthesis, no source`.
 
-When the baseline is none, steps 2 and 3 reduce to opening the current section.
+When no comparable baseline section exists for an `Added` entry, steps 2 and 3
+reduce to opening the current section and the named provenance input.
 
 The artifact body remains canonical for what the concept currently means. The
 provenance delta is an index into the comparison and its rationale, not a summary
@@ -145,6 +183,11 @@ of the concept.
 - Do not append lifetime history to a new version.
 - Do not copy the preceding version's delta into the new version.
 - Do not preserve superseded drafting decisions.
+- Preserve the initiating user prompt verbatim.
+- Include only inputs the user supplied or explicitly referenced. Do not invent
+  a baseline or retrofit an agent-discovered source.
+- Link external sources and named concepts when the intended target is
+  unambiguous; otherwise preserve the exact user reference without guessing.
 - Do not paraphrase a source on the right side.
 - Record one line per substantive concept change. Do not split a single change
   into separate lines for each mapping, example, or wording adjustment inside
@@ -158,30 +201,40 @@ of the concept.
 ## Relationship to document lineage
 
 `Builds on:` remains the canonical document-level edge and drives the generated
-lineage map. The provenance delta explains only the meaningful changes across that
-one edge.
+lineage map. It contains only repository artifacts directly used to produce the
+new artifact. The provenance delta may additionally name prompts and external
+sources that cannot be lineage edges.
 
 The term *lineage* should be reserved for relationships between artifacts.
-The provenance delta is decision provenance for a single transition.
+The provenance delta is decision provenance from the declared starting inputs
+to one delivered artifact.
 
 ## Compatibility
 
 Existing artifacts with an accumulating `## Provenance trail` remain valid and
 need not be migrated. The revised skill applies the provenance-delta format to all
-new artifacts. Revisions and replies delta from their declared baseline. A
-standalone first artifact deltas from nothing: baseline none, every entry
-`Added`, with its direct inputs remaining in `Builds on:` as lineage parents.
+new artifacts. Revisions, replies, and first artifacts all declare their actual
+inputs. `Baseline: none` remains valid only for the exceptional case where no
+input can honestly be identified.
 
 ## Verification
 
 The skill's self-check should confirm:
 
-- a declared baseline path exists and is one of the paths in `Builds on:`;
-  a `none` baseline has only `Added` entries and no baseline anchors;
+- the initiating prompt is present verbatim when one exists;
+- every declared input was supplied or explicitly referenced by the user;
+  no baseline was inferred from agent background knowledge;
+- every repository artifact input exists and is also present in `Builds on:`;
+- every external source or known concept has an unambiguous link, or preserves
+  the user's exact reference instead of guessing;
+- a `none` baseline is used only when no identifiable prompt or source exists,
+  and has only `Added` entries with no baseline anchors;
 - each entry is `Added`, `Changed`, or `Removed`;
 - baseline and current anchors exist on the appropriate side of the change;
 - every right side is one of the three allowed provenance forms;
 - every internal pointer resolves;
+- every agent-discovered source on a right side actually informed the change
+  and is not misrepresented as a baseline input;
 - every entry is a substantive delivered change rather than an edit or an
   abandoned drafting decision;
 - unchanged material is absent;
@@ -191,8 +244,9 @@ Tests should use a v1/v2 fixture containing one added concept, one changed
 concept, one removed concept, one mechanical correction, and one abandoned
 drafting decision. The expected delta contains the first three and excludes the
 last two. Two further fixtures: a standalone first artifact whose delta is
-`Baseline: none` with only `Added` entries, and a reply whose delta anchors
-against the document it answers.
+based on a verbatim prompt and a linked source, and a reply whose delta anchors
+against the document it answers. A final exceptional fixture may use
+`Baseline: none` only when it contains no prompt or source.
 
 ## Rejected alternatives
 
@@ -200,6 +254,14 @@ against the document it answers.
 
 This preserves history locally but burdens every version with context the
 recipient already knows and makes current changes harder for an agent to find.
+
+### Treat every first artifact as a delta from nothing
+
+An interactive artifact almost always starts from at least the user's prompt,
+and often from supplied documents, transcripts, links, or named concepts.
+Declaring `Baseline: none` discards that provenance and falsely makes every
+concept appear source-free. The design retains `none` only for the genuinely
+input-free edge case.
 
 ### Expand the trail into a concept index
 

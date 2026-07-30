@@ -57,17 +57,19 @@ Every repository artifact used as a baseline input must also appear in
 `Builds on:`. Prompts and external links are provenance inputs, not artifact
 lineage edges.
 
-Three baseline cases, one grammar:
+One rule: declare the inputs the artifact actually started from. Typical
+artifacts illustrate the rule; they are not grammar branches:
 
-- A revision includes its preceding version, the revision prompt verbatim, and
-  any additional user-supplied or explicitly referenced inputs.
-- A reply includes the document it answers, the reply prompt verbatim, and any
-  additional inputs. The reply is a new artifact, not a revision of that
-  document; `Removed` means the reply proposes dropping the concept, not that
-  the source document lost it.
-- A first artifact includes the initiating prompt verbatim and any additional
-  inputs. `Baseline: none` is permitted only when no identifiable input exists;
-  an interactive user prompt normally makes that state inapplicable.
+- A revision starts from its preceding version plus the revision prompt.
+- A reply starts from the document it answers plus the reply prompt. It is a
+  new artifact, not a revision of that document.
+- A first artifact starts from the initiating prompt and whatever the user
+  supplied or referenced. A document created from a mere prompt has no
+  comparable baseline sections, so its entries naturally carry current
+  anchors only.
+
+`Baseline: none` is permitted only when no identifiable input exists; an
+interactive user prompt normally makes that state inapplicable.
 
 ## Artifact format
 
@@ -112,16 +114,25 @@ artifact; the document body is canonical._
 - Added: `§Adoption constraint` ← `S1`
 ```
 
-The left side uses one of three routing labels:
+The entry is the primitive: at most one baseline anchor, at most one current
+anchor — at least one of the two — and one rationale source.
 
-- `Added` points to the current artifact.
-- `Changed` points from an exact anchor in a comparable baseline input to an
-  exact current anchor.
-- `Removed` points to an exact anchor in a comparable baseline input.
+```
+[baseline anchor] → [current anchor] ← source
+```
 
-These labels describe how the agent should retrieve the change. They are not
-importance or confidence labels. `Added` means introduced into the delivered
-artifact; it does not mean invented without a source.
+The label is the display name of the entry's anchor shape and carries no
+information of its own:
+
+- both anchors → `Changed`
+- current anchor only → `Added`
+- baseline anchor only → `Removed`
+
+Labels route retrieval; they are not importance or confidence labels, and they
+carry no meaning beyond the anchor shape. `Added` does not mean invented
+without a source. What `Removed` implies — the concept was dropped, or is
+proposed to be dropped — depends on what kind of document the reader is
+holding, not on the label.
 
 The right side keeps the existing three honest provenance forms:
 
@@ -171,8 +182,8 @@ When answering a provenance question about the new version, the agent:
    history.
 6. States plainly when the rationale is `agent synthesis, no source`.
 
-When no comparable baseline section exists for an `Added` entry, steps 2 and 3
-reduce to opening the current section and the named provenance input.
+When an entry has only one anchor, steps 2 and 3 reduce to opening that
+section and the named provenance input.
 
 The artifact body remains canonical for what the concept currently means. The
 provenance delta is an index into the comparison and its rationale, not a summary
@@ -227,10 +238,9 @@ The skill's self-check should confirm:
 - every repository artifact input exists and is also present in `Builds on:`;
 - every external source or known concept has an unambiguous link, or preserves
   the user's exact reference instead of guessing;
-- a `none` baseline is used only when no identifiable prompt or source exists,
-  and has only `Added` entries with no baseline anchors;
-- each entry is `Added`, `Changed`, or `Removed`;
-- baseline and current anchors exist on the appropriate side of the change;
+- a `none` baseline is used only when no identifiable prompt or source exists;
+- each entry has at least one anchor, and its label matches its anchor shape;
+- every named anchor exists in its document;
 - every right side is one of the three allowed provenance forms;
 - every internal pointer resolves;
 - every agent-discovered source on a right side actually informed the change

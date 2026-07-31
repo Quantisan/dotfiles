@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Logical Commits"
+  short_description: "Group pending changes into logical commits"
+  default_prompt: "Use $create-commit to review all pending changes and create up to four coherent commits."

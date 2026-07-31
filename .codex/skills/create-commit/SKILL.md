@@ -1,11 +1,11 @@
 ---
 name: create-commit
-description: Use when the user wants Codex to create a git commit from already-staged changes without staging anything else, especially when the message should match recent repo history and stay concise.
+description: Use when the user wants Codex to organize and commit pending Git changes, including mixed staged, unstaged, or relevant untracked work.
 ---
 
-# Create Commit
+# Create Commits
 
-Create a commit from the current staged changes only.
+Review all pending changes and create one to four logical commits, each telling one coherent story.
 
 ## Inputs
 
@@ -14,24 +14,30 @@ Create a commit from the current staged changes only.
 
 ## Workflow
 
-1. Inspect only the staged diff, the current branch, and a few recent commits:
+1. Inspect the complete pending state and recent commit style:
+   - `git status --short`
    - `git diff --cached`
-   - `git branch --show-current`
-   - `git log --oneline -3`
-2. If nothing is staged, stop and say so. Do not guess.
-3. Infer the commit intent from the staged changes only. Ignore unstaged and untracked files.
-4. Draft a concise Conventional Commit title that matches the repo's recent style.
-5. Add a body only when it captures intent or a key decision that belongs in history.
-6. Create the commit. Do not run `git add`.
+   - `git diff`
+   - `git log --oneline -5`
+   Use the status output to identify untracked files, then inspect the contents of untracked files that may belong to the pending work.
+2. If there are no staged changes, unstaged changes, or relevant untracked files, stop and report that there is nothing to commit.
+3. Partition the pending work into one to four coherent groups. Treat the current staging state as input, not as a commit boundary: related staged, unstaged, and untracked changes belong in the same group. Leave any change that does not fit a coherent group unstaged. Never combine unrelated work merely to stay within the four-commit limit.
+4. Prepare and commit each group in turn:
+   - If pre-staged changes span groups, unstage them only as needed without changing working-tree contents.
+   - Stage only the paths or hunks in the current group. Use patch staging when one file contains changes for different groups.
+   - Review `git diff --cached` and `git status --short` to confirm that the index contains exactly the current group.
+   - Write a concise message matching the style of the five recent commits. Use Conventional Commits only when that matches the repository's recent style.
+   - Commit the group, then repeat for the next group, up to four commits.
+5. Re-run `git status --short` when finished to identify work intentionally left unstaged.
 
 ## Guardrails
 
-- Never stage files.
-- Never include unstaged or unrelated work.
+- Never discard or overwrite working-tree changes while reorganizing the index.
+- Do not broadly stage all changes when the pending work contains unrelated files.
+- Do not amend an existing commit unless the user explicitly asks.
 - Never mention conversation context that is not reflected in the staged diff.
-- Keep the wording minimal and direct.
-- If commit creation fails, report the failure and stop.
+- If staging or commit creation fails, stop immediately, report the failure and current status, and do not continue with later groups.
 
 ## Final Response
 
-Return the commit hash and final commit subject. If a body was used, summarize it briefly instead of reprinting a long message.
+List each created commit by short hash and subject. Briefly report any changes left unstaged or untracked; if no commits were needed, say so directly.

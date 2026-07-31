@@ -28,7 +28,11 @@ BACKTICKED = re.compile(r"`([^`]+)`")
 def parse_edges(root, excluded):
     """child rel-path -> [parent rel-path, ...], in declaration order."""
     edges = {}
-    for md in sorted(root.rglob("*.md")):
+    artifacts = sorted(
+        [*root.rglob("*.md"), *root.rglob("*.html")],
+        key=lambda p: p.relative_to(root).as_posix(),
+    )
+    for md in artifacts:
         rel = md.relative_to(root)
         if md.name == "README.md" or excluded & set(rel.parts[:-1]):
             continue

@@ -1,43 +1,64 @@
 ---
 name: frame-minutes
-description: "Use when a user provides a pre-cleaned transcript (Speaker: utterance format) and wants structured meeting minutes using bottom-up fact extraction -- especially for co-founder chats, customer discovery, or advisor calls where alignment and shared context matter alongside decisions."
+description: "Use when a user provides a pre-cleaned Speaker: utterance dialogue file and wants structured meeting minutes, especially for co-founder chats, customer discovery, or advisor calls; do not use for raw call, meeting, or VTT transcripts."
 ---
 
 # Frame Minutes
 
-Turn pre-cleaned transcript text into structured minutes using bottom-up fact extraction. Themes emerge from where facts cluster, not from top-down categorization.
+Turn a pre-cleaned `Speaker: utterance` dialogue file into structured minutes through bottom-up fact extraction. Themes emerge from where facts cluster, not from top-down categorization.
 
-## Inputs
+**Defining value:** distill by cutting, not rewriting. What remains after compression must be the speaker's own phrasing, style, and rhythm. These minutes should sound like the speakers — not like a secretary.
 
-- Require pre-cleaned transcript text in `Speaker: utterance` format (output of `rewrite-call-transcript`).
-- Preserve speaker names from the transcript — attribute facts, decisions, and action items to named individuals.
-- Accept optional background context from the user.
+## Three-turn contract
 
-## Function Labels
+Advance exactly one user-visible stage per assistant turn:
 
-Every extracted fact gets one label:
+1. Initial request: resolve the output path, read the dialogue with line numbers, show the theme map, then stop and wait.
+2. First user reply: incorporate the user's theme feedback, show the outline, then stop and wait.
+3. Second user reply: incorporate the user's outline feedback, write the final minutes, and return only a short path confirmation.
 
-| Label | Captures |
-|-------|----------|
-| **Decision** | A choice was made or commitment given. Action items surface through metadata (owner + deadline) on Decision labels — a decision with an owner and date is an action item. |
-| **Alignment** | Shared understanding established or confirmed between participants. |
-| **Insight** | New understanding surfaced during discussion. |
-| **Context** | Background information relevant to other facts. |
+Do not combine stages, even when there are no ambiguity questions or the user says to proceed automatically. Keep the resolved output path, numbered dialogue, extracted facts, scores, labels, and user feedback in working context across all three turns.
 
-## Pipeline
+## Step 1 — Resolve the output path
 
-### Turn 1: Extract & Score
+Resolve the minutes output path internally before reading the dialogue. Use read-only shell inspection such as `ls` on the input file's parent directory; do not delegate this work or show it to the user.
 
-Read the full transcript. Internally:
-1. Extract atomic facts as `(distilled utterance, speaker, context)` tuples — distill by cutting, not rewriting. Remove filler, false starts, and redundancy, but keep the speaker's phrasing and style. The result should sound like them, just shorter.
-2. Label each fact: Decision / Alignment / Insight / Context
-3. Score relevance 1–10 relative to this transcript (decisions tend toward 9–10, supporting context toward 4–6)
-4. Cluster facts by topic proximity — themes emerge bottom-up from where facts cluster
-5. Retain ~40% of facts (drop lowest relevance scores)
+- Identify the input's trailing suffix segments (for example, `.dialogue.txt`).
+- Look for sibling files that share the input's stem but use a `minutes`-containing suffix (for example, `.minutes.md` or `.minutes.txt`).
+- If a sibling-attested minutes suffix exists, build the output path by replacing the input's suffix with that minutes suffix. If multiple variants exist, choose the most common one.
+- If no informative sibling pattern exists, strip the input's extension or extensions and append `.minutes.md`.
 
-**Output to user:** Compact theme map (aim for 3–7 themes; prefer fewer, broader themes):
+Hold the one resolved output path in working context. Use it verbatim in Turn 3 and do not recompute it. Do not create, truncate, or otherwise modify the output file during Turn 1.
 
+## Step 2 — Read the dialogue
+
+Read the entire dialogue once with stable, one-based line numbers, using a read-only command such as:
+
+```bash
+nl -ba -- "<dialogue-file>"
 ```
+
+Keep the numbered dialogue in context for the rest of the run. Fidelity to each speaker's phrasing matters more than context economy because the input is already distilled.
+
+Preserve speaker names from the dialogue. Attribute facts, decisions, and action items to named individuals. Accept explicit background context supplied by the user, but ground all content in the dialogue or that user-supplied context.
+
+## Step 3 — Turn 1: Extract & Score → Theme Map
+
+**Do internally; do not show this work unless the user asks for raw facts:**
+
+1. Extract atomic facts as `(distilled utterance, speaker, line, context)` tuples. Distill by cutting, not rewriting: remove filler, false starts, and redundancy while keeping the speaker's phrasing and style. `line` is the numbered dialogue line where the fact lands. Capture line numbers now for Turn 3 citations.
+2. Label each fact:
+   - **Decision** — a choice was made or commitment given. Action items surface through inline owner-and-deadline metadata on Decision labels; a decision with an owner and date is an action item.
+   - **Alignment** — shared understanding established or confirmed between participants.
+   - **Insight** — new understanding surfaced during discussion.
+   - **Context** — background information relevant to other facts.
+3. Score relevance from 1–10 relative to this dialogue. Decisions tend toward 9–10; supporting context tends toward 4–6.
+4. Cluster facts by topic proximity. Themes emerge bottom-up from where facts cluster.
+5. Retain about 40% of facts by dropping the lowest relevance scores.
+
+Show a compact theme map. Aim for 3–7 themes and prefer fewer, broader themes:
+
+```markdown
 1. **Auth migration path** [3 decisions, 1 alignment] — JWT removes the last mobile blocker
 2. **Series A timing** [2 alignments, 1 insight] — Both leaning toward Q3 if ARR hits 800k
 3. **Customer onboarding friction** [1 insight, 3 context] — Drop-off at step 3 is 40%
@@ -45,30 +66,34 @@ Read the full transcript. Internally:
 Excluded: weekend plans, restaurant recommendations
 ```
 
-Format: `N. **Theme name** [label counts] — key signal in ≤12 words`
+Use `N. **Theme name** [label counts] — key signal in ≤12 words`. Make the key signal informative enough that the user can answer any question without reopening the dialogue.
 
-Include an *"Excluded: [brief list]"* line for topics dropped (passing mentions, off-topic). When borderline, include as a low-relevance theme rather than excluding.
+Include an `Excluded:` line for dropped passing mentions and off-topic material. When borderline, include the material as a low-relevance theme rather than excluding it.
 
-**Debug affordance:** If the user asks to see raw facts, show the scored fact list before the theme map.
+If the user asks to see raw facts, show the scored fact list before the theme map and remain on Turn 1.
 
-**Questions (max 2):** Multiple-choice, 2–4 described options each, targeting genuine ambiguity the LLM cannot confidently resolve. User should be able to answer by reading the theme map, without returning to the transcript. Default path: "looks good" or equivalent proceeds as-is.
+Ask zero, one, or two multiple-choice questions only for genuine ambiguity that cannot be resolved confidently. Give 2–4 described options per question. The default path is `looks good` or equivalent. Do not invent a question merely to fill the slot.
 
-Example question format:
+Example:
+
 > *Themes 2 ('Series A timing') and 3 ('Customer onboarding') both touch growth. How should I handle them?*
-> - **Keep separate** — Distinct enough that separate sections serve reference better
-> - **Merge into 'Growth strategy'** — The connection between them is the interesting part
-> - **Merge, lead with onboarding** — The customer data is more actionable than the timing discussion
+> - **Keep separate** — Distinct enough that separate sections serve reference better.
+> - **Merge into 'Growth strategy'** — The connection between them is the interesting part.
+> - **Merge, lead with onboarding** — The customer data is more actionable than the timing discussion.
 
-### Turn 2: Organize
+Stop after the theme map and any questions. Wait for the user's reply before Turn 2.
+
+## Step 4 — Turn 2: Organize
 
 Using the validated theme map:
-1. Order themes by combined fact relevance
-2. Highest-scoring facts + all Decisions/Alignments → major outline points
-3. Remaining retained facts → supporting detail nested under major points
 
-**Output to user:** Structured outline skeleton:
+1. Order themes by combined fact relevance.
+2. Promote the highest-scoring facts and every Decision and Alignment to major outline points.
+3. Nest the remaining retained facts as supporting detail beneath major points.
 
-```
+Show a structured outline skeleton:
+
+```markdown
 ## Auth migration path [decision]
 - JWT is the move — kills the last mobile blocker (Paul, by Mar 22)
 - "We're done with server-side tokens" — deprecated, 2-week window with fallback baked in
@@ -78,56 +103,63 @@ Using the validated theme map:
   - "Not worth the distraction" — intros paused until milestone hit
 ```
 
-**Questions (max 2):** Multiple-choice, targeting ambiguity. User should be able to answer by reading the outline, without returning to the transcript. Default path proceeds if user doesn't engage.
+Ask zero, one, or two multiple-choice questions only for genuine ambiguity in framing. Give enough detail in the outline and in 2–4 described options that the user need not reopen the dialogue. The default proceeds.
 
-Example question format:
+Example:
+
 > *'Pricing model' came up three times but with mixed signals. How should I frame it?*
-> - **Decision reached** — The last exchange settled it; earlier hesitation is just context
-> - **Still exploring** — No clear convergence; mark as open with options discussed
-> - **Alignment without decision** — You both see the problem the same way but haven't picked an approach
+> - **Decision reached** — The last exchange settled it; earlier hesitation is context.
+> - **Still exploring** — No clear convergence; mark it open with the options discussed.
+> - **Alignment without decision** — The problem is shared, but no approach was chosen.
 
-### Turn 3: Write & Tighten
+Stop after the outline and any questions. Wait for the user's reply before Turn 3.
 
-No questions. Final output:
-1. Render structured outline with:
-   - Theme headings ordered by significance
-   - Nested bullets with inline function labels: `[decision]`, `[alignment]`, `[insight]`, `[context]`
-   - Metadata where applicable: speakers, owners, dates
-2. Shortening pass: compress each point to the key idea
-   - Preserve: decisions, commitments, owners, dates, alignment markers, explicit uncertainty
-   - Remove: filler, redundancy, over-explanation
-   - Distill by cutting, not rewriting — what remains after compression should be the speaker's own phrasing, their style, rhythm, and word choices. Don't normalize into a "minutes voice."
+## Step 5 — Turn 3: Write, Tighten, and Persist
 
-Example final output:
+Ask no questions. Render the final minutes with this exact contract:
 
-```
+- Order `##` theme headings by significance. Put no type tag on a theme heading.
+- Use optional plain, unbolded subsection labels inside a theme when discussion clusters into sub-threads. A subsection label is a standalone line, not a bullet.
+- Begin every bullet with exactly one function label: `[decision]`, `[alignment]`, `[insight]`, or `[context]`.
+- Put speaker attribution immediately after the function label when one speaker drives the fact (`- [decision] Paul: …`). Omit speaker attribution when the fact is jointly held.
+- Weave exact direct quotes from the dialogue wherever the original wording carries the force. Quote the speaker's exact wording for the spicy bits; paraphrase only connective tissue.
+- End every bullet with its captured dialogue line number as `:NNN`. Use the actual bare line number and do not repeat the dialogue filename.
+- Keep owners and dates inline, never in a separate metadata block.
+
+Apply one shortening pass to compress each point to the key idea:
+
+- Preserve decisions, commitments, owners, dates, alignment markers, and explicit uncertainty.
+- Remove filler, redundancy, and over-explanation.
+- Distill by cutting, not rewriting. Keep the speakers' phrasing, style, rhythm, and word choices; do not normalize into a minutes voice.
+
+Example final shape:
+
+```markdown
 ## Auth migration path
 
-- [decision] JWT is the move — kills the last mobile blocker (Paul, by Mar 22)
-- [decision] "Done with server-side tokens" — deprecated; 2-week migration window with fallback
-- [alignment] Both "fine with the risk at this scale"
+JWT cutover
+- [decision] Paul: JWT is "the move" — kills the last mobile blocker. Target Mar 22. :225
+- [decision] "Done with server-side tokens" — deprecated; 2-week window with fallback. :243
+- [alignment] Both "fine with the risk at this scale." :251
 
 ## Series A timing
 
-- [alignment] "Pretty convinced" Q3 if ARR hits 800k — shared threshold
-- [decision] "Not worth the distraction" — intros paused until milestone hit
-- [insight] Board seat expectations may "vary a lot" between target leads — needs research
+- [alignment] Both "pretty convinced" Q3 if ARR hits 800k. :310
+- [decision] "Not worth the distraction" — intros paused until milestone hit. :322
+- [insight] Board seat expectations "vary a lot" between target leads — needs research. :340
 ```
 
-## Quality Rules
+Write the content to the output path resolved in Step 1 using `apply_patch`. If the resolved output file already exists, overwrite its content. Do not write any other meeting file.
 
-- Thematic organization, not chronological
-- Order themes by significance
-- Consolidate scattered discussion of the same topic
-- Mention each concept once in its best location
-- Keep uncertainty explicit — never upgrade "we should think about" to a decision
-- Never add information not grounded in the transcript
-- Alignment and context are first-class, not supporting detail for decisions
-- Distill by cutting, not rewriting — the minutes should sound like the speakers, not like a secretary. Preserve each speaker's phrasing, style, and voice. Remove filler and redundancy; never normalize language.
+After the write succeeds, return exactly one short line confirming the output path and nothing else.
 
-## Baked-in Reader Assumptions
+## Quality rules
 
-- Reader is the meeting participant
-- Primary use: future reference and pattern recognition
-- Values alignment and shared context alongside decisions
-- Needs facts well-labeled for later search and dot-connecting
+- Organize thematically, not chronologically.
+- Order themes by significance.
+- Consolidate scattered discussion of the same topic.
+- Mention each concept once in its best location.
+- Keep uncertainty explicit. Never upgrade `we should think about`, `we could`, `maybe`, or another suggestion into a decision.
+- Never add information not grounded in the dialogue or explicit user-supplied context.
+- Treat Alignment and Context as first-class facts, not merely supporting detail for Decisions.
+- Serve a meeting participant using the minutes for future reference and pattern recognition; preserve alignment and shared context alongside decisions, and label facts for later search.

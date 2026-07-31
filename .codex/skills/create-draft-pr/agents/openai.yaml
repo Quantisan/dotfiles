@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Draft PR"
+  short_description: "Create and open a concise draft pull request"
+  default_prompt: "Use $create-draft-pr to create and open a concise draft pull request for the current branch."

@@ -13,7 +13,8 @@ network_access = true
 
 [tui]
 experimental_mode = "plan"
-status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "weekly-limit"]
+status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "weekly-limit", "current-dir", "git-branch"]
+status_line_use_colors = true
 
 [mcp_servers.atlassianRovo]
 url = "https://mcp.atlassian.com/v1/mcp"

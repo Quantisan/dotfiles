@@ -1,0 +1,4 @@
+interface:
+  display_name: "Walk Branch Changes"
+  short_description: "Trace a branch diff through changed behavior"
+  default_prompt: "Use $walk-branch-changes to walk my current branch against main."

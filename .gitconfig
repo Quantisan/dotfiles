@@ -191,7 +191,9 @@
 	defaultBranch = main
 
 [pull]
-    rebase = false
+    # Fast-forward when there's nothing local; otherwise replay unpushed
+    # commits on top of upstream so they stay at HEAD. Never a merge commit.
+    rebase = true
 
 # GPG
 

@@ -2,7 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE}")"
 
-git pull origin master
+## Deploys whatever is checked out; pull yourself when you want the latest
 
 function doIt() {
         rsync --exclude ".git/" \

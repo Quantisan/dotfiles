@@ -7,6 +7,7 @@ return {
         "clojure",
         "python",
         "hcl",
+        "svelte",
       },
     },
   },

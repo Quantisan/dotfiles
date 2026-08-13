@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- Upgrade installed Mason tools whenever lazy.nvim finishes updating plugins, so
 -- `:Lazy update` also covers language servers, linters and formatters.
 vim.api.nvim_create_autocmd("User", {
-  pattern = { "LazyUpdate", "LazySync" },
+  pattern = "LazyUpdate",
   callback = function()
     require("lazy").load({ plugins = { "mason.nvim" } })
     local mr = require("mason-registry")
@@ -25,20 +25,31 @@ vim.api.nvim_create_autocmd("User", {
         return
       end
       local upgrading = {}
+      local unchecked = {}
       for _, pkg in ipairs(mr.get_installed_packages()) do
         local installed = pkg:get_installed_version()
         -- get_latest_version throws when a package has a malformed source id
         local ok, latest = pcall(pkg.get_latest_version, pkg)
-        if ok and installed and installed ~= latest and not pkg:is_installing() then
-          pkg:install()
+        if not installed or not ok then
+          table.insert(unchecked, pkg.name)
+        elseif installed ~= latest then
           table.insert(upgrading, pkg.name)
+          if not pkg:is_installing() then
+            pkg:install()
+          end
         end
       end
       -- vim.notify runs UI code, so defer it out of mason's async runner
       vim.schedule(function()
-        vim.notify(
-          #upgrading > 0 and ("Mason: upgrading " .. table.concat(upgrading, ", ")) or "Mason: all tools up to date"
-        )
+        if #upgrading > 0 then
+          vim.notify("Mason: upgrading " .. table.concat(upgrading, ", "), vim.log.levels.INFO)
+        end
+        if #unchecked > 0 then
+          vim.notify("Mason: unable to check " .. table.concat(unchecked, ", "), vim.log.levels.WARN)
+        end
+        if #upgrading == 0 and #unchecked == 0 then
+          vim.notify("Mason: all tools up to date")
+        end
       end)
     end)
   end,

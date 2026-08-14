@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Opens URLs in Safari.
+#
+# Exists so `$BROWSER` can be `safari` and satisfy both conventions:
+# tools that exec `$BROWSER <url>` (gh, xdg-open, python's webbrowser)
+# find this script, while Vite hands the same string to macOS `open -a`,
+# which resolves it to Safari.app.
+
+exec open -a Safari "$@"

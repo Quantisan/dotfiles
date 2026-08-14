@@ -3,7 +3,8 @@
 # Make NeoVim the default editor.
 export EDITOR='nvim'
 
-# Make Safari the default browser for CLI tools that open URLs (e.g. `vite`).
+# Make Safari the browser for CLI tools that open URLs (e.g. `gh`, `vite`).
+# Resolves to the `safari` script in ~/.local/bin.
 export BROWSER='safari'
 
 # Enable persistent REPL history for `node`.

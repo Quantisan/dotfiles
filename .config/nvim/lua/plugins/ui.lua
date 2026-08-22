@@ -71,7 +71,7 @@ return {
         sources = {
           explorer = {
             layout = {
-              layout = { position = "right" },
+              layout = { position = "right", width = 58 },
 
               -- hide the Filter Input box
               auto_hide = { "input" },

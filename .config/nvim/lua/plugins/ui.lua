@@ -69,6 +69,9 @@ return {
       },
       picker = {
         sources = {
+          -- Dotfiles are ordinary source here; the finders exclude .git anyway
+          files = { hidden = true },
+          grep = { hidden = true },
           explorer = {
             layout = {
               layout = { position = "right", width = 58 },

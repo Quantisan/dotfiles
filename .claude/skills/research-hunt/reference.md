@@ -82,6 +82,12 @@ Judgment lives in gate agents on the session model; control flow lives in the sc
 
 Record post-shakedown edits here: date, what changed, the run evidence that forced it. (No shakedown run has happened yet — the first full round in any project is it.)
 
+### 2026-08-24 — verdict prompt names every required schema field
+
+Evidence: the `japan-felt-societal-problems` round (run `wf_e89eec2f-bbf`) died at agent 66 of 66 — `StructuredOutput retry cap (5) exceeded` — after 65 agents and ~54 minutes of completed work. The Phase-3 verdict prompt listed `verdict`, `answer`, and the probe suggestion but never mentioned `rationale`, which `VERDICT.required` demands. The agent submitted exactly the three fields it was asked for, five times; the schema rejected all five and the whole run threw. The prompt now names all three required fields explicitly and labels `probeSuggestion` by its key.
+
+Generalizable: a required schema field the prompt never asks for is an unforced run-killer, because the harness's retry loop cannot teach the agent a field the instructions omit. When adding a required field to any schema here, add it to the prompt in the same edit.
+
 ### 2026-07-19 — boundary tolerates string-delivered `args`
 
 Evidence: two launches (2026-07-09 reasoning-trail chain, 2026-07-19 japan-sme-manufacturing-niches round) where the Workflow harness delivered `args` as a JSON string and the engine died at validation with `missing brief slot 'slug'` — 0 agent calls, ~15ms, but each launch needed a hand-written parse-and-delegate shim workflow to proceed. The boundary now does `if (typeof args === 'string') args = JSON.parse(args)` before validation; harmless if the harness delivers a real object.

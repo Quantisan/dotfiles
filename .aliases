@@ -106,6 +106,13 @@ alias repl='clj -M:repl/interactive'
 
 alias rr='roborev'
 
+# Claude Code with the Artifact and Workflow tools on; both default to off in
+# ~/.claude/settings.json to keep their definitions out of the system prompt, which
+# costs about 8k tokens per session. --settings is the flagSettings source, which
+# takes precedence over user settings. CLAUDE_CODE_ARTIFACT lifts the separate -p
+# entrypoint gate on artifacts. Workflows are what /research-hunt and ultracode need.
+alias claudeplus='CLAUDE_CODE_ARTIFACT=1 claude --settings '"'"'{"enableArtifact":true,"enableWorkflows":true}'"'"''
+
 ## Browsers ##
 
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'

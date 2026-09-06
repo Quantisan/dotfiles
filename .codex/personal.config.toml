@@ -1,4 +1,4 @@
-model = "gpt-5.6-sol"
+model = "gpt-6-astra"
 model_reasoning_effort = "high"
 web_search = "cached"
 personality = "pragmatic"
@@ -16,6 +16,11 @@ network_access = true
 experimental_mode = "plan"
 status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "weekly-limit", "current-dir", "git-branch"]
 status_line_use_colors = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+"gpt-5.6-sol" = 4
+gpt-6-astra = 4
 
 [mcp_servers.atlassianRovo]
 url = "https://mcp.atlassian.com/v1/mcp"

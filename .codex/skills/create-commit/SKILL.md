@@ -36,7 +36,10 @@ Review all pending changes and create one to four logical commits, each telling 
 - Do not broadly stage all changes when the pending work contains unrelated files.
 - Do not amend an existing commit unless the user explicitly asks.
 - Never mention conversation context that is not reflected in the staged diff.
-- If staging or commit creation fails, stop immediately, report the failure and current status, and do not continue with later groups.
+- If staging or commit creation fails, pause the current group and inspect the error and Git state before deciding whether to retry. Do not continue with later groups until the current group is successfully committed.
+- Before retrying, check whether the intended commit already exists and re-review the staged diff and working-tree changes. Retry only the unfinished operation, ensuring the index contains exactly the intended group before committing.
+- A sandbox permission block may be recoverable: use the environment's approval mechanism to request the permissions needed for the same scoped operation, then retry if approved. Task authorization does not itself grant sandbox permissions.
+- If recovery is unavailable, approval is denied, or the retry fails, stop and report the error, current Git status, and what is needed to continue. Preserve working-tree contents and do not bypass Git hooks or delete lock files merely to force progress.
 
 ## Final Response
 

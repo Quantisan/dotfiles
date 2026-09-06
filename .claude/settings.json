@@ -62,5 +62,10 @@
       "$defaults",
       "Source control: github.com/Quantisan and all repos under it"
     ]
+  },
+  "voiceEnabled": true,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
   }
 }

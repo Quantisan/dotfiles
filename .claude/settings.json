@@ -50,8 +50,11 @@
   },
   "effortLevel": "high",
   "askUserQuestionTimeout": "never",
-  "autoUpdatesChannel": "stable",
   "tui": "default",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
   "skipWorkflowUsageWarning": true,
   "theme": "light",
   "preferredNotifChannel": "ghostty",
@@ -63,9 +66,5 @@
       "Source control: github.com/Quantisan and all repos under it"
     ]
   },
-  "voiceEnabled": true,
-  "voice": {
-    "enabled": true,
-    "mode": "hold"
-  }
+  "voiceEnabled": true
 }

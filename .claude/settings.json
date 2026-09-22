@@ -27,6 +27,7 @@
     "ask": [],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "enableArtifact": false,
   "enableWorkflows": false,
   "statusLine": {
@@ -49,6 +50,7 @@
     }
   },
   "effortLevel": "high",
+  "advisorModel": "fable",
   "askUserQuestionTimeout": "never",
   "tui": "default",
   "voice": {

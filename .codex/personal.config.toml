@@ -1,12 +1,14 @@
-model = "gpt-6-astra"
-model_reasoning_effort = "high"
+model = "gpt-6-sol"
+model_reasoning_effort = "xhigh"
+plan_mode_model = "gpt-6-astra"
+plan_mode_reasoning_effort = "high"
+approvals_reviewer = "auto_review"
 web_search = "cached"
 personality = "pragmatic"
-plan_mode_reasoning_effort = "ultra"
-approvals_reviewer = "auto_review"
 
 [agents]
-default_subagent_model = "gpt-5.6-terra"
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "max"
 max_concurrent_threads_per_session = 3
 
 [sandbox_workspace_write]
@@ -16,6 +18,7 @@ network_access = true
 experimental_mode = "plan"
 status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "weekly-limit", "current-dir", "git-branch"]
 status_line_use_colors = true
+screen_reader_detection_done = true
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4

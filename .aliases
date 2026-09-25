@@ -111,7 +111,9 @@ alias rr='roborev'
 # costs about 8k tokens per session. --settings is the flagSettings source, which
 # takes precedence over user settings. CLAUDE_CODE_ARTIFACT lifts the separate -p
 # entrypoint gate on artifacts. Workflows are what /research-hunt and ultracode need.
-alias claudeplus='CLAUDE_CODE_ARTIFACT=1 claude --settings '"'"'{"enableArtifact":true,"enableWorkflows":true}'"'"''
+# CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION raises the default 200-search session cap,
+# which counts every subagent a workflow spawns and fails silently when hit.
+alias claudeplus='CLAUDE_CODE_ARTIFACT=1 CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION=600 claude --settings '"'"'{"enableArtifact":true,"enableWorkflows":true}'"'"''
 
 ## Browsers ##
 

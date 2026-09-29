@@ -4,7 +4,7 @@
 ;; Input fields: https://code.claude.com/docs/en/statusline#available-data
 
 (require '[babashka.process :refer [shell]]
-         '[cheshire.core :as json]
+         '[clojure.data.json :as json]
          '[clojure.string :as str])
 (import '(java.time Instant ZoneId)
         '(java.time.format DateTimeFormatter))
@@ -78,6 +78,6 @@
 (println
  (try
    (let [now-seconds (/ (System/currentTimeMillis) 1000.0)
-         status (status-from-input (json/parse-stream *in* true) now-seconds)]
+         status (status-from-input (json/read *in* :key-fn keyword) now-seconds)]
      (status-line status (current-branch (:cwd status))))
    (catch Exception _ "")))

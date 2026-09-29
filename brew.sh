@@ -78,6 +78,7 @@ brew install prettyping
 # Tools that I use for development
 brew install awscli
 brew install clojure
+brew install borkdude/brew/babashka
 brew install borkdude/brew/clj-kondo
 brew install leiningen
 brew install packer

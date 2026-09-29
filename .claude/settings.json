@@ -50,6 +50,11 @@
     }
   },
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "advisorModel": "fable",
   "askUserQuestionTimeout": "never",
   "tui": "default",

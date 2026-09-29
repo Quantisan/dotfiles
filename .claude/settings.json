@@ -32,7 +32,7 @@
   "enableWorkflows": false,
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "/opt/homebrew/bin/bb ~/.claude/statusline.clj"
   },
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true,

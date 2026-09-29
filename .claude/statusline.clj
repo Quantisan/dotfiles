@@ -30,11 +30,12 @@
 (defn status-from-input
   "Pulls the displayed fields out of Claude Code's session JSON."
   [input now-seconds]
-  (let [pct-left #(when (number? %) (Math/round (- 100.0 %)))]
+  (let [pct-used #(when (number? %) (Math/round (double %)))
+        pct-left #(when (number? %) (Math/round (- 100.0 %)))]
     {:model       (get-in input [:model :display_name])
      :effort      (get-in input [:effort :level])
      :cwd         (get-in input [:workspace :current_dir])
-     :ctx-used    (some-> (get-in input [:context_window :used_percentage]) double Math/round)
+     :ctx-used    (pct-used (get-in input [:context_window :used_percentage]))
      :five-left   (pct-left (get-in input [:rate_limits :five_hour :used_percentage]))
      :five-resets (clock (get-in input [:rate_limits :five_hour :resets_at]) "HH:mm")
      :week-left   (pct-left (get-in input [:rate_limits :seven_day :used_percentage]))
@@ -74,10 +75,13 @@
                                     "rev-parse" "--abbrev-ref" "HEAD")]
       (when (zero? exit) (str/trim out)))))
 
-;; A malformed payload prints an empty line rather than a stack trace.
+;; A malformed payload prints an empty line; the error goes to stderr,
+;; which Claude Code shows only under --debug.
 (println
  (try
    (let [now-seconds (/ (System/currentTimeMillis) 1000.0)
-         status (status-from-input (json/read *in* :key-fn keyword) now-seconds)]
+         status (status-from-input (json/read-str (slurp *in*) :key-fn keyword) now-seconds)]
      (status-line status (current-branch (:cwd status))))
-   (catch Exception _ "")))
+   (catch Exception e
+     (binding [*out* *err*] (println "statusline:" (ex-message e)))
+     "")))

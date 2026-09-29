@@ -1,9 +1,10 @@
 #!/bin/bash
 # Claude Code status line. Reads session JSON on stdin and prints one line:
-#   model · effort · branch · ctx [####------] 42% · 5h: 60% left · 7d: 80% left · cache cold
+#   model · effort · branch · ctx [####------] 42% · 5h: 60% left (resets 14:30) · 7d: 80% left · cache cold
 # Input fields: https://code.claude.com/docs/en/statusline#available-data
 
-# Rate-limit segments show their reset time once remaining usage drops below this.
+# The 7d segment shows its reset time once remaining usage drops below this.
+# The 5h segment always shows it.
 LOW_LIMIT_PCT=25
 
 # Extract every field in one jq pass. @sh quotes each value so eval is safe;
@@ -37,12 +38,14 @@ context_bar() {
                   "$(printf '%*s' $(( 10 - filled )) '' | tr ' ' '-')"
 }
 
-# "5h: 12% left", plus "(resets 14:30)" when running low.
+# "5h: 12% left", plus "(resets 14:30)" either always or only when running low.
 limit_segment() {
-  local label=$1 left=$2 resets=$3
+  local label=$1 left=$2 resets=$3 show_resets=$4
   [ -n "$left" ] || return
   local segment="$label: ${left}% left"
-  (( left < LOW_LIMIT_PCT )) && [ -n "$resets" ] && segment="$segment (resets $resets)"
+  if [ -n "$resets" ] && { [ "$show_resets" = always ] || (( left < LOW_LIMIT_PCT )); }; then
+    segment="$segment (resets $resets)"
+  fi
   echo "$segment"
 }
 
@@ -57,8 +60,8 @@ append "$model"
 [ -n "$effort" ] && append "effort:$effort"
 append "$branch"
 [ -n "$ctx_used" ] && append "ctx $(context_bar "$ctx_used") ${ctx_used}%"
-append "$(limit_segment 5h "$five_left" "$five_resets")"
-append "$(limit_segment 7d "$week_left" "$week_resets")"
+append "$(limit_segment 5h "$five_left" "$five_resets" always)"
+append "$(limit_segment 7d "$week_left" "$week_resets" when-low)"
 [ -n "$cache_cold" ] && append "cache cold"
 
 echo "$out"

@@ -92,10 +92,10 @@ The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code con
 - `.claude/skills/` → copied to `~/.claude/skills/` (Agent Skills, e.g. `restate`, `research-hunt`)
 - `.claude/agents/` → copied to `~/.claude/agents/` (subagent definitions, e.g. `restater`)
 - `.claude/workflows/` → copied to `~/.claude/workflows/` (multi-agent workflow engines, e.g. `research-hunt.js`)
+- `.claude/statusline.sh` → copied to `~/.claude/statusline.sh` (status line command referenced by `settings.json`)
 - `.claude/settings.json` → **symlinked** to `~/.claude/settings.json`
-- `.claude/statusline.sh` → **symlinked** to `~/.claude/statusline.sh` (status line command referenced by `settings.json`)
 
-**Important:** `CLAUDE.md`, `commands/`, `skills/`, `agents/`, and `workflows/` edits require running `source bootstrap.sh` to copy them to `~/.claude/`. Settings and status line changes are immediate since they're symlinked—Claude's runtime permission changes appear as git modifications in the dotfiles repo.
+**Important:** `CLAUDE.md`, `commands/`, `skills/`, `agents/`, `workflows/`, and `statusline.sh` edits require running `source bootstrap.sh` to copy them to `~/.claude/`. Settings changes are immediate since it's symlinked—Claude's runtime permission changes appear as git modifications in the dotfiles repo.
 
 ## Key Customizations
 

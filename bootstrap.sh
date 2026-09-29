@@ -34,6 +34,7 @@ function doIt() {
         ## Set up Claude Code config
         mkdir -p ~/.claude
         ln -shf "$(pwd)/.claude/settings.json" ~/.claude/settings.json
+        cp .claude/statusline.sh ~/.claude/statusline.sh
         cp .claude/CLAUDE.md ~/.claude/CLAUDE.md
         cp .claude/clojure.md ~/.claude/clojure.md
         rsync -avh --delete \

@@ -28,9 +28,9 @@ brew install bash-completion2
 
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
-  echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
-  chsh -s "${BREW_PREFIX}/bin/bash";
-fi;
+        echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
+        chsh -s "${BREW_PREFIX}/bin/bash"
+fi
 
 brew install wget
 
@@ -76,14 +76,10 @@ brew install bat
 brew install prettyping
 
 # Tools that I use for development
-brew install awscli
 brew install clojure
 brew install borkdude/brew/babashka
 brew install borkdude/brew/clj-kondo
-brew install leiningen
-brew install packer
 brew install pgcli
-brew install terraform
 
 # More tools I use
 brew install jq

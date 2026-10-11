@@ -11,7 +11,7 @@ The crawl explores and returns raw results. It never scores, ranks, verifies, or
 
 ## Launch
 
-1. **Drift pre-flight** — the installed engine must match the canonical source: `diff -q ~/.claude/workflows/discovery-crawl.js "$(cat ~/.claude/workflows/.source)/.claude/workflows/discovery-crawl.js"`; if they differ, `source bootstrap.sh` first.
+1. **Drift pre-flight** — the installed engine must match the canonical source: `cmp ~/.claude/workflows/discovery-crawl.js "$(cat ~/.claude/workflows/.source)/.claude/workflows/discovery-crawl.js"` (`cmp`, because `diff` is a git-diff shell function here); if they differ, `source bootstrap.sh` first.
 2. **Read the brief into `args`** per the ARGS CONTRACT block at the top of `discovery-crawl.js`. Take `slug` from the brief's filename and pass `date` in (scripts cannot call Date). Already-known paths go in as absolute paths. The engine validates `args` at its boundary.
 3. **Launch by explicit path** (expand `~` to the home directory):
 

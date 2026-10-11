@@ -31,7 +31,7 @@ The crawl explores and returns raw results. It never scores, ranks, verifies, or
    printf '%s\n' <links> | bb ~/.claude/skills/discovery-crawl/check-links.clj
    ```
 
-   `blocked` and `error` are "couldn't open", not "gone". Drop a `missing` link's find or mark it, and say so on the map.
+   `blocked`, `other`, and `error` are "couldn't open", not "gone". Drop a `missing` link's find or mark it, and say so on the map.
 3. **Quotes are unchecked.** Mark them so on the map. A quote gets the independent substring re-check (fetch the page yourself, find the exact words) only when Paul leans on it.
 
 ## Write the map

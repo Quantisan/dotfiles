@@ -177,8 +177,11 @@ const runRound = async (round, planned) => {
   planned.forEach((s, i) => {
     const r = reports[i]
     if (!r) {
-      // A dead search is a gap in the round, not an empty result.
+      // A dead search is a gap in the round, not an empty result. Its lead
+      // goes back to open, so a later round may retry it and the map lists it
+      // as not reached.
       s.status = 'died'
+      if (s.leadId) followedLeadIds.delete(s.leadId)
       log(`Round ${round}: search ${s.id} died — recorded as a gap, not as nothing found`)
       return
     }

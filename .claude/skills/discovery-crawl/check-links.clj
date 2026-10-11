@@ -2,10 +2,11 @@
 ;; Checks that every link a discovery-crawl map cites opens.
 ;; Input: URLs on stdin, one per line. Output: one tab-separated line per URL,
 ;; "<verdict>\t<status>\t<url>", in input order. Verdicts:
-;;   opens          2xx/3xx
+;;   opens          2xx after redirects are followed
 ;;   blocked        401/403/429/451/999 — couldn't open, not proof the page is gone
 ;;   missing        404/410
-;;   other          any other status
+;;   other          any other status, including a 3xx left unresolved
+;;                  (redirect loop, https→http)
 ;;   error          no response (DNS, TLS, timeout)
 (require '[babashka.http-client :as http]
          '[clojure.string :as str])
@@ -15,7 +16,7 @@
 
 (defn verdict [status]
   (cond
-    (<= 200 status 399) "opens"
+    (<= 200 status 299) "opens"
     (#{401 403 429 451 999} status) "blocked"
     (#{404 410} status) "missing"
     :else "other"))

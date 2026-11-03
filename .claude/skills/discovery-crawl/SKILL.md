@@ -53,7 +53,7 @@ Also record:
 - **Access failures** — `result.accessFailures`, as "couldn't open", separate from empty results.
 - **Proposed access-guide edits** — if the brief's access notes cite a platform guide, list this crawl's method finds (what opened, what blocked, which query shapes worked) as proposed edits to that guide, each with its find ID. Paul accepts or rejects them; don't edit the guide yourself.
 
-**Layout:** not yet chosen. On the first real crawl, render two or three layouts from its result, let Paul pick, and record the choice here.
+**Layout: grouped by source.** Paul picked it on the first real crawl (2026-10-15, remote co-design adaptations). Under Problems and Words, each source document is a `###` heading with its link and search IDs; its finds nest under it as bullets of short label + quote. Repeat sightings of one source fold into one block. Where and Who are deduped by URL, with every search ID listed. Footer the quote sections: "Quotes: copied by search agents, unchecked."
 
 ## Common mistakes
 

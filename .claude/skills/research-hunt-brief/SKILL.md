@@ -24,6 +24,8 @@ Once per round, in the current project:
 
 Write `<research-location>/YYYY-MM-DD.<slug>-brief.md`. Freeform prose, but it must contain every required element in `brief-contract.md` (beside this file) — the directional prompt verbatim, the engine parameters one-to-one with the engine's ARGS CONTRACT, and the expected cost. The cost belongs in the brief because review time is when it is decision-relevant.
 
+For `accessStrategy`, look for platform guides in an `access/` folder at or above the research location. Build it from the guide that covers the round's ground, and cite its path. Don't write access strategy from memory: sites change their blocks, and a guide records what last opened.
+
 The brief is pure intent and is **never mutated after writing** — no status slot, no go/abort updates. Execution facts (parameters as run, engine version) belong to the report the launch skill writes. An unlaunched brief sitting in the research location is its own record; write it and stop.
 
 ## Common mistakes

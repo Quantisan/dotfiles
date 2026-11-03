@@ -51,6 +51,7 @@ Also record:
 
 - **Execution facts** — the brief path, the parameters as run (`result.brief`, `result.roundsRun`), and the engine commit: `git -C "$(cat ~/.claude/workflows/.source)" log -1 --format=%h -- .claude/workflows/discovery-crawl.js`.
 - **Access failures** — `result.accessFailures`, as "couldn't open", separate from empty results.
+- **Proposed access-guide edits** — if the brief's access notes cite a platform guide, list this crawl's method finds (what opened, what blocked, which query shapes worked) as proposed edits to that guide, each with its find ID. Paul accepts or rejects them; don't edit the guide yourself.
 
 **Layout:** not yet chosen. On the first real crawl, render two or three layouts from its result, let Paul pick, and record the choice here.
 

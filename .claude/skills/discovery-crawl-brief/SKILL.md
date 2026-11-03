@@ -24,6 +24,8 @@ Write `<research-location>/YYYY-MM-DD.<slug>-brief.md`. Freeform prose, but it m
 
 Ask only what you genuinely cannot infer. Defaults (`rounds: 5`, `searchesPerRound: 4`) are never asked about. For "already known", look in the research location for earlier reports and briefs on the same direction and list them; Paul strikes any that don't belong.
 
+For access notes, look for platform guides in an `access/` folder at or above the research location. Build `accessNotes` from the guide that covers the direction's ground, and cite its path. Don't write access notes from memory: sites change their blocks, and a guide records what last opened.
+
 The brief is pure intent and is **never mutated after writing**. Execution facts belong to the map the launch skill writes. Write it and stop.
 
 ## Common mistakes

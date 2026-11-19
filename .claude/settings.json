@@ -68,6 +68,8 @@
   "skipWorkflowUsageWarning": true,
   "theme": "light",
   "preferredNotifChannel": "ghostty",
+  "precomputeCompactionEnabled": true,
+  "idleCompaction": false,
   "inputNeededNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "autoMode": {

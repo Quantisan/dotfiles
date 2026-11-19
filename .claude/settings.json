@@ -2,7 +2,6 @@
   "env": {
     "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
   },
-  "autoCompactWindow": 400000,
   "permissions": {
     "allow": [
       "Bash(pwd:*)",
@@ -53,8 +52,12 @@
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "high"
     }
   },
+  "autoCompactWindow": 400000,
   "advisorModel": "fable",
   "askUserQuestionTimeout": "never",
   "tui": "default",

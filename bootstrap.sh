@@ -61,6 +61,7 @@ function doIt() {
         ## Set up Antigravity (agy) config
         mkdir -p ~/.gemini/antigravity-cli ~/.gemini/config
         ln -shf "$(pwd)/.gemini/antigravity-cli/personal.settings.json" ~/.gemini/antigravity-cli/personal.settings.json
+        ln -shf "$(pwd)/.gemini/antigravity-cli/statusline.clj" ~/.gemini/antigravity-cli/statusline.clj
         ln -shf "$(pwd)/.gemini/config/config.json" ~/.gemini/config/config.json
         ln -shf "$(pwd)/.gemini/config/mcp_config.json" ~/.gemini/config/mcp_config.json
         ln -shf "$(pwd)/.gemini/config/skills.json" ~/.gemini/config/skills.json

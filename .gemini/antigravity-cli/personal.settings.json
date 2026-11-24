@@ -1,0 +1,11 @@
+{
+  "model": "Gemini 4 Neon (High)",
+  "statusLine": {
+    "type": "command",
+    "command": "/opt/homebrew/bin/bb ~/.gemini/antigravity-cli/statusline.clj",
+    "enabled": true
+  },
+  "voice": {
+    "voiceMode": "dictation"
+  }
+}

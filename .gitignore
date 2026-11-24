@@ -61,6 +61,7 @@ workbench.xmi
 # #####
 context/
 **/.claude/*.local.json
+**/.gemini/*.local.json
 *.local.md
 .worktrees/
 .superpowers/

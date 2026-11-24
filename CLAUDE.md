@@ -97,6 +97,18 @@ The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code con
 
 **Important:** `CLAUDE.md`, `commands/`, `skills/`, `agents/`, `workflows/`, and `statusline.clj` edits require running `source bootstrap.sh` to copy them to `~/.claude/`. Settings changes are immediate since it's symlinked—Claude's runtime permission changes appear as git modifications in the dotfiles repo.
 
+### Antigravity CLI (`agy`) Configuration
+
+The `.gemini/` folder is the **source** for tracked Antigravity CLI config under `~/.gemini/` (excluded from top-level `rsync` so runtime state and Gemini CLI files are untouched):
+- `.gemini/antigravity-cli/personal.settings.json` → **symlinked** to `~/.gemini/antigravity-cli/personal.settings.json` (tracked CLI preferences loaded via the `agy()` shell wrapper in `.functions` using `--settings`; `~/.gemini/antigravity-cli/settings.json` remains untracked for machine-local state like `trustedWorkspaces`)
+- `.gemini/antigravity-cli/statusline.clj` → **symlinked** to `~/.gemini/antigravity-cli/statusline.clj` (Babashka status line command referenced by `personal.settings.json`; needs `bb` from `brew.sh`)
+- `.gemini/config/config.json` → **symlinked** to `~/.gemini/config/config.json` (plugin enable/disable state)
+- `.gemini/config/mcp_config.json` → **symlinked** to `~/.gemini/config/mcp_config.json` (global MCP servers)
+- `.gemini/config/skills.json` → **symlinked** to `~/.gemini/config/skills.json` (registers `~/.codex/skills` for shared skills; `~/.gemini/config/skills/` remains available for `agy`-only skills)
+- `.claude/CLAUDE.md` → **symlinked** to `~/.gemini/config/AGENTS.md` (single source of truth for global rules)
+
+Runtime/session data (`~/.gemini/antigravity-cli/{brain,conversations,cache,log,...}`), untracked `~/.gemini/antigravity-cli/settings.json`, local project state (`~/.gemini/config/projects/`), and Gemini CLI's `~/.gemini/settings.json` are intentionally not tracked.
+
 ## Key Customizations
 
 ### Development Tools

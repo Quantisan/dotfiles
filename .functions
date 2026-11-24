@@ -29,6 +29,20 @@ function codex-astra() {
         codex --model gpt-6-astra --config 'model_reasoning_effort="high"' "$@"
 }
 
+# Load personal settings for Antigravity runtime sessions while leaving
+# ~/.gemini/antigravity-cli/settings.json untracked for machine-local state
+# (e.g. trustedWorkspaces). Subcommands and help/version flags pass through.
+function agy() {
+        case "${1:-}" in
+        acp | agent | agents | changelog | help | install | mcp | mic-serve | models | plugin | plugins | remote-control | update | -h | --help | -v | --version)
+                command agy "$@"
+                ;;
+        *)
+                command agy --settings "$HOME/.gemini/antigravity-cli/personal.settings.json" "$@"
+                ;;
+        esac
+}
+
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
         cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"

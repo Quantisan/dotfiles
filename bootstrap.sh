@@ -21,6 +21,7 @@ function doIt() {
                 --exclude ".pi/" \
                 --exclude ".cache/" \
                 --exclude ".claude/" \
+                --exclude ".gemini/" \
                 --exclude ".github/" \
                 --exclude "LICENSE-MIT.txt" \
                 -avh --no-perms . ~
@@ -56,6 +57,15 @@ function doIt() {
         ln -shf "$(pwd)/.pi/settings.json" ~/.pi/agent/settings.json
         ln -shf "$(pwd)/.claude/CLAUDE.md" ~/.pi/agent/AGENTS.md
         ln -shf "$(pwd)/.pi/extensions" ~/.pi/agent/extensions
+
+        ## Set up Antigravity (agy) config
+        mkdir -p ~/.gemini/antigravity-cli ~/.gemini/config
+        ln -shf "$(pwd)/.gemini/antigravity-cli/personal.settings.json" ~/.gemini/antigravity-cli/personal.settings.json
+        ln -shf "$(pwd)/.gemini/antigravity-cli/statusline.clj" ~/.gemini/antigravity-cli/statusline.clj
+        ln -shf "$(pwd)/.gemini/config/config.json" ~/.gemini/config/config.json
+        ln -shf "$(pwd)/.gemini/config/mcp_config.json" ~/.gemini/config/mcp_config.json
+        ln -shf "$(pwd)/.gemini/config/skills.json" ~/.gemini/config/skills.json
+        ln -shf "$(pwd)/.claude/CLAUDE.md" ~/.gemini/config/AGENTS.md
 
         source ~/.bash_profile
 }

@@ -1,0 +1,11 @@
+{
+  "model": "Gemini 4 Neon (High)",
+  "statusLine": {
+    "type": "",
+    "command": "",
+    "enabled": true
+  },
+  "voice": {
+    "voiceMode": "dictation"
+  }
+}

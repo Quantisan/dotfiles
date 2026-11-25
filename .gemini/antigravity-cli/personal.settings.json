@@ -1,5 +1,5 @@
 {
-  "model": "Gemini 4 Neon (High)",
+  "model": "Orchestrator (Neon)",
   "statusLine": {
     "type": "command",
     "command": "/opt/homebrew/bin/bb ~/.gemini/antigravity-cli/statusline.clj",

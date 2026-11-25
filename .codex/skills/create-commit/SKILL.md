@@ -28,14 +28,15 @@ Organize pending Git changes into logical commits—each telling one coherent st
 
 ## Commit Messages
 
-The diff already records *what* changed; the commit message is the permanent record of *why*—especially domain context from the session that disappears once the chat ends.
+The diff already records *what* changed; the commit message is the permanent record of *why*—only the domain context from the session that a reader looking at the diff in 6 months couldn't infer.
 
 - **Subject:** single concise line matching the style of recent commits; use Conventional Commits only when the repository does.
-- **When to include a body:** ask *"What does this session know that a reader looking only at the diff in 6 months wouldn't?"* Include a short body whenever the answer is anything meaningful—even for a 1-line diff. Omit the body when the change is self-explanatory.
-- **What to write in the body:**
-  - Capture **domain-significant** thought process: the triggering problem, constraints, tradeoffs, and rejected alternatives. Gloss over *what* changed.
-  - **Quote key parts verbatim** when session phrasing sharply states a domain rationale or constraint—prefer preserving the original words over flattening them into generic summaries.
-  - Ignore session mechanics, tooling/admin back-and-forth, and turn-by-turn narration.
+- **When to include a body:** ask *"What does this session know that the diff won't show in 6 months?"* Include a body only for non-obvious rationale (triggering problem, constraint, tradeoff, or rejected alternative)—even for a 1-line diff. Omit the body when the subject and diff speak for themselves (including doc/config/prose edits whose text is already self-explanatory).
+- **Length and shape:** default to **1–3 sentences in a single short paragraph**. Do not write a bulleted changelog enumerating each edit in the diff; use bullets (at most 2–3 one-liners) only when a commit carries genuinely distinct, non-obvious rationales.
+- **What to write:**
+  - State the *why* directly; **do not restate *what* changed** when the diff already shows it.
+  - Keep a short verbatim phrase when session wording is sharper than a paraphrase.
+  - Omit session mechanics, tooling/admin back-and-forth, and turn-by-turn narration.
 - **Do not include:** invented rationale when no session context exists, references to uncommitted work, or `Co-Authored-By` / agent trailers.
 
 ## Guardrails

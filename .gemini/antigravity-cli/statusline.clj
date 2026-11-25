@@ -36,16 +36,29 @@
       :else (and (number? reset-in-seconds) (<= reset-in-seconds 86400)))))
 
 (defn other-family-prefix
-  "Returns the inactive model family's quota prefix to filter out (3p- on Gemini, gemini- on 3P)."
+  "Returns the inactive model family's quota prefix to filter out (3p- on Gemini, gemini- on 3P),
+  or nil when the model may span both families or cannot be classified."
   [model]
   (when (seq model)
-    (if (str/includes? (str/lower-case model) "gemini")
-      "3p-"
-      "gemini-")))
+    (let [s             (str/lower-case model)
+          orchestrator? (str/includes? s "orchestrator")
+          third-party?  (boolean (re-find #"claude|gpt" s))
+          gemini?       (or (str/includes? s "gemini")
+                            (and orchestrator? (not third-party?)))]
+      (cond
+        (and orchestrator? third-party?) nil
+        gemini?                          "3p-"
+        third-party?                     "gemini-"))))
 
-(defn short-quota-label [bucket-name]
-  (let [stripped (str/replace (str/lower-case bucket-name) #"^(gemini|3p)-" "")]
-    (if (= stripped "weekly") "7d" stripped)))
+(defn short-quota-label [bucket-name strip-family?]
+  (let [lower (str/lower-case bucket-name)
+        label (if strip-family?
+                (str/replace lower #"^(gemini|3p)-" "")
+                lower)]
+    (cond
+      (= label "weekly")               "7d"
+      (str/ends-with? label "-weekly") (str (subs label 0 (- (count label) 7)) "-7d")
+      :else                            label)))
 
 (defn quota-entries
   "Normalizes agy's quota map for the active model family into sorted bucket records."
@@ -60,7 +73,7 @@
                                         (str/starts-with? (str/lower-case raw-label) skip-prefix))))
                      (let [short?  (short-window? raw-label reset_in_seconds)
                            instant (parse-reset-instant reset_time reset_in_seconds now-seconds)]
-                       {:label        (short-quota-label raw-label)
+                       {:label        (short-quota-label raw-label (boolean skip-prefix))
                         :left         (Math/round (* 100.0 (double remaining_fraction)))
                         :resets       (format-instant instant (if short? "HH:mm" "EEE HH:mm"))
                         :show-resets  (if short? :always :when-low)

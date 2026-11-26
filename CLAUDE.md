@@ -83,31 +83,26 @@ launch-agents/ -> symlinked to ~/Library/LaunchAgents/
 - Logs to `~/.claude-cron.log`
 - Prevents session expiration for daily Claude CLI usage
 
-### Claude Code Configuration
+### Coding Agent Configuration
 
-The `.claude/` folder is the **source** for `~/.claude/` (global Claude Code config):
-- `.claude/CLAUDE.md` → copied to `~/.claude/CLAUDE.md` (global instructions)
-- `.claude/clojure.md` → copied to `~/.claude/clojure.md` (Clojure conventions, referenced on demand from CLAUDE.md)
-- `.claude/commands/` → copied to `~/.claude/commands/` (custom slash commands)
-- `.claude/skills/` → copied to `~/.claude/skills/` (Agent Skills, e.g. `restate`, `research-hunt`)
-- `.claude/agents/` → copied to `~/.claude/agents/` (subagent definitions, e.g. `restater`)
-- `.claude/workflows/` → copied to `~/.claude/workflows/` (multi-agent workflow engines, e.g. `research-hunt.js`)
-- `.claude/statusline.clj` → copied to `~/.claude/statusline.clj` (Babashka status line command referenced by `settings.json`; needs `bb` from `brew.sh`)
-- `.claude/settings.json` → **symlinked** to `~/.claude/settings.json`
+One rule decides where a file lives: **shared by all agents → `agents/`; used by one tool only → that tool's folder** (`.claude/`, `.codex/`, `.gemini/`). `bootstrap.sh` symlinks every tracked agent config file into `~` (other dotfiles are still rsync-copied), so edits are live; re-run `source bootstrap.sh` only when you add or remove a file or directory entry. Because the links point at this working tree, switching branches here changes the live config of every agent.
 
-**Important:** `CLAUDE.md`, `commands/`, `skills/`, `agents/`, `workflows/`, and `statusline.clj` edits require running `source bootstrap.sh` to copy them to `~/.claude/`. Settings changes are immediate since it's symlinked—Claude's runtime permission changes appear as git modifications in the dotfiles repo.
+| Repo path | Linked to | Used by |
+|---|---|---|
+| `agents/AGENTS.md` (global rules) | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/config/AGENTS.md` | all |
+| `agents/clojure.md` | `~/.agents/clojure.md` (the rules refer to this path) | all |
+| `agents/skills/<name>/` | `~/.agents/skills/<name>` and `~/.claude/skills/<name>` | all |
+| `.claude/settings.json`, `.claude/statusline.clj` | same names in `~/.claude/` | Claude |
+| `.claude/{commands,skills,agents,workflows}/<entry>` | `~/.claude/<same>/<entry>` | Claude |
+| `.codex/personal.config.toml`, `.codex/skills/<name>/` | `~/.codex/personal.config.toml`, `~/.codex/skills/<name>` | Codex |
+| `.gemini/antigravity-cli/{personal.settings.json,statusline.clj}`, `.gemini/config/{config.json,mcp_config.json}` | same paths under `~/.gemini/` | agy |
 
-### Antigravity CLI (`agy`) Configuration
-
-The `.gemini/` folder is the **source** for tracked Antigravity CLI config under `~/.gemini/` (excluded from top-level `rsync` so runtime state and Gemini CLI files are untouched):
-- `.gemini/antigravity-cli/personal.settings.json` → **symlinked** to `~/.gemini/antigravity-cli/personal.settings.json` (tracked CLI preferences loaded via the `agy()` shell wrapper in `.functions` using `--settings`; `~/.gemini/antigravity-cli/settings.json` remains untracked for machine-local state like `trustedWorkspaces`)
-- `.gemini/antigravity-cli/statusline.clj` → **symlinked** to `~/.gemini/antigravity-cli/statusline.clj` (Babashka status line command referenced by `personal.settings.json`; needs `bb` from `brew.sh`)
-- `.gemini/config/config.json` → **symlinked** to `~/.gemini/config/config.json` (plugin enable/disable state)
-- `.gemini/config/mcp_config.json` → **symlinked** to `~/.gemini/config/mcp_config.json` (global MCP servers)
-- `.gemini/config/skills.json` → **symlinked** to `~/.gemini/config/skills.json` (registers `~/.codex/skills` for shared skills; `~/.gemini/config/skills/` remains available for `agy`-only skills)
-- `.claude/CLAUDE.md` → **symlinked** to `~/.gemini/config/AGENTS.md` (single source of truth for global rules)
-
-Runtime/session data (`~/.gemini/antigravity-cli/{brain,conversations,cache,log,...}`), untracked `~/.gemini/antigravity-cli/settings.json`, local project state (`~/.gemini/config/projects/`), and Gemini CLI's `~/.gemini/settings.json` are intentionally not tracked.
+- Codex and agy read `~/.agents/skills` natively; Claude Code does not, so shared skills are also linked into `~/.claude/skills`.
+- Directories that other tools also write to are linked entry by entry, never as a whole: `~/.agents/` (skills installer lock file), `~/.claude/{skills,commands,workflows}` (Claude's `skills/synced`, reckon's `rk-*.md` commands), and `~/.codex/skills` (Codex's `.system`). Bootstrap removes dangling links that point into this repo (for example after a skill is renamed), and warns and skips if a real directory differing from the repo's already sits where a link belongs.
+- `.claude/settings.json` is symlinked, so Claude's runtime permission changes appear as git modifications in this repo.
+- `agy()` in `.functions` loads the tracked `personal.settings.json` with `--settings`; `~/.gemini/antigravity-cli/settings.json` stays untracked for machine-local state like `trustedWorkspaces`. `codex()` in `.functions` runs Codex with `--profile personal`, which reads the tracked `personal.config.toml`.
+- The status lines for Claude and agy are Babashka scripts; they need `bb` from `brew.sh`.
+- Runtime and session data (`~/.gemini/antigravity-cli/{brain,conversations,cache,log,...}`, `~/.gemini/config/projects/`, Gemini CLI's `~/.gemini/settings.json`) is intentionally not tracked.
 
 ## Key Customizations
 

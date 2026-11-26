@@ -1,6 +1,9 @@
 ---
 name: create-draft-pr
 description: Use when the user wants to create and open a draft pull request from the current Git branch, with or without an explicit base branch.
+argument-hint: "[base-branch]"
+allowed-tools: Bash(git status:*), Bash(git log:*), Bash(git diff:*), Bash(git branch:*), Bash(git symbolic-ref:*), Bash(git push:*), Bash(gh pr list:*), Bash(gh pr create:*), Bash(gh pr view:*)
+model: sonnet
 ---
 
 # Create Draft PR
@@ -35,7 +38,7 @@ The diff already records *what* changed; the PR summary helps a reviewer quickly
   - Lead with the **domain "why"**, triggering problem, key tradeoffs, rejected alternatives, and any context a reviewer needs (drawing from commit bodies and session context). Gloss over file-by-file *what* already obvious from the diff.
   - **Quote key phrases verbatim** when session or commit wording sharply states a domain rationale or constraint.
   - Ignore session mechanics, tooling back-and-forth, and turn-by-turn narration.
-- **Do not include:** invented rationale not supported by commits/diff/session, references to uncommitted work as if it were in the PR, or `Co-Authored-By` / agent trailers.
+- **Do not include:** invented rationale not supported by commits/diff/session, references to uncommitted work as if it were in the PR, or `Co-Authored-By` / agent trailers beyond any attribution the tool is configured to add.
 
 ## Guardrails
 

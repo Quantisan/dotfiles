@@ -1,6 +1,6 @@
 # Clojure Conventions
 
-Read this when working in a Clojure codebase. The general principles in `CLAUDE.md` still apply; this adds only what's specific to Clojure.
+Read this when working in a Clojure codebase. The general principles in the global rules (`AGENTS.md`) still apply; this adds only what's specific to Clojure.
 
 ## Domain Naming in Practice
 

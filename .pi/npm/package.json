@@ -1,7 +1,0 @@
-{
-  "name": "pi-extensions",
-  "private": true,
-  "dependencies": {
-    "@aliou/pi-guardrails": "^0.14.1"
-  }
-}

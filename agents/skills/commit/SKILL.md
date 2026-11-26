@@ -1,6 +1,8 @@
 ---
-name: create-commit
+name: commit
 description: Use when the user wants to organize and commit pending Git changes, including staged, unstaged, or relevant untracked work.
+allowed-tools: Bash(git add:*), Bash(git commit:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git apply:*), Bash(git restore:*), Bash(git reset:*), Read
+model: sonnet
 ---
 
 # Create Commits
@@ -37,7 +39,7 @@ The diff already records *what* changed; the commit message is the permanent rec
   - State the *why* directly; **do not restate *what* changed** when the diff already shows it.
   - Keep a short verbatim phrase when session wording is sharper than a paraphrase.
   - Omit session mechanics, tooling/admin back-and-forth, and turn-by-turn narration.
-- **Do not include:** invented rationale when no session context exists, references to uncommitted work, or `Co-Authored-By` / agent trailers.
+- **Do not include:** invented rationale when no session context exists, references to uncommitted work, or `Co-Authored-By` / agent trailers beyond any attribution the tool is configured to add.
 
 ## Guardrails
 

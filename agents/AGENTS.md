@@ -55,7 +55,7 @@ Then the user decides, and the build/test loop begins.
 
 ## Engineering (code work only — ignore for product and writing tasks)
 
-When writing or reviewing Clojure, read `~/.claude/clojure.md` first.
+When writing or reviewing Clojure, read `~/.agents/clojure.md` first.
 
 ### Functional Core, Imperative Shell
 

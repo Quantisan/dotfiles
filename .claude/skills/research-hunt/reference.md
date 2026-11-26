@@ -21,7 +21,7 @@ Judgment lives in gate agents on the session model; control flow lives in the sc
 
 ## Maintaining the engine
 
-- The canonical source lives in the dotfiles repo (checkout path recorded at `~/.claude/workflows/.source`); the installed copy at `~/.claude/workflows/research-hunt.js` is what runs. Edit the canonical source, then `source bootstrap.sh` to reinstall — never edit the installed copy.
+- The canonical source lives in the dotfiles repo (checkout path recorded at `~/.claude/workflows/.source`); `~/.claude/workflows/research-hunt.js` is a link to it, so edits are live. Re-run `source bootstrap.sh` only if the link is missing.
 - Read this file before any engine edit — the counters and gates encode the lessons below.
 - After any run that forces an engine edit, record the edit's rationale in the log at the bottom, dated.
 - **Re-base check on every edit:** ask "does the harness now do any of this natively?" (scheduling, structured-output enforcement, resume, journaling already come from harness primitives) — and delete what it does. The methodology stays in code; the plumbing should not.

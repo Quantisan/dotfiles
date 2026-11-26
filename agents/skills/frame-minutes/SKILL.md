@@ -1,11 +1,13 @@
 ---
 name: frame-minutes
 description: "Use when a user provides a pre-cleaned Speaker: utterance dialogue file and wants structured meeting minutes, especially for co-founder chats, customer discovery, or advisor calls; do not use for raw call, meeting, or VTT transcripts."
+argument-hint: <dialogue-file>
+allowed-tools: Read, Write, Bash(ls:*), Bash(nl:*)
 ---
 
 # Frame Minutes
 
-Turn a pre-cleaned `Speaker: utterance` dialogue file into structured minutes through bottom-up fact extraction. Themes emerge from where facts cluster, not from top-down categorization.
+Turn a pre-cleaned `Speaker: utterance` dialogue file into structured minutes through bottom-up fact extraction. Themes emerge from where facts cluster, not from top-down categorization. The dialogue file is the path the user provides.
 
 **Defining value:** distill by cutting, not rewriting. What remains after compression must be the speaker's own phrasing, style, and rhythm. These minutes should sound like the speakers — not like a secretary.
 
@@ -149,7 +151,7 @@ JWT cutover
 - [insight] Board seat expectations "vary a lot" between target leads — needs research. :340
 ```
 
-Write the content to the output path resolved in Step 1 using `apply_patch`. If the resolved output file already exists, overwrite its content. Do not write any other meeting file.
+Write the content to the output path resolved in Step 1 with a file-write tool. If the resolved output file already exists, overwrite its content. Do not write any other meeting file.
 
 After the write succeeds, return exactly one short line confirming the output path and nothing else.
 

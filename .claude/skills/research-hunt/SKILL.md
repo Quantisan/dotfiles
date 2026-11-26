@@ -11,7 +11,7 @@ The methodology lives in the engine at `~/.claude/workflows/research-hunt.js`; i
 
 ## Launch
 
-1. **Drift pre-flight** — the installed engine must match the canonical source: `diff -q ~/.claude/workflows/research-hunt.js "$(cat ~/.claude/workflows/.source)/.claude/workflows/research-hunt.js"`; if they differ, `source bootstrap.sh` first.
+1. **Install pre-flight** — the engine is linked into `~/.claude/workflows/` and edits are live: `test -e ~/.claude/workflows/research-hunt.js`; if missing, `source bootstrap.sh` first.
 2. **Read the brief into `args`** per the ARGS CONTRACT block at the top of `research-hunt.js`. The parameters map one-to-one; take `slug` from the brief's filename and pass `date` in (scripts cannot call Date). The engine validates `args` at its boundary — a mapping gap surfaces there, so don't pre-validate beyond an honest read.
 3. **Launch by explicit path** (expand `~` to the home directory):
 

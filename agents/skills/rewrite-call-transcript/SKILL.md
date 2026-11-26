@@ -1,6 +1,8 @@
 ---
 name: rewrite-call-transcript
 description: Use when a user wants a noisy call, meeting, interview, podcast, or other conversation transcript file rewritten into clean speaker-by-speaker dialogue, especially when speaker labels are messy or ASR errors need conservative repair.
+argument-hint: <transcript-file>
+allowed-tools: Read, Agent, Write
 ---
 
 # Rewrite Call Transcript
@@ -19,7 +21,7 @@ End the turn immediately after asking. Do not process anything until the user re
 
 ## Controller workflow
 
-Use fresh-context Codex subagents for raw-file inspection. The controller coordinates them but never reads the full raw transcript.
+Use fresh-context subagents for raw-file inspection. The controller coordinates them but never reads the full raw transcript.
 
 ### 1. Resolve the output path
 
@@ -31,7 +33,7 @@ After the roster reply, spawn a fresh-context path resolver. Give it the input t
 - If a sibling convention exists, replace the input suffix with that sibling-attested dialogue suffix. If several variants exist, use the most common.
 - Otherwise, strip the input's extension or extensions and append `.dialogue.txt`.
 
-Require exactly one returned line containing the resolved output path, with no listing or rationale. Keep that path verbatim for the write step.
+This is a lookup task; a small, fast model is sufficient for the resolver. Require exactly one returned line containing the resolved output path, with no listing or rationale. Keep that path verbatim for the write step.
 
 ### 2. Map the conversation
 

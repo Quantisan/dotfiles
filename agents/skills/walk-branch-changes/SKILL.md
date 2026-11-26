@@ -1,6 +1,8 @@
 ---
 name: walk-branch-changes
 description: Use when the user wants a guided review of a branch, base ref, or Git diff range and needs the changed behavior placed in execution order.
+argument-hint: "[base-ref-or-range]"
+model: sonnet
 ---
 
 Walk the diff in execution order so the user can place the changes in the domain workflow without re-tracing the subsystem.

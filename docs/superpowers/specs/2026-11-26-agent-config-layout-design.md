@@ -26,6 +26,8 @@ Rule: **shared → `agents/`; one tool only → that tool's folder.**
 
 Directories that others also write to are linked **per entry**. Bootstrap prunes dangling links that point into the repo, and refuses (warns, skips) to replace a real directory it doesn't own.
 
+Migration is a one-time manual cleanup of the copies older bootstraps left in `~` (old command and skill copies, `~/.claude/clojure.md`, `~/.gemini/config/skills.json`), not permanent bootstrap code.
+
 ## Shared skills
 `commit`, `create-draft-pr`, `frame-minutes`, `rewrite-call-transcript`, `walk-branch-changes`. The Codex copy is the base (newer in all five); substantive Claude-only improvements are folded in. Wording is tool-neutral: no `$ARGUMENTS` or `!`-command injection. Claude-only frontmatter keys stay only if Codex and agy still load the skill. `agents/openai.yaml` metadata is kept (Codex UI; ignored by others). `gcm` alias uses `$commit`.
 

@@ -62,7 +62,6 @@ function doIt() {
                 --exclude "AGENTS.md" \
                 --exclude "agents/" \
                 --exclude ".codex/" \
-                --exclude ".pi/" \
                 --exclude ".cache/" \
                 --exclude ".claude/" \
                 --exclude ".gemini/" \
@@ -84,7 +83,6 @@ function doIt() {
         link "$repo_dir/agents/AGENTS.md" ~/.claude/CLAUDE.md
         link "$repo_dir/agents/AGENTS.md" ~/.codex/AGENTS.md
         link "$repo_dir/agents/AGENTS.md" ~/.gemini/config/AGENTS.md
-        link "$repo_dir/agents/AGENTS.md" ~/.pi/agent/AGENTS.md
 
         ## Set up Claude Code config
         link "$repo_dir/.claude/settings.json" ~/.claude/settings.json
@@ -100,10 +98,6 @@ function doIt() {
         ## Set up Codex config
         link "$repo_dir/.codex/personal.config.toml" ~/.codex/personal.config.toml
         link_entries "$repo_dir/.codex/skills" ~/.codex/skills
-
-        ## Set up pi config
-        link "$repo_dir/.pi/settings.json" ~/.pi/agent/settings.json
-        link "$repo_dir/.pi/extensions" ~/.pi/agent/extensions
 
         ## Set up Antigravity (agy) config
         link "$repo_dir/.gemini/antigravity-cli/personal.settings.json" ~/.gemini/antigravity-cli/personal.settings.json

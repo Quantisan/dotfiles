@@ -1,7 +1,7 @@
 ---
 name: commit
 description: Use when the user wants to organize and commit pending Git changes, including staged, unstaged, or relevant untracked work.
-allowed-tools: Bash(git add:*), Bash(git commit:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git apply:*), Bash(git restore:*), Bash(git reset:*), Read
+allowed-tools: Bash(git add:*), Bash(git commit:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git apply --cached:*), Read
 model: sonnet
 ---
 

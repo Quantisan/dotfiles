@@ -85,7 +85,7 @@ launch-agents/ -> symlinked to ~/Library/LaunchAgents/
 
 ### Coding Agent Configuration
 
-One rule decides where a file lives: **shared by all agents → `agents/`; used by one tool only → that tool's folder** (`.claude/`, `.codex/`, `.gemini/`, `.pi/`). `bootstrap.sh` symlinks every tracked file into `~`, so edits are live; re-run `source bootstrap.sh` only when you add or remove a file or directory entry.
+One rule decides where a file lives: **shared by all agents → `agents/`; used by one tool only → that tool's folder** (`.claude/`, `.codex/`, `.gemini/`, `.pi/`). `bootstrap.sh` symlinks every tracked agent config file into `~` (other dotfiles are still rsync-copied), so edits are live; re-run `source bootstrap.sh` only when you add or remove a file or directory entry. Because the links point at this working tree, switching branches here changes the live config of every agent.
 
 | Repo path | Linked to | Used by |
 |---|---|---|

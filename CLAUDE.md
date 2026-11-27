@@ -12,7 +12,7 @@ This is a personal macOS dotfiles repository, based on Mathias Bynens' dotfiles 
 ```bash
 source bootstrap.sh
 ```
-This syncs dotfiles to your home directory and creates a symlink for LLM templates.
+This syncs dotfiles to your home directory and creates a symlink for LLM templates. Only files git tracks are copied, so `git add` a new dotfile before bootstrapping; untracked and ignored files never reach `~`.
 
 For force update without confirmation:
 ```bash
@@ -87,16 +87,9 @@ launch-agents/ -> symlinked to ~/Library/LaunchAgents/
 
 One rule decides where a file lives: **shared by all agents → `agents/`; used by one tool only → that tool's folder** (`.claude/`, `.codex/`, `.gemini/`). `bootstrap.sh` symlinks every tracked agent config file into `~` (other dotfiles are still rsync-copied), so edits are live; re-run `source bootstrap.sh` only when you add or remove a file or directory entry. Because the links point at this working tree, switching branches here changes the live config of every agent.
 
-| Repo path | Linked to | Used by |
-|---|---|---|
-| `agents/AGENTS.md` (global rules) | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/config/AGENTS.md` | all |
-| `agents/clojure.md` | `~/.agents/clojure.md` (the rules refer to this path) | all |
-| `agents/skills/<name>/` | `~/.agents/skills/<name>` and `~/.claude/skills/<name>` | all |
-| `.claude/settings.json`, `.claude/statusline.clj` | same names in `~/.claude/` | Claude |
-| `.claude/{commands,skills,agents,workflows}/<entry>` | `~/.claude/<same>/<entry>` | Claude |
-| `.codex/personal.config.toml`, `.codex/skills/<name>/` | `~/.codex/personal.config.toml`, `~/.codex/skills/<name>` | Codex |
-| `.gemini/antigravity-cli/{personal.settings.json,statusline.clj}`, `.gemini/config/{config.json,mcp_config.json}` | same paths under `~/.gemini/` | agy |
+The `link` and `link_entries` calls in `bootstrap.sh` are the complete list of what is linked where; read them there rather than copying the list here.
 
+- `agents/clojure.md` is linked to `~/.agents/clojure.md` because the global rules refer to that path.
 - Codex and agy read `~/.agents/skills` natively; Claude Code does not, so shared skills are also linked into `~/.claude/skills`.
 - Directories that other tools also write to are linked entry by entry, never as a whole: `~/.agents/` (skills installer lock file), `~/.claude/{skills,commands,workflows}` (Claude's `skills/synced`, reckon's `rk-*.md` commands), and `~/.codex/skills` (Codex's `.system`). Bootstrap removes dangling links that point into this repo (for example after a skill is renamed), and warns and skips if a real directory differing from the repo's already sits where a link belongs.
 - `.claude/settings.json` is symlinked, so Claude's runtime permission changes appear as git modifications in this repo.

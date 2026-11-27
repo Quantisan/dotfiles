@@ -49,25 +49,33 @@ function link_entries() {
 ## Deploys whatever is checked out; pull yourself when you want the latest
 
 function doIt() {
-        rsync --exclude ".git/" \
-                --exclude "templates/" \
-                --exclude ".DS_Store" \
-                --exclude ".osx" \
-                --exclude "bootstrap.sh" \
-                --exclude "brew.sh" \
-                --exclude "docs/" \
-                --exclude "git-setup.sh" \
-                --exclude "README.md" \
-                --exclude "CLAUDE.md" \
-                --exclude "AGENTS.md" \
-                --exclude "agents/" \
-                --exclude ".codex/" \
-                --exclude ".cache/" \
-                --exclude ".claude/" \
-                --exclude ".gemini/" \
-                --exclude ".github/" \
-                --exclude "LICENSE-MIT.txt" \
-                -avh --no-perms . ~
+        ## Copy only files git tracks, so untracked and ignored files (logs, worktrees,
+        ## LSP caches, *.local.md notes) never reach ~. rsync can't do this filtering:
+        ## it ignores directory --exclude patterns under --files-from.
+
+        ## Repo tooling and docs; never belongs in ~
+        local repo_only=(
+                ':!bootstrap.sh'
+                ':!brew.sh'
+                ':!git-setup.sh'
+                ':!README.md'
+                ':!CLAUDE.md'
+                ':!AGENTS.md'
+                ':!LICENSE-MIT.txt'
+                ':!.config/nvim/README.md'
+                ':!docs/'
+                ':!.github/'
+        )
+        ## Linked into ~ below instead of copied
+        local linked_below=(
+                ':!templates/'
+                ':!agents/'
+                ':!.claude/'
+                ':!.codex/'
+                ':!.gemini/'
+        )
+        git ls-files -z -- . "${repo_only[@]}" "${linked_below[@]}" \
+                | rsync --from0 --files-from=- -avh --no-perms . ~
 
         ## Set up Git identity and signing preferences
         bash "$repo_dir/git-setup.sh"

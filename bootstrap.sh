@@ -50,25 +50,31 @@ function link_entries() {
 
 function doIt() {
         ## Copy only files git tracks, so untracked and ignored files (logs, worktrees,
-        ## LSP caches, *.local.md notes) never reach ~. The pathspecs leave out repo
-        ## tooling and the paths that are symlinked below instead of copied. rsync can't
-        ## do this filtering: it ignores directory --exclude patterns under --files-from.
-        git ls-files -z -- . \
-                ':!bootstrap.sh' \
-                ':!brew.sh' \
-                ':!git-setup.sh' \
-                ':!README.md' \
-                ':!CLAUDE.md' \
-                ':!AGENTS.md' \
-                ':!LICENSE-MIT.txt' \
-                ':!.config/nvim/README.md' \
-                ':!docs/' \
-                ':!templates/' \
-                ':!agents/' \
-                ':!.claude/' \
-                ':!.codex/' \
-                ':!.gemini/' \
-                ':!.github/' \
+        ## LSP caches, *.local.md notes) never reach ~. rsync can't do this filtering:
+        ## it ignores directory --exclude patterns under --files-from.
+
+        ## Repo tooling and docs; never belongs in ~
+        local repo_only=(
+                ':!bootstrap.sh'
+                ':!brew.sh'
+                ':!git-setup.sh'
+                ':!README.md'
+                ':!CLAUDE.md'
+                ':!AGENTS.md'
+                ':!LICENSE-MIT.txt'
+                ':!.config/nvim/README.md'
+                ':!docs/'
+                ':!.github/'
+        )
+        ## Linked into ~ below instead of copied
+        local linked_below=(
+                ':!templates/'
+                ':!agents/'
+                ':!.claude/'
+                ':!.codex/'
+                ':!.gemini/'
+        )
+        git ls-files -z -- . "${repo_only[@]}" "${linked_below[@]}" \
                 | rsync --from0 --files-from=- -avh --no-perms . ~
 
         ## Set up Git identity and signing preferences

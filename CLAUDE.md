@@ -12,7 +12,7 @@ This is a personal macOS dotfiles repository, based on Mathias Bynens' dotfiles 
 ```bash
 source bootstrap.sh
 ```
-This syncs dotfiles to your home directory and creates a symlink for LLM templates.
+This syncs dotfiles to your home directory and creates a symlink for LLM templates. Only files git tracks are copied, so `git add` a new dotfile before bootstrapping; untracked and ignored files never reach `~`.
 
 For force update without confirmation:
 ```bash

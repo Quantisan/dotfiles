@@ -55,7 +55,7 @@ unset jscbin
 ## macOS System ##
 
 alias flush='dscacheutil -flushcache && killall -HUP mDNSResponder'
-alias lscleanup='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder'
+alias lscleanup='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -r -f -all local,system,user && killall Finder'
 
 # Destructive: permanently deletes Trash, old ASL logs, and quarantine history.
 alias emptytrash='sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* "delete from LSQuarantineEvent"'
